@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pann Pyoe Thu</title>
+  <link rel="icon" href="../Images/Logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../CSS/Homepage.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="homepage">
+    <header class="header">
+      <div class="logo">
+        <img src="../Images/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
+        <span class="logo-text">Pann Pyoe Thu</span>
+      </div>
+      <nav class="nav">
+        <a href="#">About us</a>
+        <a href="#">Courses</a>
+        <a href="../HTML/Counsellor page.html">Educational Counsellors</a>
+        <a href="#">Scholarships</a>
+        <a href="#">Local Universities</a>
+        <a href="#">Job Opportunities</a>
+      </nav>
+      <div class="profile-icon" onclick="openLogin()">
+  <img src="../Images/Profile.png" alt="Profile" class="profile-img" />
+</div>
+    </header>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." />
+      <button>🔍</button>
+    </div>
+
+    <main class="main-content">
+      <div class="quote-box">
+        <p>
+          <span class="highlight">"Pann Pyoe Thu</span> is dedicated to nurturing Myanmar's youth through quality education, practical guidance, and career empowerment."
+        </p>
+      </div>
+
+      <section class="features">
+        <div class="feature">
+          <img src="../Images/image/Image.png" alt="Enhance skills" />
+          <h3>Enhance skills</h3>
+          <p>Develop practical and professional life skills</p>
+        </div>
+        <div class="feature">
+          <img src="../Images/image/Image.png" alt="Guidance" />
+          <h3>Guidance</h3>
+          <p>Mentorship that opens doors to success</p>
+        </div>
+        <div class="feature">
+          <img src="../Images/image/Image.png" alt="Opportunities" />
+          <h3>Opportunities</h3>
+          <p>Career opportunities and growth</p>
+        </div>
+      </section>
+    </main>
+    <section class="introduction-section">
+  <div class="intro-left">
+    <div class="black-rectangle"></div>
+    <div class="brown-rectangle"></div>
+    <div class="intro-text">
+  <p class="subtext">Support young minds with</p>
+  <h1 class="maintext">
+    <span class="pann">Pann</span>
+    <span class="pyoe">Pyoe</span>
+    <span class="thu">Thu</span>
+  </h1>
+</div>
+  </div>
+  <div class="intro-right">
+    <div class="video-placeholder">
+  <video controls width="100%">
+    <source src="../Videos/IntroVid.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+</section>
+  </div>
+  <div id="loginModal" class="modal">
+  <div class="modal-content login-container">
+    <!-- Left side -->
+    <div class="login-left">
+      <h1>Welcome to Pann Pyoe Thu</h1>
+      <img src="../Images/tulips.png" alt="Flowers" class="flower-img" />
+    </div>
+
+    <!-- Right side -->
+   <div class="login-right">
+  <span class="close" onclick="closeLogin()">&times;</span>
+      <img src="../Images/logo.ico" class="login-logo" alt="logo" />
+      <div class="login-box">
+    <input type="text" placeholder="Username" />
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <div class="login-buttons">
+      <button class="signin">Sign in</button>
+      <button class="signup">Sign up</button>
+    </div>
+    <a href="#" class="forgot">Forgot your password?</a>
+  </div>
+</div>
+
+
+<script>
+  function openLogin() {
+    document.getElementById('loginModal').style.display = 'block';
+  }
+
+  function closeLogin() {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('loginModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+</script>
+</body>
+</html>
