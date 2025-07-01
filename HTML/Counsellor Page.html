@@ -2,125 +2,274 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pann Pyoe Thu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Educational Counsellors</title>
   <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../CSS/Homepage.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #cce8f0, #1e3c4e);
+    }
+    header {
+      background-color: #143447;
+      padding: 20px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    header h1 {
+      font-family: 'Rowdies', sans-serif;
+      margin-left: 40px;
+    }
+    nav {
+      background-color: #0a2d3d;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .login-btn {
+      margin-right: 40px;
+      background: white;
+      color: #143447;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 20px;
+    }
+    .container {
+      padding: 40px 60px;
+      color: white;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+      font-size: 22px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      justify-content: center;
+    }
+    .card {
+      background-color: #193849;
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      position: relative;
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      display: inline-block;
+      background-color: #eec0a5;
+      color: black;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .card p, .card li {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .card ul {
+      margin-top: 10px;
+      list-style: disc inside;
+    }
+    .card img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      object-fit: cover;
+    }
+    .card .btn {
+      margin-top: 15px;
+      display: inline-block;
+      background: #5cb3fd;
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    footer {
+      background-color: #143447;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+    footer a {
+      color: #5cb3fd;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <div class="homepage">
-    <header class="header">
-      <div class="logo">
-        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-        <span class="logo-text">Pann Pyoe Thu</span>
+  <header>
+    <h1>Pann Pyoe Thu</h1>
+    <span class="login-btn"><i class="fas fa-user"></i></span>
+  </header>
+
+  <nav>
+    <a href="../HTML/Homepage.html">Home</a>
+    <a href="#">About us</a>
+    <a href="#">Courses</a>
+    <a href="../HTML/Counsellor Page.html">Educational counsellors</a>
+    <a href="#">Scholarships</a>
+    <a href="#">Local Universities</a>
+    <a href="#">Job Applications</a>
+  </nav>
+
+  <div class="container">
+    <h2>“Consult with us for  your further academic studies”</h2>
+    <div class="cards">
+      <!-- Cathy Doll -->
+      <div class="card">
+        <h3>Cathy Doll</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Guidance & Counselling</p>
+        <p><strong>Specialization:</strong> Academic planning, career guidance, course registration support, and scholarship consultation.</p>
+        <p><strong>Phone:</strong> +959 123 456 789</p>
+        <p><strong>Email:</strong> cathy.doll@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>Over 8 years providing academic and career counseling sessions.</li>
+          <li>Supported students in course registration, major selection, and scholarship applications.</li>
+          <li>Known for empathetic feedback, personalized advising, and student success tracking.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('Cathy Doll')">Get Appointment</a>
       </div>
-      <nav class="nav">
-        <a href="#">About us</a>
-        <a href="#">Courses</a>
-        <a href="../HTML/Counsellor Page.html">Educational Counsellors</a>
-        <a href="#">Scholarships</Sa>
-        <a href="#">Local Universities</a>
-        <a href="#">Job Opportunities</a>
-      </nav>
-      <div class="profile-icon" onclick="openLogin()">
-  <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-</div>
-    </header>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Search..." />
-      <button>🔍</button>
-    </div>
-
-    <main class="main-content">
-      <div class="quote-box">
-        <p>
-          <span class="highlight">"Pann Pyoe Thu</span> is dedicated to nurturing Myanmar's youth through quality education, practical guidance, and career empowerment."
-        </p>
+      <!-- 5 more advisors -->
+      <div class="card">
+        <h3>Mercy Donan</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Education</p>
+        <p><strong>Specialization:</strong> Major selection guidance, career center coordination, and academic mentorship.</p>
+        <p><strong>Phone:</strong> +959 987 654 321</p>
+        <p><strong>Email:</strong> mercy.donan@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>10+ years supporting academic growth and career paths.</li>
+          <li>Guided students through college fairs and internship planning.</li>
+          <li>Recognized for approachability and strategic planning.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('Mercy Donan')">Get Appointment</a>
       </div>
-
-      <section class="features">
-        <div class="feature">
-          <img src="../Images/image/Image.png" alt="Enhance skills" />
-          <h3>Enhance skills</h3>
-          <p>Develop practical and professional life skills</p>
-        </div>
-        <div class="feature">
-          <img src="../Images/image/Image.png" alt="Guidance" />
-          <h3>Guidance</h3>
-          <p>Mentorship that opens doors to success</p>
-        </div>
-        <div class="feature">
-          <img src="../Images/image/Image.png" alt="Opportunities" />
-          <h3>Opportunities</h3>
-          <p>Career opportunities and growth</p>
-        </div>
-      </section>
-    </main>
-    <section class="introduction-section">
-  <div class="intro-left">
-    <div class="black-rectangle"></div>
-    <div class="brown-rectangle"></div>
-    <div class="intro-text">
-  <p class="subtext">Support young minds with</p>
-  <h1 class="maintext">
-    <span class="pann">Pann</span>
-    <span class="pyoe">Pyoe</span>
-    <span class="thu">Thu</span>
-  </h1>
-</div>
-  </div>
-  <div class="intro-right">
-    <div class="video-placeholder">
-  <video controls width="100%">
-    <source src="../Videos/IntroVid.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
-
-</section>
-  </div>
-  <div id="loginModal" class="modal">
-  <div class="modal-content login-container">
-    <!-- Left side -->
-    <div class="login-left">
-      <h1>Welcome to Pann Pyoe Thu</h1>
-      <img src="../HomePimg/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
+      <div class="card">
+        <h3>David Johnson</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Education</p>
+        <p><strong>Specialization:</strong> University applications, study skills development, and high-school-to-college transition support.</p>
+        <p><strong>Phone:</strong> +959 555 123 456</p>
+        <p><strong>Email:</strong> david.johnson@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>10 years of academic counseling experience for youth.</li>
+          <li>Personalized guidance on SATs, GPA, majors, and interviews.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('David Johnson')">Get Appointment</a>
+      </div>
+      <div class="card">
+        <h3>Linda Mae</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Psychology</p>
+        <p><strong>Specialization:</strong> First-generation student support, academic transition advising, and long-term planning.</p>
+        <p><strong>Phone:</strong> +959 777 888 999</p>
+        <p><strong>Email:</strong> linda.mae@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>Helped 100+ students build confidence in academic choices.</li>
+          <li>Expert in timeline clarity and emotional support.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('Linda Mae')">Get Appointment</a>
+      </div>
+      <div class="card">
+        <h3>Sophia Lavin</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Human Services</p>
+        <p><strong>Specialization:</strong> Retention strategies, early intervention, and internship placement.</p>
+        <p><strong>Phone:</strong> +959 444 222 111</p>
+        <p><strong>Email:</strong> sophia.lavin@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>8 years helping students maintain academic progress.</li>
+          <li>Collaborated with NGOs for job shadowing programs.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('Sophia Lavin')">Get Appointment</a>
+      </div>
+      <div class="card">
+        <h3>Michael Tun</h3>
+        <p><strong>Academic & Career Advisor</strong></p>
+        <p>⬆️ Degree: B.A. in Sociology</p>
+        <p><strong>Specialization:</strong> Career planning, resume review, coaching, and adult learners.</p>
+        <p><strong>Phone:</strong> +959 222 333 444</p>
+        <p><strong>Email:</strong> michael.tun@pannpyoethu.edu.mm</p>
+        <p><strong>Experience Highlights:</strong></p>
+        <ul>
+          <li>Guided adults through career transitions and reentry programs.</li>
+          <li>Leads interview coaching workshops.</li>
+        </ul>
+        <a href="#" class="btn" onclick="openPopup('Michael Tun')">Get Appointment</a>
+      </div>
     </div>
-
-    <!-- Right side -->
-   <div class="login-right">
-  <span class="close" onclick="closeLogin()">&times;</span>
-      <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo" />
-      <div class="login-box">
-    <input type="text" placeholder="Username" />
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Password" />
-    <div class="login-buttons">
-      <button class="signin">Sign in</button>
-      <button class="signup">Sign up</button>
-    </div>
-    <a href="#" class="forgot">Forgot your password?</a>
   </div>
-</div>
 
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <p><strong>About us</strong></p>
+        <p>Education counselling<br>Local universities<br>Job applications<br>Scholarships<br>Available courses</p>
+      </div>
+      <div>
+        <p><strong>Contact us:</strong></p>
+        <p>09761529542<br>pannpyoethu25@gmail.com</p>
+      </div>
+    </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
 
-<script>
-  function openLogin() {
-    document.getElementById('loginModal').style.display = 'block';
-  }
-
-  function closeLogin() {
-    document.getElementById('loginModal').style.display = 'none';
-  }
-
-  window.onclick = function(event) {
-    const modal = document.getElementById('loginModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
+  <script>
+    function openPopup(name) {
+      alert("Get appointment with " + name);
     }
-  };
-</script>
+  </script>
 </body>
 </html>
