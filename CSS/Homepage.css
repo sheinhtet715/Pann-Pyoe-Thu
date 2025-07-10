@@ -519,7 +519,15 @@ body {
     margin-top: 15px;
 }
 
-.card-text, .card-text1 {
+ .card-text1 {
+    font-size: 20px;
+    padding: 15px;
+    text-align: left;
+    color: rgb(240, 238, 238);
+    flex-grow: 1;
+}
+
+.card-text{
     font-size: 20px;
     padding: 15px;
     text-align: left;
