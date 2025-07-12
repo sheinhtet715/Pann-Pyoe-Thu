@@ -112,7 +112,29 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="../CSS/Homepage.css">
+    
+  <?php if (!empty($error)): ?>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign‑In Failed',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    </script>
+  <?php elseif (!empty($success)): ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Great!',
+        text: <?= json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+    </script>
+  <?php endif; ?>
     <title>Pann Pyoe Thu</title>
 </head>
 <body>
@@ -413,8 +435,12 @@ $conn->close();
             <i class="fab fa-twitter"></i>
         </div>
     </div>
+     <!-- … your header, form, etc … -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="../JavaScript/Homepage.js"></script>
+    
     <script>
   function openLogin() {
     document.getElementById('loginModal').style.display = 'block';
@@ -430,6 +456,17 @@ $conn->close();
       modal.style.display = 'none';
     }
   };
+</script>
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: <?= json_encode($error) ?>,
+    confirmButtonText: 'Try Again'
+  }).then(() => {
+    // reopen the login modal so they can type again:
+    openLogin();
+  });
 </script>
 </body>
 </html>
