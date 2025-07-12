@@ -9,21 +9,23 @@ $password = $_POST['password']       ?? '';
 
 // -------- SIGN IN --------
 if (isset($_POST['signin'])) {
-    // 1. fetch the user by email OR username
     $sql  = "SELECT user_id, user_name, email, password_hash
              FROM user_tbl
              WHERE email = ? OR user_name = ?
              LIMIT 1";
     $stmt = $conn->prepare($sql);
+    if (! $stmt) {
+        die("❌ SQL Error on prepare(): " . $conn->error);
+    }
+
     $stmt->bind_param("ss", $email, $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows === 1) {
         $user = $result->fetch_assoc();
-        // 2. verify the password
         if (password_verify($password, $user['password_hash'])) {
-            // 3. on success, write session and redirect
+            // success!
             $_SESSION['user_id']   = $user['user_id'];
             $_SESSION['user_name'] = $user['user_name'];
             $_SESSION['email']     = $user['email'];
@@ -35,12 +37,19 @@ if (isset($_POST['signin'])) {
     } else {
         $error = "No account found with that email or username.";
     }
+
+    $stmt->close();
 }
+
 // -------- SIGN UP --------
 if (isset($_POST['signup'])) {
     // 1. check for existing account
     $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
     $chk = $conn->prepare($sql);
+    if (! $chk) {
+        die("❌ SQL Error on prepare(): " . $conn->error);
+    }
+
     $chk->bind_param("ss", $username, $email);
     $chk->execute();
     $res = $chk->get_result();
@@ -57,9 +66,14 @@ if (isset($_POST['signup'])) {
               (user_name, email, password_hash)
             VALUES (?, ?, ?)
         ");
-        $ins->bind_param("sss", $username, $email, $hash);
+        if (! $ins) {
+            die("❌ SQL Error on prepare(): " . $conn->error);
+        }
 
-        if ($ins->execute()) {
+        $ins->bind_param("sss", $username, $email, $hash);
+        if (! $ins->execute()) {
+            $error = "❌ Signup failed — please try again. (" . $ins->error . ")";
+        } else {
             // 4. grab the newly created user_id
             $user_id = $conn->insert_id;
 
@@ -69,21 +83,21 @@ if (isset($_POST['signup'])) {
                   (user_id, user_name, password_hash, email, role, last_login)
                 VALUES (?, ?, ?, ?, 'user', NOW())
             ");
-            $loginIns->bind_param("isss", $user_id, $username, $hash, $email);
+            if (! $loginIns) {
+                die("❌ SQL Error on prepare(): " . $conn->error);
+            }
 
+            $loginIns->bind_param("isss", $user_id, $username, $hash, $email);
             if ($loginIns->execute()) {
                 $success = "✅ Account created and login registered! You can now sign in.";
             } else {
-                $error = "⚠️ Account created but failed to register login: " 
-                       . $loginIns->error;
+                $error = "⚠️ Account created but failed to register login: " . $loginIns->error;
             }
             $loginIns->close();
-
-        } else {
-            $error = "❌ Signup failed — please try again.";
         }
         $ins->close();
     }
+    $chk->close();
 }
 
 $conn->close();
