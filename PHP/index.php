@@ -1,3 +1,94 @@
+<?php
+session_start();
+include "db_connection.php";
+
+// grab POSTed values (or empty strings)
+$username = trim($_POST['user_name'] ?? '');
+$email    = trim($_POST['email']     ?? '');
+$password = $_POST['password']       ?? '';
+
+// -------- SIGN IN --------
+if (isset($_POST['signin'])) {
+    // 1. fetch the user by email OR username
+    $sql  = "SELECT user_id, user_name, email, password_hash
+             FROM user_tbl
+             WHERE email = ? OR user_name = ?
+             LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $email, $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        // 2. verify the password
+        if (password_verify($password, $user['password_hash'])) {
+            // 3. on success, write session and redirect
+            $_SESSION['user_id']   = $user['user_id'];
+            $_SESSION['user_name'] = $user['user_name'];
+            $_SESSION['email']     = $user['email'];
+            header("Location: ./index.php");
+            exit;
+        } else {
+            $error = "Incorrect password.";
+        }
+    } else {
+        $error = "No account found with that email or username.";
+    }
+}
+// -------- SIGN UP --------
+if (isset($_POST['signup'])) {
+    // 1. check for existing account
+    $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
+    $chk = $conn->prepare($sql);
+    $chk->bind_param("ss", $username, $email);
+    $chk->execute();
+    $res = $chk->get_result();
+
+    if ($res->num_rows > 0) {
+        $error = "❌ That username or email is already taken.";
+    } else {
+        // 2. hash the password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        // 3. insert into user_tbl
+        $ins = $conn->prepare("
+            INSERT INTO user_tbl
+              (user_name, email, password_hash)
+            VALUES (?, ?, ?)
+        ");
+        $ins->bind_param("sss", $username, $email, $hash);
+
+        if ($ins->execute()) {
+            // 4. grab the newly created user_id
+            $user_id = $conn->insert_id;
+
+            // 5. insert into Login_tbl as well
+            $loginIns = $conn->prepare("
+                INSERT INTO Login_tbl
+                  (user_id, user_name, password_hash, email, role, last_login)
+                VALUES (?, ?, ?, ?, 'user', NOW())
+            ");
+            $loginIns->bind_param("isss", $user_id, $username, $hash, $email);
+
+            if ($loginIns->execute()) {
+                $success = "✅ Account created and login registered! You can now sign in.";
+            } else {
+                $error = "⚠️ Account created but failed to register login: " 
+                       . $loginIns->error;
+            }
+            $loginIns->close();
+
+        } else {
+            $error = "❌ Signup failed — please try again.";
+        }
+        $ins->close();
+    }
+}
+
+$conn->close();
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,9 +117,16 @@
                 <a href="#universities">Local Universities</a>
                 <a href="#jobs">Job Opportunities</a>
             </nav>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+        <div class="user-bar">
+            <span class="welcome">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
+            <a href="logout.php" class="btn-logout">Logout</a>
+        </div>
+            <?php else: ?>
             <div class="profile-icon" onclick="openLogin()">
                 <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
             </div>
+            <?php endif; ?>
         </header>
 
         <main class="main-content">
@@ -95,15 +193,20 @@
                 <span class="close" onclick="closeLogin()">&times;</span>
                 <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo" />
                 <div class="login-box">
-                    <input type="text" placeholder="Username" />
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
+                    <?php if (!empty($error))   echo "<p class='error'>$error</p>"; ?>
+                    <?php if (!empty($success)) echo "<p class='success'>$success</p>"; ?>
+                    <form method="POST" action="index.php" class="login-box">
+                    <input type="text" name="user_name" placeholder="Username" required />
+                    <input type="email" name="email" placeholder="Email"  required />
+                    <input type="password" name="password" placeholder="Password" required />
                     <div class="login-buttons">
-                        <button class="signin">Sign in</button>
-                        <button class="signup">Sign up</button>
+                        <button class="signin" type="submit" name="signin">Sign in</button>
+                        <button class="signup" type="submit" name="signup">Sign up</button>
                     </div>
                     <a href="#" class="forgot">Forgot your password?</a>
+                    </form>
                 </div>
+                
             </div>
         </div>
     </div>
