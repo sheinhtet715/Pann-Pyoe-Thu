@@ -149,7 +149,7 @@ $conn->close();
                 <a href="#about">About us</a>
                 <a href="#courses">Courses</a>
                 <a href="./Counsellor.php">Educational Counsellors</a>
-                <a href="#scholarships">Scholarships</a>
+                <a href="../PHP/Scholarship.php">Scholarships</a>
                 <a href="#universities">Local Universities</a>
                 <a href="#jobs">Job Opportunities</a>
             </nav>

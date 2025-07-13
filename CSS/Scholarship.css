@@ -1,0 +1,643 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #529AA6;
+}
+
+/* Header */
+.header {
+    background-color: #5fa5ac;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-family: "Georgia", serif;
+    font-size: 20px;
+    color: white;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation and footer link hover effect */
+.nav a, .bottom a, .forgot {
+  transition: color 0.18s, text-decoration 0.18s, box-shadow 0.18s;
+}
+.nav a:hover, .bottom a:hover, .forgot:hover {
+  text-decoration: none;
+  color: #ffe6c7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+/* Profile Icon */
+.profile-icon {
+    background-color: #f0e8d9;
+    width: 60px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    background-color: #e6d8c7;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img {
+    width: 36px; 
+    height: 36px;
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .search-bar {
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .search-bar input {
+        width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+
+    .nav a {
+        font-size: 14px;
+        padding: 3px 5px;
+    }
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+/*----------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* Modal Content */
+.modal-content {
+    background: linear-gradient(to bottom, #e4e9ea, #438da4);
+    border-radius: 50px;
+    width: 500px;
+    margin: 60px auto;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content.login-container {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    max-width: 90%;
+    height: 500px;
+    background-color: transparent;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: center;
+}
+
+.login-right, .login-left {
+    flex: 1;
+    height: 100%;
+    padding: 50px 50px;
+    box-sizing: border-box;
+}
+
+.login-left {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'TimesNewRoman', serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #438da4, #e4e9ea);
+    border-radius: 20px;
+    border: #052027;
+    position: relative;
+}
+
+.login-left h1 {
+    font-size: 28px;
+}
+
+.flower-img {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.login-right {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #e4e9ea, #438da4);
+    border-radius: 20px;
+    border: #052027;
+    position: relative;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+}
+
+.login-logo {
+    margin-bottom: 40px;
+    max-width: 180px;
+    height: auto;
+}
+
+.login-box input {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+}
+
+.login-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.signin, .signup {
+    background: linear-gradient(135deg, #c1a089 0%, #b08f7a 100%);
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(193, 160, 137, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.signin:hover, .signup:hover {
+    background: linear-gradient(135deg, #b08f7a 0%, #9f7e6b 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(193, 160, 137, 0.4);
+    color: white;
+}
+
+.signin:active, .signup:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(193, 160, 137, 0.3);
+}
+
+.forgot {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot:hover {
+    color: #e6d8c7;
+    text-decoration: underline;
+}
+
+/* Close Button */
+.close {
+    color: white;
+    font-size: 35px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.2);
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.main-content {
+    background: #529AA6;
+    margin: 30px 0 0 0;
+    padding: 30px 0 60px 0;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.main-content h2 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.main-content p {
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.filter-btn {
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 18px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.filter-select {
+    background: #e9f2f3;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+.scholarship-list {
+    margin-top: 10px;
+}
+.scholarship-card {
+    background: #1d2733;
+    border-radius: 14px;
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 0 0 0 18px;
+    position: relative;
+}
+.scholarship-card .left {
+    background: #fff;
+    border-radius: 14px;
+    width: 160px;
+    min-width: 160px;
+    margin: 18px 0 18px 0;
+    padding: 26px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.scholarship-card .left .country,
+.scholarship-card .left .info,
+.scholarship-card .left .date {
+    text-align: left;
+    width: 100%;
+}
+.flag {
+    margin-bottom: 8px;
+    align-self: flex-start;
+}
+.scholarship-card .left .country {
+    font-size: 15px;
+    color: #1d2733;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.scholarship-card .left .info {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.scholarship-card .left .date {
+    font-size: 13px;
+    color: #b08b5e;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.scholarship-card .center {
+    padding: 22px 0 22px 28px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.scholarship-card .center .logo {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+.scholarship-card .center .title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .coverage {
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .desc {
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .note {
+    color: #bdbdbd;
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+.scholarship-card .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 0 24px 18px 0;
+    position: static;
+}
+.apply-btn {
+    background: #f5e6d6;
+    color: #222;
+    border: none;
+    border-radius: 9px;
+    padding: 8px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    transition: background 0.2s;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 220px;
+    width: auto;
+    display: inline-block;
+}
+.apply-btn:hover {
+    background: #e2d2b8;
+}
+
+
+
+
+/* Bottom Section */
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3A9BA5;
+    padding: 20px 40px;
+    flex-wrap: wrap;
+    color: black;
+    gap: 20px;
+}
+
+.bottom a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.bottom a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.bottom p {
+    font-size: 20px;
+}
+
+.bottom-left, .bottom-middle, .bottom-right {
+    flex: 1;
+    text-align: center;
+    min-width: 200px;
+}
+
+.bottom-left {
+    text-align: left;
+    color: black;
+}
+
+.bottom-right {
+    text-align: right;
+}
+
+.fab {
+    font-size: 24px;
+    margin-right: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.fab:hover {
+    transform: scale(1.2);
+}
+
+.fa-facebook { color: #1877f2; }
+.fa-instagram { color: #e1306c; }
+.fa-twitter { color: #1DA1F2; }
+
+footer {
+    background: #374151;
+    color: white;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+footer div {
+    margin-bottom: 1rem;
+}
+footer h4 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+footer p, footer a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+}
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.social-icon-square {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+}
+.social-icon-square:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.social-link {
+    display: inline-block;
+}
+.facebook { background: #1d4ed8; }
+.instagram { background: #ec4899; }
+.twitter { background: #0ea5e9; }
+.social-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+@media (max-width: 1100px) {
+    header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 10px;
+    }
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    nav {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+@media (max-width: 900px) {
+    .scholarship-card {
+        flex-direction: column;
+        padding: 0;
+    }
+    .scholarship-card .right {
+        position: static;
+        padding: 0 18px 18px 0;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .scholarship-card .center {
+        padding: 18px;
+    }
+    .scholarship-card .left {
+        border-radius: 14px 14px 0 0;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 18px;
+    }
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 32px 16px 16px 16px;
+    }
+}
