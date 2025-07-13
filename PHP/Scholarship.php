@@ -28,6 +28,9 @@
       </div>
     </header>
 
+    <!-- Block Bar -->
+        <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
+
      <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content login-container">
