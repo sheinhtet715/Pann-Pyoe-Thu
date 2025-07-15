@@ -174,17 +174,17 @@ $conn->close();
 
             <section class="features">
                 <div class="feature">
-                    <img src="../HomePimg/unlock skills.jpg" alt="Enhance skills" />
+                    <img src="../HomePimg/ambitious.png" alt="Enhance skills" />
                     <h3>Enhance skills</h3>
                     <p>Develop practical and professional life skills</p>
                 </div>
                 <div class="feature">
-                    <img src="../HomePimg/guidance.jpg" alt="Guidance" />
+                    <img src="../Counsellor_page_images/target_icon.png" alt="Guidance" />
                     <h3>Guidance</h3>
                     <p>Mentorship that opens doors to success</p>
                 </div>
                 <div class="feature">
-                    <img src="../HomePimg/opportunities.jpg" alt="Opportunities" />
+                    <img src="../HomePimg/opportunitiesss.png" alt="Opportunities" />
                     <h3>Opportunities</h3>
                     <p>Career opportunities and growth</p>
                 </div>
