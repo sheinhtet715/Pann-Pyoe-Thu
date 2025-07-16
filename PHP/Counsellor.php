@@ -1,3 +1,73 @@
+<?php
+session_start();
+// if (!isset($_SESSION['user_email'])) {
+//   header("Location: ../front page/Homepage.php");
+//   exit;
+// }
+include("../front page/db_connect.php");
+$error = "";   // ← collect errors here
+$success = "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // 1) Must be signed in
+    if (empty($_SESSION['user_id'])) {
+        $error = "❌ You must be signed in to book an appointment.";
+
+    // 2) Email on the form must match the session email
+    } elseif ($_POST['email'] !== $_SESSION['email']) {
+        $error = "❌ That email doesn’t match your logged‑in account.";
+
+    // 3) All good → do your counsellor lookup & insert here
+    } else {
+        $user_id          = $_SESSION['user_id'];
+        $advisor_name     = trim($_POST['advisor_name']     ?? '');
+        $description      = trim($_POST['description']      ?? '');
+        $appointment_date = trim($_POST['appointment_date'] ?? '');
+        $appointment_time = trim($_POST['appointment_time'] ?? '');
+
+        // (a) Find counsellor_id
+        $cs = $conn->prepare("
+            SELECT counsellor_id 
+              FROM Counsellor_tbl 
+             WHERE counsellor_name = ?
+        ");
+        $cs->bind_param("s", $advisor_name);
+        $cs->execute();
+        $cres = $cs->get_result();
+        if (!$cres->num_rows) {
+            $error = "⚠️ Counsellor “{$advisor_name}” not found.";
+        } else {
+            $counsellor_id = $cres->fetch_assoc()['counsellor_id'];
+            $cs->close();
+
+            // (b) Insert appointment
+            $insert = $conn->prepare("
+                INSERT INTO Appointment_tbl
+                  (user_id, counsellor_id, appointment_date, appointment_time, description, appointment_status)
+                VALUES (?, ?, ?, ?, ?, 'Confirmed')
+            ");
+            $insert->bind_param(
+                "iisss",
+                $user_id,
+                $counsellor_id,
+                $appointment_date,
+                $appointment_time,
+                $description
+            );
+
+            if ($insert->execute()) {
+                $success = "✅ Appointment booked successfully!";
+            } else {
+                $error = "❌ Error inserting appointment: " . $insert->error;
+            }
+            $insert->close();
+        }
+    }  // end of else
+
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +80,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/Counsellor.css" />
   <title>Educational Counsellors</title>
-  <script src="../JavaScript/Counsellor.js"></script>
+ 
 </head>
 <body>
   <div class="homepage">
@@ -34,7 +104,15 @@
     </header>
 
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
-
+    <?php if ($error): ?>
+      <div class="alert alert-error">
+        <?= htmlspecialchars($error) ?>
+      </div>
+    <?php elseif ($success): ?>
+      <div class="alert alert-success">
+        <?= htmlspecialchars($success) ?>
+      </div>
+    <?php endif; ?>
     <div class="title">“Consult with us for your further academic studies”</div>
     <div class="divider"></div>
 
@@ -62,6 +140,17 @@
                 <li>Empathetic advising and tracking</li>
               </ul>
             </div>
+             <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+          <button class="appointment-btn" onclick="openPopup('Cathy Doll')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn"
+              onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+              🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -89,6 +178,16 @@
                 <li>Strategic advising</li>
               </ul>
             </div>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+          <button class="appointment-btn" onclick="openPopup('Mercy Donan')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -115,6 +214,16 @@
                 <li>Led workshops for study skills</li>
               </ul>
             </div>
+          <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('David Johnson')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -140,6 +249,16 @@
                 <li>Community college experience</li>
               </ul>
             </div>
+          <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Linda Mae')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -166,6 +285,16 @@
                 <li>NGO and business internship collabs</li>
               </ul>
             </div>
+             <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -192,6 +321,16 @@
                 <li>Mock interviews and resume sessions</li>
               </ul>
             </div>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Michael Tun')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
           </div>
         </div>
       </div>
@@ -289,6 +428,10 @@
       </div>
     </div>
   </div>
-
+   <script src="../JavaScript/Counsellor.js"></script>
+<script>
+   const isLoggedIn = <?= !empty($_SESSION['user_id']) ? 'true' : 'false' ?>;
+  
+</script>
 </body>
 </html>

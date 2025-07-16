@@ -1,13 +1,23 @@
-function openPopup(advisorName) {
-  console.log('openPopup called for advisor:', advisorName);
-  var popup = document.getElementById("appointment-popup");
-  var nameSpan = document.getElementById("advisor-name");
 
-  if (popup && nameSpan) {
-    nameSpan.textContent = advisorName;
-    popup.style.display = "flex";
-  }
+function openPopup(advisorName) {
+  if (!isLoggedIn) {
+  alert('Please sign in to book an appointment.');
+  // encode the space as %20
+  window.location.href = '../front page/Homepage.php';
+  return;
 }
+  const advisorInput = document.getElementById("advisor-input");
+  const nameSpan     = document.getElementById("advisor-name");
+  const popup        = document.getElementById("appointment-popup");
+
+  if (advisorInput) {
+    advisorInput.value = advisorName;
+    console.log("DEBUG: advisor-input set to:", advisorInput.value);
+  }
+  if (nameSpan) nameSpan.textContent = advisorName;
+  if (popup)    popup.style.display = "flex";
+}
+  
 
 function closePopup() {
   var popup = document.getElementById("appointment-popup");
@@ -15,13 +25,13 @@ function closePopup() {
     popup.style.display = "none";
   }
 }
-
 function toggleProfileMenu() {
   var menu = document.getElementById("profile-menu");
   if (menu) {
     menu.classList.toggle("show");
   }
 }
+
 
 // Close profile menu when clicking outside
 document.addEventListener('click', function(event) {
