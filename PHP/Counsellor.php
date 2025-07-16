@@ -4,7 +4,7 @@ session_start();
 //   header("Location: ../front page/Homepage.php");
 //   exit;
 // }
-include("../front page/db_connect.php");
+include("./db_connection.php");
 $error = "";   // ← collect errors here
 $success = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -79,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/Counsellor.css" />
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
   <title>Educational Counsellors</title>
  
 </head>
@@ -104,15 +108,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
-    <?php if ($error): ?>
-      <div class="alert alert-error">
-        <?= htmlspecialchars($error) ?>
-      </div>
-    <?php elseif ($success): ?>
-      <div class="alert alert-success">
-        <?= htmlspecialchars($success) ?>
-      </div>
-    <?php endif; ?>
+ <?php if ($error): ?>
+    <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
+  <?php elseif ($success): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+  <?php endif; ?>
+
+  <!-- your scripts for openPopup/closePopup, etc. -->
+
+  <?php if ($success): ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: <?= json_encode(trim($success)) ?>,
+          icon: 'success',
+          draggable: true
+        });
+      });
+    </script>
+  <?php endif; ?> 
     <div class="title">“Consult with us for your further academic studies”</div>
     <div class="divider"></div>
 
@@ -121,7 +135,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content">
          <div>
             <img src="../Counsellor_page_images/Cathy Doll.png" alt="Cathy Doll" class="advisor-img"> 
-            <button class="appointment-btn" onclick="openPopup('Cathy Doll')">Get Appointment</button>
+            <!-- <button class="appointment-btn" onclick="openPopup('Cathy Doll')">Get Appointment</button> -->
+             <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+          <button class="appointment-btn" onclick="openPopup('Cathy Doll')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn"
+              onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+              🎤 Get Appointment
+            </button>
+          <?php endif; ?>
              <img class= "appimg" src ="../HomePimg/tulips-removebg-preview.png">
            </div>
 
@@ -140,17 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>Empathetic advising and tracking</li>
               </ul>
             </div>
-             <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-          <button class="appointment-btn" onclick="openPopup('Cathy Doll')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn"
-              onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-              🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+             
           </div>
         </div>
       </div>
@@ -160,7 +175,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content">
          <div>
             <img src="../Counsellor_page_images/Mery Donan.png" alt="Mercy Donan" class="advisor-img"> 
-            <button class="appointment-btn" onclick="openPopup('Mercy Donan')">Get Appointment</button>
+            <!-- <button class="appointment-btn" onclick="openPopup('Mercy Donan')">Get Appointment</button> -->
+              <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+          <button class="appointment-btn" onclick="openPopup('Mercy Donan')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
              <img class= "appimg" src ="../HomePimg/tulips-removebg-preview.png">
            </div>
           <div>
@@ -178,16 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>Strategic advising</li>
               </ul>
             </div>
-            <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-          <button class="appointment-btn" onclick="openPopup('Mercy Donan')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-            🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+           
           </div>
         </div>
       </div>
@@ -196,7 +212,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content">
            <div>
             <img src="../Counsellor_page_images/David Johnson.png" alt="David Johnson" class="advisor-img">
-            <button class="appointment-btn" onclick="openPopup('David Johnson')">Get Appointment</button>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('David Johnson')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
+            <!-- <button class="appointment-btn" onclick="openPopup('David Johnson')">Get Appointment</button> -->
              <img class= "appimg" src ="../Counsellor_page_images/Pink Tulip.png">
            </div>
           
@@ -214,16 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>Led workshops for study skills</li>
               </ul>
             </div>
-          <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('David Johnson')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-            🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+          
           </div>
         </div>
       </div>
@@ -232,7 +249,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content"> 
           <div>
             <img src="../Counsellor_page_images/Linda Mae.png" alt="Linda Mae" class="advisor-img">
-            <button class="appointment-btn" onclick="openPopup('Linda Mae')">Get Appointment</button>
+            <!-- <button class="appointment-btn" onclick="openPopup('Linda Mae')">Get Appointment</button> -->
+             <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Linda Mae')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
              <img class= "appimg" src ="../Counsellor_page_images/Pink Tulip.png">
            </div>
           <div>
@@ -249,16 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>Community college experience</li>
               </ul>
             </div>
-          <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Linda Mae')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-            🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+          
           </div>
         </div>
       </div>
@@ -267,7 +285,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content">
           <div>
             <img src="../Counsellor_page_images/Sophia Lwin.png" alt="Sophia Lwin" class="advisor-img">
-            <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">Get Appointment</button>
+            <!-- <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">Get Appointment</button> -->
+             <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
              <img class= "appimg" src ="../Counsellor_page_images/White Tulip.png">
            </div>
 
@@ -285,16 +313,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>NGO and business internship collabs</li>
               </ul>
             </div>
-             <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-            🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+             
           </div>
         </div>
       </div>
@@ -303,7 +322,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="advisor-content">
           <div>
             <img src="../Counsellor_page_images/Michael Tun.png" alt="Michael Tun" class="advisor-img">
-            <button class="appointment-btn" onclick="openPopup('Michael Tun')">Get Appointment</button>
+            <!-- <button class="appointment-btn" onclick="openPopup('Michael Tun')">Get Appointment</button> -->
+              <?php if (!empty($_SESSION['user_id'])): ?>
+  <!-- Logged in → show the real popup button -->
+            <button class="appointment-btn" onclick="openPopup('Michael Tun')">🎤 Get Appointment</button>
+
+          <?php else: ?>
+  <!-- Not logged in → send them back to sign‑in -->
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            🎤 Get Appointment
+            </button>
+          <?php endif; ?>
              <img class= "appimg" src ="../Counsellor_page_images/White Tulip.png">
            </div>
           
@@ -321,16 +350,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>Mock interviews and resume sessions</li>
               </ul>
             </div>
-            <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Michael Tun')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-            🎤 Get Appointment
-            </button>
-          <?php endif; ?>
+           
           </div>
         </div>
       </div>
@@ -367,40 +387,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <div id="appointment-popup" class="popup">
+    <form method="POST" action="./Counsellor.php">
+        <input type="hidden" name="advisor_name" id="advisor-input" />
     <div class="card">
       <span class="close-btn" onclick="closePopup()">&times;</span>
       <img src="../Counsellor_page_images/tulips-removebg-preview.png" class="flower-image" alt="flowers" />
+      
       <div class="left">
         <h2>Get appointment with <span id="advisor-name">...............</span></h2>
         <div class="textbox">
           <label>Enter your name</label>
-          <input type="text" placeholder="Your name" />
+          <input type="text" name="user_name" placeholder="Your name" required />
 
           <label>What kind of education counselling you want to get</label>
-          <textarea placeholder="Your response..."></textarea>
+          <textarea name="description" placeholder="Your response..." required></textarea>
 
           <label>Email</label>
-          <input type="email" placeholder="your@email.com" />
+          <input type="email" name="email" placeholder="your@email.com" />
 
           <p class="disclaimer">We'll reach out to you via email once the appointment date and time have been arranged.</p>
         </div>
       </div>
-      <div class="right">
+     <div class="right">
         <img src="../Counsellor_page_images/Logo.ico" class="top-logo" alt="logo" />
-        <label>Preferred date</label>
-        <input type="date" />
 
-        <label>Backup date</label>
-        <input type="date" />
+        <label>Appointment Date</label>
+        <input type="date" name="appointment_date" required />
+
+        <label>Appointment Time</label>
+        <input type="time" name="appointment_time" required />
 
         <div class="button-group">
-          <button class="cancel-btn" onclick="closePopup()">Cancel</button>
-          <button class="confirm-btn">Confirm</button>
+          <button type="button" class="cancel-btn" onclick="closePopup()">Cancel</button>
+          <button type="submit" class="confirm-btn">Confirm</button>
         </div>
       </div>
+      </div>  
     </div>
+   
   </div>
-
+   </form>
   <!-- Login Modal -->
   <div id="loginModal" class="modal">
     
@@ -431,7 +457,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <script src="../JavaScript/Counsellor.js"></script>
 <script>
    const isLoggedIn = <?= !empty($_SESSION['user_id']) ? 'true' : 'false' ?>;
+  <?php if ($error): ?>
+      // 1) re‑open & repopulate the appointment popup
+      const advisorName = <?= json_encode($advisor_name ?? '') ?>;
+      const hiddenInput = document.getElementById('advisor-input');
+      const nameSpan    = document.getElementById('advisor-name');
+      const popupEl     = document.getElementById('appointment-popup');
+
+      if (hiddenInput) hiddenInput.value = advisorName;
+      if (nameSpan)    nameSpan.textContent = advisorName;
+      if (popupEl)     popupEl.style.display = 'flex';
+
+      // 2) show the error alert
+      Swal.fire({
+        title: <?= json_encode(trim($error)) ?>,
+        icon: 'error',
+        confirmButtonText: 'Try Again',
+        allowOutsideClick: false
+      });
+    <?php endif; ?>
   
 </script>
+
+
 </body>
 </html>
