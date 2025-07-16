@@ -449,13 +449,35 @@ $conn->close();
     <script src="../JavaScript/Homepage.js"></script>
     
     <script>
+  let _loginAutoOpened = false;
+
   function openLogin() {
-    document.getElementById('loginModal').style.display = 'block';
+    const modal = document.getElementById('loginModal');
+    // Only open if not already visible
+    if (modal && modal.style.display !== 'block') {
+      modal.style.display = 'block';
+    }
   }
 
   function closeLogin() {
-    document.getElementById('loginModal').style.display = 'none';
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.style.display = 'none';
   }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const url = new URL(window.location);
+    const params = url.searchParams;
+
+    if (params.get('showLogin') === '1' && !_loginAutoOpened) {
+      _loginAutoOpened = true;          // mark as done
+      openLogin();                      // pop the modal
+
+      // scrub the query so it can't fire again
+      params.delete('showLogin');
+      window.history.replaceState({}, '', url.pathname + (params.toString() ? `?${params}` : ''));
+    }
+  });
+
 
   window.onclick = function(event) {
     const modal = document.getElementById('loginModal');

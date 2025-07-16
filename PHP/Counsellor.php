@@ -102,9 +102,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="#universities">Local Universities</a>
         <a href="#jobs">Job Opportunities</a>
       </nav>
-      <div class="profile-icon" onclick="openLogin()">
+      <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-      </div>
+      </div> -->
+      <?php if (!empty($_SESSION['user_id'])): ?>
+  <div class="user-bar">
+    <span class="welcome">
+      Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? $_SESSION['email']) ?>!
+    </span>
+    <a href="counsellor_logout.php" class="btn-logout">Logout</a>
+  </div>
+<?php else: ?>
+  <div class="profile-icon" onclick="window.location.href = 'index.php?showLogin=1'">
+    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+  </div>
+<?php endif; ?>
     </header>
 
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
@@ -142,9 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn"
-              onclick="alert('Please sign in first!'); window.location.href='./index.php';">
-              🎤 Get Appointment
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
+            🎤 Get Appointment
             </button>
           <?php endif; ?>
              <img class= "appimg" src ="../HomePimg/tulips-removebg-preview.png">
@@ -182,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
             🎤 Get Appointment
             </button>
           <?php endif; ?>
@@ -218,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+           <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
             🎤 Get Appointment
             </button>
           <?php endif; ?>
@@ -256,7 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+           <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
             🎤 Get Appointment
             </button>
           <?php endif; ?>
@@ -292,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
             🎤 Get Appointment
             </button>
           <?php endif; ?>
@@ -329,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <?php else: ?>
   <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php';">
+            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
             🎤 Get Appointment
             </button>
           <?php endif; ?>

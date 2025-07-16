@@ -55,33 +55,41 @@ window.onclick = function(event) {
   }
 };
 
-function openLogin() {
-  console.log('openLogin called');
-  var modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.style.display = 'block';
-  }
-}
+// function openLogin() {
+//   console.log('openLogin called');
+//   var modal = document.getElementById('loginModal');
+//   if (modal) {
+//     modal.style.display = 'block';
+//   }
+// }
 
-function closeLogin() {
-  var modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-}
+// function closeLogin() {
+//   var modal = document.getElementById('loginModal');
+//   if (modal) {
+//     modal.style.display = 'none';
+//   }
+// }
 
 // Hide login modal on page load as a fallback
-window.addEventListener('DOMContentLoaded', function() {
-  var modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-  // Add robust event handler to profile icon
-  var profileIcon = document.querySelector('.profile-icon');
-  if (profileIcon) {
-    profileIcon.addEventListener('click', function() {
-      console.log('Profile icon clicked, opening login modal');
-      openLogin();
-    });
-  }
-});
+// window.addEventListener('DOMContentLoaded', function() {
+//   var modal = document.getElementById('loginModal');
+//   if (modal) {
+//     modal.style.display = 'none';
+//   }
+//   // Add robust event handler to profile icon
+//   var profileIcon = document.querySelector('.profile-icon');
+//   if (profileIcon) {
+//     profileIcon.addEventListener('click', function() {
+//       console.log('Profile icon clicked, opening login modal');
+//       openLogin();
+//     });
+//   }
+// });
+  // window.addEventListener('DOMContentLoaded', function() {
+  //   // 1) Hide login modal initially
+  //   const loginModal = document.getElementById('loginModal');
+  //   if (loginModal) loginModal.style.display = 'none';
+
+  //   // 2) Profile‑icon → openLogin()
+  //   const profileIcon = document.querySelector('.profile-icon');
+  //   if (profileIcon) profileIcon.addEventListener('click', openLogin);  });
