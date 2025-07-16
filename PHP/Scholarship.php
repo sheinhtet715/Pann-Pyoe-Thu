@@ -18,8 +18,8 @@
         <a href="../PHP/index.php">Home</a>
         <a href="#about">About us</a>
         <a href="#courses">Courses</a>
-        <a href="../PHP/Counsellor.html">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.html">Scholarships</a>
+        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
+        <a href="../PHP/Scholarship.php">Scholarships</a>
         <a href="../PHP/LocalUni.php">Local Universities</a>
         <a href="#jobs">Job Opportunities</a>
       </nav>
