@@ -1,0 +1,455 @@
+<div class="scholarship-list">
+  <?php foreach ($scholarships as $s): ?>
+    <div class="scholarship-card">
+      <div class="left">
+        <div class="flag"
+             style="background:url('https://flagcdn.com/<?= strtolower(substr($s['apply_link'], 8,2)) ?>.svg') center/cover;">
+        </div>
+        <div class="country"><?= htmlspecialchars($s['type']) ?></div>
+        <div class="info"><?= htmlspecialchars($s['intake_season']) ?></div>
+        <div class="info"><?= htmlspecialchars($s['degree_level']) ?></div>
+        <div class="date"><?= htmlspecialchars($s['deadline']) ?></div>
+      </div>
+
+      <div class="center">
+        <div class="title"><?= htmlspecialchars($s['title']) ?></div>
+        <div class="coverage">
+          Coverage<br>
+          <?= nl2br(htmlspecialchars($s['coverage'])) ?>
+        </div>
+        <div class="desc"><?= htmlspecialchars($s['description']) ?></div>
+        <div class="note"><?= htmlspecialchars($s['eligibility']) ?></div>
+      </div>
+
+      <div class="right">
+        <!-- favourite star button -->
+        <form method="POST" style="display:inline">
+          <button
+            name="toggle_fav"
+            value="<?= $s['scholarship_id'] ?>"
+            class="fav-btn <?= $s['is_fav'] ? 'fav' : '' ?>"
+            title="Toggle favourite">
+            <?= $s['is_fav'] ? '★' : '☆' ?>
+          </button>
+        </form>
+
+        <!-- apply link button -->
+        <a href="<?= htmlspecialchars($s['apply_link']) ?>"
+           class="apply-btn"
+           target="_blank">Apply</a>
+      </div>
+    </div>
+  <?php endforeach; ?>
+</div>
+
+.scholarship-list {
+    margin-top: 10px;
+}
+.scholarship-card {
+    background: #1d2733;
+    border-radius: 14px;
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 0 0 0 18px;
+    position: relative;
+}
+.scholarship-card .left {
+    background: #fff;
+    border-radius: 14px;
+    width: 160px;
+    min-width: 160px;
+    margin: 18px 0 18px 0;
+    padding: 26px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    gap: 10px;
+    box-sizing: border-box;
+}
+.scholarship-card .left .country,
+.scholarship-card .left .info,
+.scholarship-card .left .date {
+    text-align: left;
+    width: 100%;
+}
+.flag {
+    margin-bottom: 8px;
+    align-self: flex-start;
+}
+.scholarship-card .left .country {
+    font-size: 15px;
+    color: #1d2733;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.scholarship-card .left .info {
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.scholarship-card .left .date {
+    font-size: 13px;
+    color: #b08b5e;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.scholarship-card .center {
+    padding: 22px 0 22px 28px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+.scholarship-card .center .logo {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+.scholarship-card .center .title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .coverage {
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .desc {
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+.scholarship-card .center .note {
+    color: #bdbdbd;
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+.scholarship-card .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-top: auto;
+    padding: 0 24px 18px 0;
+    position: static;
+}
+.apply-btn {
+    background: #f5e6d6;
+    color: #222;
+    border: none;
+    border-radius: 9px;
+    padding: 8px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    transition: background 0.2s;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 220px;
+    width: auto;
+    display: inline-block;
+}
+.apply-btn:hover {
+    background: #e2d2b8;
+}
+
+
+
+<div class="scholarship-list">
+                <!-- Card 1 -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/us.svg') center/cover;"></div>
+                        <div class="country">United States</div>
+                        <div class="info">Fall 2025</div>
+                        <div class="info">April 1</div>
+                        <div class="date">April 30, 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/en/b/b7/Stanford_University_seal_2003.svg" alt="Stanford" style="width:40px;height:40px;"></div>
+                        <div class="title">Stanford Graduate Fellowship</div>
+                        <div class="coverage">Coverage<br>Tuition, partial living expenses</div>
+                        <div class="desc">Apply now</div>
+                        <div class="note">Scholarships for international students not from outside EU/EEA.</div>
+                    </div>
+                    <div class="right">
+                        <button class="apply-btn">Apply now</button>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/us.svg') center/cover;"></div>
+                        <div class="country">United States</div>
+                        <div class="info">Fall 2025</div>
+                        <div class="info">April 1</div>
+                        <div class="date">April 30, 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Flag_of_Europe.svg" alt="Erasmus" style="width:40px;height:40px;"></div>
+                        <div class="title">Erasmus University, Holland Scholarship</div>
+                        <div class="coverage">Coverage<br>Tuition, partial living expenses</div>
+                        <div class="desc">Apply now</div>
+                        <div class="note">Scholarships for international students not from outside EU/EEA.</div>
+                    </div>
+                    <div class="right">
+                        <button class="apply-btn">Apply now</button>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/au.svg') center/cover;"></div>
+                        <div class="country">Australia</div>
+                        <div class="info">Spring 2025</div>
+                        <div class="info">April 1</div>
+                        <div class="date">March 31, 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/en/2/2e/Monash_University_coat_of_arms.svg" alt="Monash" style="width:40px;height:40px;"></div>
+                        <div class="title">Monash International, Merit-Scholarship</div>
+                        <div class="coverage">Coverage<br>Tuition, living, travel allowance</div>
+                        <div class="desc">Apply now</div>
+                        <div class="note">Awards for students with excellent academic records.</div>
+                    </div>
+                    <div class="right">
+                        <button class="apply-btn">Apply now</button>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/us.svg') center/cover;"></div>
+                        <div class="country">New York</div>
+                        <div class="info">Spring 2025</div>
+                        <div class="info">July 1</div>
+                        <div class="date">August 31, 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Yale_University_Shield_1.svg" alt="Yale" style="width:40px;height:40px;"></div>
+                        <div class="title">Yale University</div>
+                        <div class="coverage">Coverage<br>Tuition, living, travel allowance</div>
+                        <div class="desc">Apply now</div>
+                        <div class="note">Awards for students with excellent academic records.</div>
+                    </div>
+                    <div class="right">
+                        <button class="apply-btn">Apply now</button>
+                    </div>
+                </div>
+                <!-- New Card 1: MEXT Japanese Studies Scholarship 2026 -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/jp.svg') center/cover;"></div>
+                        <div class="country">Japan</div>
+                        <div class="info">October 2026</div>
+                        <div class="info">Undergraduate</div>
+                        <div class="date">Application: January 2026; Deadline: TBD</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="../Scholarships_page_images/MEXT.jpg" alt="Japan" style="width:40px;height:40px;"></div>
+                        <div class="title">MEXT Japanese Studies Scholarship 2026</div>
+                        <div class="coverage">Coverage<br>Tuition, monthly stipend, travel expenses</div>
+                        <div class="desc">One-year scholarship for undergraduates to study Japanese language and culture in Japan</div>
+                        <div class="note">Eligibility: Must be an undergraduate student at a university outside Japan, majoring in Japanese language or culture. Must meet age limits and academic requirements. Applications typically open the winter before the scholarship year.</div>
+                        <div class="right">
+                            <a href="https://www.nashville.us.emb-japan.go.jp/itpr_en/00_000307.html" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 2: Study in Italy Program for Myanmar Students -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/it.svg') center/cover;"></div>
+                        <div class="country">Italy</div>
+                        <div class="info">2025–2026</div>
+                        <div class="info">UG, Graduate</div>
+                        <div class="date">Varies by University</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg" alt="Italy" style="width:40px;height:40px;"></div>
+                        <div class="title">Study in Italy Program for Myanmar Students</div>
+                        <div class="coverage">Coverage<br>Tuition reductions, university scholarships, housing benefits</div>
+                        <div class="desc">Support and scholarship opportunities for Myanmar students wishing to study at Italian universities. Includes guidance on enrollment, visa, tuition, and eligibility for fee reductions and scholarships.</div>
+                        <div class="note">Eligibility: Myanmar students with a minimum 12 years of schooling (or alternative conditions) applying to Italian universities. Language proficiency in Italian or English required. Income-based fee reduction available upon proof. Declaration of Value required for enrollment.</div>
+                        <div class="right">
+                            <a href="https://ambyangon.esteri.it/en/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/studying-in-italy/" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 3: Octavius Catto Scholarship -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/us.svg') center/cover;"></div>
+                        <div class="country">United States</div>
+                        <div class="info">Fall & Spring</div>
+                        <div class="info">Associate</div>
+                        <div class="date">No separate application</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Community_College_of_Philadelphia_logo.png" alt="CCP" style="width:40px;height:40px;"></div>
+                        <div class="title">Octavius Catto Scholarship</div>
+                        <div class="coverage">Coverage<br>Tuition-free, all course materials, stipend, support services</div>
+                        <div class="desc">A no-debt, tuition-free scholarship at Community College of Philadelphia with stipends, academic resources, and holistic student support to empower low-income Philadelphians toward upward economic mobility.</div>
+                        <div class="note">Eligibility: New, first-time CCP students, transfer students with 30 or fewer credits, or former CCP students with a 2.0 GPA returning after one year. Must be a Philadelphia resident for 12 months, attend full-time, have a high school diploma or equivalent, FAFSA with SAI ≤ $8,000, and place college-ready or one level below in English and Math.</div>
+                        <div class="right">
+                            <a href="https://www.ccp.edu/admission-aid/paying-college/scholarships/octavius-catto-scholarship" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 4: Türkiye Scholarships – Bachelor's Program -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/tr.svg') center/cover;"></div>
+                        <div class="country">Turkey</div>
+                        <div class="info">Fall</div>
+                        <div class="info">Bachelor's</div>
+                        <div class="date">Dec–Feb (annual)</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="Turkey" style="width:40px;height:40px;"></div>
+                        <div class="title">Türkiye Scholarships – Bachelor's Program</div>
+                        <div class="coverage">Coverage<br>Tuition, stipend, accommodation, insurance, Turkish course, flights</div>
+                        <div class="desc">Scholarships for undergraduate students in various fields in Türkiye.</div>
+                        <div class="note">Eligibility: Open to international students. Must verify field equivalence in home country.</div>
+                        <div class="right">
+                            <a href="https://www.turkiyeburslari.gov.tr/en" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 5: Chevening Scholarships -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/gb.svg') center/cover;"></div>
+                        <div class="country">United Kingdom</div>
+                        <div class="info">Fall 2026</div>
+                        <div class="info">Masters</div>
+                        <div class="date">Aug–Nov 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK" style="width:40px;height:40px;"></div>
+                        <div class="title">Chevening Scholarships</div>
+                        <div class="coverage">Coverage<br>Tuition, living, travel, allowances</div>
+                        <div class="desc">UK govt scholarship for master's</div>
+                        <div class="note">Eligibility: International emerging leaders</div>
+                        <div class="right">
+                            <a href="https://www.chevening.org/scholarships/who-can-apply/" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 6: DAAD Helmut‑Schmidt Masters Scholarship -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/de.svg') center/cover;"></div>
+                        <div class="country">Germany</div>
+                        <div class="info">Sept/Oct 2026</div>
+                        <div class="info">Master's</div>
+                        <div class="date">31 July 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg" alt="Germany" style="width:40px;height:40px;"></div>
+                        <div class="title">DAAD Helmut‑Schmidt Masters Scholarship</div>
+                        <div class="coverage">Coverage<br>Tuition + monthly stipend</div>
+                        <div class="desc">Postgraduate public policy & governance in Germany</div>
+                        <div class="note">Eligibility: Open to Myanmar students</div>
+                        <div class="right">
+                            <a href="https://daad.de/go/en/stipa57692564" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 7: MOFA Taiwan Scholarship -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/tw.svg') center/cover;"></div>
+                        <div class="country">Taiwan</div>
+                        <div class="info">Fall 2026</div>
+                        <div class="info">Bachelor's, Master's</div>
+                        <div class="date">Varies; usually Spring</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg" alt="Taiwan" style="width:40px;height:40px;"></div>
+                        <div class="title">MOFA Taiwan Scholarship</div>
+                        <div class="coverage">Coverage<br>NT$25,000–30,000 monthly + tuition waiver</div>
+                        <div class="desc">Taiwan govt scholarship</div>
+                        <div class="note">Eligibility: Non‑Taiwanese nationals</div>
+                        <div class="right">
+                            <a href="https://en.mofa.gov.tw/cp.aspx?n=1325" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 8: Jardine Scholarship -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Oxford.svg') center/cover;"></div>
+                        <div class="country">United Kingdom</div>
+                        <div class="info">Fall 2026</div>
+                        <div class="info">Undergraduate</div>
+                        <div class="date">Around Oct 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Flag_of_the_United_Kingdom.svg" alt="UK" style="width:40px;height:40px;"></div>
+                        <div class="title">Jardine Scholarship</div>
+                        <div class="coverage">Coverage<br>Full tuition and living expenses</div>
+                        <div class="desc">Prestigious full scholarship to Oxford/Cambridge</div>
+                        <div class="note">Eligibility: From Asia-Pacific; academic excellence</div>
+                        <div class="right">
+                            <a href="https://www.jardines.com/en/sustainability/our-focus-areas/shaping-social-inclusion/jardine-foundation" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 9: University of Windsor Global Conflict Relief Bursary -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/ca.svg') center/cover;"></div>
+                        <div class="country">Canada</div>
+                        <div class="info">Fall 2025</div>
+                        <div class="info">Undergraduate</div>
+                        <div class="date">Oct 15, 2025</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg" alt="Canada" style="width:40px;height:40px;"></div>
+                        <div class="title">University of Windsor Global Conflict Relief Bursary</div>
+                        <div class="coverage">Coverage<br>CAD 10,000</div>
+                        <div class="desc">Bursary for international students affected by global conflicts</div>
+                        <div class="note">Eligibility: International undergrad; open Aug 1–Oct 15 2025</div>
+                        <div class="right">
+                            <a href="https://www.uwindsor.ca/studentawards/international-students-scholarships" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card 10: UWindsor Open Entrance Scholarship -->
+                <div class="scholarship-card">
+                    <div class="left">
+                        <div class="flag" style="background:url('https://flagcdn.com/ca.svg') center/cover;"></div>
+                        <div class="country">Canada</div>
+                        <div class="info">Fall 2025</div>
+                        <div class="info">Undergraduate</div>
+                        <div class="date">TBD closing 2025‑26</div>
+                    </div>
+                    <div class="center">
+                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg" alt="Canada" style="width:40px;height:40px;"></div>
+                        <div class="title">UWindsor Open Entrance Scholarship</div>
+                        <div class="coverage">Coverage<br>CAD 1,000</div>
+                        <div class="desc">Automatic merit based for incoming international students</div>
+                        <div class="note">Eligibility: International undergrad, auto‑considered</div>
+                        <div class="right">
+                            <a href="https://www.uwindsor.ca/studentawards/international-students-scholarships" class="apply-btn" target="_blank">Apply / Source</a>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>

@@ -432,6 +432,18 @@ html, body {
     justify-content: center;
     font-size: 30px;
 }
+
+.fav-btn {
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.fav-btn.fav {
+  color: gold;  /* filled star color */
+}
+
 .scholarship-card .center .title {
     color: #fff;
     font-size: 15px;
