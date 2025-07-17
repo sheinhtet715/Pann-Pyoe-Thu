@@ -169,7 +169,7 @@
                         <div class="date">Application: January 2026; Deadline: TBD</div>
                     </div>
                     <div class="center">
-                        <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg" alt="Japan" style="width:40px;height:40px;"></div>
+                        <div class="logo"><img src="../Scholarships_page_images/MEXT.jpg" alt="Japan" style="width:40px;height:40px;"></div>
                         <div class="title">MEXT Japanese Studies Scholarship 2026</div>
                         <div class="coverage">Coverage<br>Tuition, monthly stipend, travel expenses</div>
                         <div class="desc">One-year scholarship for undergraduates to study Japanese language and culture in Japan</div>

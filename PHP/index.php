@@ -497,5 +497,18 @@ $conn->close();
     openLogin();
   });
 </script>
+
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: 'Sign up successful..',
+    text: <?= json_encode($success) ?>,
+    confirmButtonText: 'OK'
+  }).then(() => {
+    // reopen the login modal so they can type again:
+    openLogin();
+  });
+  </script>
+
 </body>
 </html>
