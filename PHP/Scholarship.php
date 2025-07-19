@@ -198,20 +198,20 @@ $conn->close();
               <div class="note"><?= htmlspecialchars($s['eligibility']) ?></div>
             </div>
             <div class="right">
-              <form method="POST" style="display:inline">
-                <button
-                  type="submit"
-                  name="toggle_fav"
-                  value="<?= (int)$s['scholarship_id'] ?>"
-                  class="fav-btn <?= $s['is_fav'] ? 'fav' : '' ?>"
-                  title="Toggle favourite"
-                ><?= $s['is_fav'] ? '★' : '☆' ?></button>
-              </form>
-              <a
-                href="<?= htmlspecialchars($s['apply_link'] ?? '#') ?>"
-                class="apply-btn"
-                target="_blank"
-              >Apply</a>
+                <form method="POST" style="display:inline">
+                  <button
+                    type="submit"
+                    name="toggle_fav"
+                    value="<?= (int)$s['scholarship_id'] ?>"
+                    class="fav-btn <?= $s['is_fav'] ? 'fav' : '' ?>"
+                    title="Toggle favourite"
+                  ><?= $s['is_fav'] ? '★' : '☆' ?></button>
+                </form>
+                <a
+                  href="<?= htmlspecialchars($s['apply_link'] ?? '#') ?>"
+                  class="apply-btn"  style="text-decoration: none !important;"
+                  target="_blank"
+                ><span>Apply</span></a>
             </div>
           </div>
         <?php endforeach; ?>

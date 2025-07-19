@@ -477,6 +477,7 @@ html, body {
 }
 .apply-btn {
     background: #f5e6d6;
+    text-decoration: none !important;
     color: #222;
     border: none;
     border-radius: 9px;
@@ -491,9 +492,18 @@ html, body {
     max-width: 220px;
     width: auto;
     display: inline-block;
+   
 }
 .apply-btn:hover {
     background: #e2d2b8;
+}
+
+a.apply-btn,
+a.apply-btn:link,
+a.apply-btn:visited,
+a.apply-btn:hover,
+a.apply-btn:active {
+  text-decoration: none;
 }
 
 
