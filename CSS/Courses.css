@@ -1,0 +1,351 @@
+body {
+  background: #11202A;
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+}
+
+/*__________Header Start__________*/
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5a9ea3;
+    padding: 10px 50px;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column; /* Stack logo and text vertically */
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .logo-text {
+    margin-top: 5px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    color: black;
+    text-shadow:
+      -1px -1px 0 white,
+        1px -1px 0 white,
+      -1px  1px 0 white,
+        1px  1px 0 white;
+  }
+
+  nav {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .profile-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #ead7c0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-btn img {
+    width: 24px;
+    height: 24px;
+  }
+
+/*__________Header End__________*/
+
+/*__________Return Home__________*/
+
+.return-container {
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #BF9E8D;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.return-text {
+  color: black;
+  padding: 15px;
+  font-weight: bold;
+}
+
+/*__________Return Home End__________*/
+
+/*__________Courses Start__________*/
+
+.course-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 50px;
+  margin-top: 125px;
+}
+
+.course  {
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+}
+
+.course:hover {
+  transform: translateY(-5px);
+}
+
+.course-image {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-image img{
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain
+}
+
+.course1 {
+  background-color: #529AA6;
+}
+
+.course2,
+.course4,
+.course7,
+.course8 {
+  background-color: #E8D9C4;
+}
+
+.course3,
+.course5 {
+  background-color: #BF9E8D;
+}
+
+.course6 {
+  background-color: #9CC2CF;
+}
+
+.photo-enroll {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.photo-enroll img.icon {
+  width: 50px;
+  height: 50px;
+}
+
+.enroll {
+  background-color: #1D2733;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.course-text {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.course-text p {
+  margin: 6px 0 0 0;
+  font-size: 20px;
+  line-height: 0.8;
+  font-weight: bold;
+  color: black;
+}
+
+/*__________Courses End__________*/
+
+/*__________Popular Course Start__________*/
+
+.most-popular h1 {
+  padding: 20px;
+}
+
+.course-discount {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 150px;
+}
+
+.last-part {
+  display: flex;
+  flex-direction: row;
+}
+
+.box-one {
+  background-color: white;
+  width: 50px;
+  height: 150px;
+  margin-top: 200px;
+  margin-right: -10px;
+}
+
+.box-two {
+  background-color: white;
+  padding: 20px;
+  width: 250px;
+  height: 250px;
+  transform: rotate(-30deg);
+}
+
+.box-two p {
+  margin: 0 0 10px;
+  font-size: 20px;
+  transform: rotate(0deg);
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.box-two .red {
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+/*__________Popular Course End__________*/
+
+/*__________Offer Course Start__________*/
+.stay-tuned h1 {
+  padding: 20px;
+}
+
+.upcoming-course {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+.offer-course {
+  border-radius: 20px;
+  width: 400px;
+  height: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+  display: flex;
+}
+
+.offer-course:hover {
+  transform: translateY(-5px);
+}
+
+.card {
+  background-color: #9CC2CF;
+  color: black;
+}
+
+.offer-course img {
+  width: 150px;
+  height: 150px;
+  padding: 30px;
+}
+
+.offer-text {
+  font-size: 24px;
+  color: black;
+  padding: 20px;
+  font-weight: bold;
+
+}
+
+.offer-text p {
+  text-align: center;
+  margin-top: 60px;
+}
+/*__________Offer Course End__________*/
+
+/*__________Bottom SLide Start__________*/
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3A9BA5;
+    padding: 20px 40px;
+    flex-wrap: warp;
+    color: black;
+    margin-top: 100px;
+    height: auto;
+}
+.bottom a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.bottom p {
+    font-size: 20px;
+}
+
+.bottom-left,
+.bottom-middle,
+.bottom-right {
+    flex: 1;
+    text-align: center;
+}
+
+.bottom-left {
+    text-align: left;
+    color: black;
+}
+
+.bottom-right {
+    text-align: right;
+}
+
+.fab {
+    font-size: 24px;
+    margin-right: 6px;
+}
+
+.fa-facebook {
+    color: #1877f2
+}
+
+.fa-instagram {
+    color: #e1306c;
+}
+
+.fa-twitter {
+    color: #1DA1F2;
+}
+/*__________Bottom Slide End__________*/

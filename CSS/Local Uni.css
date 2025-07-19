@@ -1,0 +1,244 @@
+body {
+    background-color: #1D2733;
+}
+
+.header {
+    background-color: #5fa5ac;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    margin-top: 5px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    color: black;
+    text-shadow:
+      -1px -1px 0 white,
+        1px -1px 0 white,
+      -1px  1px 0 white,
+        1px  1px 0 white;
+  }
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Profile Icon */
+.profile-icon {
+    background-color: #f0e8d9;
+    width: 60px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    background-color: #e6d8c7;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img {
+    width: 36px; 
+    height: 36px;
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+/*__________Header End__________*/
+
+/*__________Starter Text Start__________*/
+
+.starter-text h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: left;
+    padding: 24px;
+}
+
+.starter-text p {
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    padding: 24px;
+    margin-top: -25px;
+}
+
+/*__________Starter Text End__________*/
+
+/*__________Middle Part Start__________*/
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.university img {
+    width: 225px;
+    height: 225px;
+    object-fit: cover;
+    padding: 60px;
+}
+
+.university .uni-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.university {
+    display: flex;
+    flex-direction: column;
+    width: 1050px;
+    height: 350px;
+}
+
+.uni-text {
+    margin-top: 35px;
+}
+
+.uni-text h1 {
+    font-size:  40px;
+}
+
+.uni-text p {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+.uni-icon {
+    width: 350px;
+    height: 350px;
+    align-items: center;
+}
+
+.uni-icon img {
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.visit-container {
+   width: 200px;
+   height: 50px;
+   border-radius: 25px;
+   background-color: #BF9E8D;
+   margin-top: 10px;
+}
+
+.visit-text {
+   color: black;
+   padding: 15px;
+   font-weight: bold;
+   text-align: center;
+}
+
+.visit-text a {
+    text-decoration: none;
+    color: black;
+}
+/*__________Middle Part End__________*/
+
+/*__________Bottom SLide Start__________*/
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3A9BA5;
+    padding: 20px 40px;
+    flex-wrap: warp;
+    color: black;
+    margin-top: 100px;
+}
+.bottom a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.bottom p {
+    font-size: 20px;
+}
+
+.bottom-left,
+.bottom-middle,
+.bottom-right {
+    flex: 1;
+    text-align: center;
+}
+
+.bottom-left {
+    text-align: left;
+    color: black;
+}
+
+.bottom-right {
+    text-align: right;
+}
+
+.fab {
+    font-size: 24px;
+    margin-right: 6px;
+}
+
+.fa-facebook {
+    color: #1877f2
+}
+
+.fa-instagram {
+    color: #e1306c;
+}
+
+.fa-twitter {
+    color: #1DA1F2;
+}
+/*__________Bottom Slide End__________*/

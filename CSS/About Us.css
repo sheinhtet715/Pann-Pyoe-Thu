@@ -1,0 +1,514 @@
+body {
+  background: #11202A;
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+}
+/*__________Header Start__________*/
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5a9ea3;
+    padding: 10px 30px;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column; /* Stack logo and text vertically */
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .logo-text {
+    margin-top: 5px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    color: black;
+    text-shadow:
+      -1px -1px 0 white,
+        1px -1px 0 white,
+      -1px  1px 0 white,
+        1px  1px 0 white;
+  }
+
+  nav {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .profile-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #ead7c0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-btn img {
+    width: 24px;
+    height: 24px;
+  }
+
+/*__________Header End__________*/
+
+/*__________The Start Starts__________*/
+
+.the-start {
+  position: relative;
+  width: 480px;
+  height: 360px;
+  margin: -50px auto;
+}
+
+.the-start img {
+  width: 480px;
+  height: 360px;
+  display: block;
+}
+
+.start-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 24px;
+}
+
+/*__________The Start End__________*/
+
+/*__________Vision Start__________*/
+.vision {
+  color: white;
+  padding: 40px;
+}
+
+.vision p{
+  margin-top: 40px;
+}
+
+.vision-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100vh;
+  position: relative;
+  padding: 40px;
+}
+
+.vision-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%; 
+  position: relative;
+}
+
+.vision-right {
+  width: 50%;
+}
+
+.vision-right p {
+  color: white;
+  padding: 40px;
+}
+
+.vision-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
+  z-index: 1;
+}
+
+.vision-item {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.vision-item img {
+  width: 150px;
+  height: auto;
+  margin-right: 40px;
+}
+
+.vision-text {
+  background-color: #a2d3e8;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.vision-line {
+  position: absolute;
+  right: 200px;
+  top: 0px;
+  bottom: 0px;
+  width: 8px;
+  background-color: #b48e78;
+}
+
+ .vision-line::before,
+ .vision-line::after {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 6px;
+  background-color: #e5e5e5;
+}
+
+.vision-line::before {
+  top: 0;
+  right: 0;
+}
+
+.vision-line::after {
+  bottom: 0;
+  right: 0;
+}
+
+.image-container {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/*__________Vision End__________*/
+
+/*__________Mission Start__________*/
+
+.mission-container {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  max-width: 1000px; /* Adjust as needed */
+  margin: 0 auto;
+  margin-top: 180px;
+}
+
+.mission-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mission-text {
+  position: absolute;
+  top: 25%; /* Center vertically */
+  left: 45%; /* Center horizontally */
+  transform: translate(-25%, -25%); /* Align center */
+  color: white; /* Text color */
+  text-align: left; /* Center text */
+  padding: 20px; /* Padding around text */
+  width: 600px;
+}
+
+.mission-text h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.mission-text ul {
+  list-style-type: disc;
+  padding: 0;
+  font-size: 20px;
+}
+
+.mission-text li {
+  margin: 5px 0px;
+}
+
+/*__________Mission End__________*/
+
+/*__________Core Values Start__________*/
+
+.core {
+  margin-top: 250px;
+}
+
+.core-container {
+  display: flex;
+  flex-direction: column;
+  gap: 75px;
+  align-items: center;
+  margin-top: 110px;
+}
+
+.core-row {
+  display: flex;
+  gap: 150px;
+  justify-content: center;
+}
+
+.core-card {
+  position: relative;
+  width: 300px;
+  height: 200px;
+}
+
+.core-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.core-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px #000;
+  pointer-events: none;
+}
+
+/*__________Core Value End__________*/
+
+/*__________Members Start__________*/
+
+.team-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+  height: 100vh;
+  gap: 50px;
+}
+
+.cover {
+  position: relative;
+  text-align: center;
+  margin-right: 250px;
+  margin-left: 250px;
+}
+
+.cover img {
+  width: 120px;
+  opacity: 0.6;
+}
+
+.cover-text {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  width: 300px;
+}
+
+
+.cover-text .o {
+  color: #BF9E8D;
+  font-size: 40px;
+}
+
+.cover-text .u {
+  color: #9CC2CF;
+  font-size: 40px;
+}
+
+.cover-text .r {
+  color: #BF9E8D;
+  font-size: 40px;
+}
+
+.member {
+  position: relative;
+  width: 300px;
+}
+
+.member-header {
+  position: absolute;
+  top: -10px;
+  background-color: #2C4854;
+  color: white;
+  border-radius: 15px;
+  font-weight: bold;
+  width: 300px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+.member-info {
+  background: linear-gradient(to bottom, #E8D9C4, #BF9E8D);
+  border-radius: 20px;
+  padding: 20px 20px 20px 20px; /* top padding increased for header space */
+  color: black;
+  text-align: center;
+  width: 300px;
+  height: 400px;
+}
+
+.profile-image {
+ width: 175px;
+ height: 175px;
+ border-radius: 50%;
+ margin: 55px auto;
+ object-fit: cover;
+ display: block;
+}
+
+.member-role {
+  font-weight: bold;
+  margin: -40px;
+}
+
+.member-quote {
+  font-size: 15px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.member-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 120px; /* space between cards */
+  justify-content: center;
+  margin: 0 auto;
+}
+/*__________Members End__________*/
+
+/*__________Photo Tree Start__________*/
+
+.tree-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 50px;
+  margin-top: 150px;
+}
+
+.tree-text {
+  color: white;
+  font-size: 36px;
+  text-align: center;
+}
+
+.tree-image {
+  width: 640px;
+  height: 640px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/*__________Photo Tree End__________*/
+
+/*__________Bottom Part Start__________*/
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #3A9BA5;
+    padding: 40px 60px;
+    color: black;
+}
+.bottom a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.bottom p {
+    font-size: 20px;
+}
+
+.bottom-left,
+.bottom-middle,
+.bottom-right {
+    flex: 1;
+    text-align: center;
+}
+
+.bottom-left {
+    text-align: left;
+    color: black;
+}
+
+.bottom-right {
+    text-align: right;
+}
+
+.fab {
+    font-size: 36px;
+    margin-right: 6px;
+}
+
+.fa-facebook {
+    color: #1877f2
+}
+
+.fa-instagram {
+    color: #e1306c;
+}
+
+.fa-twitter {
+    color: #1DA1F2;
+  }
+/*
+* {
+  outline: 1px solid red; /* for debugging layout */
+
+  /*__________Bottom Part End__________*/
+
+  /*__________Smaall Mobile__________*/
+
+@media screen and (max-width: 479px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  } 
+
+}

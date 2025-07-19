@@ -94,14 +94,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <span class="logo-text">Pann Pyoe Thu</span>
       </div>
       <nav class="nav">
-        <a href="../PHP/index.php">Home</a>
-        <a href="#about">About us</a>
-        <a href="#courses">Courses</a>
-        <a href="../PHP/Counsellors.php">Educational Counsellors</a>
+       <a href="../PHP/index.php">Home</a>
+        <a href="../PHP/About Us.php">About us</a>
+        <a href="../PHP/Courses.php">Courses</a>
+        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="#universities">Local Universities</a>
-        <a href="#jobs">Job Opportunities</a>
-      </nav>
+        <a href="../PHP/Local Uni.php">Local Universities</a>
+         <a href="../PHP/Jobs.php">Job Opportunities</a>
+    </nav>
       <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div> -->
