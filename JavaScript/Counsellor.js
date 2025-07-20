@@ -1,59 +1,53 @@
-
-function openPopup(advisorName) {
-  if (!isLoggedIn) {
-  alert('Please sign in to book an appointment.');
-  // encode the space as %20
-  window.location.href = '../front page/Homepage.php';
-  return;
-}
-  const advisorInput = document.getElementById("advisor-input");
-  const nameSpan     = document.getElementById("advisor-name");
-  const popup        = document.getElementById("appointment-popup");
-
-  if (advisorInput) {
-    advisorInput.value = advisorName;
-    console.log("DEBUG: advisor-input set to:", advisorInput.value);
+// Counsellor.js
+// Counsellor.js
+function openPopup(advisorName, skipLoginCheck = false) {
+  if (!skipLoginCheck && !window.isLoggedIn) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Please sign in',
+      text: 'You must be signed in to book an appointment.'
+    }).then(() => {
+      window.location.href = 'index.php?showLogin=1';
+    });
+    return;
   }
-  if (nameSpan) nameSpan.textContent = advisorName;
-  if (popup)    popup.style.display = "flex";
+
+  document.getElementById('advisor-input').value     = advisorName;
+  document.getElementById('advisor-name').textContent = advisorName;
+  document.getElementById('appointment-popup').style.display = 'flex';
 }
-  
 
 function closePopup() {
-  var popup = document.getElementById("appointment-popup");
-  if (popup) {
-    popup.style.display = "none";
-  }
+  document.getElementById('appointment-popup').style.display = 'none';
 }
+
+// click‐outside auto‑close
+window.onclick = function(e) {
+  const popup = document.getElementById('appointment-popup');
+  if (popup && e.target === popup) closePopup();
+};
+
+
+// Profile‑menu toggle
 function toggleProfileMenu() {
-  var menu = document.getElementById("profile-menu");
-  if (menu) {
-    menu.classList.toggle("show");
-  }
+  const menu = document.getElementById("profile-menu");
+  if (menu) menu.classList.toggle("show");
 }
-
-
-// Close profile menu when clicking outside
-document.addEventListener('click', function(event) {
-  var profileSection = document.querySelector('.profile-section');
-  var menu = document.getElementById("profile-menu");
-  
-  if (profileSection && menu && !profileSection.contains(event.target)) {
+document.addEventListener('click', (e) => {
+  const section = document.querySelector('.profile-section');
+  const menu    = document.getElementById("profile-menu");
+  if (section && menu && !section.contains(e.target)) {
     menu.classList.remove("show");
   }
 });
 
-// Unified click-outside handler for both popups
-window.onclick = function(event) {
-  var popup = document.getElementById("appointment-popup");
-  if (popup && event.target === popup) {
-    popup.style.display = "none";
-  }
-  var modal = document.getElementById('loginModal');
-  if (modal && event.target === modal) {
-    modal.style.display = 'none';
-  }
-};
+// Close popups when clicking the overlay
+// window.onclick = (event) => {
+//   const popup = document.getElementById("appointment-popup");
+//   if (popup && event.target === popup) popup.style.display = "none";
+//   const modal = document.getElementById("loginModal");
+//   if (modal && event.target === modal) modal.style.display = "none";
+// };
 
 // function openLogin() {
 //   console.log('openLogin called');
