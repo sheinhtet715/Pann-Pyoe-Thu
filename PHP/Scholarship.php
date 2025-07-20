@@ -293,52 +293,72 @@ $conn->close();
       </div>
     </footer>
     <script src="../JavaScript/Scholarship.js"></script>
-    <script>
-      function toggleProfileMenu() {
-        var menu = document.getElementById('profile-menu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-      }
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1) Profile menu toggle (unchanged)
+    window.toggleProfileMenu = function() {
+      var menu = document.getElementById('profile-menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    };
 
-      // Filter functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const select = document.querySelector('.filter-select');
-        const cards = document.querySelectorAll('.scholarship-card');
-        select.addEventListener('change', function() {
-          const value = select.value;
-          cards.forEach(card => {
-            const country = card.querySelector('.country')?.textContent?.trim();
-            if (value === 'All' || country === value) {
-              card.style.display = '';
-            } else {
-              card.style.display = 'none';
-            }
-          });
+    // 2) Filter functionality (unchanged)
+    const select = document.querySelector('.filter-select');
+    if (select) {
+      const cards = document.querySelectorAll('.scholarship-card');
+      select.addEventListener('change', function() {
+        const value = select.value;
+        cards.forEach(card => {
+          const country = card.querySelector('.country')?.textContent?.trim();
+          card.style.display = (value === '' || value === country) ? '' : 'none';
         });
       });
-    </script>
-  <script>
-// toggle “My Favorites” in URL
-function toggleFavorites(){
-  const p = new URLSearchParams(location.search);
-  if(p.get('showFavorites')==='1') p.delete('showFavorites');
-  else p.set('showFavorites','1');
-  location.search = p.toString();
-}
+    }
 
-// prevent non‑logged‑in from toggling favorites
-const isLoggedIn = <?= $userId? 'true':'false' ?>;
-document.querySelectorAll('.fav-btn').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    if(!isLoggedIn){
-      e.preventDefault();
-      Swal.fire({
-        icon: 'warning',
-        title: 'Please log in',
-        text:  'You must be logged in to favorite a scholarship.'
+    // 3) Favorites toggle + star‑button guard
+    const isLoggedIn  = <?= $userId ? 'true' : 'false' ?>;
+    const showFavBtn  = document.getElementById('show-fav');
+    const favStarBtns = document.querySelectorAll('.fav-btn');
+
+    // “My Favorites” / “Show All” button
+    if (showFavBtn) {
+      showFavBtn.addEventListener('click', function(e) {
+        if (!isLoggedIn) {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'warning',
+            title: 'Please log in',
+            text:  'You must be signed in to view your favorites.'
+          });
+          return;
+        }
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('showFavorites') === '1') {
+          params.delete('showFavorites');
+          showFavBtn.textContent = 'My Favorites';
+        } else {
+          params.set('showFavorites', '1');
+          showFavBtn.textContent = 'Show All';
+        }
+        window.location.search = params.toString();
       });
     }
+
+    // Star buttons: block if not logged in
+    favStarBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (!isLoggedIn) {
+          e.preventDefault();
+          Swal.fire({
+            icon: 'warning',
+            title: 'Please log in',
+            text:  'You must be signed in to favorite a scholarship.'
+          });
+        }
+        // otherwise let the form submit
+      });
+    });
   });
-});
 </script>
+
 </body>
 </html>    
