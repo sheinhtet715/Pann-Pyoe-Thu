@@ -3,90 +3,109 @@
 session_start();
 include "./db_connection.php";
 require_once "./Controller/ScholarshipController.php";
-
+// at top of your view
+  $logoFolder = '../Scholarships_page_images/';
 // current user (or null)
 $userId = $_SESSION['user_id'] ?? null;
 
 // 1) Handle favourite toggle
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['toggle_fav']) && $userId) {
+if ($_SERVER['REQUEST_METHOD']==='POST' && !empty($_POST['toggle_fav'])) {
+  if (!$userId) {
+    // non‑logged in will be caught by JS
+  } else {
     $schId = intval($_POST['toggle_fav']);
-
-    // check if already favourited
+    // check existing
     $check = $conn->prepare("
-      SELECT 1 
-        FROM FavouriteScholarship_tbl
-       WHERE user_id = ? 
-         AND scholarship_id = ?
+      SELECT 1 FROM FavouriteScholarship_tbl
+       WHERE user_id = ? AND scholarship_id = ?
     ");
     $check->bind_param("ii", $userId, $schId);
     $check->execute();
     $res = $check->get_result();
-
     if ($res->num_rows) {
-        // remove favourite
-        $del = $conn->prepare("
-          DELETE FROM FavouriteScholarship_tbl
-           WHERE user_id = ? 
-             AND scholarship_id = ?
-        ");
-        $del->bind_param("ii", $userId, $schId);
-        $del->execute();
-        $del->close();
+      // delete
+      $del = $conn->prepare("
+        DELETE FROM FavouriteScholarship_tbl
+         WHERE user_id = ? AND scholarship_id = ?
+      ");
+      $del->bind_param("ii", $userId, $schId);
+      $del->execute();
+      $del->close();
     } else {
-        // verify scholarship exists
-        $schCheck = $conn->prepare("
-          SELECT 1 
-            FROM Scholarship_tbl 
-           WHERE scholarship_id = ?
-        ");
-        $schCheck->bind_param("i", $schId);
-        $schCheck->execute();
-        $schRes = $schCheck->get_result();
-
-        if ($schRes->num_rows > 0) {
-            // insert favourite
-            $ins = $conn->prepare("
-              INSERT INTO FavouriteScholarship_tbl (user_id, scholarship_id)
-              VALUES (?, ?)
-            ");
-            $ins->bind_param("ii", $userId, $schId);
-            $ins->execute();
-            $ins->close();
-        }
-        $schCheck->close();
+      // insert
+      $ins = $conn->prepare("
+        INSERT IGNORE INTO FavouriteScholarship_tbl(user_id,scholarship_id)
+        VALUES(?,?)
+      ");
+      $ins->bind_param("ii", $userId, $schId);
+      $ins->execute();
+      $ins->close();
     }
     $check->close();
+    // avoid repost
+    header("Location: ".$_SERVER['REQUEST_URI']);
+    exit;
+  }
 }
 
-// 2) Fetch via controller (will include apply_link, is_fav, etc.)
-$controller    = new ScholarshipController($conn, $userId);
-$allScholarships = $controller->getAllScholarships();
+// 2) Fetch all scholarships + is_fav flag
+$sql = "
+  SELECT
+    s.*,
+    CASE WHEN f.scholarship_id IS NOT NULL THEN 1 ELSE 0 END AS is_fav
+  FROM Scholarship_tbl s
+  LEFT JOIN FavouriteScholarship_tbl f
+    ON s.scholarship_id = f.scholarship_id
+   AND f.user_id = ?
+  ORDER BY s.intake_season, s.title
+";
+$stmt = $conn->prepare($sql);
+$uid  = $userId ?: 0;
+$stmt->bind_param("i",$uid);
+$stmt->execute();
+$result = $stmt->get_result();
+$all = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
-// 3) Country filter
-$countryFilter = $_GET['country'] ?? '';
-if ($countryFilter && $countryFilter !== 'All') {
-    $scholarships = array_filter(
-        $allScholarships,
-        fn($s) => ($s['country'] ?? '') === $countryFilter
-    );
+// 3) Apply “My Favorites” and country filters
+$countryFilter = $_GET['country']    ?? '';
+$showFav       = ($_GET['showFavorites'] ?? '')==='1' && $userId;
+
+// first, optionally only favorites
+if ($showFav) {
+  $filtered = array_filter($all, fn($s)=>!empty($s['is_fav']));
 } else {
-    $scholarships = $allScholarships;
+  $filtered = $all;
+}
+// then country
+if ($countryFilter && $countryFilter!=='All') {
+  $scholarships = array_filter(
+    $filtered,
+    fn($s)=>($s['country'] ?? '')===$countryFilter
+  );
+} else {
+  $scholarships = $filtered;
 }
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Scholarships!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
        <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/Scholarship.css">
+      <!-- SweetAlert2 -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
     .fav-btn { background:none; border:none; font-size:24px; cursor:pointer; }
     .fav-btn.fav { color: gold; }
+    .filter-row { display:flex; gap:1rem; align-items:center; margin-bottom:1rem;}
   </style>
 </head>
 <body>
@@ -96,14 +115,14 @@ $conn->close();
         <span class="logo-text">Pann Pyoe Thu</span>
       </div>
         <nav class="nav">
-       <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
+        <a href="../PHP/index.php">Home</a>
+        <a href="#about">About us</a>
+        <a href="#courses">Courses</a>
         <a href="../PHP/Counsellor.php">Educational Counsellors</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
+        <a href="../PHP/LocalUni.php">Local Universities</a>
+        <a href="#jobs">Job Opportunities</a>
+      </nav>
       <?php if (! empty($_SESSION['user_id'])): ?>
   <!-- Logged in -->
   <div class="user-bar">
@@ -152,72 +171,86 @@ $conn->close();
             <h2>Find Scholarships</h2>
             
             <p>Looking for ways to fund your education? Explore a variety of scholarships tailored to your dreams and start your journey with confidence.</p>
-            <form method="GET" class="filter-row">
-        <button class="filter-btn" disabled>Filter by</button>
-        <span>Country</span>
-        <select name="country" class="filter-select" onchange="this.form.submit()">
+        <!-- filters + show favorites -->
+    <div class="filter-row">
+      <form method="GET" style="display:inline-flex;gap:0.5rem;">
+        <button class="filter-btn" disabled>Filter by Country</button>
+        
+        <select name="country" onchange="this.form.submit()">
           <option value="">All</option>
-          <?php 
-            $countries = array_unique(array_column($allScholarships, 'country'));
+          <?php
+            $countries = array_unique(array_column($all,'country'));
             sort($countries);
-            foreach ($countries as $c): 
+            foreach($countries as $c):
           ?>
-            <option
-              value="<?= htmlspecialchars($c) ?>"
-              <?= $c === $countryFilter ? 'selected' : '' ?>
-            >
-              <?= htmlspecialchars($c) ?>
-            </option>
-          <?php endforeach; ?>
+          <option value="<?=htmlspecialchars($c)?>"
+            <?=$c===$countryFilter?'selected':''?>>
+            <?=htmlspecialchars($c)?>
+          </option>
+          <?php endforeach;?>
         </select>
       </form>
+      <button
+        type="button"
+        id="show-fav"
+        class="btn btn-secondary btn-sm <?= $showFav ? 'active' : '' ?>"
+        onclick="toggleFavorites()"
+        title="<?= $showFav ? 'Show all scholarships' : 'Show only my favorites' ?>"
+      >
+        <?= $showFav ? 'Show All' : 'Show Favorites' ?>
+      </button>
 
-      <div class="scholarship-list">
-        <?php foreach ($scholarships as $s): ?>
-          <div class="scholarship-card">
-            <div class="left">
-              <div class="flag"
-                   style="background:url('https://flagcdn.com/<?= strtolower(substr($s['country'],0,2)) ?>.svg') center/cover;">
-              </div>
-              <div class="country"><?= htmlspecialchars($s['type']) ?></div>
-              <div class="info"><?= htmlspecialchars($s['intake_season']) ?></div>
-              <div class="info"><?= htmlspecialchars($s['degree_level']) ?></div>
-              <div class="date"><?= htmlspecialchars($s['deadline']) ?></div>
-            </div>
-            <div class="center">
-              <div class="logo">
-                <img src="<?= htmlspecialchars($s['logo_url'] ?? '../default-logo.png') ?>"
-                     alt="<?= htmlspecialchars($s['title']) ?> logo"
-                     style="width:40px;height:40px;object-fit:contain">
-              </div>
-              <div class="title"><?= htmlspecialchars($s['title']) ?></div>
-              <div class="coverage">
-                Coverage<br><?= nl2br(htmlspecialchars($s['coverage'])) ?>
-              </div>
-              <div class="desc"><?= htmlspecialchars($s['description']) ?></div>
-              <div class="note"><?= htmlspecialchars($s['eligibility']) ?></div>
-            </div>
-            <div class="right">
-                <form method="POST" style="display:inline">
-                  <button
-                    type="submit"
-                    name="toggle_fav"
-                    value="<?= (int)$s['scholarship_id'] ?>"
-                    class="fav-btn <?= $s['is_fav'] ? 'fav' : '' ?>"
-                    title="Toggle favourite"
-                  ><?= $s['is_fav'] ? '★' : '☆' ?></button>
-                </form>
-                <a
-                  href="<?= htmlspecialchars($s['apply_link'] ?? '#') ?>"
-                  class="apply-btn"  style="text-decoration: none !important;"
-                  target="_blank"
-                ><span>Apply</span></a>
-            </div>
+    </div>
+
+    <!-- scholarship list -->
+    <div class="scholarship-list">
+      <?php foreach($scholarships as $s): ?>
+      <div class="scholarship-card">
+        <div class="left">
+          <div class="flag"
+               style="background:url('https://flagcdn.com/<?=strtolower(substr($s['country'],0,2))?>.svg') center/cover;"></div>
+          <div class="country"><?=htmlspecialchars($s['type'])?></div>
+          <div class="info"><?=htmlspecialchars($s['intake_season'])?></div>
+          <div class="info"><?=htmlspecialchars($s['degree_level'])?></div>
+          <div class="date"><?=htmlspecialchars($s['deadline'])?></div>
+        </div>
+        <div class="center">
+          <!-- <div class="logo"> -->
+            <img
+                src="<?= htmlspecialchars(
+                  preg_match('~^https?://~', $s['logo_url'])
+                    ? $s['logo_url']
+                    : $logoFolder . $s['logo_url']
+                ) ?>"
+                alt="<?= htmlspecialchars($s['title']) ?> logo"
+                style="width:130px;height:130px;object-fit:contain;"
+              >
+          <!-- </div> -->
+          <div class="title"><?=htmlspecialchars($s['title'])?></div>
+          <div class="coverage">
+            Coverage<br><?=nl2br(htmlspecialchars($s['coverage']))?>
           </div>
-        <?php endforeach; ?>
+          <div class="desc"><?=htmlspecialchars($s['description'])?></div>
+          <div class="note"><?=htmlspecialchars($s['eligibility'])?></div>
+        </div>
+        <div class="right">
+          <form method="POST" style="display:inline">
+            <button
+              type="submit"
+              name="toggle_fav"
+              value="<?= (int)$s['scholarship_id'] ?>"
+              class="fav-btn <?= $s['is_fav']?'fav':'' ?>"
+              title="Toggle favourite"
+            ><?= $s['is_fav']?'★':'☆'?></button>
+          </form>
+          <a href="<?=htmlspecialchars($s['apply_link']??'#')?>"
+             class="apply-btn" target="_blank"><span>Apply</span></a>
+        </div>
       </div>
+      <?php endforeach;?>
     </div>
-    </div>
+  </div>
+</div>
     <footer>
       <div>
         <h4>Explore</h4>
@@ -283,5 +316,29 @@ $conn->close();
         });
       });
     </script>
+  <script>
+// toggle “My Favorites” in URL
+function toggleFavorites(){
+  const p = new URLSearchParams(location.search);
+  if(p.get('showFavorites')==='1') p.delete('showFavorites');
+  else p.set('showFavorites','1');
+  location.search = p.toString();
+}
+
+// prevent non‑logged‑in from toggling favorites
+const isLoggedIn = <?= $userId? 'true':'false' ?>;
+document.querySelectorAll('.fav-btn').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    if(!isLoggedIn){
+      e.preventDefault();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please log in',
+        text:  'You must be logged in to favorite a scholarship.'
+      });
+    }
+  });
+});
+</script>
 </body>
 </html>    
