@@ -27,7 +27,7 @@
         <span></span>
         <span></span>
       </button>
-      <div class="profile-icon" onclick="openLogin()" role="button" tabindex="0" aria-label="Open login menu">
+      <div class="profile-icon" onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)" role="button" tabindex="0" aria-label="Open login menu">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div>
     </header>

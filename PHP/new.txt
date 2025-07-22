@@ -453,3 +453,55 @@
                 </div>
             </div>  
         </div>
+
+ <div id="loginModal" class="modal">
+        <div class="modal-content login-container">
+            <!-- Left side -->
+            <div class="login-left">
+                <h1>Welcome to Pann Pyoe Thu</h1>
+                <img src="../HomePimg/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
+            </div>
+
+            <!-- Right side -->
+            <div class="login-right">
+                <span class="close" onclick="closeLogin()">&times;</span>
+                <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo" />
+                <div class="login-box">
+                    <?php if (!empty($error))   echo "<p class='error'>$error</p>"; ?>
+                    <?php if (!empty($success)) echo "<p class='success'>$success</p>"; ?>
+                    <form method="POST" action="index.php" class="login-box">
+                    <input type="text" name="user_name" placeholder="Username" required />
+                    <input type="email" name="email" placeholder="Email"  required />
+                    <input type="password" name="password" placeholder="Password" required />
+                    <div class="login-buttons">
+                        <button class="signin" type="submit" name="signin">Sign in</button>
+                        <button class="signup" type="submit" name="signup">Sign up</button>
+                    </div>
+                    <a href="#" class="forgot">Forgot your password?</a>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+      
+  <?php if (!empty($error)): ?>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign‑In Failed',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    </script>
+  <?php elseif (!empty($success)): ?>
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Great!',
+        text: <?= json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+    </script>
+  <?php endif; ?>

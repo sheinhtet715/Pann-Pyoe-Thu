@@ -22,7 +22,7 @@
         <a href="../PHP/Local Uni.php">Local Universities</a>
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
-        <div class="profile-icon" onclick="openLogin()">
+        <div class="profile-icon" onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
                 <img src="../Images/Profile.png" alt="Profile" class="profile-img" />
         </div>
     </header>

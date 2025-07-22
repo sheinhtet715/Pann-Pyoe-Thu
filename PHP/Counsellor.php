@@ -105,7 +105,7 @@ $conn->close();
     <a href="counsellor_logout.php" class="btn-logout">Logout</a>
   </div>
 <?php else: ?>
-  <div class="profile-icon" onclick="window.location.href = 'index.php?showLogin=1'">
+  <div class="profile-icon" onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
     <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
   </div>
 <?php endif; ?>
@@ -181,7 +181,7 @@ $conn->close();
           icon: 'warning',
           title: 'Please sign in',
           text:  'You must be signed in to book an appointment.'
-        }).then(()=>window.location='index.php?showLogin=1')">
+        }).then(()=>window.location='login.php?return=' + encodeURIComponent(window.location.href)>
   Get Appointment
 </button>
 

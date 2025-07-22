@@ -1,107 +1,11 @@
 <?php
-session_start();
-include "db_connection.php";
-
-// grab POSTed values (or empty strings)
-$username = trim($_POST['user_name'] ?? '');
-$email    = trim($_POST['email']     ?? '');
-$password = $_POST['password']       ?? '';
-
-// -------- SIGN IN --------
-if (isset($_POST['signin'])) {
-    $sql  = "SELECT user_id, user_name, email, password_hash
-             FROM user_tbl
-             WHERE email = ? OR user_name = ?
-             LIMIT 1";
-    $stmt = $conn->prepare($sql);
-    if (! $stmt) {
-        die("❌ SQL Error on prepare(): " . $conn->error);
-    }
-
-    $stmt->bind_param("ss", $email, $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result && $result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password_hash'])) {
-            // success!
-            $_SESSION['user_id']   = $user['user_id'];
-            $_SESSION['user_name'] = $user['user_name'];
-            $_SESSION['email']     = $user['email'];
-            header("Location: ./index.php");
-            exit;
-        } else {
-            $error = "Incorrect password.";
-        }
-    } else {
-        $error = "No account found with that email or username.";
-    }
-
-    $stmt->close();
-}
-
-// -------- SIGN UP --------
-if (isset($_POST['signup'])) {
-    // 1. check for existing account
-    $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
-    $chk = $conn->prepare($sql);
-    if (! $chk) {
-        die("❌ SQL Error on prepare(): " . $conn->error);
-    }
-
-    $chk->bind_param("ss", $username, $email);
-    $chk->execute();
-    $res = $chk->get_result();
-
-    if ($res->num_rows > 0) {
-        $error = "❌ That username or email is already taken.";
-    } else {
-        // 2. hash the password
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-
-        // 3. insert into user_tbl
-        $ins = $conn->prepare("
-            INSERT INTO user_tbl
-              (user_name, email, password_hash)
-            VALUES (?, ?, ?)
-        ");
-        if (! $ins) {
-            die("❌ SQL Error on prepare(): " . $conn->error);
-        }
-
-        $ins->bind_param("sss", $username, $email, $hash);
-        if (! $ins->execute()) {
-            $error = "❌ Signup failed — please try again. (" . $ins->error . ")";
-        } else {
-            // 4. grab the newly created user_id
-            $user_id = $conn->insert_id;
-
-            // 5. insert into Login_tbl as well
-            $loginIns = $conn->prepare("
-                INSERT INTO Login_tbl
-                  (user_id, user_name, password_hash, email, role, last_login)
-                VALUES (?, ?, ?, ?, 'user', NOW())
-            ");
-            if (! $loginIns) {
-                die("❌ SQL Error on prepare(): " . $conn->error);
-            }
-
-            $loginIns->bind_param("isss", $user_id, $username, $hash, $email);
-            if ($loginIns->execute()) {
-                $success = "✅ Account created and login registered! You can now sign in.";
-            } else {
-                $error = "⚠️ Account created but failed to register login: " . $loginIns->error;
-            }
-            $loginIns->close();
-        }
-        $ins->close();
-    }
-    $chk->close();
-}
-
-$conn->close();
+  // pick up any flash‐error or ‐success from login.php
+  session_start();
+  $error   = $_SESSION['login_error']   ?? '';
+  $success = $_SESSION['login_success'] ?? '';
+  unset($_SESSION['login_error'], $_SESSION['login_success']);
 ?>
+
 
 <html lang="en">
 <head>
@@ -114,27 +18,7 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="../CSS/Homepage.css">
-    
-  <?php if (!empty($error)): ?>
-    <script>
-      Swal.fire({
-        icon: 'error',
-        title: 'Sign‑In Failed',
-        text: <?= json_encode($error) ?>,
-        confirmButtonText: 'Try Again'
-      });
-    </script>
-  <?php elseif (!empty($success)): ?>
-    <script>
-      Swal.fire({
-        icon: 'success',
-        title: 'Great!',
-        text: <?= json_encode($success) ?>,
-        timer: 2000,
-        showConfirmButton: false
-      });
-    </script>
-  <?php endif; ?>
+  
     <title>Pann Pyoe Thu</title>
 </head>
 <body>
@@ -222,37 +106,7 @@ $conn->close();
         </section>
     </div>
 
-        <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content login-container">
-            <!-- Left side -->
-            <div class="login-left">
-                <h1>Welcome to Pann Pyoe Thu</h1>
-                <img src="../HomePimg/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
-            </div>
 
-            <!-- Right side -->
-            <div class="login-right">
-                <span class="close" onclick="closeLogin()">&times;</span>
-                <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo" />
-                <div class="login-box">
-                    <?php if (!empty($error))   echo "<p class='error'>$error</p>"; ?>
-                    <?php if (!empty($success)) echo "<p class='success'>$success</p>"; ?>
-                    <form method="POST" action="index.php" class="login-box">
-                    <input type="text" name="user_name" placeholder="Username" required />
-                    <input type="email" name="email" placeholder="Email"  required />
-                    <input type="password" name="password" placeholder="Password" required />
-                    <div class="login-buttons">
-                        <button class="signin" type="submit" name="signin">Sign in</button>
-                        <button class="signup" type="submit" name="signup">Sign up</button>
-                    </div>
-                    <a href="#" class="forgot">Forgot your password?</a>
-                    </form>
-                </div>
-                
-            </div>
-        </div>
-    </div>
 
     <!-- Consulting Section -->
     <div class="consult-slider">
@@ -443,72 +297,65 @@ $conn->close();
         </div>
     </div>
      <!-- … your header, form, etc … -->
+<?php include 'login_modal.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- 1) Load your libraries -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../JavaScript/Homepage.js"></script>
 
-    <script src="../JavaScript/Homepage.js"></script>
-    
-    <script>
-  let _loginAutoOpened = false;
+<!-- 2) Fire the flash (only once!) and wire up open/close -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    <?php if ($error): ?>
+      openLogin();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    <?php elseif ($success): ?>
+      openLogin();
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: <?= json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+    <?php endif; ?>
+  });
 
+  // centralize open/close here—remove your duplicates elsewhere
   function openLogin() {
-    const modal = document.getElementById('loginModal');
-    // Only open if not already visible
-    if (modal && modal.style.display !== 'block') {
-      modal.style.display = 'block';
-    }
+    const m = document.getElementById('loginModal');
+    if (m && m.style.display !== 'block') m.style.display = 'block';
   }
-
   function closeLogin() {
-    const modal = document.getElementById('loginModal');
-    if (modal) modal.style.display = 'none';
+    const m = document.getElementById('loginModal');
+    if (m) m.style.display = 'none';
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    const url = new URL(window.location);
-    const params = url.searchParams;
+  // clicking the ✕ or outside closes
+  document.addEventListener('click', e => {
+    const m = document.getElementById('loginModal');
+    if (!m) return;
+    if (e.target.classList.contains('close') || e.target === m) {
+      closeLogin();
+    }
+  });
 
-    if (params.get('showLogin') === '1' && !_loginAutoOpened) {
-      _loginAutoOpened = true;          // mark as done
-      openLogin();                      // pop the modal
-
-      // scrub the query so it can't fire again
+  // also honor ?showLogin=1
+  (function(){
+    let auto = false;
+    const params = new URL(location).searchParams;
+    if (params.get('showLogin') === '1' && !auto) {
+      auto = true;
+      openLogin();
       params.delete('showLogin');
-      window.history.replaceState({}, '', url.pathname + (params.toString() ? `?${params}` : ''));
+      history.replaceState({},'', location.pathname + (params.toString() ? `?${params}` : ''));
     }
-  });
-
-
-  window.onclick = function(event) {
-    const modal = document.getElementById('loginModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  };
+  })();
 </script>
-<script>
-  Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: <?= json_encode($error) ?>,
-    confirmButtonText: 'Try Again'
-  }).then(() => {
-    // reopen the login modal so they can type again:
-    openLogin();
-  });
-</script>
-
-<script>
-  Swal.fire({
-    icon: 'success',
-    title: 'Sign up successful..',
-    text: <?= json_encode($success) ?>,
-    confirmButtonText: 'OK'
-  }).then(() => {
-    // reopen the login modal so they can type again:
-    openLogin();
-  });
-  </script>
-
 </body>
 </html>

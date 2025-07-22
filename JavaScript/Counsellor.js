@@ -7,7 +7,7 @@ function openPopup(advisorName, skipLoginCheck = false) {
       title: 'Please sign in',
       text: 'You must be signed in to book an appointment.'
     }).then(() => {
-      window.location.href = 'index.php?showLogin=1';
+      window.location.href = 'login.php?return=' + encodeURIComponent(window.location.href);
     });
     return;
   }

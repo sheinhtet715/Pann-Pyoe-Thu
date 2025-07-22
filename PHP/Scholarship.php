@@ -134,7 +134,7 @@ $conn->close();
 <?php else: ?>
   <!-- Not logged in → redirect to index and trigger showLogin -->
   <div class="profile-icon"
-       onclick="window.location.href='index.php?showLogin=1';">
+       onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
     <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
   </div>
 <?php endif; ?>
@@ -347,12 +347,14 @@ $conn->close();
     favStarBtns.forEach(btn => {
       btn.addEventListener('click', function(e) {
         if (!isLoggedIn) {
-          e.preventDefault();
-          Swal.fire({
-            icon: 'warning',
-            title: 'Please log in',
-            text:  'You must be signed in to favorite a scholarship.'
-          });
+           e.preventDefault();
+            Swal.fire({
+              icon: 'warning',
+              title: 'Please log in',
+              text: 'You must be signed in to favorite a scholarship.'
+            }).then(() => {
+              window.location.href = 'login.php?return=' + encodeURIComponent(window.location.href);
+            });
         }
         // otherwise let the form submit
       });
