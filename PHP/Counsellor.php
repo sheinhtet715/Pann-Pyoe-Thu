@@ -3,11 +3,15 @@
 session_start();
 include "./db_connection.php";
 require_once "./Controller/CounsellorController.php";
+
 $imgFolder = '../Counsellor_page_images/'; 
-$error   = "";
-$success = "";
+$error   = $_SESSION['login_error']   ?? '';
+$success = $_SESSION['login_success'] ?? '';
+
+unset($_SESSION['login_error'], $_SESSION['login_success']);
+
 // 1) Handle form POST (unchanged)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset($_POST['signup'])) {
     if (empty($_SESSION['user_id'])) {
         $error = "❌ You must be signed in to book an appointment.";
     } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
@@ -74,7 +78,7 @@ $conn->close();
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
   <!-- SweetAlert2 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
   <title>Educational Counsellors</title>
  
 </head>
@@ -97,66 +101,65 @@ $conn->close();
       <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div> -->
-      <?php if (!empty($_SESSION['user_id'])): ?>
-  <div class="user-bar">
-    <span class="welcome">
-      Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? $_SESSION['email']) ?>!
-    </span>
-    <a href="counsellor_logout.php" class="btn-logout">Logout</a>
-  </div>
-<?php else: ?>
-  <div class="profile-icon" onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
-    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-  </div>
-<?php endif; ?>
-    </header>
+   <?php if (!empty($_SESSION['user_id'])): ?>
+      <div class="user-bar">
+        <span>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
+        <a href="counsellor_logout.php" class="btn-logout">Logout</a>
+      </div>
+    <?php else: ?>
+      <div class="profile-icon" onclick="openLogin()">
+        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img"/>
+      </div>
+    <?php endif; ?>
+  </header>
+
 
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
 
 
   <!-- your scripts for openPopup/closePopup, etc. -->
-
-  <?php if ($success): ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-          title: <?= json_encode(trim($success)) ?>,
-          icon: 'success',
-          draggable: true
-        });
-      });
-    </script>
-    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($error)): ?>
 <script>
-  // Immediately invoke our re‑open/restoration logic.
-  (function(){
-    // 1) Re‑open the popup (bypass isLoggedIn check)
-    openPopup(<?= json_encode($advisor_name) ?>, true);
-
-    // 2) Grab the form and restore values
-    const form = document.querySelector('#appointment-popup form');
-    if (!form) {
-      console.error("Could not find appointment form!");
-      return;
-    }
-    form.elements['user_name'].value         = <?= json_encode($_POST['user_name']         ?? '') ?>;
-    form.elements['description'].value       = <?= json_encode($_POST['description']      ?? '') ?>;
-    form.elements['email'].value             = <?= json_encode($_POST['email']            ?? '') ?>;
-    form.elements['appointment_date'].value  = <?= json_encode($_POST['appointment_date'] ?? '') ?>;
-    form.elements['appointment_time'].value  = <?= json_encode($_POST['appointment_time'] ?? '') ?>;
-
-    // 3) Show the SweetAlert error
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($error)): ?>
+    <?php if (empty($_SESSION['user_id']) || ($_POST['email'] !== ($_SESSION['email'] ?? ''))): ?>
+      // Login-related error
+      openLogin();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    <?php else: ?>
+      // Booking form error – restore popup
+      openPopup(<?= json_encode($advisor_name) ?>, true);
+      const form = document.querySelector('#appointment-popup form');
+      if (form) {
+        form.elements['user_name'].value         = <?= json_encode($_POST['user_name'] ?? '') ?>;
+        form.elements['description'].value       = <?= json_encode($_POST['description'] ?? '') ?>;
+        form.elements['email'].value             = <?= json_encode($_POST['email'] ?? '') ?>;
+        form.elements['appointment_date'].value  = <?= json_encode($_POST['appointment_date'] ?? '') ?>;
+        form.elements['appointment_time'].value  = <?= json_encode($_POST['appointment_time'] ?? '') ?>;
+      }
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    <?php endif; ?>
+  <?php elseif (!empty($success)): ?>
     Swal.fire({
-      icon: 'error',
-      title: 'Oops…',
-      text: <?= json_encode($error) ?>,
-      confirmButtonText: 'Try Again'
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode(trim($success)) ?>,
+      timer: 2000,
+      showConfirmButton: false
     });
-  })();
+  <?php endif; ?>
+});
 </script>
-<?php endif; ?>
 
-  <?php endif; ?> 
       <div class="title">“Consult with us for your further academic studies”</div>
     <div class="divider"></div>
 
@@ -174,18 +177,21 @@ $conn->close();
         onclick="openPopup('<?= $a['counsellor_name'] ?>')">
   Get Appointment
 </button>
+<?php else: ?>
+  <button class="appointment-btn"
+          onclick="
+            Swal.fire({
+              icon: 'warning',
+              title: 'Please sign in',
+              text: 'You must be signed in to book an appointment.'
+            }).then(() => {
+              window.location = 'login.php?return=' + encodeURIComponent(window.location.href);
+            });
+          ">
+    Get Appointment
+  </button>
+<?php endif; ?>
 
-              <?php else: ?>
-                <button class="appointment-btn"
-        onclick="Swal.fire({
-          icon: 'warning',
-          title: 'Please sign in',
-          text:  'You must be signed in to book an appointment.'
-        }).then(()=>window.location='login.php?return=' + encodeURIComponent(window.location.href)>
-  Get Appointment
-</button>
-
-              <?php endif; ?>
 
               <img class="appimg"
                    src="../HomePimg/tulips-removebg-preview.png"
@@ -288,53 +294,74 @@ $conn->close();
 
   </div>
   <!-- Login Modal -->
-  <div id="loginModal" class="modal">
-    
-    <div class="modal-content login-container">
-      <!-- Left side -->
-      <div class="login-left">
-        <h1>Welcome to Pann Pyoe Thu</h1>
-        <img src="../Counsellor_page_images/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
-      </div>
-  
-      <!-- Right side -->
-      <div class="login-right">
-        <span class="close" onclick="closeLogin()">&times;</span>
-        <img src="../Counsellor_page_images/Logo.ico" class="login-logo" alt="logo" />
-        <div class="login-box">
-          <input type="text" placeholder="Username" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <div class="login-buttons">
-            <button class="signin">Sign in</button>
-            <button class="signup">Sign up</button>
-          </div>
-          <a href="#" class="forgot">Forgot your password?</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--  -->
+  <!-- 1) pull in your shared login modal markup -->
+  <!-- 0) Expose login state for Counsellor.js -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- 1) pull in your shared login‑modal markup -->
+   <?php include './login_modal.php'; ?>
+  <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
+  <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
 
-     <!-- 1) Expose login state for your JS -->
-    <script>
-      window.isLoggedIn = <?= !empty($_SESSION['user_id']) ? 'true' : 'false' ?>;
-    </script>
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
 
-    <!-- 2) Load your popup logic (defines openPopup/closePopup) -->
-    <script src="../JavaScript/Counsellor.js"></script>
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
 
-    <!-- 3) If PHP set an $error, re‑open popup, restore fields & alert -->
- <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($error)): ?>
-    <script>
-      Swal.fire({
-        icon: 'error',
-        title: 'Appointment Failed',
-        text: <?= json_encode($error) ?>,
-        confirmButtonText: 'Got it'
-      });
-    </script>
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?= json_encode($error) ?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode($success) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
   <?php endif; ?>
+});
+</script>
 
 
+
+  <!-- 3) Now load Counsellor.js, which needs window.isLoggedIn -->
+  <script src="../JavaScript/Counsellor.js"></script>
 </body>
 </html>
+

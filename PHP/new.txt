@@ -505,3 +505,24 @@
       });
     </script>
   <?php endif; ?>
+
+   <script>
+    window.isLoggedIn = <?= ! empty($_SESSION['user_id']) ? 'true' : 'false' ?>;
+  </script>
+  function openLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal && modal.style.display !== 'block') {
+      modal.style.display = 'block';
+    }
+  }
+  function closeLogin() {
+    const modal = document.getElementById('loginModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+        const params = new URLSearchParams(window.location.search);
+      if (params.get('showLogin') === '1') {
+        openLogin(); // assume defined elsewhere
+        params.delete('showLogin');
+        history.replaceState(null, '', window.location.pathname);
+      }

@@ -305,57 +305,61 @@
 
 <!-- 2) Fire the flash (only once!) and wire up open/close -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    <?php if ($error): ?>
-      openLogin();
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops…',
-        text: <?= json_encode($error) ?>,
-        confirmButtonText: 'Try Again'
-      });
-    <?php elseif ($success): ?>
-      openLogin();
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: <?= json_encode($success) ?>,
-        timer: 2000,
-        showConfirmButton: false
-      });
-    <?php endif; ?>
-  });
-
-  // centralize open/close here—remove your duplicates elsewhere
-  function openLogin() {
-    const m = document.getElementById('loginModal');
-    if (m && m.style.display !== 'block') m.style.display = 'block';
-  }
-  function closeLogin() {
-    const m = document.getElementById('loginModal');
-    if (m) m.style.display = 'none';
-  }
-
-  // clicking the ✕ or outside closes
-  document.addEventListener('click', e => {
-    const m = document.getElementById('loginModal');
-    if (!m) return;
-    if (e.target.classList.contains('close') || e.target === m) {
-      closeLogin();
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
     }
-  });
-
-  // also honor ?showLogin=1
-  (function(){
-    let auto = false;
-    const params = new URL(location).searchParams;
-    if (params.get('showLogin') === '1' && !auto) {
-      auto = true;
-      openLogin();
-      params.delete('showLogin');
-      history.replaceState({},'', location.pathname + (params.toString() ? `?${params}` : ''));
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
     }
-  })();
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
+
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?= json_encode($error) ?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode($success) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
+   
+  <?php endif; ?>
+});
 </script>
 </body>
 </html>

@@ -11,7 +11,6 @@ function openPopup(advisorName, skipLoginCheck = false) {
     });
     return;
   }
-
   document.getElementById('advisor-input').value     = advisorName;
   document.getElementById('advisor-name').textContent = advisorName;
   document.getElementById('appointment-popup').style.display = 'flex';
@@ -21,11 +20,16 @@ function closePopup() {
   document.getElementById('appointment-popup').style.display = 'none';
 }
 
-// click‐outside auto‑close
-window.onclick = function(e) {
+// click-outside to close *appointment* popup
+document.addEventListener('click', function(e) {
   const popup = document.getElementById('appointment-popup');
   if (popup && e.target === popup) closePopup();
-};
+});
+// click‐outside auto‑close
+// window.onclick = function(e) {
+//   const popup = document.getElementById('appointment-popup');
+//   if (popup && e.target === popup) closePopup();
+// };
 
 
 // Profile‑menu toggle

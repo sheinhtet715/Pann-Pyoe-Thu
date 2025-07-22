@@ -6,6 +6,10 @@ require_once "./Controller/ScholarshipController.php";
 // at top of your view
   $logoFolder = '../Scholarships_page_images/';
 // current user (or null)
+$error   = $_SESSION['login_error']   ?? '';
+$success = $_SESSION['login_success'] ?? '';
+
+unset($_SESSION['login_error'], $_SESSION['login_success']);
 $userId = $_SESSION['user_id'] ?? null;
 
 // 1) Handle favourite toggle
@@ -100,7 +104,7 @@ $conn->close();
     <link rel="stylesheet" href="../CSS/Scholarship.css">
       <!-- SweetAlert2 -->
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 
     <style>
     .fav-btn { background:none; border:none; font-size:24px; cursor:pointer; }
@@ -123,49 +127,28 @@ $conn->close();
         <a href="../PHP/LocalUni.php">Local Universities</a>
         <a href="#jobs">Job Opportunities</a>
       </nav>
-      <?php if (! empty($_SESSION['user_id'])): ?>
-  <!-- Logged in -->
-  <div class="user-bar">
-    <span class="welcome">
-      Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? $_SESSION['email']) ?>!
-    </span>
-    <a href="logout.php" class="btn-logout">Logout</a>
-  </div>
-<?php else: ?>
-  <!-- Not logged in → redirect to index and trigger showLogin -->
-  <div class="profile-icon"
-       onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
-    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-  </div>
-<?php endif; ?>
-    </header>
+      <?php if (!empty($_SESSION['user_id'])): ?>
+      <div class="user-bar">
+        <span>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
+        <a href="counsellor_logout.php" class="btn-logout">Logout</a>
+      </div>
+    <?php else: ?>
+      <div class="profile-icon" onclick="openLogin()">
+        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img"/>
+      </div>
+    <?php endif; ?>
+  </header>
+  <!-- Shared Login Modal -->
+
 
     <!-- Block Bar -->
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
 
     <!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
-  <div class="modal-content login-container">
-    <div class="login-left">
-      <h1>Welcome to Pann Pyoe Thu</h1>
-      <img src="../HomePimg/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
-    </div>
-    <div class="login-right">
-      <span class="close" onclick="closeLogin()">&times;</span>
-      <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo" />
-      <form method="POST" action="login.php" class="login-box">
-        <input type="text"   name="user_name" placeholder="Username" required />
-        <input type="email"  name="email"     placeholder="Email"    required />
-        <input type="password" name="password" placeholder="Password" required />
-        <div class="login-buttons">
-          <button type="submit" name="signin">Sign in</button>
-          <button type="button" onclick="window.location='signup.php'">Sign up</button>
-        </div>
-      </form>
-      <a href="forgot_password.php" class="forgot">Forgot your password?</a>
-    </div>
-  </div>
-</div>
+<!-- Shared Login Modal Markup -->
+<?php include './login_modal.php'; ?>
+
+
     <div class="main-content">
         <div class="container">
             <h2>Find Scholarships</h2>
@@ -292,7 +275,68 @@ $conn->close();
         </div>
       </div>
     </footer>
-    <script src="../JavaScript/Scholarship.js"></script>
+      <!-- 1) SweetAlert2 + Homepage.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <!-- 1) pull in your shared login‑modal markup -->
+  <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
+  <!-- 2) openLogin/closeLogin + click‑outside + showLogin=1 logic -->
+   <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+    // close on ✕ or clicking backdrop
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target === m || e.target.classList.contains('close')) {
+        closeLogin();
+      }
+    });
+    // Honor ?showLogin=1 param
+    (function(){
+      const p = new URL(location).searchParams;
+      if (p.get('showLogin') === '1') {
+        openLogin();
+        p.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (p.toString() ? `?${p}` : ''));
+      }
+    })();
+  </script>
+
+  <!-- 3) Flash → SweetAlert → then openLogin() on error -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      <?php if (! empty($error)): ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops…',
+          text: <?= json_encode($error) ?>,
+          confirmButtonText: 'Try Again'
+        }).then(openLogin);
+      <?php elseif (! empty($success)): ?>
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: <?= json_encode($success) ?>,
+          timer: 2000,
+          showConfirmButton: false
+        });
+      <?php endif; ?>
+    });
+  </script>
+
+  <!-- 4) Your Scholarship.js (only once) -->
+  <script src="../JavaScript/Scholarship.js"></script>
+  <!-- 3) Flash & SweetAlert2: error → then openLogin; success → alert only -->
+  
+
+
   <script>
   document.addEventListener('DOMContentLoaded', function() {
     // 1) Profile menu toggle (unchanged)
@@ -353,14 +397,15 @@ $conn->close();
               title: 'Please log in',
               text: 'You must be signed in to favorite a scholarship.'
             }).then(() => {
-              window.location.href = 'login.php?return=' + encodeURIComponent(window.location.href);
+              window.location = 'login.php?return=' + encodeURIComponent(window.location.href) + '&showLogin=1';
+
             });
         }
         // otherwise let the form submit
       });
     });
   });
-</script>
+</>
 
 </body>
 </html>    
