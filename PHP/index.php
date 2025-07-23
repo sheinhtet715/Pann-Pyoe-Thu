@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../CSS/Homepage.css">
   
     <title>Pann Pyoe Thu</title>
@@ -37,11 +38,32 @@
                     <a href="../PHP/Local Uni.php">Local Universities</a>
                     <a href="../PHP/Jobs.php">Job Opportunities</a>
                 </nav>
-            <?php if (!empty($_SESSION['user_id'])): ?>
-        <div class="user-bar">
-            <span class="welcome">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
-            <a href="logout.php" class="btn-logout">Logout</a>
+        <?php if (!empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >
+                <!-- your SVG icon as the button’s content: -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+                </svg>
+                </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
         </div>
+                            
+
             <?php else: ?>
             <div class="profile-icon" onclick="openLogin()">
                 <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
@@ -296,7 +318,34 @@
             <i class="fab fa-twitter"></i>
         </div>
     </div>
-     <!-- … your header, form, etc … -->
+     
+    
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const avatar = document.getElementById('profileAvatar');
+  const menu   = document.getElementById('profileDropdownMenu');
+
+  if (avatar && menu) {
+    // Toggle the dropdown on avatar click
+    avatar.addEventListener('click', e => {
+      e.stopPropagation();
+      menu.classList.toggle('show');
+    });
+
+    // Clicking anywhere else closes it
+    document.addEventListener('click', () => {
+      menu.classList.remove('show');
+    });
+  }
+});
+</script>
+
+
+
+
+
+    
+    <!-- … your header, form, etc … -->
 <?php include 'login_modal.php'; ?>
 
 <!-- 1) Load your libraries -->
@@ -361,5 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <?php endif; ?>
 });
 </script>
+
+
 </body>
 </html>
