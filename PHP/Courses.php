@@ -72,10 +72,10 @@
 
   <div class="course course3">
     <div class="course-image">
-      <img src="../Images/Problem Solving.jpg" alt="Probelm Solve">
+      <img src="../Courses page Images/Problem-solving course.jpg" alt="Probelm Solve">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/puzzle.png" alt="Puzzle">
+      <img class="icon" src="../Courses page Images/puzzle-removebg-preview.png" alt="Puzzle">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -89,10 +89,10 @@
 
   <div class="course course4">
     <div class="course-image">
-      <img src="../Images/equality.jpg" alt="Gender">
+      <img src="../Courses page Images/gender studies course.jpg" alt="Gender">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/people.png" alt="People">
+      <img class="icon" src="../Courses page Images/gender.jpg" alt="People">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -123,10 +123,10 @@
 
   <div class="course course6">
     <div class="course-image">
-      <img src="../Images/ICT.jpg" alt="ICT">
+      <img src="../Courses page Images/project management course.jpg" alt="ICT">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/project.png" alt="Project">
+      <img class="icon" src="../Courses page Images/project-removebg-preview.png" alt="Project">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -140,10 +140,10 @@
 
   <div class="course course7">
     <div class="course-image">
-      <img src="../Images/Psychological first aid.jpg" alt="Psychological">
+      <img src="../Courses page Images/Psychological first aid.jpg" alt="Psychological">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/heart.png" alt="Heart">
+      <img class="icon" src="../Courses page Images/heart-removebg-preview.png" alt="Heart">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -157,10 +157,10 @@
 
   <div class="course course8">
     <div class="course-image">
-      <img src="../Images/Collaboration Course.jpg" alt="Collaboration">
+      <img src="../Courses page Images/collaboration course.jpg" alt="Collaboration">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/teamwork.png" alt="Team">
+      <img class="icon" src="../Courses page Images/teamwork-removebg-preview.png" alt="Team">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -180,10 +180,10 @@
 <div class="course-discount">
   <div class="course course1">
     <div class="course-image">
-      <img src="../Images/Time Management.jpg" alt="Time Management">
+      <img src="../Courses page Images/Time management course.jpg" alt="Time Management">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/clock.png" alt="Brain">
+      <img class="icon" src="../Courses page Images/clock-removebg-preview.png" alt="Brain">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -211,21 +211,21 @@
 
 <div class="upcoming-course">
   <div class="offer-course card">
-    <img src="../Images/programming.png" alt="Programming">
+    <img src="../Courses page Images/programming.png" alt="Programming">
     <div class="offer-text">
       <p>Programming</p>
     </div>
   </div>
 
   <div class="offer-course card">
-    <img src="../Images/languages.png" alt="Languages">
+    <img src="../Courses page Images/languages.png" alt="Languages">
     <div class="offer-text">
       <p>Languages</p>
     </div>
   </div>
 
   <div class="offer-course card">
-    <img src="../Images/music.png" alt="Programming">
+    <img src="../Courses page Images/musicpic.png" alt="Programming">
     <div class="offer-text">
       <p>Music Lessons</p>
     </div>

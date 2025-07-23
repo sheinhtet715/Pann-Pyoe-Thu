@@ -13,16 +13,15 @@
      <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet"> -->
     
     <link rel="stylesheet" href="../CSS/Homepage.css">
-  
     <title>Pann Pyoe Thu</title>
 </head>
 <body>
-    <div class="homepage">
+    <!-- <div class="homepage">
         <header class="header">
             <div class="logo">
                 <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
@@ -44,7 +43,13 @@
                     <a href="../PHP/Scholarship.php">Scholarships</a>
                     <a href="../PHP/Local Uni.php">Local Universities</a>
                     <a href="../PHP/Jobs.php">Job Opportunities</a>
-                </nav>
+                </nav> -->
+
+<!-- Navi -->
+        <?php
+     include "Header.php";
+     ?>
+
             <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="user-bar">
             <span class="welcome">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
@@ -281,7 +286,7 @@
         <a class="about-us" href="#">Tap here to learn more About Us</a>
     </div>
 
-    <div class="bottom">
+    <!-- <div class="bottom">
         <div class="bottom-left">
             <a class="about-us" href="#">About Us</a>
             <br>
@@ -308,7 +313,15 @@
             <i class="fab fa-instagram"></i>
             <i class="fab fa-twitter"></i>
         </div>
-    </div>
+    </div> -->
+
+
+<!-- Footer -->
+    <?php
+     include "Footer.php";
+     ?>
+
+
      <!-- … your header, form, etc … -->
 <?php include 'login_modal.php'; ?>
 

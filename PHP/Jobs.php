@@ -28,9 +28,9 @@
         <span></span>
         <span></span>
       </button>
-      <div class="profile-icon" onclick="openLogin()">
-  <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-</div>
+      <div class="profile-icon" onclick="openLogin()" role="button" tabindex="0" aria-label="Open login menu">
+        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+      </div>
     </header>
     <main>
       <section class="intro">
@@ -506,6 +506,13 @@
         <button id="load-more-btn" class="page-btn">Load More</button>
       </div>
     </main>
+
+<!-- Footer -->
+    <?php
+    include "Footer.php"
+    ?>
+
+
     <script>
       function toggleMobileMenu() {
         const nav = document.getElementById('nav-menu');
