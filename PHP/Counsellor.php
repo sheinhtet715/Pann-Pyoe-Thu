@@ -1,71 +1,67 @@
 <?php
+// Counsellor.php
 session_start();
-// if (!isset($_SESSION['user_email'])) {
-//   header("Location: ../front page/Homepage.php");
-//   exit;
-// }
-include("./db_connection.php");
-$error = "";   // ← collect errors here
-$success = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+include "./db_connection.php";
+require_once "./Controller/CounsellorController.php";
 
-    // 1) Must be signed in
+$imgFolder = '../Counsellor_page_images/'; 
+$error   = $_SESSION['login_error']   ?? '';
+$success = $_SESSION['login_success'] ?? '';
+
+unset($_SESSION['login_error'], $_SESSION['login_success']);
+
+// 1) Handle form POST (unchanged)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset($_POST['signup'])) {
     if (empty($_SESSION['user_id'])) {
         $error = "❌ You must be signed in to book an appointment.";
-
-    // 2) Email on the form must match the session email
-    } elseif ($_POST['email'] !== $_SESSION['email']) {
+    } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
         $error = "❌ That email doesn’t match your logged‑in account.";
-
-    // 3) All good → do your counsellor lookup & insert here
     } else {
-        $user_id          = $_SESSION['user_id'];
-        $advisor_name     = trim($_POST['advisor_name']     ?? '');
-        $description      = trim($_POST['description']      ?? '');
-        $appointment_date = trim($_POST['appointment_date'] ?? '');
-        $appointment_time = trim($_POST['appointment_time'] ?? '');
+        $user_id      = $_SESSION['user_id'];
+        $advisor_name = trim($_POST['advisor_name'] ?? '');
+        $description  = trim($_POST['description']  ?? '');
+        $date         = trim($_POST['appointment_date'] ?? '');
+        $time         = trim($_POST['appointment_time'] ?? '');
 
-        // (a) Find counsellor_id
+        // a) find counsellor_id
         $cs = $conn->prepare("
-            SELECT counsellor_id 
-              FROM Counsellor_tbl 
+            SELECT counsellor_id
+              FROM Counsellor_tbl
              WHERE counsellor_name = ?
         ");
         $cs->bind_param("s", $advisor_name);
         $cs->execute();
         $cres = $cs->get_result();
+
         if (!$cres->num_rows) {
             $error = "⚠️ Counsellor “{$advisor_name}” not found.";
         } else {
-            $counsellor_id = $cres->fetch_assoc()['counsellor_id'];
+            $cid = $cres->fetch_assoc()['counsellor_id'];
             $cs->close();
 
-            // (b) Insert appointment
-            $insert = $conn->prepare("
+            // b) insert appointment
+            $ins = $conn->prepare("
                 INSERT INTO Appointment_tbl
-                  (user_id, counsellor_id, appointment_date, appointment_time, description, appointment_status)
+                  (user_id,counsellor_id,appointment_date,appointment_time,description,appointment_status)
                 VALUES (?, ?, ?, ?, ?, 'Confirmed')
             ");
-            $insert->bind_param(
-                "iisss",
-                $user_id,
-                $counsellor_id,
-                $appointment_date,
-                $appointment_time,
-                $description
-            );
+            $ins->bind_param("iisss", $user_id, $cid, $date, $time, $description);
 
-            if ($insert->execute()) {
+            if ($ins->execute()) {
                 $success = "✅ Appointment booked successfully!";
             } else {
-                $error = "❌ Error inserting appointment: " . $insert->error;
+                $error = "❌ Error inserting appointment: " . $ins->error;
             }
-            $insert->close();
+            $ins->close();
         }
-    }  // end of else
-
-    $conn->close();
+    }
 }
+
+// 2) Fetch dynamic list of counsellors from DB
+$controller = new CounsellorController($conn);
+$advisors   = $controller->getAllCounsellors();
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
   <!-- SweetAlert2 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
   <title>Educational Counsellors</title>
  
 </head>
@@ -105,266 +101,121 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div> -->
-      <?php if (!empty($_SESSION['user_id'])): ?>
-  <div class="user-bar">
-    <span class="welcome">
-      Welcome, <?= htmlspecialchars($_SESSION['user_name'] ?? $_SESSION['email']) ?>!
-    </span>
-    <a href="counsellor_logout.php" class="btn-logout">Logout</a>
-  </div>
-<?php else: ?>
-  <div class="profile-icon" onclick="window.location.href = 'index.php?showLogin=1'">
-    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-  </div>
-<?php endif; ?>
-    </header>
+   <?php if (!empty($_SESSION['user_id'])): ?>
+      <div class="user-bar">
+        <span>Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
+        <a href="counsellor_logout.php" class="btn-logout">Logout</a>
+      </div>
+    <?php else: ?>
+      <div class="profile-icon" onclick="openLogin()">
+        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img"/>
+      </div>
+    <?php endif; ?>
+  </header>
+
 
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
- <?php if ($error): ?>
-    <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-  <?php elseif ($success): ?>
-    <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-  <?php endif; ?>
+
 
   <!-- your scripts for openPopup/closePopup, etc. -->
-
-  <?php if ($success): ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-          title: <?= json_encode(trim($success)) ?>,
-          icon: 'success',
-          draggable: true
-        });
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($error)): ?>
+    <?php if (empty($_SESSION['user_id']) || ($_POST['email'] !== ($_SESSION['email'] ?? ''))): ?>
+      // Login-related error
+      openLogin();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
       });
-    </script>
-  <?php endif; ?> 
-    <div class="title">“Consult with us for your further academic studies”</div>
+    <?php else: ?>
+      // Booking form error – restore popup
+      openPopup(<?= json_encode($advisor_name) ?>, true);
+      const form = document.querySelector('#appointment-popup form');
+      if (form) {
+        form.elements['user_name'].value         = <?= json_encode($_POST['user_name'] ?? '') ?>;
+        form.elements['description'].value       = <?= json_encode($_POST['description'] ?? '') ?>;
+        form.elements['email'].value             = <?= json_encode($_POST['email'] ?? '') ?>;
+        form.elements['appointment_date'].value  = <?= json_encode($_POST['appointment_date'] ?? '') ?>;
+        form.elements['appointment_time'].value  = <?= json_encode($_POST['appointment_time'] ?? '') ?>;
+      }
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?= json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      });
+    <?php endif; ?>
+  <?php elseif (!empty($success)): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode(trim($success)) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    });
+  <?php endif; ?>
+});
+</script>
+
+      <div class="title">“Consult with us for your further academic studies”</div>
     <div class="divider"></div>
 
     <div class="container">
-      <div class="advisor">
-        <div class="advisor-content">
-         <div>
-            <img src="../Counsellor_page_images/Cathy.png" alt="Cathy Doll" class="advisor-img"> 
-            <!-- <button class="appointment-btn" onclick="openPopup('Cathy Doll')">Get Appointment</button> -->
-             <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-          <button class="appointment-btn" onclick="openPopup('Cathy Doll')"> Get Appointment</button>
+      <?php foreach ($advisors as $a): ?>
+        <div class="advisor">
+          <div class="advisor-content">
+            <div style="position:relative;">
+              <img src="<?= htmlspecialchars($imgFolder . ($a['image_url'] ?? 'default.jpg')) ?>"
+                   alt="<?= htmlspecialchars($a['counsellor_name']) ?>"
+                   class="advisor-img" />
 
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-             <img class= "appimg" src ="../HomePimg/tulips-removebg-preview.png">
-           </div>
-
-          <div>
-            <div class="advisor-header">Cathy Doll</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Guidance & Counselling</p>
-            <p>🎯 Academic planning, course registration, scholarships</p>
-            <p>📞 +95 9 123 456 789</p>
-            <p> 📧 cathy.doll@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>200+ counselling sessions</li>
-                <li>Helped with registration, major selection, scholarships</li>
-                <li>Empathetic advising and tracking</li>
-              </ul>
-            </div>
-             
-          </div>
-        </div>
-      </div>
-   
-
-      <div class="advisor">
-        <div class="advisor-content">
-         <div>
-            <img src="../Counsellor_page_images/Mercy.jpg" alt="Mercy Donan" class="advisor-img"> 
-            <!-- <button class="appointment-btn" onclick="openPopup('Mercy Donan')">Get Appointment</button> -->
               <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-          <button class="appointment-btn" onclick="openPopup('Mercy Donan')"> Get Appointment</button>
+                <button class="appointment-btn"
+        onclick="openPopup('<?= $a['counsellor_name'] ?>')">
+  Get Appointment
+</button>
+<?php else: ?>
+  <button class="appointment-btn"
+          onclick="
+            Swal.fire({
+              icon: 'warning',
+              title: 'Please sign in',
+              text: 'You must be signed in to book an appointment.'
+            }).then(() => {
+              window.location = 'login.php?return=' + encodeURIComponent(window.location.href);
+            });
+          ">
+    Get Appointment
+  </button>
+<?php endif; ?>
 
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-             <img class= "appimg" src ="../HomePimg/tulips-removebg-preview.png">
-           </div>
-          <div>
-            <div class="advisor-header">Mercy Donan</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Education</p>
-            <p>🎯 Major selection, career fairs, academic mentorship</p>
-            <p>📞 +95 9 987 654 321</p>
-            <p>📧 mercy.donan@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>4+ years supporting students</li>
-                <li>Organized events and fairs</li>
-                <li>Strategic advising</li>
-              </ul>
+
+              <img class="appimg"
+                   src="../HomePimg/tulips-removebg-preview.png"
+                   alt="">
             </div>
-           
+
+            <div>
+              <div class="advisor-header"><?= htmlspecialchars($a['counsellor_name']) ?></div>
+              <div class="advisor-title"><?= htmlspecialchars($a['degree']) ?></div>
+              <p>🎯 <?= htmlspecialchars($a['specialization']) ?></p>
+              <p>📞 <?= htmlspecialchars($a['phone']) ?></p>
+              <p>📧 <?= htmlspecialchars($a['email']) ?></p>
+              <div class="advisor-experience">
+                <h4>Experience Highlights:</h4>
+                <ul>
+                  <?php foreach (explode(";", $a['experiences']) as $exp): ?>
+                    <li><?= htmlspecialchars(trim($exp)) ?></li>
+                  <?php endforeach; ?>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="advisor">
-        <div class="advisor-content">
-           <div>
-            <img src="../Counsellor_page_images/David.jpg" alt="David Johnson" class="advisor-img">
-            <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('David Johnson')"> Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-           <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-            <!-- <button class="appointment-btn" onclick="openPopup('David Johnson')">Get Appointment</button> -->
-             <img class= "appimg" src ="../Counsellor_page_images/Pink Tulip.png">
-           </div>
-          
-          <div>
-            <div class="advisor-header">David Johnson</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Education</p>
-            <p>🎯 University apps, study skills, transitions</p>
-            <p>📞 +95 9 555 123 456</p>
-            <p>📧 david.johnson@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>10 years of academic advising</li>
-                <li>Led workshops for study skills</li>
-              </ul>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-
-      <div class="advisor">
-        <div class="advisor-content"> 
-          <div>
-            <img src="../Counsellor_page_images/Linda.jpg" alt="Linda Mae" class="advisor-img">
-            <!-- <button class="appointment-btn" onclick="openPopup('Linda Mae')">Get Appointment</button> -->
-             <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Linda Mae')"> Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-           <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-             <img class= "appimg" src ="../Counsellor_page_images/Pink Tulip.png">
-           </div>
-          <div>
-            <div class="advisor-header">Linda Mae</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Psychology</p>
-            <p>🎯 First-gen support, transitions, long-term planning</p>
-            <p>📞 +95 9 777 888 999</p>
-            <p>📧 linda.mae@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>Support for first-gen students</li>
-                <li>Community college experience</li>
-              </ul>
-            </div>
-          
-          </div>
-        </div>
-      </div>
-
-      <div class="advisor">
-        <div class="advisor-content">
-          <div>
-            <img src="../Counsellor_page_images/Sophia.jpg" alt="Sophia Lwin" class="advisor-img">
-            <!-- <button class="appointment-btn" onclick="openPopup('Sophia Lwin')">Get Appointment</button> -->
-             <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Sophia Lwin')"> Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-             <img class= "appimg" src ="../Counsellor_page_images/White Tulip.png">
-           </div>
-
-          <div>
-            <div class="advisor-header">Sophia Lwin</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Human Services</p>
-            <p>🎯 Retention, intervention, internships</p>
-            <p>📞 +95 9 444 222 111</p>
-            <p>📧 sophia.lwin@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>6+ years supporting student success</li>
-                <li>NGO and business internship collabs</li>
-              </ul>
-            </div>
-             
-          </div>
-        </div>
-      </div>
-
-      <div class="advisor">
-        <div class="advisor-content">
-          <div>
-            <img src="../Counsellor_page_images/Michael.jpg" alt="Michael Tun" class="advisor-img">
-            <!-- <button class="appointment-btn" onclick="openPopup('Michael Tun')">Get Appointment</button> -->
-              <?php if (!empty($_SESSION['user_id'])): ?>
-  <!-- Logged in → show the real popup button -->
-            <button class="appointment-btn" onclick="openPopup('Michael Tun')">🎤 Get Appointment</button>
-
-          <?php else: ?>
-  <!-- Not logged in → send them back to sign‑in -->
-            <button class="appointment-btn" onclick="alert('Please sign in first!'); window.location.href='./index.php?showLogin=1';">
-             Get Appointment
-            </button>
-          <?php endif; ?>
-             <img class= "appimg" src ="../Counsellor_page_images/White Tulip.png">
-           </div>
-          
-          <div>
-            <div class="advisor-header">Michael Tun</div>
-            <div class="advisor-title">Academic & Career Advisor</div>
-            <p>🎓 B.A. in Sociology</p>
-            <p>🎯 Resume help, career pathway, adult learners</p>
-            <p>📞 +95 9 222 333 444</p>
-            <p>📧 michael.tun@pannpyoethu.edu.mm</p>
-            <div class="advisor-experience">
-              <h4>Experience Highlights:</h4>
-              <ul>
-                <li>8+ years advising and coaching</li>
-                <li>Mock interviews and resume sessions</li>
-              </ul>
-            </div>
-           
-          </div>
-        </div>
-      </div>
+      <?php endforeach; ?>
     </div>
 
     <div class="bottom">
@@ -396,100 +247,121 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </div>
   </div>
-
+  <!-- Appointment Popup -->
   <div id="appointment-popup" class="popup">
     <form method="POST" action="./Counsellor.php">
-        <input type="hidden" name="advisor_name" id="advisor-input" />
-    <div class="card">
-      <span class="close-btn" onclick="closePopup()">&times;</span>
-      <img src="../HomePimg/tulips-removebg-preview.png" class="flower-image" alt="flowers" />
-      
-      <div class="left">
-        <h2>Get appointment with <span id="advisor-name">...............</span></h2>
-        <div class="textbox">
-          <label>Enter your name</label>
-          <input type="text" name="user_name" placeholder="Your name" required />
+      <input type="hidden" name="advisor_name" id="advisor-input" />
 
-          <label>What kind of education counselling you want to get</label>
-          <textarea name="description" placeholder="Your response..." required></textarea>
+      <div class="card">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <img src="../HomePimg/tulips-removebg-preview.png" class="flower-image" alt="flowers" />
 
-          <label>Email</label>
-          <input type="email" name="email" placeholder="your@email.com" />
+        <div class="left">
+          <h2>Get appointment with <span id="advisor-name">………</span></h2>
+          <div class="textbox">
+            <label>Enter your name</label>
+            <input type="text" name="user_name" placeholder="Your name" required />
 
-          <p class="disclaimer">We'll reach out to you via email once the appointment date and time have been arranged.</p>
-        </div>
-      </div>
-     <div class="right">
-        <img src="../HomePimg/Logo.ico" class="top-logo" alt="logo" />
+            <label>What kind of education counselling you want to get</label>
+            <textarea name="description" placeholder="Your response…" required></textarea>
 
-        <label>Appointment Date</label>
-        <input type="date" name="appointment_date" required />
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your@email.com" required />
 
-        <label>Appointment Time</label>
-        <input type="time" name="appointment_time" required />
-
-        <div class="button-group">
-          <button type="button" class="cancel-btn" onclick="closePopup()">Cancel</button>
-          <button type="submit" class="confirm-btn">Confirm</button>
-        </div>
-      </div>
-      </div>  
-    </div>
-   
-  </div>
-   </form>
-  <!-- Login Modal -->
-  <div id="loginModal" class="modal">
-    
-    <div class="modal-content login-container">
-      <!-- Left side -->
-      <div class="login-left">
-        <h1>Welcome to Pann Pyoe Thu</h1>
-        <img src="../Counsellor_page_images/tulips-removebg-preview.png" alt="Flowers" class="flower-img" />
-      </div>
-  
-      <!-- Right side -->
-      <div class="login-right">
-        <span class="close" onclick="closeLogin()">&times;</span>
-        <img src="../Counsellor_page_images/Logo.ico" class="login-logo" alt="logo" />
-        <div class="login-box">
-          <input type="text" placeholder="Username" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <div class="login-buttons">
-            <button class="signin">Sign in</button>
-            <button class="signup">Sign up</button>
+            <p class="disclaimer">
+              We'll reach out to you via email once the appointment date and time have been arranged.
+            </p>
           </div>
-          <a href="#" class="forgot">Forgot your password?</a>
+        </div>
+
+        <div class="right">
+          <img src="../HomePimg/Logo.ico" class="top-logo" alt="logo" />
+
+          <label>Appointment Date</label>
+          <input type="date" name="appointment_date" required />
+
+          <label>Appointment Time</label>
+          <input type="time" name="appointment_time" required />
+
+          <div class="button-group">
+            <button type="button" class="cancel-btn" onclick="closePopup()">Cancel</button>
+            <button type="submit" class="confirm-btn">Confirm</button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
-   <script src="../JavaScript/Counsellor.js"></script>
-<script>
-   const isLoggedIn = <?= !empty($_SESSION['user_id']) ? 'true' : 'false' ?>;
+
+  </div>
+  <!-- Login Modal -->
+  <!--  -->
+  <!-- 1) pull in your shared login modal markup -->
+  <!-- 0) Expose login state for Counsellor.js -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- 1) pull in your shared login‑modal markup -->
+   <?php include './login_modal.php'; ?>
+  <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
+  <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
+
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
   <?php if ($error): ?>
-      // 1) re‑open & repopulate the appointment popup
-      const advisorName = <?= json_encode($advisor_name ?? '') ?>;
-      const hiddenInput = document.getElementById('advisor-input');
-      const nameSpan    = document.getElementById('advisor-name');
-      const popupEl     = document.getElementById('appointment-popup');
-
-      if (hiddenInput) hiddenInput.value = advisorName;
-      if (nameSpan)    nameSpan.textContent = advisorName;
-      if (popupEl)     popupEl.style.display = 'flex';
-
-      // 2) show the error alert
-      Swal.fire({
-        title: <?= json_encode(trim($error)) ?>,
-        icon: 'error',
-        confirmButtonText: 'Try Again',
-        allowOutsideClick: false
-      });
-    <?php endif; ?>
-  
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?= json_encode($error) ?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode($success) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
+  <?php endif; ?>
+});
 </script>
 
 
+
+  <!-- 3) Now load Counsellor.js, which needs window.isLoggedIn -->
+  <script src="../JavaScript/Counsellor.js"></script>
 </body>
 </html>
+

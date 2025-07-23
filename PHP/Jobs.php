@@ -28,9 +28,9 @@
         <span></span>
         <span></span>
       </button>
-      <div class="profile-icon" onclick="openLogin()" role="button" tabindex="0" aria-label="Open login menu">
-        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-      </div>
+      <div class="profile-icon" onclick="openLogin()">
+  <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+</div>
     </header>
     <main>
       <section class="intro">
