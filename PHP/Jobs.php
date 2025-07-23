@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <title>Find Jobs - Pann Pyoe Thu</title>
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/Jobs.css">

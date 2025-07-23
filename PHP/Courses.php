@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
 	<link rel="stylesheet" href="../CSS/Courses.css">
 	<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
 <header class="header">
     <div class="logo-area">
       <div class="logo-img">
-        <img src="../Images/Logo.png" alt="Logo">
+        <img src="../HomePimg/Logo.ico" alt="Logo">
       </div>
       <div class="logo-text">Pann Pyoe Thu</div>
     </div>
@@ -28,7 +29,7 @@
     </nav>
 
     <div class="profile-btn">
-      <img src="../Images/Profile.png" alt="Profile">
+      <img src="../HomePimg/Profile.png" alt="Profile">
     </div>
 </header>
 
@@ -37,10 +38,10 @@
  <div class="course-container">
  	<div class="course course1">
  		<div class="course-image">
- 			<img src="../Images/Time Management.jpg" alt="Time Management">
+ 			<img src="../Courses page Images/Time management course.jpg" alt="Time Management">
  		</div>
  		<div class="photo-enroll">
- 			<img class="icon" src="../Images//clock.png" alt="Brain">
+ 			<img class="icon" src="../Courses page Images/clock-removebg-preview.png" alt="Brain">
  			<a class="enroll" href="#">Enroll</a>
  		</div>
 
@@ -54,10 +55,10 @@
 
   <div class="course course2">
     <div class="course-image">
-      <img src="../Images/Communication course.jpg" alt="Communication">
+      <img src="../Courses page Images/Communication course.jpg" alt="Communication">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/speaker.png" alt="Speaker">
+      <img class="icon" src="../Courses page Images/loudspeaker-removebg-preview.png" alt="Speaker">
       <a class="enroll" href="#">Enroll</a>
     </div>
 
@@ -105,10 +106,10 @@
 
   <div class="course course5">
     <div class="course-image">
-      <img src="../Images/thinking.jpg" alt="Critical Thinking">
+      <img src="../Courses page Images/critical thinking.jpg" alt="Critical Thinking">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Images/brain.png" alt="Brain">
+      <img class="icon" src="../Courses page Images/brain_exercise-removebg-preview.png" alt="Brain">
       <a class="enroll" href="#">Enroll</a>
     </div>
 

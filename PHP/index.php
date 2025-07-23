@@ -29,7 +29,15 @@
                 <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
                 <span class="logo-text">Pann Pyoe Thu</span>
             </div>
-            <nav class="nav">
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <nav class="nav" id="mainNav">
                 <a href="../PHP/index.php">Home</a>
                     <a href="../PHP/About Us.php">About us</a>
                     <a href="../PHP/Courses.php">Courses</a>
@@ -71,6 +79,11 @@
             <?php endif; ?>
         </header>
 
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." />
+            <button>🔍</button>
+        </div>
+        
         <main class="main-content">
             <div class="quote-box">
                 <p>
