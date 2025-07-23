@@ -13,21 +13,14 @@
      <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
-<<<<<<< HEAD
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet"> -->
-    
-=======
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
->>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
     <link rel="stylesheet" href="../CSS/Homepage.css">
     <title>Pann Pyoe Thu</title>
 </head>
 <body>
-    <!-- <div class="homepage">
+   <div class="homepage">
         <header class="header">
             <div class="logo">
                 <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
@@ -40,7 +33,6 @@
                 <span></span>
             </button>
 
-
             <nav class="nav" id="mainNav">
                 <a href="../PHP/index.php">Home</a>
                     <a href="../PHP/About Us.php">About us</a>
@@ -49,44 +41,12 @@
                     <a href="../PHP/Scholarship.php">Scholarships</a>
                     <a href="../PHP/Local Uni.php">Local Universities</a>
                     <a href="../PHP/Jobs.php">Job Opportunities</a>
-<<<<<<< HEAD
-                </nav> -->
-
-<!-- Navi -->
-        <?php
-     include "Header.php";
-     ?>
-
+                </nav> 
+                
             <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="user-bar">
             <span class="welcome">Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>!</span>
             <a href="logout.php" class="btn-logout">Logout</a>
-=======
-                </nav>
-        <?php if (!empty($_SESSION['user_id'])): ?>
-        <div class="dropdown">
-            <button
-                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
-                type="button"
-                id="profileDropdownBtn"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
-                </button>
-            <ul class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="profileDropdownBtn">
-            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-            </ul>
->>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
         </div>
                             
 
@@ -321,7 +281,7 @@
         <a class="about-us" href="#">Tap here to learn more About Us</a>
     </div>
 
-    <!-- <div class="bottom">
+ <div class="bottom">
         <div class="bottom-left">
             <a class="about-us" href="#">About Us</a>
             <br>
@@ -349,13 +309,10 @@
             <i class="fab fa-twitter"></i>
         </div>
 <<<<<<< HEAD
-    </div> -->
+    </div> 
 
 
-<!-- Footer -->
-    <?php
-     include "Footer.php";
-     ?>
+
 
 
      <!-- … your header, form, etc … -->
@@ -454,7 +411,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <?php endif; ?>
 });
 </script>
-
 
 </body>
 </html>
