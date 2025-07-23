@@ -58,4 +58,16 @@
 // };
 
 // export default Homepage;
+
+// function toggleProfileMenu() {
+//     document.getElementById('profile-menu').classList.toggle('show');
+//   }
+//   // close when clicking outside
+//   document.addEventListener('click', e => {
+//     const pnl = document.getElementById('profile-menu');
+//     const sec = document.querySelector('.profile-section');
+//     if (!sec.contains(e.target)) pnl.classList.remove('show');
+//   });
+
+               
  
