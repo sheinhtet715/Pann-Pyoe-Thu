@@ -16,8 +16,8 @@ body {
     background: #1D2733;
     overflow-x: hidden;
 }
-
-/* Header Styles */
+/* 
+/* Header Styles *//*
 .header {
     background: #529AA6;
     display: flex;
@@ -129,7 +129,7 @@ body {
     .mobile-menu-toggle {
         display: flex;
     }
-}
+} */
 
 /* Job Offers Section Styles */
 main {

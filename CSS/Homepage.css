@@ -20,7 +20,7 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
+/* Header *//*
 .header {
     background-color: #5fa5ac;
     display: flex;
@@ -75,14 +75,14 @@ body {
 /*----------------------------------------------------------------------------------*/
 
 /* Navigation and footer link hover effect */
-.nav a, .bottom a, .forgot {
+/* .nav a, .bottom a, .forgot {
   transition: color 0.18s, text-decoration 0.18s, box-shadow 0.18s;
 }
 .nav a:hover, .bottom a:hover, .forgot:hover {
   text-decoration: none;
   color: #ffe6c7;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-}
+} */
 
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -90,7 +90,7 @@ body {
 
 
 /* Profile Icon */
-.profile-icon {
+/* .profile-icon {
     background-color: #f0e8d9;
     width: 60px;
     height: 40px;
@@ -114,9 +114,13 @@ body {
     height: 36px;
     border-radius: 50%; 
     object-fit: cover; 
+<<<<<<< HEAD
+} */
+=======
 }
 /* Container around avatar + menu */
 /* Container around the avatar + menu */
+>>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
 
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -1010,8 +1014,8 @@ body {
 .consult-name1 {
     background: linear-gradient(to bottom, #1D2733, #4A6483, #577599);
 }
-
-/* Bottom Section */
+/* 
+/* Bottom Section *//*
 .bottom {
     display: flex;
     justify-content: space-between;
@@ -1070,7 +1074,7 @@ body {
 
 .fa-facebook { color: #1877f2; }
 .fa-instagram { color: #e1306c; }
-.fa-twitter { color: #1DA1F2; }
+.fa-twitter { color: #1DA1F2; } */
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -1200,7 +1204,7 @@ body {
     .slide img {
         width: 100%;
     }
-
+/* 
     .bottom {
         flex-direction: column;
         text-align: center;
@@ -1222,8 +1226,8 @@ body {
 
     .login-left {
         border-radius: 25px 25px 0 0;
-    }
-}
+    }*/
+} 
 
 @media (max-width: 480px) {
     .header {
