@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+   <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -103,26 +104,26 @@
 <div class="core-container">
   <div class="core-row">
     <div class="core-card">
-    <img src="../About us Page Images/Small Board.png" alt="small board">
+    <img src="../About us Page Images/empowerment_plate-removebg-preview.png" alt="small board">
     <div class="core-text">Empowerment</div>
   </div>
   <div class="core-card">
-    <img src="../About us Page Images/Small Board.png" alt="small board">
+    <img src="../About us Page Images/empowerment_plate-removebg-preview.png" alt="small board">
     <div class="core-text">Integrity</div>
   </div>
   <div class="core-card">
-    <img src="../About us Page Images/Small Board.png" alt="small board">
+    <img src="../About us Page Images/empowerment_plate-removebg-preview.png" alt="small board">
     <div class="core-text">Accessibility</div>
   </div>
 </div>
 
 <div class="core-row">
   <div class="core-card">
-    <img src="../About us Page Images/Small Board.png" alt="small board">
+    <img src="../About us Page Images/empowerment_plate-removebg-preview.png" alt="small board">
     <div class="core-text">Growth</div>
   </div>
   <div class="core-card">
-    <img src="../About us Page Images/Small Board.png" alt="small board">
+    <img src="../About us Page Images/empowerment_plate-removebg-preview.png" alt="small board">
     <div class="core-text">Support</div>
   </div>
 </div>
@@ -130,7 +131,7 @@
 
 <div class="team-section">
   <div class="cover">
-    <img src="../About us Page Images/Cover.png" alt="logo">
+    <img src="../About us Page Images/web_deco-removebg-preview.png" alt="logo">
     <div class="cover-text">
       Meet <span class="o">O</span><span class="u">U</span><span class="r">R</span> Team
     </div>
@@ -147,7 +148,7 @@
 </div>
 </div>
   <div class="cover">
-    <img src="../About us Page Images/Cover.png" alt="logo">
+    <img src="../About us Page Images/web_deco-removebg-preview.png" alt="logo">
     <div class="cover-text">
       Meet <span class="o">O</span><span class="u">U</span><span class="r">R</span> Team
     </div>
