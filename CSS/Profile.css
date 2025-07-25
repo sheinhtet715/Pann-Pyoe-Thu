@@ -255,7 +255,7 @@ main {
   margin-bottom: 4px;
   font-weight: 500;
 }
-.edit-profile-section input {
+.edit-profile-section input, .upload-label {
   background: #e3e3e3;
   border: none;
   border-radius: 20px;
@@ -266,7 +266,7 @@ main {
   box-shadow: 0 1px 4px #529AA622;
   transition: box-shadow 0.2s, border 0.2s;
 }
-.edit-profile-section input:focus {
+.edit-profile-section,.upload-label input:focus {
   box-shadow: 0 0 0 3px #6db6c2;
   border: 1.5px solid #1D2733;
 }
@@ -275,10 +275,10 @@ button, .upload-label, .course-circle, .profile-pic-placeholder, .brand-name {
   transition: all 0.2s;
 }
 
-.Save-btn{
+.save-btn{
   margin: 10px 20rem;
 }
-.Save-btn :hover{
+.save-btn :hover{
   box-shadow: 0 0 0 3px #6db6c2;
   border: 1.5px solid #1D2733; 
 }
