@@ -25,7 +25,7 @@ if (isset($_POST['signin'])) {
     // 4) Now do the lookup using AND
     else {
         $sql = "
-          SELECT user_id, user_name, email, password_hash
+          SELECT user_id, user_name, email, password_hash, profile_path
             FROM user_tbl
            WHERE email = ?
              AND user_name = ?

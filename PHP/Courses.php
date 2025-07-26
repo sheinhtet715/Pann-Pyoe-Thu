@@ -1,11 +1,90 @@
+<?php
+// Courses.php
+session_start();
+include "./db_connection.php";
+require_once "./Controller/CoursesController.php";
+
+
+
+$imgFolder = '../Courses page images/'; 
+$error   = $_SESSION['login_error']   ?? '';
+$success = $_SESSION['login_success'] ?? '';
+
+unset($_SESSION['login_error'], $_SESSION['login_success']);
+
+//  Handle form POST (unchanged)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset($_POST['signup'])) {
+    if (empty($_SESSION['user_id'])) {
+        $error = "❌ You must be signed in to book an Enrollment.";
+    } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
+        $error = "❌ That email doesn’t match your logged‑in account.";
+    } else {
+        $user_id      = $_SESSION['user_id'];
+        $course_name  = trim($_POST['course_name'] ?? '');
+        $fee          = trim($_POST['fee'] ?? '');
+        $type         = trim($_POST['type'] ?? '');
+        $language     = trim($_POST['language'] ?? '');
+
+        
+        // a) find course_id
+        $cs = $conn->prepare("
+            SELECT course_id
+              FROM Course_tbl
+             WHERE course_name = ?
+        ");
+        $cs->bind_param("s", $course_name);
+        $cs->execute();
+        $cres = $cs->get_result();
+
+        if (!$cres->num_rows) {
+            $error = "⚠️ Course “{$course_name}” not found.";
+        } else {
+            $courseid = $cres->fetch_assoc()['course_id'];
+            $cs->close();
+
+            // b) insert into enrollment table
+            $date = date('d-m-Y');
+            $ins = $conn->prepare("
+                INSERT INTO Enrollment_tbl
+                  (user_id,course_id,enrollment_date,payment_status)
+                VALUES (?, ?, ?, 'YES')
+            ");
+            $ins->bind_param("iis", $user_id, $courseid, $date);
+
+            if ($ins->execute()) {
+                $success = "✅ Enrollment booked successfully!";
+            } else {
+                $error = "❌ Error inserting Enrollment: " . $ins->error;
+            }
+            $ins->close();
+        }
+    }
+}
+
+// 2) Fetch dynamic list of courses from DB
+$controller = new CoursesController($conn);
+$courses    = $controller->getAllCourses();
+$pcourse = new PopularCourse($conn);
+$popularCourses = $pcourse->getPopularCourses();
+$upcourse = new UpcomingCourse($conn);
+$upcomingCourses = $upcourse->getUpcomingCourses();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
    <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-	<link rel="stylesheet" href="../CSS/Courses.css">
-	<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="../CSS/Courses.css">
+   <!-- load Courses.js, which needs window.isLoggedIn -->
+  <script src="../JavaScript/Courses.js"></script>
 	<title>Courses</title>
 </head>
 
@@ -18,180 +97,97 @@
       <div class="logo-text">Pann Pyoe Thu</div>
     </div>
 
-    <nav>
+    <nav class ="nav">
        <a href="../PHP/index.php">Home</a>
         <a href="../PHP/About Us.php">About us</a>
         <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
+        <a href="../PHP/Counsellor.php">Educational Counsellor</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
         <a href="../PHP/Local Uni.php">Local Universities</a>
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
 
-    <div class="profile-btn">
-      <img src="../HomePimg/Profile.png" alt="Profile">
-    </div>
+   
+      <?php if (!empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >
+                <!-- your SVG icon as the button’s content: -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+                </svg>
+                </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="course_logout.php">Logout</a></li>
+            </ul>
+        </div>
+    <?php else: ?>
+      <div class="profile-icon" onclick="openLogin()">
+        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img">
+      </div>
+    <?php endif; ?>
 </header>
+
 
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
 
+ 
  <div class="course-container">
- 	<div class="course course1">
- 		<div class="course-image">
- 			<img src="../Courses page Images/Time management course.jpg" alt="Time Management">
- 		</div>
- 		<div class="photo-enroll">
- 			<img class="icon" src="../Courses page Images/clock-removebg-preview.png" alt="Brain">
- 			<a class="enroll" href="#">Enroll</a>
- 		</div>
-
- 		<div class="course-text">
- 			<p>Time Management Course</p>
- 			<p>Fees - Free</p>
- 			<p>Type - Paper Format</p>
- 			<p>Language - Burmese</p>
- 		</div>
- 	</div>
-
-  <div class="course course2">
+<?php foreach ($courses as $row): ?>
+  <div class="course course1">
     <div class="course-image">
-      <img src="../Courses page Images/Communication course.jpg" alt="Communication">
+      <img src="<?= htmlspecialchars($imgFolder.($row['image_url'])) ?>" 
+        alt="<?= htmlspecialchars($row['course_name']) ?>">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/loudspeaker-removebg-preview.png" alt="Speaker">
-      <a class="enroll" href="#">Enroll</a>
+      <img class="icon" src="<?= htmlspecialchars($imgFolder.($row['icon_url'])) ?>" alt="Icon">
+      <a class="enroll" href="">Enroll</a>
     </div>
-
     <div class="course-text">
-      <p>Communication Course</p>
-      <p>Fee - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - Burmese</p>
+      <p><?= htmlspecialchars($row['course_name']) ?></p>
+      <p>Fee - <?= htmlspecialchars($row['fee']) ?></p>
+      <p>Type - <?= htmlspecialchars($row['type']) ?></p>
+      <p>Language - <?= htmlspecialchars($row['language']) ?></p>
     </div>
   </div>
-
-  <div class="course course3">
-    <div class="course-image">
-      <img src="../Courses page Images/Problem-solving course.jpg" alt="Probelm Solve">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/puzzle-removebg-preview.png" alt="Puzzle">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>Problem-Solving Skill Course</p>
-      <p>Fee - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - Burmese</p>
-    </div>
-  </div>
-
-  <div class="course course4">
-    <div class="course-image">
-      <img src="../Courses page Images/gender studies course.jpg" alt="Gender">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/gender.jpg" alt="People">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>Gender Studies Course</p>
-      <p>Fee - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - Burmese</p>
-    </div>
-  </div>
-
-  <div class="course course5">
-    <div class="course-image">
-      <img src="../Courses page Images/critical thinking.jpg" alt="Critical Thinking">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/brain_exercise-removebg-preview.png" alt="Brain">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>Critical Thinking Course</p>
-      <p>Fee - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - English</p>
-    </div>
-  </div>
-
-  <div class="course course6">
-    <div class="course-image">
-      <img src="../Courses page Images/project management course.jpg" alt="ICT">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/project-removebg-preview.png" alt="Project">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>ICT Projectment Course</p>
-      <p>Fee - 30000 Kyats</p>
-      <p>Type - Video Lectures</p>
-      <p>Language - English</p>
-    </div>
-  </div>
-
-  <div class="course course7">
-    <div class="course-image">
-      <img src="../Courses page Images/Psychological first aid.jpg" alt="Psychological">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/heart-removebg-preview.png" alt="Heart">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>Psychological First Aid</p>
-      <p>Fee - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - English</p>
-    </div>
-  </div>
-
-  <div class="course course8">
-    <div class="course-image">
-      <img src="../Courses page Images/collaboration course.jpg" alt="Collaboration">
-    </div>
-    <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/teamwork-removebg-preview.png" alt="Team">
-      <a class="enroll" href="#">Enroll</a>
-    </div>
-
-    <div class="course-text">
-      <p>Collaboration Course</p>
-      <p>Fee - 30000 Kyats</p>
-      <p>Type - Video Lectures</p>
-      <p>Language - English</p>
-    </div>
-  </div>
-</div>
+  
+<?php endforeach; ?>
+ </div>
 
 <div class="most-popular">
 <h1>The most popular course</h1>
 </div>
 
 <div class="course-discount">
+  <?php foreach ($popularCourses as $row): ?>
   <div class="course course1">
     <div class="course-image">
-      <img src="../Courses page Images/Time management course.jpg" alt="Time Management">
+      <img src="<?= htmlspecialchars($imgFolder.($row['image_url'])) ?>" 
+        alt="<?= htmlspecialchars($row['course_name']) ?>">
     </div>
     <div class="photo-enroll">
-      <img class="icon" src="../Courses page Images/clock-removebg-preview.png" alt="Brain">
-      <a class="enroll" href="#">Enroll</a>
+      <img class="icon" 
+        src="<?= htmlspecialchars($imgFolder.($row['icon_url'])) ?>" 
+        alt="<?= htmlspecialchars($row['course_name']) ?> Icon">
+      <a class="enroll" href="">Enroll</a>
     </div>
 
     <div class="course-text">
-      <p>Time Management Course</p>
-      <p>Fees - Free</p>
-      <p>Type - Paper Format</p>
-      <p>Language - Burmese</p>
+      <p><?= htmlspecialchars($row['course_name']) ?></p>
+      <p>Fees - <?= htmlspecialchars($row['fee']) ?></p>
+      <p>Type - <?= htmlspecialchars($row['type']) ?></p>
+      <p>Language - <?= htmlspecialchars($row['language']) ?></p>
     </div>
   </div>
 
@@ -204,48 +200,35 @@
     </div>
   </div>
 </div>
+<?php endforeach; ?>
 
-<div class="stay-tuned">
+  <div class="stay-tuned">
   <h1>Stay tuned for the upcoming courses</h1>
 </div>
 
 <div class="upcoming-course">
+  <?php foreach ($upcomingCourses as $row): ?>
   <div class="offer-course card">
-    <img src="../Courses page Images/programming.png" alt="Programming">
+    <img src="<?= htmlspecialchars($imgFolder.($row['icon_url'])) ?>" alt="<?= htmlspecialchars($row['course_name']) ?> Icon">
     <div class="offer-text">
-      <p>Programming</p>
+      <p><?= htmlspecialchars($row['course_name']) ?></p>
     </div>
   </div>
-
-  <div class="offer-course card">
-    <img src="../Courses page Images/languages.png" alt="Languages">
-    <div class="offer-text">
-      <p>Languages</p>
-    </div>
-  </div>
-
-  <div class="offer-course card">
-    <img src="../Courses page Images/musicpic.png" alt="Programming">
-    <div class="offer-text">
-      <p>Music Lessons</p>
-    </div>
-  </div>
-</div>
-
+  <?php endforeach; ?>
+</div> 
 
     <div class="bottom">
         <div class="bottom-left">
-            <a class="about-us" href="#">About Us</a>
+            <a class="about-us" href="../PHP/About Us.php">About Us</a>
             <br>
-            <a class="education-counselling" href="#">Education Counselling</a>
+            <a class="education-counselling" href="../PHP/Counsellor.php">Education Counselling</a>
             <br>
-            <a class="local-universities" href="#">Local Universities</a>
+            <a class="local-universities" href="../PHP/local Uni.php">Local Universities</a>
+            <a class="job-opportunities" href="../PHP/Jobs.php">Job Opportunities</a>
             <br>
-            <a class="job-opportunities" href="#">Job Opportunities</a>
+            <a class="scholarships" href="../PHP/Scholarships.php">Scholarships</a>
             <br>
-            <a class="scholarships" href="#">Scholarships</a>
-            <br>
-            <a class="available-courses" href="#">Available Courses</a>
+            <a class="available-courses" href="../PHP/Courses.php">Available Courses</a>
         </div>
 
         <div class="bottom-middle">
@@ -261,6 +244,72 @@
             <i class="fab fa-twitter"></i>
         </div>
     </div>
+
+
+    <!-- Login Modal -->
+  <!--  -->
+  <!-- 1) pull in your shared login modal markup -->
+  <!-- 0) Expose login state for Counsellor.js -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- 1) pull in your shared login‑modal markup -->
+   <?php include './login_modal.php'; ?>
+  <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
+  <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
+
+   <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?= json_encode($error) ?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?= json_encode($success) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
+  <?php endif; ?>
+});
+</script>
 
 </body>
 </html>

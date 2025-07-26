@@ -13,11 +13,22 @@
     $stmt = $conn->prepare("SELECT user_name, email, phone, profile_path FROM User_tbl WHERE user_id = ?");
     $stmt->bind_param('i', $_SESSION['user_id']);
     $stmt->execute();
+    
     $result = $stmt->get_result();
     $user   = $result->fetch_assoc();
     $stmt->close();
     $conn->close();
-
+    // DEBUG: check that the file on disk matches what’s in the DB
+    $storedPath = $user['profile_path'] ?? '';
+    if ($storedPath !== '') {
+        // build the absolute path to the file
+        $fullPath = realpath(__DIR__ . '/../' . $storedPath);
+        if ($fullPath && file_exists($fullPath)) {
+            error_log(" Display file exists at: $fullPath");
+        } else {
+            error_log(" Display file missing at: " . ($fullPath ?? 'unable to resolve') );
+        }
+    }
     // Flash messages
     $success = $_SESSION['profile_success'] ?? '';
     $error   = $_SESSION['profile_error'] ?? '';
@@ -96,7 +107,7 @@
           >
           Upload your profile picture
         </label>
-          <input class="save-btn" type="submit" value="Save">
+          <input type="submit" value="Save" class="btn btn-success">
         </form>
       </section>
     </main>

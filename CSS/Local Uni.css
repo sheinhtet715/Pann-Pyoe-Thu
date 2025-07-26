@@ -185,9 +185,11 @@ body {
     text-decoration: none;
     color: black;
 }
+
 /*__________Middle Part End__________*/
 
 /*__________Bottom SLide Start__________*/
+
 .bottom {
     display: flex;
     justify-content: space-between;
@@ -242,3 +244,151 @@ body {
     color: #1DA1F2;
 }
 /*__________Bottom Slide End__________*/
+
+/*__________Responsive for screen larger than 1920px__________*/
+
+@media screen and (min-width: 1930px) {
+
+.logo-img {
+    width: 100px;
+    height: 100px;
+}
+
+.logo-text {
+    font-size: 48px;
+}
+
+.nav a {
+    font-size: 36px;
+}
+
+.profile-icon {
+    width: 120px;
+    height: 80px;
+}
+
+.profile-img {
+    width: 72px;
+    height: 72px;
+}
+
+.starter-text h1 {
+    font-size: 48px;
+}
+
+.starter-text p {
+    font-size: 36px;
+}
+
+.university img {
+    width: 400px;
+    height: 400px;
+}
+
+.university {
+    width: 1500px;
+    height: 500px;
+}
+
+.uni-text h1 {
+    font-size: 48px;
+}
+
+.uni-text p {
+    font-size: 36px;
+}
+
+.uni-icon {
+    width: 500px;
+    height: 500px;
+}
+
+.uni-icon img {
+    width: 450px;
+    height: 400px;
+    margin-top: -15px;
+}
+
+.visit-container {
+   width: 250px;
+   height: 100px;
+   border-radius: 30px;
+   margin-top: -15px;
+}
+
+.visit-text {
+    padding: 24px;
+}
+
+.visit-text a {
+    font-size: 36px;
+}
+
+.bottom a {
+    font-size: 36px;
+}
+
+.bottom p {
+    font-size: 36px;
+}
+
+.fab {
+    font-size: 60px;
+}
+}
+
+/*__________Responsive for 1024px to 1440px__________*/
+
+@media screen and (max-width: 1440px) and (min-width: 1024px) {
+
+.university img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    padding: 45px;
+}
+
+.university {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 250px;
+}
+
+.uni-text {
+    margin-top: 20px;
+}
+
+.uni-text h1 {
+    font-size:  26px;
+}
+
+.uni-text p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+.uni-icon {
+    width: 250px;
+    height: 250px;
+    align-items: center;
+}
+
+.uni-icon img {
+    width: 200px;
+    height: 175px;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
+.visit-container {
+   width: 150px;
+   height: 50px;
+   margin-top: -5px;
+}
+
+.visit-text {
+   padding: 15px;
+}
+}

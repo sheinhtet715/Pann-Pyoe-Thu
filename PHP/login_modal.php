@@ -24,9 +24,7 @@
       <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo"/>
       <div class="login-box">
         <!-- Any server‑side error messages? -->
-        <?php if (!empty($error)): ?>
-          <p class="error"><?= htmlspecialchars($error) ?></p>
-        <?php endif; ?>
+
         <form method="POST" action="login.php" class="login-box">
           <input type="hidden" name="return"
        value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">

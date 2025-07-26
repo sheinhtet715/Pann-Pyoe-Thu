@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
+    <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <title>Find Jobs - Pann Pyoe Thu</title>
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/Jobs.css">
@@ -15,21 +15,21 @@
         <span class="logo-text">Pann Pyoe Thu</span>
       </div>
       <nav class="nav" id="nav-menu">
-       <a href="../PHP/index.php">Home</a>
+        <a href="../PHP/index.php">Home</a>
         <a href="../PHP/About Us.php">About us</a>
         <a href="../PHP/Courses.php">Courses</a>
         <a href="../PHP/Counsellor.php">Educational Counsellors</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
         <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
+        <a href="../PHP/Jobs.php">Job Opportunities</a>
+      </nav>
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <div class="profile-icon" onclick="openLogin()" role="button" tabindex="0" aria-label="Open login menu">
-        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+        <img src="Profile.png" alt="Profile" class="profile-img" />
       </div>
     </header>
     <main>
@@ -506,13 +506,7 @@
         <button id="load-more-btn" class="page-btn">Load More</button>
       </div>
     </main>
-
-<!-- Footer -->
-    <?php
-    include "Footer.php"
-    ?>
-
-
+    
     <script>
       function toggleMobileMenu() {
         const nav = document.getElementById('nav-menu');

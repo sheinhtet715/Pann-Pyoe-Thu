@@ -1,12 +1,12 @@
 <?php
-  // pick up any flash‐error or ‐success from login.php
-  session_start();
-  $error   = $_SESSION['login_error']   ?? '';
-  $success = $_SESSION['login_success'] ?? '';
-  unset($_SESSION['login_error'], $_SESSION['login_success']);
+    // pick up any flash‐error or ‐success from login.php
+    session_start();
+    $error   = $_SESSION['login_error'] ?? '';
+    $success = $_SESSION['login_success'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success']);
 ?>
 
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,9 +43,9 @@
                     <a href="../PHP/Scholarship.php">Scholarships</a>
                     <a href="../PHP/Local Uni.php">Local Universities</a>
                     <a href="../PHP/Jobs.php">Job Opportunities</a>
-                </nav> 
-                
-           <?php if (!empty($_SESSION['user_id'])): ?>
+                </nav>
+
+           <?php if (! empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -54,12 +54,21 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
+                <?php if (! empty($user['profile_path'])): ?>
+        <img
+          src="../<?php echo htmlspecialchars($user['profile_path'])?>"
+          alt="Profile"
+          class="profile-img"
+          style="width:24px; height:24px; object-fit:cover;"
+        >
+        <?php else: ?>
+            <!-- fallback SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+            <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+            </svg>
+        <?php endif; ?>
                 </button>
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
@@ -69,7 +78,7 @@
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </div>
-                            
+
 
             <?php else: ?>
             <div class="profile-icon" onclick="openLogin()">
@@ -78,11 +87,11 @@
             <?php endif; ?>
         </header>
 
-        <div class="search-bar">
+        <!-- <div class="search-bar">
             <input type="text" placeholder="Search..." />
             <button>🔍</button>
-        </div>
-        
+        </div> -->
+
         <main class="main-content">
             <div class="quote-box">
                 <p>
@@ -257,7 +266,7 @@
         <h1>Upcoming Course Offerings</h1>
         <div class="card-container">
             <div class="course-offer card4">
-                <img src="../Courses page Images/programming.png" alt="Programming">    
+                <img src="../Courses page Images/programming.png" alt="Programming">
                 <div class="course-text">
                     <p>Programming</p>
                 </div>
@@ -302,72 +311,12 @@
         <a class="about-us" href="#">Tap here to learn more About Us</a>
     </div>
 
- <div class="bottom">
-        <div class="bottom-left">
-            <a class="about-us" href="#">About Us</a>
-            <br>
-            <a class="education-counselling" href="#">Education Counselling</a>
-            <br>
-            <a class="local-universities" href="#">Local Universities</a>
-            <br>
-            <a class="job-opportunities" href="#">Job Opportunities</a>
-            <br>
-            <a class="scholarships" href="#">Scholarships</a>
-            <br>
-            <a class="available-courses" href="#">Available Courses</a>
-        </div>
-
-        <div class="bottom-middle">
-            <p>Contact Us:</p>
-            <p>09672659692</p>
-            <p>pannpyoethu26@gmail.com</p>
-        </div>
-
-        <div class="bottom-right">
-            <p>Follow Us On:</p>
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitter"></i>
-        </div>
-<<<<<<< HEAD
-    </div> 
+    <!-- Footer -->
+        <?php
+        include_once "Footer.php"
+        ?>
 
 
-
-
-
-     <!-- … your header, form, etc … -->
-=======
-    </div>
-     
-    
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const avatar = document.getElementById('profileAvatar');
-  const menu   = document.getElementById('profileDropdownMenu');
-
-  if (avatar && menu) {
-    // Toggle the dropdown on avatar click
-    avatar.addEventListener('click', e => {
-      e.stopPropagation();
-      menu.classList.toggle('show');
-    });
-
-    // Clicking anywhere else closes it
-    document.addEventListener('click', () => {
-      menu.classList.remove('show');
-    });
-  }
-});
-</script>
-
-
-
-
-
-    
-    <!-- … your header, form, etc … -->
->>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
 <?php include 'login_modal.php'; ?>
 
 <!-- 1) Load your libraries -->
@@ -414,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops…',
-      text: <?= json_encode($error) ?>,
+      text: <?php echo json_encode($error)?>,
       confirmButtonText: 'Try Again'
     })
     .then(() => {
@@ -424,11 +373,11 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?= json_encode($success) ?>,
+      text: <?php echo json_encode($success)?>,
       timer: 2000,
       showConfirmButton: false
     })
-   
+
   <?php endif; ?>
 });
 </script>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+    <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
 	<link rel="stylesheet" href="../CSS/Local Uni.css">
-     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 	<title>Local Universities</title>
@@ -11,20 +11,20 @@
 <body>
     <header class="header">
         <div class="logo">
-            <img src="../Images/Logo.png" alt="Pann Pyoe Thu logo" class="logo-img" />
+            <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
         <nav class="nav">
-       <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
-        <div class="profile-icon" onclick="window.location.href='login.php?return='+encodeURIComponent(window.location.href)">
-                <img src="../Images/Profile.png" alt="Profile" class="profile-img" />
+            <a href="../PHP/index.php">Home</a>
+            <a href="../PHP/About Us.php">About us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Educational Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Job Opportunities</a>
+        </nav>
+        <div class="profile-icon" onclick="openLogin()">
+                <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
     </header>
 
@@ -36,7 +36,7 @@
 <div class="container">
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 1.jpg" alt="Medicine1">
+        <img src="../Local_uni_images/um1.jfif"  alt="Medicine1">
         <div class="uni-text">
         <h1>University of Medicine (1)</h1>
         <p>Location - No.245, Myoma Kyaung Street, Lanmadaw Township, Yangon, Myanmar.</p>
@@ -48,10 +48,10 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 1.jpg" alt="University1">
+        <img src="../Local_uni_images/um1 front gate.jfif"  alt="University1">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://um1yangon.edu.mm/en/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 2.jpg" alt="Medicine2">
+        <img src="../Local_uni_images/um2 logo.png" alt="Medicine2">
         <div class="uni-text">
         <h1>University of Medicine (2)</h1>
         <p>Location - North Okkapala, Yangon</p>
@@ -71,17 +71,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 3.jpg" alt="University2">
+        <img src="../Local_uni_images/um2 front gate.jfif" alt="University2">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://um2ygn.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>   
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 3.jpg" alt="Medicine3">
+        <img src="../Local_uni_images/um, magway.png" alt="Medicine3">
         <div class="uni-text">
         <h1>University of Medicine, Magway</h1>
         <p>Location - Magway City, Magway Region</p>
@@ -93,17 +93,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 2.jpg" alt="University3">
+        <img src="../Local_uni_images/um, magway front gate.JPG" alt="University3">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.ummg.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 4.jpg" alt="Medicine4">
+        <img src="../Local_uni_images/um taunggyi.jfif" alt="Medicine4">
         <div class="uni-text">
         <h1>University of Medicine, Taunggyi</h1>
         <p>Location - Taunggyi, Shan State</p>
@@ -115,17 +115,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 4.jpg" alt="University4">
+        <img src="../Local_uni_images/Um taunggyi front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://umtgi.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 5.jpg" alt="Medicine4">
+        <img src="../Local_uni_images/Eco-Dept-Logo.jpg" alt="Medicine4">
         <div class="uni-text">
         <h1>Yangon University of Economics</h1>
         <p>Location – Yangon, Kamayut Township</p>
@@ -137,17 +137,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 5.jpg" alt="University4">
+        <img src="../Local_uni_images/Eco front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://yueco.edu.mm/?page_id=87" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 6.png" alt="Medicine4">
+        <img src="../Local_uni_images/yufl logo.png" alt="Medicine4">
         <div class="uni-text">
         <h1>Yangon University of Foreign Languages</h1>
         <p>Location – Yangon, Kamayut Township</p>
@@ -159,17 +159,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 6.jpg" alt="University4">
+        <img src="../Local_uni_images/yufl front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.yufl.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 7.png" alt="Medicine4">
+        <img src="../Local_uni_images/Computer uni logo.png" alt="Medicine4">
         <div class="uni-text">
         <h1>University of Computer Studies, Yangon</h1>
         <p>Location – Yangon, Hlawga </p>
@@ -181,17 +181,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 7.jpg" alt="University4">
+        <img src="../Local_uni_images/computer uni front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.ucsy.edu.mm/history.do" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 8.png" alt="Medicine4">
+        <img src="../Local_uni_images/pharmacy logo.png" alt="Medicine4">
         <div class="uni-text">
         <h1>University of Pharmacy, Yangon</h1>
         <p>Location – Yangon, North Okkalapa Township</p>
@@ -203,17 +203,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 8.jpg" alt="University4">
+        <img src="../Local_uni_images/pharmacy front page.jfif" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.uopygn.gov.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 9.png" alt="Medicine4">
+        <img src="../Local_uni_images/education logo.png" alt="Medicine4">
         <div class="uni-text">
         <h1>Yangon University of Education</h1>
         <p>Location – Yangon, Kamayut Township</p>
@@ -225,17 +225,17 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 9.jpg" alt="University4">
+        <img src="../Local_uni_images/education front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.yuoe.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>
 
     <div class="card university">
         <div class="uni-content">
-        <img src="../Images/University 10.png" alt="Medicine4">
+        <img src="../Local_uni_images/nursing logo.png" alt="Medicine4">
         <div class="uni-text">
         <h1>University of Nursing, Yangon</h1>
         <p>Location – Yangon, Lanmadaw Township </p>
@@ -247,10 +247,10 @@
     </div>
 
     <div class="card uni-icon">
-        <img src="../Images/Icon 10.jpg" alt="University4">
+        <img src="../Local_uni_images/nursing front gate.jpg" alt="University4">
         <div class="visit-container">
         <div class="visit-text">
-        <a href="#">Visit Website</a>
+        <a href="https://www.uonygn.gov.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
     </div>

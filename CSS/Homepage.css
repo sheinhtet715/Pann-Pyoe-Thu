@@ -119,41 +119,6 @@ body {
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
 
-
-/* Search Bar */
-.search-bar {
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px 40px;
-}
-
-.search-bar input {
-    padding: 8px 10px;
-    border-radius: 2px;
-    border: none;
-    width: 200px;
-    margin-right: 5px;
-}
-
-.search-bar button {
-    background-color: #d1d1d1;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
-
-.search-bar button:hover {
-    background-color: #b8b8b8;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/*----------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------------*/
-
 /* Quote Section */
 .quote-box {
     margin: 40px auto;
@@ -173,6 +138,10 @@ body {
     font-variant: small-caps;
     font-weight: bold;
 }
+
+/*----------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
 
 /* Features */
 .features {
@@ -526,8 +495,8 @@ body {
         height: auto;
     }
     .login-logo {
-        width: 80px;
-        height: 80px;
+        width: 50px;
+        height: 50px;
         margin-bottom: 18px;
     }
     .flower-img {
@@ -554,12 +523,13 @@ body {
         font-size: 1.1rem;
     }
     .login-logo {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         margin-bottom: 8px;
     }
     .flower-img {
-        width: 40px;
+        width: 50px;
+        height: 50px;
     }
     .login-box input {
         font-size: 0.98rem;
@@ -601,7 +571,8 @@ body {
         height: 25px;
     }
     .flower-img {
-        width: 20px;
+        width: 50px;
+        height: 50px;
     }
 } 
 /* Popular Course Section */
@@ -1007,7 +978,7 @@ body {
 .consult-name1 {
     background: linear-gradient(to bottom, #1D2733, #4A6483, #577599);
 }
-/* 
+
 /* Bottom Section *//*
 .bottom {
     display: flex;
@@ -1067,7 +1038,7 @@ body {
 
 .fa-facebook { color: #1877f2; }
 .fa-instagram { color: #e1306c; }
-.fa-twitter { color: #1DA1F2; } */
+.fa-twitter { color: #1DA1F2; } 
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -1197,29 +1168,6 @@ body {
     .slide img {
         width: 100%;
     }
-/* 
-    .bottom {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .bottom-left, .bottom-right {
-        text-align: center;
-    }
-
-    .modal-content {
-        width: 95%;
-        margin: 20px auto;
-    }
-
-    .login-container {
-        flex-direction: column;
-    }
-
-    .login-left {
-        border-radius: 25px 25px 0 0;
-    }*/
 } 
 
 @media (max-width: 480px) {
