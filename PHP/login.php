@@ -56,8 +56,7 @@ if (isset($_POST['signin'])) {
                     $user['user_name'],
                     $user['email'],
                     $user['password_hash'],
-                    $role,
-                    $profilePath
+                    $role
                 );
                 $insertLogin->execute();
                 $insertLogin->close();
