@@ -49,7 +49,11 @@
       <div class="logo-section">
         <img src="../HomePimg/Logo.ico" alt="Logo" class="logo-img">
         <span class="brand-name">Pann Pyoe Thu</span>
+              <nav class="nav" id="mainNav">
+                <a href="../PHP/index.php">Home</a>
+                </nav>
       </div>
+
       <form method="post" action="logout.php">
         <button type="submit" class="logout-btn">Log out</button>
       </form>
@@ -152,4 +156,28 @@
 
 
 </body>
+<style>
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-left: 700px;
+    }
+
+    .nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 17px;
+        padding: 5px 10px;
+        transition: all 0.3s ease;
+        border-radius: 5px;
+    }
+
+    .nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #ffe6c7;
+    }
+</style>
 </html>

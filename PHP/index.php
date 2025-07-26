@@ -87,11 +87,6 @@
             <?php endif; ?>
         </header>
 
-        <!-- <div class="search-bar">
-            <input type="text" placeholder="Search..." />
-            <button>🔍</button>
-        </div> -->
-
         <main class="main-content">
             <div class="quote-box">
                 <p>
