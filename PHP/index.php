@@ -338,45 +338,7 @@
             <i class="fab fa-instagram"></i>
             <i class="fab fa-twitter"></i>
         </div>
-<<<<<<< HEAD
-    </div>
 
-
-
-
-
-     <!-- … your header, form, etc … -->
-=======
-    </div>
-
-
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const avatar = document.getElementById('profileAvatar');
-  const menu   = document.getElementById('profileDropdownMenu');
-
-  if (avatar && menu) {
-    // Toggle the dropdown on avatar click
-    avatar.addEventListener('click', e => {
-      e.stopPropagation();
-      menu.classList.toggle('show');
-    });
-
-    // Clicking anywhere else closes it
-    document.addEventListener('click', () => {
-      menu.classList.remove('show');
-    });
-  }
-});
-</script>
-
-
-
-
-
-
-    <!-- … your header, form, etc … -->
->>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
 <?php include 'login_modal.php'; ?>
 
 <!-- 1) Load your libraries -->

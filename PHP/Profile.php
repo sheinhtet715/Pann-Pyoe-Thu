@@ -107,7 +107,7 @@
           >
           Upload your profile picture
         </label>
-          <input class="save-btn" type="submit" value="Save">
+          <input type="submit" value="Save" class="btn btn-success">
         </form>
       </section>
     </main>
