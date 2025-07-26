@@ -16,7 +16,7 @@ $newPhone = trim($_POST['phone']     ?? '');
 $uploadDir   = __DIR__ . '/../User_profile_images/';
 $profilePath = null;
 // Prepare file upload if provided
-$profilePath = null;
+
 if (!empty($_FILES['profile_image']['name'])) {
     $origName   = basename($_FILES['profile_image']['name']);
     $ext        = strtolower(pathinfo($origName, PATHINFO_EXTENSION));

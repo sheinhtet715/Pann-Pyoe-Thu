@@ -1,9 +1,9 @@
 <?php
-  // pick up any flash‐error or ‐success from login.php
-  session_start();
-  $error   = $_SESSION['login_error']   ?? '';
-  $success = $_SESSION['login_success'] ?? '';
-  unset($_SESSION['login_error'], $_SESSION['login_success']);
+    // pick up any flash‐error or ‐success from login.php
+    session_start();
+    $error   = $_SESSION['login_error'] ?? '';
+    $success = $_SESSION['login_success'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success']);
 ?>
 
 
@@ -43,9 +43,9 @@
                     <a href="../PHP/Scholarship.php">Scholarships</a>
                     <a href="../PHP/Local Uni.php">Local Universities</a>
                     <a href="../PHP/Jobs.php">Job Opportunities</a>
-                </nav> 
-                
-           <?php if (!empty($_SESSION['user_id'])): ?>
+                </nav>
+
+           <?php if (! empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -54,12 +54,21 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
+                <?php if (! empty($user['profile_path'])): ?>
+        <img
+          src="../<?php echo htmlspecialchars($user['profile_path'])?>"
+          alt="Profile"
+          class="profile-img"
+          style="width:24px; height:24px; object-fit:cover;"
+        >
+        <?php else: ?>
+            <!-- fallback SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+            <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+            </svg>
+        <?php endif; ?>
                 </button>
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
@@ -69,7 +78,7 @@
             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </div>
-                            
+
 
             <?php else: ?>
             <div class="profile-icon" onclick="openLogin()">
@@ -82,7 +91,7 @@
             <input type="text" placeholder="Search..." />
             <button>🔍</button>
         </div>
-        
+
         <main class="main-content">
             <div class="quote-box">
                 <p>
@@ -257,7 +266,7 @@
         <h1>Upcoming Course Offerings</h1>
         <div class="card-container">
             <div class="course-offer card4">
-                <img src="../Courses page Images/programming.png" alt="Programming">    
+                <img src="../Courses page Images/programming.png" alt="Programming">
                 <div class="course-text">
                     <p>Programming</p>
                 </div>
@@ -330,7 +339,7 @@
             <i class="fab fa-twitter"></i>
         </div>
 <<<<<<< HEAD
-    </div> 
+    </div>
 
 
 
@@ -339,8 +348,8 @@
      <!-- … your header, form, etc … -->
 =======
     </div>
-     
-    
+
+
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   const avatar = document.getElementById('profileAvatar');
@@ -365,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+
     <!-- … your header, form, etc … -->
 >>>>>>> 8c174fda73f63aa29b7b65a3c407437182756938
 <?php include 'login_modal.php'; ?>
@@ -414,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops…',
-      text: <?= json_encode($error) ?>,
+      text: <?php echo json_encode($error)?>,
       confirmButtonText: 'Try Again'
     })
     .then(() => {
@@ -424,11 +433,11 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?= json_encode($success) ?>,
+      text: <?php echo json_encode($success)?>,
       timer: 2000,
       showConfirmButton: false
     })
-   
+
   <?php endif; ?>
 });
 </script>
