@@ -4,8 +4,8 @@ session_start();
 require_once "./db_connection.php";
 
 $username = trim($_POST['user_name'] ?? '');
-$email    = trim($_POST['email']     ?? '');
-$password = $_POST['password']       ?? '';
+$email    = trim($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
 $error    = '';
 $success  = '';
 
@@ -25,7 +25,7 @@ if (isset($_POST['signin'])) {
     // 4) Now do the lookup using AND
     else {
         $sql = "
-          SELECT user_id, user_name, email, password_hash
+          SELECT user_id, user_name, email, password_hash, profile_path
             FROM user_tbl
            WHERE email = ?
              AND user_name = ?
@@ -42,6 +42,25 @@ if (isset($_POST['signin'])) {
                 $_SESSION['user_id']   = $user['user_id'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['email']     = $user['email'];
+                // ➊ record login in Login_tbl
+                $insertLogin = $conn->prepare("
+              INSERT INTO Login_tbl (
+                user_id, user_name, email, password_hash, role, last_login
+              ) VALUES (?, ?, ?, ?, ?, NOW())
+            ");
+                // if you have roles in User_tbl, you may need to fetch it first
+                $role = $user['role'] ?? 'user';
+                $insertLogin->bind_param(
+                    "issss",
+                    $user['user_id'],
+                    $user['user_name'],
+                    $user['email'],
+                    $user['password_hash'],
+                    $role
+                );
+                $insertLogin->execute();
+                $insertLogin->close();
+
                 $success = 'Signed in successfully.';
             } else {
                 $error = 'Incorrect password.';
@@ -64,21 +83,44 @@ if (isset($_POST['signup'])) {
     if ($res->num_rows > 0) {
         $error = "That username or email is already taken.";
     } else {
-        // 2) hash the password
+        // 2) hash password and insert into User_tbl
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        // 3) insert into user_tbl
-        $ins = $conn->prepare("
-            INSERT INTO user_tbl (user_name, email, password_hash)
-            VALUES (?, ?, ?)
+        $ins  = $conn->prepare("
+          INSERT INTO User_tbl
+            (user_name, email, password_hash)
+          VALUES (?, ?, ?)
         ");
         $ins->bind_param("sss", $username, $email, $hash);
+
         if ($ins->execute()) {
+            $newUserId = $ins->insert_id;
+
+            // 3) also record initial login in Login_tbl
+            $insLog = $conn->prepare("
+              INSERT INTO Login_tbl
+                (user_id, user_name, email, password_hash, role, last_login)
+              VALUES (?, ?, ?, ?, ?, NOW())
+            ");
+            $defaultRole = 'user';
+            $insLog->bind_param(
+                "issss",
+                $newUserId,
+                $username,
+                $email,
+                $hash,
+                $defaultRole
+            );
+            $insLog->execute();
+            $insLog->close();
+
             $success = "Account created! You can now sign in.";
         } else {
             $error = "Signup failed: " . $ins->error;
         }
+
         $ins->close();
     }
+
     $chk->close();
 }
 
@@ -86,13 +128,15 @@ $conn->close();
 
 // ─── FLASH IT ──────────────────────────────────────────────────────
 // whichever happened, store it in session so the caller page can pick it up:
-if ($error)   $_SESSION['login_error']   = $error;
-if ($success) $_SESSION['login_success'] = $success;
+if ($error) {
+    $_SESSION['login_error'] = $error;
+}
 
-$return = $_POST['return']
-        ?? $_GET['return']
-        ?? ($_SERVER['HTTP_REFERER'] ?? null)
-        ?? 'index.php';
+if ($success) {
+    $_SESSION['login_success'] = $success;
+}
+
+$return = $_POST['return'] ?? $_GET['return'] ?? ($_SERVER['HTTP_REFERER'] ?? null) ?? 'index.php';
 
 header("Location: " . $return);
 exit;
