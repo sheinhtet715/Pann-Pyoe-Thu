@@ -6,7 +6,7 @@
     unset($_SESSION['login_error'], $_SESSION['login_success']);
 ?>
 
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -87,10 +87,10 @@
             <?php endif; ?>
         </header>
 
-        <div class="search-bar">
+        <!-- <div class="search-bar">
             <input type="text" placeholder="Search..." />
             <button>🔍</button>
-        </div>
+        </div> -->
 
         <main class="main-content">
             <div class="quote-box">

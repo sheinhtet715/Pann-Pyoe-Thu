@@ -16,8 +16,8 @@ body {
     background: #1D2733;
     overflow-x: hidden;
 }
-/* 
-/* Header Styles *//*
+
+/* Header Styles */
 .header {
     background: #529AA6;
     display: flex;
@@ -67,12 +67,25 @@ body {
     font-weight: 500;
     font-size: 1rem;
     transition: color 0.2s;
+     transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
 .nav a:hover {
-    color: #BF9E8D;
+     background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffe6c7;
 }
 
+.nav a{
+  transition: color 0.18s, text-decoration 0.18s, box-shadow 0.18s;
+}
+.nav a:hover {
+  text-decoration: none;
+  color: #ffe6c7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
 .profile-icon {
     margin-left: 1.5rem;
     cursor: pointer;
@@ -129,7 +142,7 @@ body {
     .mobile-menu-toggle {
         display: flex;
     }
-} */
+}
 
 /* Job Offers Section Styles */
 main {
