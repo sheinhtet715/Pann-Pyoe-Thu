@@ -143,9 +143,15 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
 
  
+
  <div class="course-container">
-<?php foreach ($courses as $row): ?>
-  <div class="course course1">
+<?php 
+  $colors = ['#529AA6','#E8D9C4', '#9CC2CF','#BF9E8D','#F2E1C1']; // Initial colors for courses
+  $index = 0;
+  foreach ($courses as $row): 
+    $bgColor = $colors[$index % count($colors)];
+  ?>
+  <div class="course course1" style="background-color: <?= $bgColor ?>;">
     <div class="course-image">
       <img src="<?= htmlspecialchars($imgFolder.($row['image_url'])) ?>" 
         alt="<?= htmlspecialchars($row['course_name']) ?>">
@@ -162,7 +168,9 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
     </div>
   </div>
   
-<?php endforeach; ?>
+<?php 
+  $index++;
+  endforeach; ?>
  </div>
 
 <div class="most-popular">
