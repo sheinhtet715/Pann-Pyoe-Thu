@@ -29,11 +29,6 @@
                 <span class="logo-text">Pann Pyoe Thu</span>
             </div>
 
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open navigation menu" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
 
             <nav class="nav" id="mainNav">
                 <a href="../PHP/index.php">Home</a>
@@ -128,18 +123,17 @@
             </div>
             <div class="intro-right">
                 <div class="video-placeholder">
-  <iframe
-    width="100%"
-    height="315"
-    src="https://www.youtube.com/embed/07KJ3IAsJjQ?si=1zlI4jav5n3Y_bw8&start=1"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen>
-  </iframe>
-</div>
-
+                <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/07KJ3IAsJjQ?si=1zlI4jav5n3Y_bw8&start=1"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+                 </div>
             </div>
         </section>
     </div>
@@ -225,7 +219,7 @@
                     <p>Type - Paper Format</p>
                 </div>
                 <div class="learn-card">
-                    <a class="learn-more" href="#">Learn more</a>
+                    <a class="learn-more" href="../PHP/Courses.php">Learn more</a>
                 </div>
             </div>
 
@@ -239,7 +233,7 @@
                     <p>Type - Paper Format</p>
                 </div>
                 <div class="learn-card1">
-                    <a class="learn-more1" href="#">Learn more</a>
+                    <a class="learn-more1" href="../PHP/Courses.php">Learn more</a>
                 </div>
             </div>
 
@@ -253,7 +247,7 @@
                     <p>Type - Video Lectures</p>
                 </div>
                 <div class="learn-card">
-                    <a class="learn-more" href="#">Learn more</a>
+                    <a class="learn-more" href="../PHP/Courses.php">Learn more</a>
                 </div>
             </div>
         </div>

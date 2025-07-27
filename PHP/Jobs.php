@@ -21,7 +21,7 @@
         <a href="../PHP/Counsellor.php">Educational Counsellors</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
         <a href="../PHP/Local Uni.php">Local Universities</a>
-        <a href="../PHP/Jobs.php">Job Opportunities</a>
+        <a href="../PHP/Jobs.php" class="active">Job Opportunities</a>
       </nav>
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
         <span></span>

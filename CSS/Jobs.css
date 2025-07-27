@@ -67,25 +67,21 @@ body {
     font-weight: 500;
     font-size: 1rem;
     transition: color 0.2s;
-     transition: all 0.3s ease;
+    transition: all 0.3s ease;
     border-radius: 5px;
 }
 
 .nav a:hover {
-     background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffe6c7;
 }
 
-.nav a{
-  transition: color 0.18s, text-decoration 0.18s, box-shadow 0.18s;
-}
-.nav a:hover {
-  text-decoration: none;
-  color: #ffe6c7;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-}
+
+/* -------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------- */
 .profile-icon {
     margin-left: 1.5rem;
     cursor: pointer;

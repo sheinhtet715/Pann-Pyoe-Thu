@@ -29,9 +29,6 @@
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
 
-    <div class="profile-btn">
-      <img src="../HomePimg/Profile.png" alt="Profile">
-    </div>
   </header>
 
 <div class="the-start">
@@ -235,34 +232,76 @@
   </div>
 </div>
 
-<div class="bottom">
-        <div class="bottom-left">
-            <a class="about-us" href="#">About Us</a>
-            <br>
-            <a class="education-counselling" href="#">Education Counselling</a>
-            <br>
-            <a class="local-universities" href="#">Local Universities</a>
-            <br>
-            <a class="job-opportunities" href="#">Job Opportunities</a>
-            <br>
-            <a class="scholarships" href="#">Scholarships</a>
-            <br>
-            <a class="available-courses" href="#">Available Courses</a>
-        </div>
 
-        <div class="bottom-middle">
-            <p>Contact Us:</p>
-            <p>09672659692</p>
-            <p>pannpyoethu26@gmail.com</p>
-        </div>
+    <!-- Footer -->
+        <?php
+        include_once "Footer.php"
+        ?>
 
-        <div class="bottom-right">
-            <p>Follow Us On:</p>
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitter"></i>
-        </div>
-    </div>
+
+    <?php include 'login_modal.php'; ?>
+
+    <!-- 1) Load your libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- 2) Fire the flash (only once!) and wire up open/close -->
+    <script>
+        function openLogin() {
+          const m = document.getElementById('loginModal');
+          if (m && m.style.display !== 'block') m.style.display = 'block';
+        }
+        function closeLogin() {
+          const m = document.getElementById('loginModal');
+          if (m) m.style.display = 'none';
+        }
+
+        // Clicking the ✕ or outside the modal closes it
+        document.addEventListener('click', e => {
+          const m = document.getElementById('loginModal');
+          if (!m) return;
+          if (e.target.classList.contains('close') || e.target === m) {
+            closeLogin();
+          }
+        });
+
+        // Honor ?showLogin=1 in URL
+        (function(){
+          let auto = false;
+          const params = new URL(location).searchParams;
+          if (params.get('showLogin') === '1' && !auto) {
+            auto = true;
+            openLogin();
+            params.delete('showLogin');
+            history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+          }
+        })();
+      </script>
+
+      <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+      <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      <?php if ($error): ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops…',
+          text: <?php echo json_encode($error)?>,
+          confirmButtonText: 'Try Again'
+        })
+        .then(() => {
+          openLogin();
+        });
+      <?php elseif ($success): ?>
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: <?php echo json_encode($success)?>,
+          timer: 2000,
+          showConfirmButton: false
+        })
+
+      <?php endif; ?>
+    });
+    </script>
 </body>
 </html>
 

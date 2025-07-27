@@ -6,7 +6,7 @@ require_once "./Controller/CoursesController.php";
 
 
 
-$imgFolder = '../Courses page images/'; 
+$imgFolder = '../Courses page Images/'; 
 $error   = $_SESSION['login_error']   ?? '';
 $success = $_SESSION['login_success'] ?? '';
 
@@ -198,6 +198,8 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
       <p>Language - <?= htmlspecialchars($row['language']) ?></p>
     </div>
   </div>
+  
+    <?php endforeach; ?>
 
   <div class="last-part">
     <div class="box-one"></div>
@@ -208,7 +210,7 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+
 
   <div class="stay-tuned">
   <h1>Stay tuned for the upcoming courses</h1>

@@ -1,3 +1,10 @@
+<?php
+    // pick up any flash‐error or ‐success from login.php
+    session_start();
+    $error   = $_SESSION['login_error'] ?? '';
+    $success = $_SESSION['login_success'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +21,7 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
+
         <nav class="nav">
             <a href="../PHP/index.php">Home</a>
             <a href="../PHP/About Us.php">About us</a>
@@ -23,36 +31,74 @@
             <a href="../PHP/Local Uni.php">Local Universities</a>
             <a href="../PHP/Jobs.php">Job Opportunities</a>
         </nav>
-        <div class="profile-icon" onclick="openLogin()">
-                <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+
+        <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >
+                <?php if (! empty($user['profile_path'])): ?>
+        <img
+          src="../<?php echo htmlspecialchars($user['profile_path'])?>"
+          alt="Profile"
+          class="profile-img"
+          style="width:24px; height:24px; object-fit:cover;"
+        >
+        <?php else: ?>
+            <!-- fallback SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+            <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+            </svg>
+        <?php endif; ?>
+                </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
         </div>
+
+
+            <?php else: ?>
+            <div class="profile-icon" onclick="openLogin()">
+                <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+            </div>
+            <?php endif; ?>
     </header>
 
-<div class="starter-text">
-    <h1>Local Universities</h1>
-    <p>Discover the best local universities near you—each offering unique programs, vibrant student communities, and opportunities to shape your future. Find the right fit for your academic and career goals right here in your area.</p>
-</div>
+        <div class="starter-text">
+            <h1>Local Universities</h1>
+            <p>Discover the best local universities near you—each offering unique programs, vibrant student communities, and opportunities to shape your future. Find the right fit for your academic and career goals right here in your area.</p>
+        </div>
 
-<div class="container">
-    <div class="card university">
-        <div class="uni-content">
-        <img src="../Local_uni_images/um1.jfif"  alt="Medicine1">
-        <div class="uni-text">
-        <h1>University of Medicine (1)</h1>
-        <p>Location - No.245, Myoma Kyaung Street, Lanmadaw Township, Yangon, Myanmar.</p>
-        <p>Academic - 7‑year M.B.,B.S including 1‑year internship</p>
-        <p>Admissions - High school science pass + qualifying aggregate</p>
-        <p>Curriculum - Mix of foundational, pre‑clinical, clinical, and field training</p>
+    <div class="container">
+        <div class="card university">
+            <div class="uni-content">
+                 <img src="../Local_uni_images/um1.jfif"  alt="Medicine1">
+                    <div class="uni-text">
+                        <h1>University of Medicine (1)</h1>
+                            <p>Location - No.245, Myoma Kyaung Street, Lanmadaw Township, Yangon, Myanmar.</p>
+                            <p>Academic - 7‑year M.B.,B.S including 1‑year internship</p>
+                            <p>Admissions - High school science pass + qualifying aggregate</p>
+                            <p>Curriculum - Mix of foundational, pre‑clinical, clinical, and field training</p>
+                    </div>
+            </div>
         </div>
-        </div>
-    </div>
-
-    <div class="card uni-icon">
-        <img src="../Local_uni_images/um1 front gate.jfif"  alt="University1">
-        <div class="visit-container">
-        <div class="visit-text">
-        <a href="https://um1yangon.edu.mm/en/" target="_blank">Visit Website</a>
-        </div>
+                
+        <div class="card uni-icon">
+             <img src="../Local_uni_images/um1 front gate.jfif"  alt="University1">
+                <div class="visit-container">
+                    <div class="visit-text">
+                    <a href="https://um1yangon.edu.mm/en/" target="_blank">Visit Website</a>
+                </div>
         </div>
     </div>
 
@@ -61,11 +107,11 @@
         <div class="uni-content">
         <img src="../Local_uni_images/um2 logo.png" alt="Medicine2">
         <div class="uni-text">
-        <h1>University of Medicine (2)</h1>
-        <p>Location - North Okkapala, Yangon</p>
-        <p>Academic - 7years: Foundation → Pre‑clinical → Clinical → 1‑yr internship</p>
-        <p>Admissions - High school science pass + qualifying aggregate</p>
-        <p>Curriculum - Mix of foundational, pre‑clinical, clinical, and field training</p>
+            <h1>University of Medicine (2)</h1>
+            <p>Location - North Okkapala, Yangon</p>
+            <p>Academic - 7years: Foundation → Pre‑clinical → Clinical → 1‑yr internship</p>
+            <p>Admissions - High school science pass + qualifying aggregate</p>
+            <p>Curriculum - Mix of foundational, pre‑clinical, clinical, and field training</p>
         </div>
         </div>
     </div>
@@ -256,32 +302,75 @@
     </div>
 </div>
 
-    <div class="bottom">
-        <div class="bottom-left">
-            <a class="about-us" href="#">About Us</a>
-            <br>
-            <a class="education-counselling" href="#">Education Counselling</a>
-            <br>
-            <a class="local-universities" href="#">Local Universities</a>
-            <br>
-            <a class="job-opportunities" href="#">Job Opportunities</a>
-            <br>
-            <a class="scholarships" href="#">Scholarships</a>
-            <br>
-            <a class="available-courses" href="#">Available Courses</a>
-        </div>
 
-        <div class="bottom-middle">
-            <p>Contact Us:</p>
-            <p>09672659692</p>
-            <p>pannpyoethu26@gmail.com</p>
-        </div>
+       <!-- Footer -->
+        <?php
+        include_once "Footer.php"
+        ?>
 
-        <div class="bottom-right">
-            <p>Follow Us On:</p>
-            <i class="fab fa-facebook"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-twitter"></i>
-        </div>
-    </div>
+
+    <?php include 'login_modal.php'; ?>
+
+<!-- 1) Load your libraries -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- 2) Fire the flash (only once!) and wire up open/close -->
+<script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
+
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?php echo json_encode($error)?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?php echo json_encode($success)?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
+
+  <?php endif; ?>
+});
+</script>
 </body>
+</html>
