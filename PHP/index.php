@@ -13,6 +13,7 @@
      <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@
 
             <nav class="nav" id="mainNav">
                 <a href="../PHP/index.php">Home</a>
-                    <a href="../PHP/About Us.php">About us</a>
+                    <a href="../PHP/About Us.php">About Us</a>
                     <a href="../PHP/Courses.php">Courses</a>
                     <a href="../PHP/Counsellor.php">Educational Counsellors</a>
                     <a href="../PHP/Scholarship.php">Scholarships</a>

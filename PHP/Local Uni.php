@@ -10,10 +10,13 @@
 <head>
 	<meta charset="utf-8">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-	<link rel="stylesheet" href="../CSS/Local Uni.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-	<title>Local Universities</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../CSS/Local Uni.css">
+    <title>Local Universities</title>
+    
 </head>
 <body>
     <header class="header">
@@ -24,7 +27,7 @@
 
         <nav class="nav">
             <a href="../PHP/index.php">Home</a>
-            <a href="../PHP/About Us.php">About us</a>
+            <a href="../PHP/About Us.php">About Us</a>
             <a href="../PHP/Courses.php">Courses</a>
             <a href="../PHP/Counsellor.php">Educational Counsellors</a>
             <a href="../PHP/Scholarship.php">Scholarships</a>
@@ -62,7 +65,7 @@
             <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
             <li><a class="dropdown-item" href="settings.php">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            <li><a class="dropdown-item" href="Local Uni_Logout.php">Logout</a></li>
             </ul>
         </div>
 

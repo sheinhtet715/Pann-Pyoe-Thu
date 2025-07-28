@@ -1,3 +1,10 @@
+<?php
+    // pick up any flash‐error or ‐success from login.php
+    // session_start();
+    // $error   = $_SESSION['login_error'] ?? '';
+    // $success = $_SESSION['login_success'] ?? '';
+    // unset($_SESSION['login_error'], $_SESSION['login_success']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../CSS/About Us.css">
   <title>About Us</title>
 </head>
@@ -19,9 +28,9 @@
       <div class="logo-text">Pann Pyoe Thu</div>
     </div>
 
-    <nav>
+    <nav class="nav" id="mainNav">
        <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
+        <a href="../PHP/About Us.php">About Us</a>
         <a href="../PHP/Courses.php">Courses</a>
         <a href="../PHP/Counsellor.php">Educational Counsellors</a>
         <a href="../PHP/Scholarship.php">Scholarships</a>
@@ -29,6 +38,46 @@
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
 
+    <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >
+                <?php if (! empty($user['profile_path'])): ?>
+        <img
+          src="../<?php echo htmlspecialchars($user['profile_path'])?>"
+          alt="Profile"
+          class="profile-img"
+          style="width:24px; height:24px; object-fit:cover;"
+        >
+        <?php else: ?>
+            <!-- fallback SVG -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+            <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+            </svg>
+        <?php endif; ?>
+                </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="About Us_Logout.php">Logout</a></li>
+            </ul>
+        </div>
+
+
+            <?php else: ?>
+            <!-- <div class="profile-icon" onclick="openLogin()">
+                <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+            </div> -->
+            <?php endif; ?>
   </header>
 
 <div class="the-start">
