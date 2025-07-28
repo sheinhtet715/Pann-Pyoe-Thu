@@ -210,73 +210,45 @@
     <div class="popular-course">
         <h1>Popular Courses</h1>
         <div class="card-container">
-            <div class="card card1">
+                <?php
+                     $colors = ['#EBD8C6', '#94C3CE', '#F2E1C1', '#9CC2CF','#BF9E8D']; // Initial colors for courses
+                     $index = 0; 
+                    foreach ($popularCourses as $row): 
+                    $bgColor = $colors[$index % count($colors)];
+                    ?>
+            <div class="card " style="background-color: <?= $bgColor ?>;">
                 <div class="card-image">
-                    <img src="../Courses page Images/equality-removebg-preview.png" alt="Equality">
+                    <img src="<?=htmlspecialchars($imgFolder.($row['image_url']))?>" 
+                        alt="<?=htmlspecialchars($row['course_name'])?>">
                 </div>
                 <div class="card-text">
-                    <h3>Gender Studies Courses</h3>
-                    <p>Fees - Free</p>
-                    <p>Type - Paper Format</p>
+                    <h3><?=htmlspecialchars($row['course_name'])?></h3>
+                    <p>Fees - <?=htmlspecialchars($row['fee'])?></p>
+                    <p>Type - <?=htmlspecialchars($row['type'])?></p>
                 </div>
                 <div class="learn-card">
-                    <a class="learn-more" href="../PHP/Courses.php">Learn more</a>
+                    <a class="learn-more" href="Courses.php">Learn more</a>
                 </div>
-            </div>
+                </div>
+                <?php
+                $index++;
+                endforeach; ?>
 
-            <div class="card card2">
-                <div class="card-image">
-                    <img src="../Courses page Images/critical thinking.jpg" alt="Thinking">
-                </div>
-                <div class="card-text1">
-                    <h3>Critical Thinking Courses</h3>
-                    <p>Fees - Free</p>
-                    <p>Type - Paper Format</p>
-                </div>
-                <div class="learn-card1">
-                    <a class="learn-more1" href="../PHP/Courses.php">Learn more</a>
-                </div>
-            </div>
-
-            <div class="card card3">
-                <div class="card-image">
-                    <img src="../Courses page Images/project-removebg-preview.png" alt="ICT Programming">
-                </div>
-                <div class="card-text">
-                    <h3>ICT Projectment Course</h3>
-                    <p>Fees - 30000 kyats</p>
-                    <p>Type - Video Lectures</p>
-                </div>
-                <div class="learn-card">
-                    <a class="learn-more" href="../PHP/Courses.php">Learn more</a>
-                </div>
-            </div>
-        </div>
-
-        <h1>Upcoming Course Offerings</h1>
-        <div class="card-container">
-            <div class="course-offer card4">
-                <img src="../Courses page Images/programming.png" alt="Programming">
-                <div class="course-text">
-                    <p>Programming</p>
-                </div>
-            </div>
-
-            <div class="course-offer card4">
-                <img src="../Courses page Images/languages.png" alt="Languages">
-                <div class="course-text">
-                    <p>Languages</p>
-                </div>
-            </div>
-
-            <div class="course-offer card4">
-                <img src="../Courses page Images/musicpic.png" alt="Music">
-                <div class="course-text">
-                    <p>Music Lessons</p>
-                </div>
-            </div>
         </div>
     </div>
+        <div class="stay-tuned">   
+            <h1>Upcoming Course Offerings</h1>
+        </div>        <div class="upcoming-course">
+            <?php foreach ($upcomingCourses as $row): ?>
+                <div class="course-offer cardupcoming">
+                    <img src="<?= htmlspecialchars($imgFolder.($row['icon_url'])) ?>" 
+                         alt="<?= htmlspecialchars($row['course_name']) ?> Icon">
+                    <div class="offer-text">
+                        <p><?= htmlspecialchars($row['course_name']) ?></p>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
 
     <div class="speech">
         <p>"Education becomes more meaningful when guided by the right counselling, helping students choose the right course university and career."</p>
