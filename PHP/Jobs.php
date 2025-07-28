@@ -69,17 +69,7 @@ if (!empty($_SESSION['user_id'])) {
         <a href="../PHP/Jobs.php">Job Opportunities</a>
       </nav>
 
-   <?php if (!empty($_SESSION['user_id'])): ?>
-
-      
-      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <?php if (!empty($_SESSION['user_id'])): ?>
-
+        <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -87,12 +77,21 @@ if (!empty($_SESSION['user_id'])) {
                 id="profileDropdownBtn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-
             >
                 <?php if (!empty($user['profile_path'])): ?>
-                    <img src="../<?php echo htmlspecialchars($user['profile_path']); ?>" alt="Profile" class="profile-img" style="width:50px; height:50px; object-fit:cover;">
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
                 <?php else: ?>
-                    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" style="width:28px; height:28px; object-fit:cover;">
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
                 <?php endif; ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-end"
@@ -100,39 +99,18 @@ if (!empty($_SESSION['user_id'])) {
                 <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
                 <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="scholarship_logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </div>
-      <?php else: ?>
-        <div class="profile-icon" onclick="openLogin()">
+        <?php else: ?>
+        <div class="profile-icon" role="button" tabindex="0" aria-label="Open login menu" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
-      <?php endif; ?>
+        <?php endif; ?>
   </header>
     
 
-                >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
-                </button>
-              <ul class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="profileDropdownBtn">
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-                <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="job_logout.php">Logout</a></li>
-              </ul>
-        </div>
-      <?php else: ?>
-         <div class="profile-icon" onclick="openLogin()" role="button" tabindex="0" aria-label="Open login menu">
-            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-          </div>
-      <?php endif; ?>
-    </header>
+             
 
     <main>
       <section class="intro">
@@ -279,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
       //   alert('Login menu would open here.');
       // }
 
-      function closeLogin() {
-        alert('Login menu would close here.');
-      }
+      // function closeLogin() {
+      //   alert('Login menu would close here.');
+      // }
 
       const searchBar = document.getElementById('search-bar');
       const typeFilter = document.getElementById('filter-type');
@@ -330,70 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filterJobs();
 
     </script>
-     <!-- Login Modal -->
-  <!--  -->
-  <!-- 1) pull in your shared login modal markup -->
-  <!-- 0) Expose login state for Counsellor.js -->
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- 1) pull in your shared login‑modal markup -->
-   <?php include './login_modal.php'; ?>
-  <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
-  <script>
-    function openLogin() {
-      const m = document.getElementById('loginModal');
-      if (m && m.style.display !== 'block') m.style.display = 'block';
-    }
-    function closeLogin() {
-      const m = document.getElementById('loginModal');
-      if (m) m.style.display = 'none';
-    }
-
-    // Clicking the ✕ or outside the modal closes it
-    document.addEventListener('click', e => {
-      const m = document.getElementById('loginModal');
-      if (!m) return;
-      if (e.target.classList.contains('close') || e.target === m) {
-        closeLogin();
-      }
-    });
-
-    // Honor ?showLogin=1 in URL
-    (function(){
-      let auto = false;
-      const params = new URL(location).searchParams;
-      if (params.get('showLogin') === '1' && !auto) {
-        auto = true;
-        openLogin();
-        params.delete('showLogin');
-        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
-      }
-    })();
-  </script>
-
-   <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        <?php if ($error): ?>
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops…',
-            text: <?= json_encode($error) ?>,
-            confirmButtonText: 'Try Again'
-          })
-          .then(() => {
-            openLogin();
-          });
-        <?php elseif ($success): ?>
-          Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: <?= json_encode($success) ?>,
-            timer: 2000,
-            showConfirmButton: false
-          })
-        <?php endif; ?>
-      });
-  </script>
+  
 </body>
 </html> 
 
