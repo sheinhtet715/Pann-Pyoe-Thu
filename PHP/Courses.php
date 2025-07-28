@@ -106,7 +106,7 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
         <a href="../PHP/Local Uni.php">Local Universities</a>
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
-    
+
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
         <span></span>
         <span></span>
@@ -268,7 +268,20 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
         </div>
     </div>
 
+    <!-- Mobile Menu Toggle -->
+    <script>
+      function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+      function openLogin() {
+        alert('Login menu would open here.');
+      }
 
+      function closeLogin() {
+        alert('Login menu would close here.');
+      }
+    </script>
     <!-- Login Modal -->
   <!--  -->
   <!-- 1) pull in your shared login modal markup -->
