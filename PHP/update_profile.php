@@ -13,6 +13,12 @@ $userId   = $_SESSION['user_id'];
 $newName  = trim($_POST['user_name'] ?? '');
 $newEmail = trim($_POST['email']     ?? '');
 $newPhone = trim($_POST['phone']     ?? '');
+// Phone validation
+if ($newPhone !== '' && !preg_match('/^\+?\d{7,15}$/', $newPhone)) {
+    $_SESSION['profile_error'] = 'Please enter a valid phone number (7-15 digits, optional +).';
+    header('Location: profile.php');
+    exit;
+}
 $uploadDir   = __DIR__ . '/../User_profile_images/';
 $profilePath = null;
 // Prepare file upload if provided
