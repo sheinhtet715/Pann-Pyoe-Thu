@@ -4,6 +4,17 @@
     $error   = $_SESSION['login_error'] ?? '';
     $success = $_SESSION['login_success'] ?? '';
     unset($_SESSION['login_error'], $_SESSION['login_success']);
+
+     //____For popular and upcoming courses____//
+  include "./db_connection.php";
+  include "./Controller/CoursesController.php";
+  $imgFolder = '../Courses page images/'; 
+
+//Fetch data from course
+$pcourse = new PopularCourse($conn);
+$popularCourses = $pcourse->getPopularCourses();
+$upcourse = new UpcomingCourse($conn);
+$upcomingCourses = $upcourse->getUpcomingCourses();
 ?>
 
 <!DOCTYPE html>
@@ -238,17 +249,19 @@
     </div>
         <div class="stay-tuned">   
             <h1>Upcoming Course Offerings</h1>
-        </div>        <div class="upcoming-course">
+            <div class="upcoming-course">
             <?php foreach ($upcomingCourses as $row): ?>
                 <div class="course-offer cardupcoming">
                     <img src="<?= htmlspecialchars($imgFolder.($row['icon_url'])) ?>" 
-                         alt="<?= htmlspecialchars($row['course_name']) ?> Icon">
+                    alt="<?= htmlspecialchars($row['course_name']) ?> Icon">
                     <div class="offer-text">
                         <p><?= htmlspecialchars($row['course_name']) ?></p>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
+        </div>
+
 
     <div class="speech">
         <p>"Education becomes more meaningful when guided by the right counselling, helping students choose the right course university and career."</p>
