@@ -603,7 +603,38 @@ body {
     font-size: 2.5rem;
     padding: 30px;
 }
+.stay-tuned{
+    background-color: #529AA6;
+ 
+}
 
+.stay-tuned h1{
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    
+}
+.upcoming-course {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #529AA6;
+
+}
+.offer-text {
+    font-size: 22px;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    color: rgb(12, 12, 12);
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.cardupcoming {
+   background-color: #94C3CE;
+}
 .card-container {
     padding: 5px;
     display: flex;
@@ -635,7 +666,7 @@ body {
 }
 
 .course-offer {
-    width: 350px;
+    width: 400px;
     max-width: 100%;
     height: 200px;
     border-radius: 15px;
@@ -644,9 +675,12 @@ body {
     transition: transform 0.3s;
     margin-bottom: 30px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.card:hover, .course-offer:hover {
+.card:hover, .cardupcoming:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
@@ -658,8 +692,8 @@ body {
 }
 
 .course-offer img {
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     padding: 20px;
     margin-top: 15px;
 }
@@ -680,13 +714,6 @@ body {
     flex-grow: 1;
 }
 
-.course-text {
-    font-size: 20px;
-    margin-top: 60px;
-    padding: 25px;
-    text-align: right;
-    color: black;
-}
 
 .card-text p, .card-text1 p {
     margin: 6px 0 0 0;
