@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
 // 2) Fetch dynamic list of courses from DB
 $controller = new CoursesController($conn);
 $courses    = $controller->getAllCourses();
-$pcourse = new PopularCourse($conn);
-$popularCourses = $pcourse->getPopularCourses();
+$mcourses = new mostPopularCourse($conn);
+$mostPopularCourses = $mcourses->getMostPopularCourses();
 $upcourse = new UpcomingCourse($conn);
 $upcomingCourses = $upcourse->getUpcomingCourses();
 
@@ -106,7 +106,12 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
         <a href="../PHP/Local Uni.php">Local Universities</a>
          <a href="../PHP/Jobs.php">Job Opportunities</a>
     </nav>
-
+    
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
    
       <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
@@ -178,8 +183,14 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
 </div>
 
 <div class="course-discount">
-  <?php foreach ($popularCourses as $row): ?>
-  <div class="course course1">
+  <?php 
+     
+     $colors = ['#529AA6', '#E8D9C4', '#9CC2CF','#BF9E8D','#F2E1C1']; // Initial colors for courses
+     $index = 0; 
+    foreach ($mostPopularCourses as $row): 
+    $bgColor = $colors[$index % count($colors)];
+  ?>
+  <div class="course course1" style="background-color: <?= $bgColor ?>;">
     <div class="course-image">
       <img src="<?= htmlspecialchars($imgFolder.($row['image_url'])) ?>" 
         alt="<?= htmlspecialchars($row['course_name']) ?>">
@@ -199,7 +210,9 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
     </div>
   </div>
   
-    <?php endforeach; ?>
+    <?php 
+      $index++;
+      endforeach; ?>
 
   <div class="last-part">
     <div class="box-one"></div>
