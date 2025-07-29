@@ -48,4 +48,20 @@ class UpcomingCourse {
             : [];
     }
 }
+class mostPopularCourse {
+    private $conn;
+
+    public function __construct(mysqli $conn) {
+        $this->conn = $conn;
+    }
+
+    /** @return array<int,array> */
+    public function getMostPopularCourses(): array {
+        $sql = "SELECT * FROM course_tbl WHERE most_popular = 1 ORDER BY course_name";
+        $res = $this->conn->query($sql);
+        return $res
+            ? $res->fetch_all(MYSQLI_ASSOC)
+            : [];
+    }
+}
 ?>

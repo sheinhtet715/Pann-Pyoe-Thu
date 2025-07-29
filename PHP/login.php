@@ -19,10 +19,18 @@ if (isset($_POST['signin'])) {
         $error = 'Please enter a valid email address.';
     }
     // 3) (Optional) enforce your username rules
-    elseif (! preg_match('/^[A-Za-z0-9_]{3,30}$/', $username)) {
-        $error = 'Usernames must be 3–30 chars and only letters, numbers and underscores.';
+    elseif (! preg_match('/^[A-Za-z0-9_ ]{3,30}$/', $username)) {
+        $error = 'Usernames must be 3–30 chars and only letters, numbers, underscores, and spaces.';
     }
-    // 4) Now do the lookup using AND
+    // 4) Password cannot contain spaces
+    elseif (preg_match('/\s/', $password)) {
+        $error = 'Password cannot contain spaces.';
+    }
+    // 5) If phone is present, validate phone (optional for sign in)
+    elseif (isset($_POST['phone']) && $_POST['phone'] !== '' && !preg_match('/^\+?\d{7,15}$/', $_POST['phone'])) {
+        $error = 'Please enter a valid phone number (7-15 digits, optional +).';
+    }
+    // 6) Now do the lookup using AND
     else {
         $sql = "
           SELECT user_id, user_name, email, password_hash, profile_path
@@ -74,54 +82,67 @@ if (isset($_POST['signin'])) {
 
 // -------- SIGN UP --------
 if (isset($_POST['signup'])) {
-    // 1) check for existing account
-    $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
-    $chk = $conn->prepare($sql);
-    $chk->bind_param("ss", $username, $email);
-    $chk->execute();
-    $res = $chk->get_result();
-    if ($res->num_rows > 0) {
-        $error = "That username or email is already taken.";
+    // 1) check for valid input
+    if ($username === '' || $email === '' || $password === '') {
+        $error = 'Please enter your username, email, and password.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please enter a valid email address.';
+    } elseif (!preg_match('/^[A-Za-z0-9_ ]{3,30}$/', $username)) {
+        $error = 'Usernames must be 3–30 chars and only letters, numbers, underscores, and spaces.';
+    } elseif (preg_match('/\s/', $password)) {
+        $error = 'Password cannot contain spaces.';
+    } elseif (isset($_POST['phone']) && $_POST['phone'] !== '' && !preg_match('/^\+?\d{7,15}$/', $_POST['phone'])) {
+        $error = 'Please enter a valid phone number (7-15 digits, optional +).';
     } else {
-        // 2) hash password and insert into User_tbl
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        $ins  = $conn->prepare("
-          INSERT INTO User_tbl
-            (user_name, email, password_hash)
-          VALUES (?, ?, ?)
-        ");
-        $ins->bind_param("sss", $username, $email, $hash);
-
-        if ($ins->execute()) {
-            $newUserId = $ins->insert_id;
-
-            // 3) also record initial login in Login_tbl
-            $insLog = $conn->prepare("
-              INSERT INTO Login_tbl
-                (user_id, user_name, email, password_hash, role, last_login)
-              VALUES (?, ?, ?, ?, ?, NOW())
-            ");
-            $defaultRole = 'user';
-            $insLog->bind_param(
-                "issss",
-                $newUserId,
-                $username,
-                $email,
-                $hash,
-                $defaultRole
-            );
-            $insLog->execute();
-            $insLog->close();
-
-            $success = "Account created! You can now sign in.";
+        // 2) check for existing account
+        $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
+        $chk = $conn->prepare($sql);
+        $chk->bind_param("ss", $username, $email);
+        $chk->execute();
+        $res = $chk->get_result();
+        if ($res->num_rows > 0) {
+            $error = "That username or email is already taken.";
         } else {
-            $error = "Signup failed: " . $ins->error;
+            // 3) hash password and insert into User_tbl
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $ins  = $conn->prepare("
+              INSERT INTO User_tbl
+                (user_name, email, password_hash)
+              VALUES (?, ?, ?)
+            ");
+            $ins->bind_param("sss", $username, $email, $hash);
+
+            if ($ins->execute()) {
+                $newUserId = $ins->insert_id;
+
+                // 4) also record initial login in Login_tbl
+                $insLog = $conn->prepare("
+                  INSERT INTO Login_tbl
+                    (user_id, user_name, email, password_hash, role, last_login)
+                  VALUES (?, ?, ?, ?, ?, NOW())
+                ");
+                $defaultRole = 'user';
+                $insLog->bind_param(
+                    "issss",
+                    $newUserId,
+                    $username,
+                    $email,
+                    $hash,
+                    $defaultRole
+                );
+                $insLog->execute();
+                $insLog->close();
+
+                $success = "Account created! You can now sign in.";
+            } else {
+                $error = "Signup failed: " . $ins->error;
+            }
+
+            $ins->close();
         }
 
-        $ins->close();
+        $chk->close();
     }
-
-    $chk->close();
 }
 
 $conn->close();

@@ -1,16 +1,24 @@
 <?php
 // Scholarship.php
+
 session_start();
 include "./db_connection.php";
+$error   = $_SESSION['login_error']   ?? '';
+$success = $_SESSION['login_success'] ?? '';
+unset($_SESSION['login_error'], $_SESSION['login_success']);
+$user = null;
+$userId = $_SESSION['user_id'] ?? null;
+if (!empty($userId)) {
+    $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+}
 require_once "./Controller/ScholarshipController.php";
 // at top of your view
   $logoFolder = '../Scholarships_page_images/';
-// current user (or null)
-$error   = $_SESSION['login_error']   ?? '';
-$success = $_SESSION['login_success'] ?? '';
-
-unset($_SESSION['login_error'], $_SESSION['login_success']);
-$userId = $_SESSION['user_id'] ?? null;
 
 // 1) Handle favourite toggle
 if ($_SERVER['REQUEST_METHOD']==='POST' && !empty($_POST['toggle_fav'])) {
@@ -137,27 +145,26 @@ $conn->close();
                 id="profileDropdownBtn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
-                </button>
+            >
+                <?php if (!empty($user['profile_path'])): ?>
+                    <img src="../<?php echo htmlspecialchars($user['profile_path']); ?>" alt="Profile" class="profile-img" style="width:50px; height:50px; object-fit:cover;">
+                <?php else: ?>
+                    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" style="width:28px; height:28px; object-fit:cover;">
+                <?php endif; ?>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
-            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="scholarship_logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="scholarship_logout.php">Logout</a></li>
             </ul>
         </div>
-    <?php else: ?>
-      <div class="profile-icon" onclick="openLogin()">
-        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img"/>
-      </div>
-    <?php endif; ?>
+      <?php else: ?>
+        <div class="profile-icon" onclick="openLogin()">
+            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+        </div>
+      <?php endif; ?>
   </header>
   <!-- Shared Login Modal -->
 
