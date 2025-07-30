@@ -97,7 +97,7 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
       <div class="logo-text">Pann Pyoe Thu</div>
     </div>
 
-    <nav class ="nav" id="nav-menu">
+    <nav class ="nav">
        <a href="../PHP/index.php">Home</a>
         <a href="../PHP/About Us.php">About us</a>
         <a href="../PHP/Courses.php">Courses</a>
@@ -333,17 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
   <?php endif; ?>
 });
 </script>
-<script>// toggleMobileMenu
- function toggleMobileMenu() {
-        const nav = document.getElementById('nav-menu');
-        nav.classList.toggle('active');
-      }
-      function openLogin() {
-        alert('Login menu would open here.');
-      }
 
-      function closeLogin() {
-        alert('Login menu would close here.');
-      }</script>
 </body>
 </html>

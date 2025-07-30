@@ -26,7 +26,6 @@ body {
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
-    z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
@@ -88,6 +87,7 @@ body {
     position: relative;
     animation: fadeIn 0.3s ease-in-out;
     color: #ffffff;
+    z-index: 2000;
 }
 
 .modal-content.login-container {
@@ -101,6 +101,7 @@ body {
     overflow: hidden;
     margin: center;
     color: #ffffff;
+     z-index: 2001;
 }
 
 .login-right, .login-left {
