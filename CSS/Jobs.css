@@ -81,7 +81,7 @@ body {
 
 /* Modal Content */
 .modal-content {
-    background: linear-gradient(to bottom, #e4e9ea, #146e8a);
+    background: linear-gradient(to bottom,  #b6d3d6, #2e5356);
     border-radius: 50px;
     width: 500px;
     margin: 60px auto;
@@ -121,7 +121,7 @@ body {
     align-items: center;
     font-family: 'TimesNewRoman', serif;
     text-align: center;
-    background: linear-gradient(to bottom, #146e8a, #e4e9ea);
+    background: linear-gradient(to bottom, #2e5356, #b6d3d6);
     border-radius: 20px;
     border: #052027;
     position: relative;
@@ -145,7 +145,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom, #e4e9ea, #146e8a);
+    background: linear-gradient(to bottom,  #b6d3d6, #2e5356);
     border-radius: 20px;
     border: #052027;
     position: relative;
