@@ -69,6 +69,12 @@ if (!empty($_SESSION['user_id'])) {
         <a href="../PHP/Jobs.php">Job Opportunities</a>
       </nav>
 
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
         <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
@@ -249,17 +255,17 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-      // function toggleMobileMenu() {
-      //   const nav = document.getElementById('nav-menu');
-      //   nav.classList.toggle('active');
-      // }
-      // function openLogin() {
-      //   alert('Login menu would open here.');
-      // }
+      function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+      function openLogin() {
+        alert('Login menu would open here.');
+      }
 
-      // function closeLogin() {
-      //   alert('Login menu would close here.');
-      // }
+      function closeLogin() {
+        alert('Login menu would close here.');
+      }
 
       const searchBar = document.getElementById('search-bar');
       const typeFilter = document.getElementById('filter-type');
