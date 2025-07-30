@@ -176,6 +176,7 @@ h1 {
         display: none;
         position: absolute;
         top: 70px;
+        margin-top: 45px;
         left: 0;
         width: 100vw;
         background: #529AA6;
@@ -193,8 +194,23 @@ h1 {
     .mobile-menu-toggle {
         display: flex;
     }
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        margin-top: 40px;
 }
-
+}
+@media (max-width: 425px) {
+    .nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        margin-top: 20px;
+}
+}
+}
 /*__________Header End__________*/
 
 /*__________Return Home__________*/

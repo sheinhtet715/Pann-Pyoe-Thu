@@ -97,7 +97,7 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
       <div class="logo-text">Pann Pyoe Thu</div>
     </div>
 
-    <nav class ="nav">
+    <nav class ="nav" id="nav-menu">
        <a href="../PHP/index.php">Home</a>
         <a href="../PHP/About Us.php">About us</a>
         <a href="../PHP/Courses.php">Courses</a>
@@ -278,6 +278,13 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
    <?php include './login_modal.php'; ?>
   <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
   <script>
+    //Mobile menu toggle function 
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+
+
     function openLogin() {
       const m = document.getElementById('loginModal');
       if (m && m.style.display !== 'block') m.style.display = 'block';

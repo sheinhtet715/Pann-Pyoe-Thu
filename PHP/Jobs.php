@@ -254,10 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-      // function toggleMobileMenu() {
-      //   const nav = document.getElementById('nav-menu');
-      //   nav.classList.toggle('active');
-      // }
+      function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
       // function openLogin() {
       //   alert('Login menu would open here.');
       // }
