@@ -95,19 +95,7 @@
 <body>
   <div class="homepage">
     <header class="header">
-      <div class="logo">
-        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-        <span class="logo-text">Pann Pyoe Thu</span>
-      </div>
-      <nav class="nav">
-       <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
+       <?php include './logo_container.php' ?>
       <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div> -->
