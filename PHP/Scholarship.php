@@ -110,6 +110,7 @@ $conn->close();
     
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/Scholarship.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
       <!-- SweetAlert2 -->
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
