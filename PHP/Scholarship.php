@@ -110,6 +110,7 @@ $conn->close();
     
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/Scholarship.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
       <!-- SweetAlert2 -->
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
@@ -124,19 +125,7 @@ $conn->close();
 </head>
 <body>
     <header class="header">
-      <div class="logo-container">
-        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-        <span class="logo-text">Pann Pyoe Thu</span>
-      </div>
-        <nav class="nav">
-        <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-      </nav>
+       <?php include './logo_container.php' ?>
        <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button

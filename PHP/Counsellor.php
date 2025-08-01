@@ -1,75 +1,75 @@
 <?php
-// Counsellor.php
-session_start();
-$error   = $_SESSION['login_error']   ?? '';
-$success = $_SESSION['login_success'] ?? '';
-unset($_SESSION['login_error'], $_SESSION['login_success']);
-include "./db_connection.php";
-$user = null;
-if (!empty($_SESSION['user_id'])) {
-    $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
-    $stmt->bind_param('i', $_SESSION['user_id']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-    $stmt->close();
-}
-require_once "./Controller/CounsellorController.php";
+    // Counsellor.php
+    session_start();
+    $error   = $_SESSION['login_error'] ?? '';
+    $success = $_SESSION['login_success'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success']);
+    include "./db_connection.php";
+    $user = null;
+    if (! empty($_SESSION['user_id'])) {
+        $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+        $stmt->bind_param('i', $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user   = $result->fetch_assoc();
+        $stmt->close();
+    }
+    require_once "./Controller/CounsellorController.php";
 
-$imgFolder = '../Counsellor_page_images/'; 
+    $imgFolder = '../Counsellor_page_images/';
 
-// 1) Handle form POST (unchanged)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset($_POST['signup'])) {
-    if (empty($_SESSION['user_id'])) {
-        $error = "❌ You must be signed in to book an appointment.";
-    } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
-        $error = "❌ That email doesn’t match your logged‑in account.";
-    } else {
-        $user_id      = $_SESSION['user_id'];
-        $advisor_name = trim($_POST['advisor_name'] ?? '');
-        $description  = trim($_POST['description']  ?? '');
-        $date         = trim($_POST['appointment_date'] ?? '');
-        $time         = trim($_POST['appointment_time'] ?? '');
+    // 1) Handle form POST (unchanged)
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! isset($_POST['signin']) && ! isset($_POST['signup'])) {
+        if (empty($_SESSION['user_id'])) {
+            $error = "❌ You must be signed in to book an appointment.";
+        } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
+            $error = "❌ That email doesn’t match your logged‑in account.";
+        } else {
+            $user_id      = $_SESSION['user_id'];
+            $advisor_name = trim($_POST['advisor_name'] ?? '');
+            $description  = trim($_POST['description'] ?? '');
+            $date         = trim($_POST['appointment_date'] ?? '');
+            $time         = trim($_POST['appointment_time'] ?? '');
 
-        // a) find counsellor_id
-        $cs = $conn->prepare("
+            // a) find counsellor_id
+            $cs = $conn->prepare("
             SELECT counsellor_id
               FROM Counsellor_tbl
              WHERE counsellor_name = ?
         ");
-        $cs->bind_param("s", $advisor_name);
-        $cs->execute();
-        $cres = $cs->get_result();
+            $cs->bind_param("s", $advisor_name);
+            $cs->execute();
+            $cres = $cs->get_result();
 
-        if (!$cres->num_rows) {
-            $error = "⚠️ Counsellor “{$advisor_name}” not found.";
-        } else {
-            $cid = $cres->fetch_assoc()['counsellor_id'];
-            $cs->close();
+            if (! $cres->num_rows) {
+                $error = "⚠️ Counsellor “{$advisor_name}” not found.";
+            } else {
+                $cid = $cres->fetch_assoc()['counsellor_id'];
+                $cs->close();
 
-            // b) insert appointment
-            $ins = $conn->prepare("
+                // b) insert appointment
+                $ins = $conn->prepare("
                 INSERT INTO Appointment_tbl
                   (user_id,counsellor_id,appointment_date,appointment_time,description,appointment_status)
                 VALUES (?, ?, ?, ?, ?, 'Confirmed')
             ");
-            $ins->bind_param("iisss", $user_id, $cid, $date, $time, $description);
+                $ins->bind_param("iisss", $user_id, $cid, $date, $time, $description);
 
-            if ($ins->execute()) {
-                $success = "✅ Appointment booked successfully!";
-            } else {
-                $error = "❌ Error inserting appointment: " . $ins->error;
+                if ($ins->execute()) {
+                    $success = "✅ Appointment booked successfully!";
+                } else {
+                    $error = "❌ Error inserting appointment: " . $ins->error;
+                }
+                $ins->close();
             }
-            $ins->close();
         }
     }
-}
 
-// 2) Fetch dynamic list of counsellors from DB
-$controller = new CounsellorController($conn);
-$advisors   = $controller->getAllCounsellors();
+    // 2) Fetch dynamic list of counsellors from DB
+    $controller = new CounsellorController($conn);
+    $advisors   = $controller->getAllCounsellors();
 
-$conn->close();
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -78,6 +78,7 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
+   <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
@@ -90,29 +91,17 @@ $conn->close();
   <!-- SweetAlert2 JS -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
   <title>Educational Counsellors</title>
- 
+
 </head>
 <body>
-  <div class="homepage">
+ 
     <header class="header">
-      <div class="logo">
-        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-        <span class="logo-text">Pann Pyoe Thu</span>
-      </div>
-      <nav class="nav">
-       <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
+       <?php include './logo_container.php' ?>
       <!-- <div class="profile-icon" onclick="openLogin()">
         <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
       </div> -->
-  
-      <?php if (!empty($_SESSION['user_id'])): ?>
+
+      <?php if (! empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -121,7 +110,7 @@ $conn->close();
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-                <?php if (!empty($user['profile_path'])): ?>
+                <?php if (! empty($user['profile_path'])): ?>
                      <img
                         src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
                         alt="Profile"
@@ -154,39 +143,28 @@ $conn->close();
   <!-- your scripts for openPopup/closePopup, etc. -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($error)): ?>
-    <?php if (empty($_SESSION['user_id']) || ($_POST['email'] !== ($_SESSION['email'] ?? ''))): ?>
-      // Login-related error
-      openLogin();
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops…',
-        text: <?= json_encode($error) ?>,
-        confirmButtonText: 'Try Again'
-      });
-    <?php else: ?>
-      // Booking form error – restore popup
-      openPopup(<?= json_encode($advisor_name) ?>, true);
-      const form = document.querySelector('#appointment-popup form');
-      if (form) {
-        form.elements['user_name'].value         = <?= json_encode($_POST['user_name'] ?? '') ?>;
-        form.elements['description'].value       = <?= json_encode($_POST['description'] ?? '') ?>;
-        form.elements['email'].value             = <?= json_encode($_POST['email'] ?? '') ?>;
-        form.elements['appointment_date'].value  = <?= json_encode($_POST['appointment_date'] ?? '') ?>;
-        form.elements['appointment_time'].value  = <?= json_encode($_POST['appointment_time'] ?? '') ?>;
-      }
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops…',
-        text: <?= json_encode($error) ?>,
-        confirmButtonText: 'Try Again'
-      });
-    <?php endif; ?>
-  <?php elseif (!empty($success)): ?>
+  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! empty($error)): ?>
+    // Always show the appointment popup on booking error
+    openPopup(<?php echo json_encode($advisor_name ?? ($_POST['advisor_name'] ?? ''))?>, true);
+    const form = document.querySelector('#appointment-popup form');
+    if (form) {
+      form.elements['user_name'].value         = <?php echo json_encode($_POST['user_name'] ?? '')?>;
+      form.elements['description'].value       = <?php echo json_encode($_POST['description'] ?? '')?>;
+      form.elements['email'].value             = <?php echo json_encode($_POST['email'] ?? '')?>;
+      form.elements['appointment_date'].value  = <?php echo json_encode($_POST['appointment_date'] ?? '')?>;
+      form.elements['appointment_time'].value  = <?php echo json_encode($_POST['appointment_time'] ?? '')?>;
+    }
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?php echo json_encode($error)?>,
+      confirmButtonText: 'Try Again'
+    });
+  <?php elseif (! empty($success)): ?>
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?= json_encode(trim($success)) ?>,
+      text: <?php echo json_encode(trim($success))?>,
       timer: 2000,
       showConfirmButton: false
     });
@@ -202,13 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="advisor">
           <div class="advisor-content">
             <div style="position:relative;">
-              <img src="<?= htmlspecialchars($imgFolder . ($a['image_url'] ?? 'default.jpg')) ?>"
-                   alt="<?= htmlspecialchars($a['counsellor_name']) ?>"
+              <img src="<?php echo htmlspecialchars($imgFolder . ($a['image_url'] ?? 'default.jpg'))?>"
+                   alt="<?php echo htmlspecialchars($a['counsellor_name'])?>"
                    class="advisor-img" />
 
-              <?php if (!empty($_SESSION['user_id'])): ?>
+              <?php if (! empty($_SESSION['user_id'])): ?>
                 <button class="appointment-btn"
-        onclick="openPopup('<?= $a['counsellor_name'] ?>')">
+        onclick="openPopup('<?php echo $a['counsellor_name']?>')">
   Get Appointment
 </button>
 <?php else: ?>
@@ -219,8 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
               title: 'Please sign in',
               text: 'You must be signed in to book an appointment.'
             }).then(() => {
-              window.location = 'login.php?return=' + encodeURIComponent(window.location.href);
-            });
+      openLogin();
+    });
           ">
     Get Appointment
   </button>
@@ -233,16 +211,16 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
 
             <div>
-              <div class="advisor-header"><?= htmlspecialchars($a['counsellor_name']) ?></div>
-              <div class="advisor-title"><?= htmlspecialchars($a['degree']) ?></div>
-              <p>🎯 <?= htmlspecialchars($a['specialization']) ?></p>
-              <p>📞 <?= htmlspecialchars($a['phone']) ?></p>
-              <p>📧 <?= htmlspecialchars($a['email']) ?></p>
+              <div class="advisor-header"><?php echo htmlspecialchars($a['counsellor_name'])?></div>
+              <div class="advisor-title"><?php echo htmlspecialchars($a['degree'])?></div>
+              <p>🎯 <?php echo htmlspecialchars($a['specialization'])?></p>
+              <p>📞 <?php echo htmlspecialchars($a['phone'])?></p>
+              <p>📧 <?php echo htmlspecialchars($a['email'])?></p>
               <div class="advisor-experience">
                 <h4>Experience Highlights:</h4>
                 <ul>
                   <?php foreach (explode(";", $a['experiences']) as $exp): ?>
-                    <li><?= htmlspecialchars(trim($exp)) ?></li>
+                    <li><?php echo htmlspecialchars(trim($exp))?></li>
                   <?php endforeach; ?>
                 </ul>
               </div>
@@ -282,8 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
   <!-- Appointment Popup -->
+  <!-- Appointment Popup -->
   <div id="appointment-popup" class="popup">
-    <form method="POST" action="./Counsellor.php">
+    <form method="POST" action="Counsellor.php">
       <input type="hidden" name="advisor_name" id="advisor-input" />
 
       <div class="card">
@@ -326,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </form>
   </div>
 
-  </div>
+
   <!-- Login Modal -->
   <!--  -->
   <!-- 1) pull in your shared login modal markup -->
@@ -374,17 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops…',
-      text: <?= json_encode($error) ?>,
+      text: <?php echo json_encode($error)?>,
       confirmButtonText: 'Try Again'
-    })
-    .then(() => {
-      openLogin();
     });
   <?php elseif ($success): ?>
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?= json_encode($success) ?>,
+      text: <?php echo json_encode($success)?>,
       timer: 2000,
       showConfirmButton: false
     })
@@ -394,7 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  <!-- 3) Now load Counsellor.js, which needs window.isLoggedIn -->
+  <script>
+    // Expose login state for Counsellor.js and other scripts
+    window.isLoggedIn =                        <?php echo json_encode(! empty($_SESSION['user_id'])); ?>;
+  </script>
   <script src="../JavaScript/Counsellor.js"></script>
 </body>
 </html>

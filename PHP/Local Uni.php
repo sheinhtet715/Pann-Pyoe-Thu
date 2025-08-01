@@ -4,6 +4,17 @@
     $error   = $_SESSION['login_error'] ?? '';
     $success = $_SESSION['login_success'] ?? '';
     unset($_SESSION['login_error'], $_SESSION['login_success']);
+    include "./db_connection.php";
+    // Fetch user info for profile image
+    $user = null;
+    if (! empty($_SESSION['user_id'])) {
+        $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+        $stmt->bind_param('i', $_SESSION['user_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user   = $result->fetch_assoc();
+        $stmt->close();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,26 +27,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="../CSS/Local Uni.css">
     <title>Local Universities</title>
-    
+
 </head>
 <body>
     <header class="header">
-        <div class="logo">
-            <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-            <span class="logo-text">Pann Pyoe Thu</span>
-        </div>
+         <?php include './logo_container.php' ?>
 
-        <nav class="nav">
-            <a href="../PHP/index.php">Home</a>
-            <a href="../PHP/About Us.php">About Us</a>
-            <a href="../PHP/Courses.php">Courses</a>
-            <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-            <a href="../PHP/Scholarship.php">Scholarships</a>
-            <a href="../PHP/Local Uni.php">Local Universities</a>
-            <a href="../PHP/Jobs.php">Job Opportunities</a>
-        </nav>
-
-        <?php if (! empty($_SESSION['user_id'])): ?>
+      <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -43,39 +41,37 @@
                 id="profileDropdownBtn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >
-                <?php if (! empty($user['profile_path'])): ?>
-        <img
-          src="../<?php echo htmlspecialchars($user['profile_path'])?>"
-          alt="Profile"
-          class="profile-img"
-          style="width:24px; height:24px; object-fit:cover;"
-        >
-        <?php else: ?>
-            <!-- fallback SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-            <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-            </svg>
-        <?php endif; ?>
-                </button>
+            >
+                <?php if (!empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
-            <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-            <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="Local Uni_Logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
+                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </div>
-
-
-            <?php else: ?>
-            <div class="profile-icon" onclick="openLogin()">
-                <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-            </div>
-            <?php endif; ?>
-    </header>
+        <?php else: ?>
+        <div class="profile-icon" onclick="openLogin()">
+            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+        </div>
+        <?php endif; ?>
+        </header>
 
         <div class="starter-text">
             <h1>Local Universities</h1>
@@ -95,7 +91,7 @@
                     </div>
             </div>
         </div>
-                
+
         <div class="card uni-icon">
              <img src="../Local_uni_images/um1 front gate.jfif"  alt="University1">
                 <div class="visit-container">
@@ -126,7 +122,7 @@
         <a href="https://um2ygn.edu.mm/" target="_blank">Visit Website</a>
         </div>
         </div>
-    </div>   
+    </div>
 
     <div class="card university">
         <div class="uni-content">
@@ -308,7 +304,7 @@
 
        <!-- Footer -->
         <?php
-        include_once "Footer.php"
+            include_once "Footer.php";
         ?>
 
 
@@ -357,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops…',
-      text: <?php echo json_encode($error)?>,
+      text:            <?php echo json_encode($error) ?>,
       confirmButtonText: 'Try Again'
     })
     .then(() => {
@@ -367,13 +363,21 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?php echo json_encode($success)?>,
+      text:            <?php echo json_encode($success) ?>,
       timer: 2000,
       showConfirmButton: false
     })
 
   <?php endif; ?>
 });
+
+
+//Mobile menu toggle function
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+
 </script>
 </body>
 </html>

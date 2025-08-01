@@ -12,6 +12,19 @@ $success = $_SESSION['login_success'] ?? '';
 
 unset($_SESSION['login_error'], $_SESSION['login_success']);
 
+// Fetch user info for profile image
+$user = null;
+if (!empty($_SESSION['user_id'])) {
+    $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+}
+
+
+
 //  Handle form POST (unchanged)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset($_POST['signup'])) {
     if (empty($_SESSION['user_id'])) {
@@ -69,6 +82,9 @@ $mostPopularCourses = $mcourses->getMostPopularCourses();
 $upcourse = new UpcomingCourse($conn);
 $upcomingCourses = $upcourse->getUpcomingCourses();
 
+$dcourses = new discountCourse($conn);
+$discountCourses = $dcourses->getDiscountCourses();
+
 ?>
 
 <!DOCTYPE html>
@@ -90,30 +106,9 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
 
 <body>
 <header class="header">
-    <div class="logo-area">
-      <div class="logo-img">
-        <img src="../HomePimg/Logo.ico" alt="Logo">
-      </div>
-      <div class="logo-text">Pann Pyoe Thu</div>
-    </div>
-
-    <nav class ="nav">
-       <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellor</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-         <a href="../PHP/Jobs.php">Job Opportunities</a>
-    </nav>
-
-      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-   
-      <?php if (!empty($_SESSION['user_id'])): ?>
+    <?php include './logo_container.php' ?>
+    
+     <?php if (!empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -121,28 +116,37 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
                 id="profileDropdownBtn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >
-                <!-- your SVG icon as the button’s content: -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
-                    <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
-                </svg>
-                </button>
+            >
+                <?php if (!empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                 <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="course_logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
         </div>
-    <?php else: ?>
-      <div class="profile-icon" onclick="openLogin()">
-        <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img">
-      </div>
-    <?php endif; ?>
-</header>
+        <?php else: ?>
+        <div class="profile-icon" onclick="openLogin()">
+            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+        </div>
+        <?php endif; ?>
+        </header>
 
 
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
@@ -291,6 +295,13 @@ $upcomingCourses = $upcourse->getUpcomingCourses();
    <?php include './login_modal.php'; ?>
   <!-- 3) openLogin/closeLogin & click‐outside & showLogin=1 logic -->
   <script>
+    //Mobile menu toggle function 
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+
+
     function openLogin() {
       const m = document.getElementById('loginModal');
       if (m && m.style.display !== 'block') m.style.display = 'block';

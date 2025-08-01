@@ -1,40 +1,32 @@
 
 <?php
-// --- MERGED LOGIC ---
-session_start();
-include "./db_connection.php";
+    // --- MERGED LOGIC ---
+    session_start();
+    include "./db_connection.php";
 
-$imgFolder = '../Job page images/';
-$error   = $_SESSION['login_error']   ?? '';
-$success = $_SESSION['login_success'] ?? '';
-unset($_SESSION['login_error'], $_SESSION['login_success']);
+    $imgFolder = '../Job page images/';
+    $error     = $_SESSION['login_error'] ?? '';
+    $success   = $_SESSION['login_success'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success']);
 
-// Fetch job locations (PDO)
-$locationStmt = $pdo->query("SELECT DISTINCT location FROM job_tbl ORDER BY location ASC");
-$locations = $locationStmt->fetchAll(PDO::FETCH_COLUMN);
-// Fetch unique company names (PDO)
-$companyStmt = $pdo->query("SELECT DISTINCT org_name FROM job_tbl ORDER BY org_name ASC");
-$companies = $companyStmt->fetchAll(PDO::FETCH_COLUMN);
-
-// Fetch user profile image (MySQLi)
-$profile_path = '../HomePimg/Profile.png'; // default
+    // Fetch job locations (PDO)
+    $locationStmt = $pdo->query("SELECT DISTINCT location FROM job_tbl ORDER BY location ASC");
+    $locations    = $locationStmt->fetchAll(PDO::FETCH_COLUMN);
+    // Fetch unique company names (PDO)
+    $companyStmt = $pdo->query("SELECT DISTINCT org_name FROM job_tbl ORDER BY org_name ASC");
+    $companies   = $companyStmt->fetchAll(PDO::FETCH_COLUMN);
+  
+// Fetch user info for profile image
+$user = null;
 if (!empty($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-    // Use MySQLi connection $conn (from db_connection.php)
-    if (isset($conn)) {
-        $stmt = $conn->prepare('SELECT profile_path FROM User_tbl WHERE user_id = ?');
-        if ($stmt) {
-            $stmt->bind_param('i', $user_id);
-            $stmt->execute();
-            $stmt->bind_result($db_profile_path);
-            if ($stmt->fetch() && $db_profile_path && file_exists($db_profile_path)) {
-                $profile_path = $db_profile_path;
-            }
-            $stmt->close();
-        }
-    }
+    $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
 }
-// Do not close $conn here; other queries may use it later
+    // Do not close $conn here; other queries may use it later
 ?>
 <html lang="en">
 <head>
@@ -44,7 +36,7 @@ if (!empty($_SESSION['user_id'])) {
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
 
      <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 
@@ -55,21 +47,8 @@ if (!empty($_SESSION['user_id'])) {
 </head>
 <body>
     <header class="header">
-      <div class="logo-container">
-        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
-        <span class="logo-text">Pann Pyoe Thu</span>
-      </div>
-      <nav class="nav" id="nav-menu">
-        <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-        <a href="../PHP/Jobs.php">Job Opportunities</a>
-      </nav>
-
-        <?php if (!empty($_SESSION['user_id'])): ?>
+      <?php include './logo_container.php' ?>
+       <?php if (! empty($_SESSION['user_id'])): ?>
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
@@ -78,7 +57,7 @@ if (!empty($_SESSION['user_id'])) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-                <?php if (!empty($user['profile_path'])): ?>
+                <?php if (! empty($user['profile_path'])): ?>
                     <img
                         src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
                         alt="Profile"
@@ -103,14 +82,14 @@ if (!empty($_SESSION['user_id'])) {
             </ul>
         </div>
         <?php else: ?>
-        <div class="profile-icon" role="button" tabindex="0" aria-label="Open login menu" onclick="openLogin()">
+        <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
         <?php endif; ?>
-  </header>
-    
+        </header>
 
-             
+
+
 
     <main>
       <section class="intro">
@@ -130,13 +109,13 @@ if (!empty($_SESSION['user_id'])) {
             <select name="location" id="filter-location">
               <option value="">All Locations</option>
               <?php foreach ($locations as $location): ?>
-                <option value="<?= htmlspecialchars($location) ?>"><?= htmlspecialchars($location) ?></option>
+                <option value="<?php echo htmlspecialchars($location)?>"><?php echo htmlspecialchars($location)?></option>
               <?php endforeach; ?>
             </select>
             <select name="company" id="filter-company">
               <option value="">All Companies</option>
               <?php foreach ($companies as $company): ?>
-                <option value="<?= htmlspecialchars($company) ?>"><?= htmlspecialchars($company) ?></option>
+                <option value="<?php echo htmlspecialchars($company)?>"><?php echo htmlspecialchars($company)?></option>
               <?php endforeach; ?>
             </select>
           <button type="submit" style="display:none"></button>
@@ -145,30 +124,30 @@ if (!empty($_SESSION['user_id'])) {
 
       <section class="jobs-grid" id="jobs-grid">
         <?php
-        // Initial page load: show all jobs
-        $stmt = $pdo->query("SELECT * FROM job_tbl");
-        $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($jobs as $job): 
+            // Initial page load: show all jobs
+            $stmt = $pdo->query("SELECT * FROM job_tbl");
+            $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($jobs as $job):
         ?>
           <div class="job-card"
-               data-title="<?= htmlspecialchars($job['job_title']) ?>"
-               data-type="<?= htmlspecialchars($job['job_type']) ?>"
-               data-location="<?= htmlspecialchars($job['location']) ?>"
-               data-company="<?= htmlspecialchars($job['org_name']) ?>">
+               data-title="<?php echo htmlspecialchars($job['job_title'])?>"
+               data-type="<?php echo htmlspecialchars($job['job_type'])?>"
+               data-location="<?php echo htmlspecialchars($job['location'])?>"
+               data-company="<?php echo htmlspecialchars($job['org_name'])?>">
             <div class="job-card-header">
-              <img src="<?= htmlspecialchars($imgFolder . $job['imglogo_url']) ?>"
-                   alt="<?= htmlspecialchars($job['org_name']) ?>"
+              <img src="<?php echo htmlspecialchars($imgFolder . $job['imglogo_url'])?>"
+                   alt="<?php echo htmlspecialchars($job['org_name'])?>"
                    class="company-logo">
               <div>
-                <div class="job-title"><?= htmlspecialchars($job['job_title']) ?></div>
-                <div class="company-name"><?= htmlspecialchars($job['org_name']) ?></div>
-                <span class="job-type"><?= htmlspecialchars($job['job_type']) ?></span>
+                <div class="job-title"><?php echo htmlspecialchars($job['job_title'])?></div>
+                <div class="company-name"><?php echo htmlspecialchars($job['org_name'])?></div>
+                <span class="job-type"><?php echo htmlspecialchars($job['job_type'])?></span>
               </div>
             </div>
-            <div class="job-location"><?= htmlspecialchars($job['location']) ?></div>
-            <div class="job-summary"><strong>Summary JD:</strong> <?= htmlspecialchars($job['description']) ?></div>
-            <div class="job-desc"><?= htmlspecialchars($job['requirement']) ?></div>
-            <a class="apply-btn" href="<?= htmlspecialchars($job['job_attachment']) ?>" target="_blank">Apply now</a>
+            <div class="job-location"><?php echo htmlspecialchars($job['location'])?></div>
+            <div class="job-summary"><strong>Summary JD:</strong> <?php echo htmlspecialchars($job['description'])?></div>
+            <div class="job-desc"><?php echo htmlspecialchars($job['requirement'])?></div>
+            <a class="apply-btn" href="<?php echo htmlspecialchars($job['job_attachment'])?>" target="_blank">Apply now</a>
           </div>
         <?php endforeach; ?>
       </section>
@@ -180,7 +159,7 @@ if (!empty($_SESSION['user_id'])) {
 
        <!-- Footer -->
         <?php
-        include_once "Footer.php"
+            include_once "Footer.php";
         ?>
 
 
@@ -229,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops…',
-      text: <?php echo json_encode($error)?>,
+      text:            <?php echo json_encode($error) ?>,
       confirmButtonText: 'Try Again'
     })
     .then(() => {
@@ -239,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: <?php echo json_encode($success)?>,
+      text:            <?php echo json_encode($success) ?>,
       timer: 2000,
       showConfirmButton: false
     })
@@ -249,10 +228,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-      // function toggleMobileMenu() {
-      //   const nav = document.getElementById('nav-menu');
-      //   nav.classList.toggle('active');
-      // }
+      function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
       // function openLogin() {
       //   alert('Login menu would open here.');
       // }
@@ -308,9 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
       filterJobs();
 
     </script>
-  
+
 </body>
-</html> 
+</html>
 
 
         <!-- ...existing job cards... -->
