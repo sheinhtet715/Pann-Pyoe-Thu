@@ -3,3 +3,7 @@
 *.js text eol=lf
 *.scss text eol=lf
 *.vendor text eol=lf
+*.less  text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
