@@ -64,4 +64,27 @@ class mostPopularCourse {
             : [];
     }
 }
+class discountCourse{
+    private $conn;
+
+    public function __construct(mysqli $conn) {
+        $this->conn = $conn;
+    }
+    /** @return array<int,array> */
+    public function getDiscountCourses(): array {
+        $today = date("Y-m-d");
+        $discounts = [];
+        $sql = "SELECT * FROM course_discounts WHERE start_date <= ? And end_date >= ? ORDER BY start_date ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $today, $today);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        while ($row = $res->fetch_assoc()) {
+            $discounts[] = (int)$row['discount_percent'];
+        }
+        return $discounts;
+
+    }
+}
 ?>
