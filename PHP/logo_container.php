@@ -91,7 +91,24 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffe6c7;
 }
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    
+}
 
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+}
 @media (max-width: 900px) {
     .login-container {
         flex-direction: column;

@@ -27,6 +27,25 @@ html, body {
     padding-left: 50px;
 }
 
+/*____ Mobile Menu Toggle___ */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+}
 /* .logo-img {
     width: 50px;
     height: 50px; 
@@ -677,5 +696,8 @@ footer p, footer a {
         align-items: flex-start;
         gap: 24px;
         padding: 32px 16px 16px 16px;
+    }
+       .mobile-menu-toggle {
+        display: flex;
     }
 }

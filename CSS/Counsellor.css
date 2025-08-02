@@ -469,6 +469,25 @@ textarea {
   align-items: center;
 }
 
+/*____ Mobile Menu Toggle___ */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+}
 /* .logo-img {
   width: 50px;
   height: 50px;
@@ -653,6 +672,9 @@ button:hover, .appointment-btn:hover, .confirm-btn:hover, .signin:hover, .signup
   /* .flower-img {
     width: 120px;
   } */
+      .mobile-menu-toggle {
+        display: flex;
+    }
   .card {
     min-width: 0;
     max-width: 100vw;
