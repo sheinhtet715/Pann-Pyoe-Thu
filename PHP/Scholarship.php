@@ -101,60 +101,17 @@ if ($countryFilter && $countryFilter!=='All') {
 
 $conn->close();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Scholarships!</title>
-    
-    <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../CSS/Scholarship.css">
-    <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
-      <!-- SweetAlert2 -->
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <?php
+ob_start();
+?>
+  <link rel="stylesheet" href="../CSS/Scholarship.css">
 
     <style>
     .fav-btn { background:none; border:none; font-size:24px; cursor:pointer; }
     .fav-btn.fav { color: gold; }
     .filter-row { display:flex; gap:1rem; align-items:center; margin-bottom:1rem;}
   </style>
-</head>
-<body>
-    <header class="header">
-       <?php include './logo_container.php' ?>
-       <?php if (!empty($_SESSION['user_id'])): ?>
-        <div class="dropdown">
-            <button
-                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
-                type="button"
-                id="profileDropdownBtn"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
-                <?php if (!empty($user['profile_path'])): ?>
-                    <img src="../<?php echo htmlspecialchars($user['profile_path']); ?>" alt="Profile" class="profile-img" style="width:50px; height:50px; object-fit:cover;">
-                <?php else: ?>
-                    <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" style="width:28px; height:28px; object-fit:cover;">
-                <?php endif; ?>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="profileDropdownBtn">
-                <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="scholarship_logout.php">Logout</a></li>
-            </ul>
-        </div>
-      <?php else: ?>
-        <div class="profile-icon" onclick="openLogin()">
-            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-        </div>
-      <?php endif; ?>
-  </header>
+
   <!-- Shared Login Modal -->
 
 
@@ -163,8 +120,6 @@ $conn->close();
 
     <!-- LOGIN MODAL -->
 <!-- Shared Login Modal Markup -->
-<?php include './login_modal.php'; ?>
-
 
     <div class="main-content">
         <div class="container">
@@ -424,5 +379,7 @@ $conn->close();
   });
 </script>
 
-</body>
-</html>    
+<?php
+$content = ob_get_clean(); 
+require './logo_container.php';
+?>

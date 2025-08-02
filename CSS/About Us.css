@@ -11,7 +11,7 @@ body {
   color: white;
 }
 /*__________Header Start__________*/
- .header {
+ /* .header {
     background: #529AA6;
     display: flex;
     justify-content: space-between;
@@ -20,7 +20,7 @@ body {
     position: sticky;
     top: 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+} */
 
   .logo-area {
     display: flex;
@@ -28,7 +28,7 @@ body {
     align-items: center;
   }
 
-  .logo-img {
+  /* .logo-img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -37,14 +37,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
 
   .logo-img img {
     width: 100%;
     height: auto;
   }
 
-.logo-text {
+/* .logo-text {
     margin-top: 5px;
     font-family: 'Great Vibes', cursive;
     font-size: 24px;
@@ -54,7 +54,7 @@ body {
         1px -1px 0 white,
       -1px  1px 0 white,
         1px  1px 0 white;
-}
+} */
 /* The above CSS code is styling a navigation bar. It sets the navigation bar to display as a flex
 container with items spaced 30px apart. The navigation items are centered within the flex container,
 and the font size is set to 18px with white text color. */
@@ -68,7 +68,7 @@ and the font size is set to 18px with white text color. */
     color: white;
   } */
 
-.nav a {
+/* .nav a {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -83,7 +83,7 @@ and the font size is set to 18px with white text color. */
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffe6c7;
-}
+} */
 
   .profile-btn {
     width: 40px;
@@ -189,12 +189,12 @@ and the font size is set to 18px with white text color. */
     font-size: 28px;
     color: #ffffff;
 }
-
+/* 
 .flower-img {
     width: 250px;
     height: 250px;
     margin-top: 10px;
-}
+} */
 
 .login-right {
     width: 100%;
@@ -322,19 +322,19 @@ and the font size is set to 18px with white text color. */
         height: auto;
         color: #ffffff;
     }
-       .nav a {
+       /* .nav a {
         padding: 1rem 2rem;
         border-bottom: 1px solid #417b87;
-    }
+    } */
     .login-logo {
         width: 50px;
         height: 50px;
         margin-bottom: 18px;
     }
-    .flower-img {
+    /* .flower-img {
         width: 150px;
         height: 150px;
-    }
+    } */
 }
 @media (max-width: 600px) {
     .modal-content.login-container {
@@ -360,10 +360,10 @@ and the font size is set to 18px with white text color. */
         height: 30px;
         margin-bottom: 8px;
     }
-    .flower-img {
+    /* .flower-img {
         width: 80px;
         height: 80px;
-    }
+    } */
     .login-box input {
         font-size: 0.98rem;
         padding: 10px 12px;
@@ -380,17 +380,17 @@ and the font size is set to 18px with white text color. */
    }
 }
 @media (max-width: 480px) {
-    .logo-text {
+    /* .logo-text {
         font-size: 11px;
-    }
-     .header {
+    } */
+     /* .header {
         padding: 4px 1px;
-    }
+    } */
 
-        .nav a {
+        /* .nav a {
         font-size: 12px;
         padding: 2px 3px;
-    }
+    } */
     .bottom {
         padding: 4px 1px;
     }
@@ -407,10 +407,10 @@ and the font size is set to 18px with white text color. */
         width: 60px;
         height: 60px;
     }
-    .flower-img {
+    /* .flower-img {
         width: 80px;
         height: 80px;
-    }
+    } */
 
     .close {
     margin-top: 5px;
