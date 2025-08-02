@@ -94,7 +94,6 @@ ob_start();
 
                     <!-- Content Row -->
 <?php
-$content = ob_get_clean();
-$title   = 'Product List';  
+$content = ob_get_clean(); 
 require '../layouts/master.php';
 ?>

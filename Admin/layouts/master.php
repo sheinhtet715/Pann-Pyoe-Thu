@@ -49,7 +49,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
+                <a class="nav-link" href="../Counsellor/list.php"><i class="fa-solid fa-circle-plus"></i></i><span>Counsellors </span></a>
             </li>
 
             <li class="nav-item">
@@ -93,7 +93,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content" style="background-color: rgb(27, 42, 49);">
+            <div id="content" style="background-color: white">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
