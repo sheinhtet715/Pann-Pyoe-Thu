@@ -1,5 +1,5 @@
-<?php
-    ob_start();
+
+    <?php
 include '../database/db_connection.php';
 $page = max(1, (int)($_GET['page'] ?? 1));
 // ── 1) Handle Create (with file upload) ──
@@ -94,14 +94,16 @@ $stmt->close();
 
 
 
-
+<?php
+    ob_start();
+    ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Category List</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Counsellor List</h1>
                     </div>
 
                     <div class="">
@@ -145,15 +147,15 @@ $stmt->close();
                                         <td><?= htmlspecialchars($row['specialization']) ?></td>
                                         <td><?= htmlspecialchars($row['email']) ?></td>
                                         <td>
-                                            <a href="edit_counsellor.php?id=<?= $row['counsellor_id'] ?>"
+                                            <a href="edit.php?id=<?= $row['counsellor_id'] ?>"
                                             class="btn btn-sm btn-outline-secondary">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
-                                            <a href="delete_counsellor.php?id=<?= $row['counsellor_id'] ?>"
-                                            onclick="return confirm('Delete this counsellor?')"
-                                            class="btn btn-sm btn-outline-danger">
+                                          <button type="button"
+                                                onclick="deleteCounsellor(<?= $row['counsellor_id'] ?>)"
+                                                class="btn btn-sm btn-outline-danger">
                                             <i class="fa-solid fa-trash"></i>
-                                            </a>
+                                        </button>
                                         </td>
                                         </tr>
                                     <?php endwhile; ?>
@@ -178,3 +180,33 @@ $stmt->close();
     $content = ob_get_clean();
 require '../layouts/master.php';
 ?>
+
+<script>
+   
+function deleteCounsellor(id) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "This counsellor record will be permanently deleted!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Optionally show a “Deleted!” toast before redirect
+      Swal.fire({
+        title: "Deleted!",
+        text: "The counsellor has been deleted.",
+        icon: "success",
+        showConfirmButton: false
+      })
+      .then(() => {
+        // Redirect to your delete script
+        window.location.href = 'delete_counsellor.php?id=' + id;
+      });
+    }
+  });
+}
+
+</script>
