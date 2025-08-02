@@ -260,7 +260,11 @@
 
         
     </header>
+
+    
   <?= $content ?>
+
+
 <?php include 'login_modal.php'; ?>
           <script>
     function openLogin() {

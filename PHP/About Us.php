@@ -293,6 +293,11 @@ ob_start();
 
       <?php endif; ?>
     });
+    //Mobile menu toggle function
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
     </script>
 
 <?php
