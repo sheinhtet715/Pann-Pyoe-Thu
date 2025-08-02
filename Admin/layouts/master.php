@@ -54,7 +54,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
+                <a class="nav-link" href="../Scholarships/list.php"><i class="fa-solid fa-plus"></i></i><span>Scholarships </span></a>
             </li>
 
             <li class="nav-item">
