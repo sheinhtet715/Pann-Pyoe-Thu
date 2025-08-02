@@ -1,5 +1,6 @@
 <?php
     // pick up any flash‐error or ‐success from login.php
+    $active = 'localuni';
     session_start();
     $error   = $_SESSION['login_error'] ?? '';
     $success = $_SESSION['login_success'] ?? '';

@@ -3,7 +3,7 @@
     // --- MERGED LOGIC ---
  
     include "./db_connection.php";
-
+    $active = 'jobs';
     $imgFolder = '../Job page images/';
     $error     = $_SESSION['login_error'] ?? '';
     $success   = $_SESSION['login_success'] ?? '';

@@ -36,17 +36,19 @@
     .header {
     background: #529AA6;
     display: flex;
+    /* flex-wrap: wrap;  */
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 10px 30px;
     position: sticky;
     top: 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 3000;           
+    /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
+      z-index: 3000;            
 }
 .logo-container {
     display: flex;
     align-items: center;
+     flex-direction: column;
     gap: 0.7rem;
     flex-shrink: 0;
 }
@@ -56,10 +58,11 @@
     width: auto;
     border-radius: 8px;
     object-fit: contain;
+
 }
 
 .logo-text {
-    margin-top: 5px;
+    margin-top: 0px;
     font-family: 'Great Vibes', cursive;
     font-size: 24px;
     color: black;
@@ -71,8 +74,18 @@
 }
 
 .nav {
-    display: flex;
-    gap: 1.5rem;
+     display: flex;
+    gap: 30px;
+    flex: 1;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+}
+
+/* active color change */
+.nav a.active {
+  background-color: rgba(255,255,255,0.3);
+  color: #ffe6c7;
 }
 
 .nav a {
@@ -110,6 +123,50 @@
     background: #fff;
     border-radius: 2px;
 }
+@media (max-width: 1260){
+      .logo-container {
+    flex-direction: column;
+    align-items: center;  /* center the text under the image */
+    gap: 0.3rem;          /* a bit tighter now that it’s vertical */
+  }
+  .logo-text {
+
+    margin-top: 0;        /* remove the old 5px if you like */
+  }
+    .header {
+
+    padding: 0.2rem 0.1rem;
+  
+}
+    .logo-container {
+
+    gap: 0.1rem;
+
+}
+    .logo-img {
+    height: 30px;
+
+}
+    .logo-text {
+    margin-top: 5px;
+    font-size: 15px;
+
+}
+    .nav {
+
+         width: 100%;
+    justify-content: center; /* center links on their own row */
+    margin-top: 1rem;   
+    display: flex;
+    gap: 0;
+}
+    .nav a {
+
+    font-size: 0.5rem;
+    padding: 3px 2px;
+}
+}
+
 @media (max-width: 900px) {
     .login-container {
         flex-direction: column;
@@ -125,6 +182,27 @@
     .flower-img {
         width: 150px;
         height: 150px;
+    }
+      .nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        background: #529AA6;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .nav.active {
+        display: flex;
+    }
+    .nav a {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #417b87;
+    }
+    .mobile-menu-toggle {
+        display: flex;
     }
 }
 @media (max-width: 600px) {
@@ -169,29 +247,7 @@
    
 }
 
-@media (max-width: 900px) {
-    .nav {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100vw;
-        background: #529AA6;
-        flex-direction: column;
-        gap: 0;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    .nav.active {
-        display: flex;
-    }
-    .nav a {
-        padding: 1rem 2rem;
-        border-bottom: 1px solid #417b87;
-    }
-    .mobile-menu-toggle {
-        display: flex;
-    }
-}
+
 
     </style>
 </head>
@@ -202,13 +258,13 @@
         <span class="logo-text">Pann Pyoe Thu</span>
       </div>
       <nav class="nav" id="nav-menu">
-        <a href="../PHP/index.php">Home</a>
-        <a href="../PHP/About Us.php">About us</a>
-        <a href="../PHP/Courses.php">Courses</a>
-        <a href="../PHP/Counsellor.php">Educational Counsellors</a>
-        <a href="../PHP/Scholarship.php">Scholarships</a>
-        <a href="../PHP/Local Uni.php">Local Universities</a>
-        <a href="../PHP/Jobs.php">Job Opportunities</a>
+        <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
+        <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
+        <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
+        <a href="../PHP/Counsellor.php" class="<?= ($active==='counsellors')    ? 'active' : '' ?>">Educational Counsellors</a>
+        <a href="../PHP/Scholarship.php" class="<?= ($active==='scholarships')    ? 'active' : '' ?>">Scholarships</a>
+        <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
+        <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
       </nav>
 
       <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
@@ -261,7 +317,7 @@
         
     </header>
 
-    
+
   <?= $content ?>
 
 

@@ -5,6 +5,7 @@
     $success = $_SESSION['login_success'] ?? '';
     unset($_SESSION['login_error'], $_SESSION['login_success']);
 include "./db_connection.php";
+$active = 'about';
 $user = null;
 if (!empty($_SESSION['user_id'])) {
     $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");

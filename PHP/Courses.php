@@ -9,7 +9,7 @@ require_once "./Controller/CoursesController.php";
 $imgFolder = '../Courses page Images/'; 
 $error   = $_SESSION['login_error']   ?? '';
 $success = $_SESSION['login_success'] ?? '';
-
+$active = 'courses';
 unset($_SESSION['login_error'], $_SESSION['login_success']);
 
 // Fetch user info for profile image

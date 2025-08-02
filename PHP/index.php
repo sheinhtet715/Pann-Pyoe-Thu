@@ -4,7 +4,7 @@ session_start();
 $error   = $_SESSION['login_error'] ?? '';
 $success = $_SESSION['login_success'] ?? '';
 unset($_SESSION['login_error'], $_SESSION['login_success']);
-
+$active = 'home';
 // DB connection and course controller logic
 include "./db_connection.php";
 include "./Controller/CoursesController.php";

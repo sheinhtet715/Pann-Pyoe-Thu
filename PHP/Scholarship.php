@@ -3,6 +3,7 @@
 
 session_start();
 include "./db_connection.php";
+$active = 'scholarships';
 $error   = $_SESSION['login_error']   ?? '';
 $success = $_SESSION['login_success'] ?? '';
 unset($_SESSION['login_error'], $_SESSION['login_success']);
