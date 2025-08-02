@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><?php echo htmlspecialchars(trim($exp))?></li>
                   <?php endforeach; ?>
                 </ul>
-              </div>
+              </div>  
             </div>
           </div>
         </div>
