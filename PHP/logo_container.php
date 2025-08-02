@@ -42,7 +42,7 @@
     position: sticky;
     top: 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    
+      z-index: 3000;           
 }
 .logo-container {
     display: flex;
