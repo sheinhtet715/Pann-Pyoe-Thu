@@ -1,7 +1,7 @@
 <?php
     ob_start();
 include '../database/db_connection.php';
-
+$page = max(1, (int)($_GET['page'] ?? 1));
 // ── 1) Handle Create (with file upload) ──
 if (isset($_POST['create'])) {
     // sanitize text inputs
@@ -62,6 +62,8 @@ if (! empty($_FILES['image']['name'])) {
         }
         $ins->close();
     }
+    header("Location: " . $_SERVER['PHP_SELF'] . "?page={$page}");
+    exit;
 }
 
 // ── 2) Pagination + fetch ──
