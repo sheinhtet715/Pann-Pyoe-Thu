@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 3001;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
 /* Modal Content */
 .modal-content {
     background: linear-gradient(to bottom, #e4e9ea, #146e8a);
