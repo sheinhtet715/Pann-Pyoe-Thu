@@ -178,17 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div class="bottom">
       <div class="bottom-left">
-        <a class="about-us" href="#">About Us</a>
+        <a class="about-us" href="../PHP/About Us.php">About Us</a>
         
-        <a class="education-counselling" href="#">Education Counselling</a>
+        <a class="education-counselling" href="../PHP/Counsellor.php">Education Counsellors</a>
       
-        <a class="local-universities" href="#">Local Universities</a>
+        <a class="local-universities" href="../PHP/Local Uni.php">Local Universities</a>
         
-        <a class="job-opportunities" href="#">Job Opportunities</a>
+        <a class="job-opportunities" href="../PHP/Jobs.php">Job Opportunities</a>
        
-        <a class="scholarships" href="#">Scholarships</a>
+        <a class="scholarships" href="../PHP/Scholarship.php">Scholarships</a>
       
-        <a class="available-courses" href="#">Available Courses</a>
+        <a class="available-courses" href="../PHP/Courses.php">Available Courses</a>
       </div>
 
       <div class="bottom-middle">

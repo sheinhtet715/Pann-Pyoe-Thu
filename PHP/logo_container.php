@@ -203,6 +203,8 @@
     .mobile-menu-toggle {
         display: flex;
     }
+    .nav {
+      margin-top: 25px;   }
 }
 @media (max-width: 600px) {
     .login-container {
@@ -219,6 +221,9 @@
         width: 80px;
         height: 80px;
     }
+    .nav {
+      margin-top: 5px;  
+     }
 
 }
 @media (max-width: 480px) {
@@ -242,7 +247,9 @@
         width: 80px;
         height: 80px;
     }
-
+     .nav {
+      margin-top: 5px;  
+     }
    
 }
 
