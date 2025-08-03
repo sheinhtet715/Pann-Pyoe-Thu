@@ -12,17 +12,15 @@
 <body>
     <div class="bottom">
         <div class="bottom-left">
-            <a class="about-us" href="#">About Us</a>
-            <br>
-            <a class="education-counselling" href="#">Education Counselling</a>
-            <br>
-            <a class="local-universities" href="#">Local Universities</a>
-            <br>
-            <a class="job-opportunities" href="#">Job Opportunities</a>
-            <br>
-            <a class="scholarships" href="#">Scholarships</a>
-            <br>
-            <a class="available-courses" href="#">Available Courses</a>
+            <a class="about-us" href="../PHP/About Us.php">About Us</a> <br>    
+            <a class="education-counselling" href="../PHP/Counsellor.php">Education Counsellors</a> <br>  
+            <a class="local-universities" href="../PHP/Local Uni.php">Local Universities</a><br> 
+            
+            <a class="job-opportunities" href="../PHP/Jobs.php">Job Opportunities</a><br> 
+            
+            <a class="scholarships" href="../PHP/Scholarship.php">Scholarships</a><br> 
+            
+            <a class="available-courses" href="../PHP/Courses.php">Available Courses</a><br> 
         </div>
 
         <div class="bottom-middle">

@@ -179,15 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="bottom">
       <div class="bottom-left">
         <a class="about-us" href="#">About Us</a>
-        <br>
+        
         <a class="education-counselling" href="#">Education Counselling</a>
-        <br>
+      
         <a class="local-universities" href="#">Local Universities</a>
-        <br>
+        
         <a class="job-opportunities" href="#">Job Opportunities</a>
-        <br>
+       
         <a class="scholarships" href="#">Scholarships</a>
-        <br>
+      
         <a class="available-courses" href="#">Available Courses</a>
       </div>
 
@@ -199,9 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <div class="bottom-right">
         <p>Follow Us On:</p>
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
       </div>
     </div>
   </div>

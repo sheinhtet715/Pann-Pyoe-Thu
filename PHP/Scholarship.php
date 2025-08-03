@@ -210,11 +210,11 @@ ob_start();
     <footer>
       <div>
         <h4>Explore</h4>
-        <p><a href="#">About us</a></p>
-        <p><a href="#">Education counselling</a></p>
-        <p><a href="#">Scholarships</a></p>
-        <p><a href="#">Available courses</a></p>
-        <p><a href="#">Job opportunities</a></p>
+        <p><a href="../PHP/About Us.php">About us</a></p>
+        <p><a href="../PHP/Counsellor.php">Education counselling</a></p>
+        <p><a href="../PHP/Scholarship.php">Scholarships</a></p>
+        <p><a href="../PHP/Courses.php">Available courses</a></p>
+        <p><a href="../PHP/Jobs.php">Job opportunities</a></p>
       </div>
       <div>
         <h4>Contact us</h4>
