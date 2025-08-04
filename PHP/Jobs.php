@@ -89,7 +89,7 @@ ob_start();
             <div class="job-location"><?php echo htmlspecialchars($job['location'])?></div>
             <div class="job-summary"><strong>Summary JD:</strong> <?php echo htmlspecialchars($job['description'])?></div>
             <div class="job-desc"><?php echo htmlspecialchars($job['requirement'])?></div>
-            <a class="apply-btn" href="<?php echo htmlspecialchars($job['job_attachment'])?>" target="_blank">Apply now</a>
+            <a class="apply-btn text-decoration-none" href="<?php echo htmlspecialchars($job['job_attachment'])?>" target="_blank">Apply now</a>
           </div>
         <?php endforeach; ?>
       </section>
