@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <input type="hidden" name="advisor_name" id="advisor-input" />
 
       <div class="card">
-        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <!-- <span class="close-btn" onclick="closePopup()">&times;</span> -->
         <img src="../HomePimg/tulips-removebg-preview.png" class="flower-image" alt="flowers" />
 
         <div class="left">

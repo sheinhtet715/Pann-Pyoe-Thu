@@ -151,7 +151,7 @@ ob_start();
                             <p>"To guide a student is to shape a future, one decision at a time."</p>
                             <p>You don't need to have it all figured out. That's why I'm here—to help you discover your strengths, set your goals, and make confident decisions about your future..........</p>
                             <div class="see">
-                                <a href="#">See Profile...</a>
+                                <a href="../PHP/Counsellor.php">See Profile...</a>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@ ob_start();
     </div>
 
     <div class="us-text">
-        <a class="about-us" href="#">Tap here to learn more About Us</a>
+        <a class="about-us" href="../PHP/About Us.php">Tap here to learn more About Us</a>
     </div>
 
     <!-- Footer -->
