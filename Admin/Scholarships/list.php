@@ -95,6 +95,7 @@
     SELECT
       scholarship_id,
       title,
+      description,
       country,
       intake_season,
       degree_level,
@@ -215,7 +216,7 @@
        <tr class="detail-row" id="detail-<?= $r['scholarship_id'] ?>" style="display:none;">
           <td colspan="8" class="bg-light">
              <strong>Description:</strong>
-            <?= nl2br(htmlspecialchars($r['description'])) ?><br>
+          <?= isset($r['description']) ? nl2br(htmlspecialchars($r['description'])) : '' ?><br>
             <strong>Deadline:</strong> <?= htmlspecialchars($r['deadline']) ?><br>
             <strong>Coverage:</strong> <?= nl2br(htmlspecialchars($r['coverage'])) ?><br>
             <strong>Apply Link:</strong>
