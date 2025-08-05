@@ -114,7 +114,12 @@
     margin-left: 1rem;
     
 }
-
+.profile-img {
+    width: 36px; 
+    height: 36px;
+    border-radius: 50%; 
+    object-fit: cover; 
+}
 .mobile-menu-toggle span {
     display: block;
     width: 24px;

@@ -151,13 +151,13 @@ body {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
+/* 
 .profile-img {
     width: 36px; 
     height: 36px;
     border-radius: 50%; 
     object-fit: cover; 
-}
+} */
 
 
 /* Modal */
@@ -634,10 +634,10 @@ body {
     height: 80px;
 }
 
-.profile-img {
+/* .profile-img {
     width: 72px;
     height: 72px;
-}
+} */
 
 .starter-text h1 {
     font-size: 48px;

@@ -117,13 +117,13 @@ and the font size is set to 18px with white text color. */
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
+/* 
 .profile-img {
     width: 36px; 
     height: 36px;
     border-radius: 50%; 
     object-fit: cover; 
-} 
+}  */
   
 /* Modal */
 .modal {
