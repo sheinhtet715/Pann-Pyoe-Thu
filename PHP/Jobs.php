@@ -1,7 +1,8 @@
 
 <?php
     // --- MERGED LOGIC ---
- 
+session_start();
+
     include "./db_connection.php";
     $active = 'jobs';
     $imgFolder = '../Job page images/';
@@ -88,7 +89,7 @@ ob_start();
             <div class="job-location"><?php echo htmlspecialchars($job['location'])?></div>
             <div class="job-summary"><strong>Summary JD:</strong> <?php echo htmlspecialchars($job['description'])?></div>
             <div class="job-desc"><?php echo htmlspecialchars($job['requirement'])?></div>
-            <a class="apply-btn" href="<?php echo htmlspecialchars($job['job_attachment'])?>" target="_blank">Apply now</a>
+            <a class="apply-btn text-decoration-none" href="<?php echo htmlspecialchars($job['job_attachment'])?>" target="_blank">Apply now</a>
           </div>
         <?php endforeach; ?>
       </section>
@@ -109,77 +110,12 @@ ob_start();
 <!-- 1) Load your libraries -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- 2) Fire the flash (only once!) and wire up open/close -->
-<script>
-    function openLogin() {
-      const m = document.getElementById('loginModal');
-      if (m && m.style.display !== 'block') m.style.display = 'block';
-    }
-    function closeLogin() {
-      const m = document.getElementById('loginModal');
-      if (m) m.style.display = 'none';
-    }
 
-    // Clicking the ✕ or outside the modal closes it
-    document.addEventListener('click', e => {
-      const m = document.getElementById('loginModal');
-      if (!m) return;
-      if (e.target.classList.contains('close') || e.target === m) {
-        closeLogin();
-      }
-    });
 
-    // Honor ?showLogin=1 in URL
-    (function(){
-      let auto = false;
-      const params = new URL(location).searchParams;
-      if (params.get('showLogin') === '1' && !auto) {
-        auto = true;
-        openLogin();
-        params.delete('showLogin');
-        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
-      }
-    })();
-  </script>
 
-  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  <?php if ($error): ?>
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops…',
-      text:            <?php echo json_encode($error) ?>,
-      confirmButtonText: 'Try Again'
-    })
-    .then(() => {
-      openLogin();
-    });
-  <?php elseif ($success): ?>
-    Swal.fire({
-      icon: 'success',
-      title: 'Success!',
-      text:            <?php echo json_encode($success) ?>,
-      timer: 2000,
-      showConfirmButton: false
-    })
-
-  <?php endif; ?>
-});
-</script>
 
     <script>
-      function toggleMobileMenu() {
-        const nav = document.getElementById('nav-menu');
-        nav.classList.toggle('active');
-      }
-      // function openLogin() {
-      //   alert('Login menu would open here.');
-      // }
 
-      // function closeLogin() {
-      //   alert('Login menu would close here.');
-      // }
 
       const searchBar = document.getElementById('search-bar');
       const typeFilter = document.getElementById('filter-type');

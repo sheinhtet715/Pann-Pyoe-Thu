@@ -1,5 +1,6 @@
 
     <?php
+    session_start();  
 include '../database/db_connection.php';
 $page = max(1, (int)($_GET['page'] ?? 1));
 // ── 1) Handle Create (with file upload) ──
@@ -57,14 +58,22 @@ if (! empty($_FILES['image']['name'])) {
             $phone, $email, $exp,
             $imgFilename   // <-- just the filename
         );
-        if (! $ins->execute()) {
-            $error = "Insert failed: " . $ins->error;
+        if ($ins->execute()) {
+        $_SESSION['flash_success'] = "Counsellor “{$name}” created successfully!";
+        } else {
+            $_SESSION['flash_error'] = "Insert failed: " . $ins->error;
         }
         $ins->close();
+
     }
     header("Location: " . $_SERVER['PHP_SELF'] . "?page={$page}");
     exit;
+
 }
+    $success = $_SESSION['flash_success'] ?? '';
+    $error   = $_SESSION['flash_error']   ?? '';
+    unset($_SESSION['flash_success'], $_SESSION['flash_error']);
+
 
 // ── 2) Pagination + fetch ──
 $limit      = 5;
@@ -209,4 +218,24 @@ function deleteCounsellor(id) {
   });
 }
 
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Created!',
+      text: <?= json_encode($success) ?>,
+      timer: 2000,
+      showConfirmButton: false
+    });
+  <?php elseif ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: <?= json_encode($error) ?>,
+      confirmButtonText: 'OK'
+    });
+  <?php endif; ?>
+});
 </script>

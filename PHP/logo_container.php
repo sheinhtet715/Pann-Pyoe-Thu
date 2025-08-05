@@ -347,42 +347,46 @@
       }
     });
 
-    // Honor ?showLogin=1 in URL
-    (function(){
-      let auto = false;
-      const params = new URL(location).searchParams;
-      if (params.get('showLogin') === '1' && !auto) {
-        auto = true;
-        openLogin();
-        params.delete('showLogin');
-        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
-      }
-    })();
   </script>
   <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
   <script>
 document.addEventListener('DOMContentLoaded', () => {
-  <?php if ($error): ?>
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops…',
-      text:            <?php echo json_encode($error) ?>,
-      confirmButtonText: 'Try Again'
-    })
-    .then(() => {
-      openLogin();
-    });
-  <?php elseif ($success): ?>
-    Swal.fire({
-      icon: 'success',
-      title: 'Success!',
-      text:            <?php echo json_encode($success) ?>,
-      timer: 2000,
-      showConfirmButton: false
-    })
 
-  <?php endif; ?>
-});
+  <?php if ($error): ?>
+      // 1) Login error – show SweetAlert, then open modal on “Try Again”
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?php echo json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      })
+      .then(() => openLogin());
+
+    <?php elseif ($success): ?>
+      // 2) Success – quick toast only
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: <?php echo json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+    <?php else: ?>
+      // 3) No error/success – honor ?showLogin=1 here
+      (function(){
+        const params = new URL(location).searchParams;
+        if (params.get('showLogin') === '1') {
+          openLogin();
+          params.delete('showLogin');
+          history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+        }
+      })();
+
+    <?php endif; ?>
+
+  });
+
 </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
