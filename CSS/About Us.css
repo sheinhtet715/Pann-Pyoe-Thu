@@ -33,6 +33,7 @@ body {
 /* 
 .profile-img {
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 36px; 
     height: 36px;
     border-radius: 50%; 
@@ -50,10 +51,15 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,0.5);
 =======
+=======
+>>>>>>> 98e31fe900e7b2631920162a3006c7f32d45a922
   width: 36px; 
   height: 36px;
   border-radius: 50%; 
   object-fit: cover; 
+<<<<<<< HEAD
+>>>>>>> 98e31fe900e7b2631920162a3006c7f32d45a922
+=======
 >>>>>>> 98e31fe900e7b2631920162a3006c7f32d45a922
 }
 
