@@ -195,8 +195,8 @@
     <tbody>
        <?php while ($r = $list->fetch_assoc()): ?>
 <tr class="main-row" data-id="<?= $r['scholarship_id'] ?>">
-        <td class="toggle-cell" style="cursor:pointer;">
-          <i class="fas fa-chevron-down"></i>
+      <td class="toggle-cell" style="cursor:pointer; width:34px; text-align:center;">
+              <i class="fas fa-chevron-right"></i>
         </td>
         <td><?= $r['scholarship_id'] ?></td>
         <td><?= htmlspecialchars($r['title']) ?></td>
@@ -213,7 +213,7 @@
           </button>
         </td>
       </tr>
-       <tr class="detail-row" id="detail-<?= $r['scholarship_id'] ?>" style="display:none;">
+       <tr class="detail-row" id="detail-<?= $r['scholarship_id'] ?>" style="display:none; background:#f8f9fa;">
           <td colspan="8" class="bg-light">
              <strong>Description:</strong>
           <?= isset($r['description']) ? nl2br(htmlspecialchars($r['description'])) : '' ?><br>

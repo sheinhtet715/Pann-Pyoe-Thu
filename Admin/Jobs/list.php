@@ -214,8 +214,12 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                  
 
                   <strong>Logo :(stored)</strong>
-                    <?= htmlspecialchars($j['imglogo_url'] ?? '') ?>
-                  
+
+                           <?php if ($j['imglogo_url']): ?>
+                                    <img src="<?= '../../Job page images/' . htmlspecialchars($j['imglogo_url']) ?>" alt="Job Image" style="width: 80px; height: auto;">
+                                <?php else: ?>
+                             -
+                                <?php endif; ?>
               
             </td>
           </tr>
@@ -261,35 +265,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
-// Toggle detail rows
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.toggle-cell').forEach(cell => {
-    cell.addEventListener('click', () => {
-      const tr = cell.closest('tr.main-row');
-      if (!tr) return;
-      const id = tr.dataset.id;
-      const detail = document.getElementById('detail-' + id);
-      const icon = cell.querySelector('i');
+// after the table, add:
+document.querySelectorAll('.toggle-cell').forEach(cell => {
+  cell.addEventListener('click', () => {
+    const tr = cell.closest('tr.main-row');
+    const id = tr.dataset.id;
+    const detail = document.getElementById('detail-' + id);
+    const icon   = cell.querySelector('i');
 
-      if (!detail) return;
-
-      const showing = detail.style.display !== 'none' && detail.style.display !== '';
-      if (showing) {
-        // hide
-        detail.style.display = 'none';
-        if (icon) {
-          icon.classList.remove('fa-chevron-down');
-          icon.classList.add('fa-chevron-right');
-        }
-      } else {
-        // show
-        detail.style.display = '';
-        if (icon) {
-          icon.classList.remove('fa-chevron-right');
-          icon.classList.add('fa-chevron-down');
-        }
-      }
-    });
+    if (detail.style.display === 'none') {
+      detail.style.display = '';
+      icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
+    } else {
+      detail.style.display = 'none';
+      icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
+    }
   });
 });
 </script>
