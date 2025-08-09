@@ -97,7 +97,9 @@ ob_start();
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
 
  
-
+<?php
+include "./auth_msg.php";
+?>
  <div class="course-container">
 <?php 
   $colors = ['#529AA6','#E8D9C4', '#9CC2CF','#BF9E8D','#F2E1C1']; // Initial colors for courses

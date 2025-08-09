@@ -1,4 +1,6 @@
 <?php
+session_name('ADMINSESSID');
+session_start();
 ob_start();
 ?>
    <div class="container-fluid">

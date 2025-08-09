@@ -121,7 +121,9 @@ ob_start();
 
     <!-- LOGIN MODAL -->
 <!-- Shared Login Modal Markup -->
-
+<?php
+include "./auth_msg.php";
+?>
     <div class="main-content">
         <div class="container">
             <h2>Find Scholarships</h2>

@@ -1,5 +1,6 @@
 <?php
-    session_start();  
+session_name('ADMINSESSID');
+session_start(); 
 include '../database/db_connection.php';
 
 // Handle form submission to create new course

@@ -1,5 +1,6 @@
 <?php
-    session_start();
+session_name('ADMINSESSID');
+session_start();
 // adjust this to point at your real file location:
 include './database/db_connection.php';
 

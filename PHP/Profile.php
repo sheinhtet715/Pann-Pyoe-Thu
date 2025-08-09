@@ -53,7 +53,9 @@
                 <a href="../PHP/index.php">Home</a>
                 </nav>
       </div>
-
+<?php
+include "./auth_msg.php";
+?>
       <form method="post" action="logout.php">
         <button type="submit" class="logout-btn">Log out</button>
       </form>

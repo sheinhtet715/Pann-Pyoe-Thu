@@ -1,6 +1,7 @@
 
     <?php
-    session_start();  
+session_name('ADMINSESSID');
+session_start();
 include '../database/db_connection.php';
 $page = max(1, (int)($_GET['page'] ?? 1));
 // ── 1) Handle Create (with file upload) ──

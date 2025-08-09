@@ -36,7 +36,9 @@ ob_start();
 
    <div class="homepage">
         
-
+<?php
+include "./auth_msg.php";
+?>
         <main class="main-content">
             <div class="quote-box">
                 <p>

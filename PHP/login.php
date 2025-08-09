@@ -2,6 +2,7 @@
 // ===== login.php =====
 session_start();
 require_once "./db_connection.php";
+require 'auth_check.php';
 
 $username = trim($_POST['user_name'] ?? '');
 $email    = trim($_POST['email'] ?? '');
@@ -161,3 +162,4 @@ $return = $_POST['return'] ?? $_GET['return'] ?? ($_SERVER['HTTP_REFERER'] ?? nu
 
 header("Location: " . $return);
 exit;
+?>

@@ -32,8 +32,11 @@ ob_start();
 
 
 
-
+<?php
+include "./auth_msg.php";
+?>
     <main>
+      
       <section class="intro">
         <h1>Find Your Next Job</h1>
         <p>Discover the best job opportunities from top companies in Myanmar. Use the filters below to find your perfect match.</p>

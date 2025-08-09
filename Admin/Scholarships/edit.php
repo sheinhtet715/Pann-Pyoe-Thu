@@ -1,6 +1,7 @@
 <?php
     // Admin/Scholarship/edit.php
-    session_start();
+session_name('ADMINSESSID');
+session_start();
     include '../database/db_connection.php';
 
     // 1) Validate & load existing record

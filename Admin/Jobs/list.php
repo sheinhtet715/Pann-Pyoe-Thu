@@ -1,5 +1,6 @@
 <?php
 // Admin/Jobs/admin_jobs.php
+session_name('ADMINSESSID');
 session_start();
 ob_start();
 // DB connection (adjust path to your PDO)

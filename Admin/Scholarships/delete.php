@@ -1,5 +1,6 @@
 <?php
 // Admin/Scholarship/delete.php
+session_name('ADMINSESSID');
 session_start();
 include '../database/db_connection.php';
 

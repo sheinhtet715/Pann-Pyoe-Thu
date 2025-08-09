@@ -30,7 +30,9 @@ ob_start();
 </div>
 
 <br>
-
+<?php
+include "./auth_msg.php";
+?>
 <div class="the-speech">
   	<p>At Pann Pyoe Thu, we believe every student deserves access to clear guidance, supportive mentorship, and quality educational resources. We provide academic and career advising services to help students unlock their full potential, whether they are choosing courses, applying for scholarships, or planning for their future careers.</p>
 </div>

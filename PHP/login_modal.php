@@ -306,6 +306,15 @@
     <div class="login-right">
       <span class="close" onclick="closeLogin()">&times;</span>
       <img src="../HomePimg/Logo.ico" class="login-logo" alt="logo"/>
+      <?php if (isset($_GET['msg']) && $_GET['msg'] === 'account_deleted'): ?>
+      <div class="alert alert-warning mt-3">
+        Your account has been deleted. Please contact support if this is an error.
+      </div>
+    <?php endif; ?>
+
+    <?php if (!empty($error)): ?>
+      <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
       <div class="login-box">
         <!-- Any server‑side error messages? -->
 

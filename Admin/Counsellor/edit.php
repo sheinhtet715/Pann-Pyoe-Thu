@@ -1,5 +1,6 @@
 <?php
 // update_counsellor.php
+session_name('ADMINSESSID');
 session_start();
 include '../database/db_connection.php';
 

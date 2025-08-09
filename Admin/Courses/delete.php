@@ -1,5 +1,6 @@
 <?php
 // delete.php (for courses)
+session_name('ADMINSESSID');
 session_start();
 include '../database/db_connection.php'; // should define $pdo as PDO
 
