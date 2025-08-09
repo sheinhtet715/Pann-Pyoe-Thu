@@ -1,8 +1,11 @@
 <?php
 // ===== login.php =====
+
+// Start fresh session again after destroying
 session_start();
+
 require_once "./db_connection.php";
-require 'auth_check.php';
+
 
 $username = trim($_POST['user_name'] ?? '');
 $email    = trim($_POST['email'] ?? '');
@@ -158,7 +161,7 @@ if ($success) {
     $_SESSION['login_success'] = $success;
 }
 
-$return = $_POST['return'] ?? $_GET['return'] ?? ($_SERVER['HTTP_REFERER'] ?? null) ?? 'index.php';
+$return = $_POST['return'] ?? $_GET['return'] ?? 'index.php';
 
 header("Location: " . $return);
 exit;

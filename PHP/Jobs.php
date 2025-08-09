@@ -32,9 +32,7 @@ ob_start();
 
 
 
-<?php
-include "./auth_msg.php";
-?>
+
     <main>
       
       <section class="intro">

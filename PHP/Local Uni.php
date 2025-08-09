@@ -21,10 +21,7 @@
 ob_start();
 ?>
 	<link rel="stylesheet" href="../CSS/Local Uni.css">
-  
-<?php
-include "./auth_msg.php";
-?>
+
 
         <div class="starter-text">
             <h1>Local Universities</h1>

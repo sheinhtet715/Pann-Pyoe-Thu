@@ -1,6 +1,24 @@
 <?php
 // pick up any flash‐error or ‐success from login.php
 session_start();
+// 1) Check if logged-in user exists
+if (!empty($_SESSION['user_id'])) {
+    require_once "./db_connection.php";
+
+    $stmt = $conn->prepare("SELECT user_id FROM User_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $_SESSION['user_id']);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows === 0) {
+        // User no longer exists — clear session and redirect to login with message
+        session_unset();
+        session_destroy();
+        header('Location: login.php?msg=account_deleted');
+        exit;
+    }
+    $stmt->close();
+} 
 $error   = $_SESSION['login_error'] ?? '';
 $success = $_SESSION['login_success'] ?? '';
 unset($_SESSION['login_error'], $_SESSION['login_success']);
@@ -36,9 +54,7 @@ ob_start();
 
    <div class="homepage">
         
-<?php
-include "./auth_msg.php";
-?>
+
         <main class="main-content">
             <div class="quote-box">
                 <p>

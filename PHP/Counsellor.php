@@ -82,9 +82,6 @@ ob_start();
   <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  -->
 
 
-<?php
-include "./auth_msg.php";
-?>
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
 
 
