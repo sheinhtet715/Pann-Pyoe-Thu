@@ -1,3 +1,51 @@
+<?php
+include '../database/db_connection.php'; // adjust path
+    $error = '';
+$id = isset($_GET['job_id']) ? (int) $_GET['job_id'] : 0;
+
+if ($id <= 0) {
+    die("Invalid job ID.");
+}
+
+$stmt = $pdo->prepare("SELECT * FROM Job_tbl WHERE job_id = ?");
+$stmt->execute([$id]);
+$current = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$current) {
+    die("Job not found.");
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $org_name     = $_POST['org_name'];
+    $job_title    = $_POST['job_title'];
+    $job_type = trim(strtolower($_POST['job_type']));
+    $location     = $_POST['location'];
+    $description  = $_POST['description'];
+    $requirement  = $_POST['requirement'];
+    $job_attachment = $_POST['job_attachment'];
+    $imglogo_url  = $current['imglogo_url'];
+
+    $allowed_types = ['full time', 'part time'];
+    if (!in_array($job_type, $allowed_types)) {
+    $error = "Invalid Job Type. Please enter 'full time' or 'part time' only.";
+}
+else{
+    // If new image uploaded
+    if (!empty($_FILES['imglogo_url']['name'])) {
+        $filename = basename($_FILES['imglogo_url']['name']);
+        move_uploaded_file($_FILES['imglogo_url']['tmp_name'], "../../Job page images/" . $filename);
+        $imglogo_url = $filename;
+    }
+
+    $stmt = $pdo->prepare("UPDATE Job_tbl 
+        SET org_name=?, job_title=?, job_type=?, location=?, description=?, requirement=?, job_attachment=?, imglogo_url=? 
+        WHERE job_id=?");
+    $stmt->execute([$org_name, $job_title, $job_type, $location, $description, $requirement, $job_attachment, $imglogo_url, $id]);
+
+    header("Location: list.php");
+    exit;
+}
+}
+?>
 
 
 <?php
@@ -40,53 +88,51 @@
                      value="<?= htmlspecialchars($current['job_title']) ?>">
             </div>
             <div class="mb-3">
-              <label>Specialization *</label>
+              <label>Job Type *</label>
               <input type="text"
-                     name="specialization"
+                     name="job_type"
                      class="form-control"
                      required
-                     value="<?= htmlspecialchars($current['specialization']) ?>">
+                     value="<?= htmlspecialchars($current['job_type']) ?>">
             </div>
             <div class="mb-3">
-              <label>Phone</label>
+              <label>Location</label>
               <input type="text"
-                     name="phone"
+                     name="location"
                      class="form-control"
-                     value="<?= htmlspecialchars($current['phone']) ?>">
+                     value="<?= htmlspecialchars($current['location']) ?>">
             </div>
             <div class="mb-3">
-              <label>Email</label>
-              <input type="email"
-                     name="email"
-                     class="form-control"
-                     value="<?= htmlspecialchars($current['email']) ?>">
+              <label>Description</label>
+              <label>Description</label>
+  <textarea name="description" class="form-control" rows="3"><?= htmlspecialchars($current['description']) ?></textarea>
             </div>
             <div class="mb-3">
-              <label>Experiences</label>
-              <textarea name="experiences"
+              <label>Requirement</label>
+              <textarea name="requirement"
                         class="form-control"
-                        rows="3"><?= htmlspecialchars($current['experiences']) ?></textarea>
+                        rows="3"><?= htmlspecialchars($current['requirement']) ?></textarea>
             </div>
-            <div class="mb-3">
+              <div class="mb-3">
+              <label class="form-label">Job Attachment Link </label>
+              <input type="url" name="job_attachment" class="form-control"  value="<?= htmlspecialchars($current['job_attachment']) ?>">
+            </div>
+          
+          
+              <div class="mb-3">
               <label>Current Image</label><br>
-              <?php if ($current['image_url']): ?>
-                <?php 
-                    $testPath = '../../Counsellor_page_images/' . $current['image_url'];
-                    echo '<!-- DEBUG: image path → ' . htmlspecialchars($testPath) . ' -->'; 
-                    ?>
+ 
                 <img 
-                        src="<?= htmlspecialchars('../../Counsellor_page_images/' . $current['image_url']) ?>"
+                        src="<?= htmlspecialchars('../../Job page images/' . $current['imglogo_url']) ?>"
                         alt="current image"
                         style="width:130px; height:130px; object-fit:cover;"
                         >
-              <?php else: ?>
-                <span class="text-muted">No image</span>
-              <?php endif; ?>
+
             </div>
             <div class="mb-3">
               <label>Replace Image</label>
               <input type="file"
-                     name="image"
+                     name="imglogo_url"
                      accept="image/*"
                      class="form-control">
             </div>
@@ -107,3 +153,18 @@
     $content = ob_get_clean();
     require '../layouts/master.php';
 ?>
+<?php if ($error): ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "<?= addslashes($error) ?>",
+        confirmButtonText: "OK"
+    }).then(() => {
+        // Redirect back to the same edit page (you are already on it, so reload)
+        window.location.href = "edit.php?job_id=<?= $id ?>";
+    });
+</script>
+<?php endif; ?>
+    

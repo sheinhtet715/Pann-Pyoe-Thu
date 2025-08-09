@@ -187,7 +187,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             <td>
-              <a href="edit.php?id=<?= (int)$j['job_id'] ?>" class="btn btn-sm btn-secondary">
+             <a href="edit.php?job_id=<?= $j['job_id'] ?>" class="btn btn-sm btn-secondary">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
               <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?= (int)$j['job_id'] ?>)">
