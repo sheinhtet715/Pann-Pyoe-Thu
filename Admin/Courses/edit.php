@@ -57,20 +57,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $icon_url = $iconName;
         }
     }
+   // ... existing POST data retrieval ...
 
-    // Update database
-    $stmt = $pdo->prepare("UPDATE Course_tbl SET course_name=?, fee=?, type=?, language=?, paid_status=?, instructor_name=?, image_url=?, icon_url=? WHERE course_id=?");
-    $stmt->execute([
-        $course_name,
-        $fee,
-        $type,
-        $language,
-        $paid_status,
-        $instructor_name,
-        $image_url,
-        $icon_url,
-        $course_id
-    ]);
+$most_popular = isset($_POST['most_popular']) ? 1 : 0;
+
+if ($most_popular === 1) {
+    // Reset others
+    $pdo->exec("UPDATE Course_tbl SET most_popular = 0 WHERE course_id != $course_id");
+}
+
+$stmt = $pdo->prepare("UPDATE Course_tbl SET course_name=?, fee=?, type=?, language=?, paid_status=?, instructor_name=?, image_url=?, icon_url=?, most_popular=? WHERE course_id=?");
+$stmt->execute([
+    $course_name,
+    $fee,
+    $type,
+    $language,
+    $paid_status,
+    $instructor_name,
+    $image_url,
+    $icon_url,
+    $most_popular,
+    $course_id
+]);
+
+
 
     $_SESSION['flash_success'] = "Course updated successfully.";
     header('Location: list.php');
@@ -130,6 +140,11 @@ ob_start();
                                 <label>Instructor Name</label>
                                 <input type="text" name="instructor_name" class="form-control"
                                        value="<?= htmlspecialchars($current['instructor_name']) ?>">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" name="most_popular" id="most_popular" class="form-check-input"
+                                    <?= $current['most_popular'] ? 'checked' : '' ?>>
+                                <label for="most_popular" class="form-check-label">Most Popular?</label>
                             </div>
 
                             <div class="mb-3">
