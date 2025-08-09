@@ -40,7 +40,7 @@ if (tableExists($conn, 'Appointment_tbl')) {
 }
 
 ?>
-?>
+
    <div class="container-fluid">
 
                     <!-- Page Heading -->
