@@ -19,52 +19,97 @@
 
     $imgFolder = '../Counsellor_page_images/';
 
-    // 1) Handle form POST (unchanged)
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! isset($_POST['signin']) && ! isset($_POST['signup'])) {
-        if (empty($_SESSION['user_id'])) {
-            $error = "❌ You must be signed in to book an appointment.";
-        } elseif ($_POST['email'] !== ($_SESSION['email'] ?? '')) {
-            $error = "❌ That email doesn’t match your logged‑in account.";
+ // ===== in Counsellor.php, inside your existing POST handler =====
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! isset($_POST['signin']) && ! isset($_POST['signup'])) {
+    if (empty($_SESSION['user_id'])) {
+        $error = "❌ You must be signed in to book an appointment.";
+    } elseif (!isset($_POST['email']) || $_POST['email'] !== ($_SESSION['email'] ?? '')) {
+        $error = "❌ That email doesn’t match your logged-in account.";
+    } else {
+        $user_id      = (int) $_SESSION['user_id'];
+        $advisor_name = trim((string)($_POST['advisor_name'] ?? ''));
+        $description  = trim((string)($_POST['description'] ?? ''));
+        $date         = trim((string)($_POST['appointment_date'] ?? ''));
+        $time         = trim((string)($_POST['appointment_time'] ?? ''));
+
+        // basic required fields
+        if ($advisor_name === '' || $description === '' || $date === '' || $time === '') {
+            $error = "Please fill in all fields.";
         } else {
-            $user_id      = $_SESSION['user_id'];
-            $advisor_name = trim($_POST['advisor_name'] ?? '');
-            $description  = trim($_POST['description'] ?? '');
-            $date         = trim($_POST['appointment_date'] ?? '');
-            $time         = trim($_POST['appointment_time'] ?? '');
-
-            // a) find counsellor_id
-            $cs = $conn->prepare("
-            SELECT counsellor_id
-              FROM Counsellor_tbl
-             WHERE counsellor_name = ?
-        ");
-            $cs->bind_param("s", $advisor_name);
-            $cs->execute();
-            $cres = $cs->get_result();
-
-            if (! $cres->num_rows) {
-                $error = "⚠️ Counsellor “{$advisor_name}” not found.";
+            // Stronger date/time validation using DateTime
+            $d = DateTime::createFromFormat('Y-m-d', $date);
+            $t = DateTime::createFromFormat('H:i', $time) ?: DateTime::createFromFormat('H:i:s', $time);
+            if (!($d && $d->format('Y-m-d') === $date)) {
+                $error = "Invalid date format. Use YYYY-MM-DD.";
+            } elseif (!($t && ($t->format('H:i') === substr($time,0,5) || $t->format('H:i:s') === $time))) {
+                $error = "Invalid time format. Use HH:MM or HH:MM:SS.";
             } else {
-                $cid = $cres->fetch_assoc()['counsellor_id'];
-                $cs->close();
-
-                // b) insert appointment
-                $ins = $conn->prepare("
-                INSERT INTO Appointment_tbl
-                  (user_id,counsellor_id,appointment_date,appointment_time,description,appointment_status)
-                VALUES (?, ?, ?, ?, ?, 'Confirmed')
-            ");
-                $ins->bind_param("iisss", $user_id, $cid, $date, $time, $description);
-
-                if ($ins->execute()) {
-                    $success = "✅ Appointment booked successfully!";
+                // 1) find counsellor id
+                $cs = $conn->prepare("SELECT counsellor_id FROM Counsellor_tbl WHERE counsellor_name = ? LIMIT 1");
+                if (! $cs) {
+                    $error = "Server error (prepare): " . $conn->error;
                 } else {
-                    $error = "❌ Error inserting appointment: " . $ins->error;
+                    $cs->bind_param("s", $advisor_name);
+                    $cs->execute();
+                    $cres = $cs->get_result();
+
+                    if (! $cres || $cres->num_rows === 0) {
+                        $error = "⚠️ Counsellor “" . htmlspecialchars($advisor_name) . "” not found.";
+                    } else {
+                        $cid = (int) $cres->fetch_assoc()['counsellor_id'];
+                        $cs->close();
+
+                        // OPTIONAL: prevent double booking for same counsellor/date/time (excluding Cancelled if you want)
+                        $chk = $conn->prepare("
+                            SELECT COUNT(*) AS cnt
+                              FROM Appointment_tbl
+                             WHERE counsellor_id = ?
+                               AND appointment_date = ?
+                               AND appointment_time = ?
+                               AND appointment_status <> 'Cancelled'
+                        ");
+                        if (! $chk) {
+                            $error = "Server error (prepare chk): " . $conn->error;
+                        } else {
+                            $chk->bind_param("iss", $cid, $date, $time);
+                            $chk->execute();
+                            $cres2 = $chk->get_result();
+                            $row = $cres2->fetch_assoc();
+                            $count = (int)($row['cnt'] ?? 0);
+                            $chk->close();
+
+                            if ($count > 0) {
+                                $error = "That time slot is already taken for this counsellor. Please choose another time.";
+                            } else {
+                                // insert appointment with default status = 'Pending'
+                                $ins = $conn->prepare("
+                                  INSERT INTO Appointment_tbl
+                                    (user_id, counsellor_id, appointment_date, appointment_time, description, appointment_status)
+                                  VALUES (?, ?, ?, ?, ?, ?)
+                                ");
+                                if (! $ins) {
+                                    $error = "Server error (prepare insert): " . $conn->error;
+                                } else {
+                                    $status = 'Pending'; // default initial state
+                                    $ins->bind_param("iissss", $user_id, $cid, $date, $time, $description, $status);
+
+                                    if ($ins->execute()) {
+                                        $success = "✅ Appointment booked successfully! Status: {$status}";
+                                    } else {
+                                        $error = "❌ Error inserting appointment: " . $ins->error;
+                                    }
+                                    $ins->close();
+                                }
+                            }
+                        }
+                    }
                 }
-                $ins->close();
             }
         }
     }
+}
+
+
 
     // 2) Fetch dynamic list of counsellors from DB
     $controller = new CounsellorController($conn);

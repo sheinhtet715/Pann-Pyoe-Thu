@@ -35,9 +35,10 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                     <img src="../../HomePimg/Logo.ico" style="width: 50px" alt="">
                 </div>
-                <div class="sidebar-brand-text mx-3">Pann Pyoo Thu</div>
+                <div class="sidebar-brand-text mx-3">Pann Pyoe Thu</div>
             </a>
 
             <!-- Divider -->
@@ -70,7 +71,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i><span>Order Board </span></a>
+                <a class="nav-link" href="../Appointment_lists/appoinment.php"><i class="fa-solid fa-cart-shopping"></i><span>Appoinment Lists </span></a>
             </li>
 
             <li class="nav-item">
