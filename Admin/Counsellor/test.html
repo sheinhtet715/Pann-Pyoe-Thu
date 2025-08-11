@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Responsive Bootstrap Table</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      /* small extra nicety: keep header visible when scrolling horizontally */
+      .table-responsive { overflow-x: auto; }
+      .table thead th { white-space: nowrap; }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <h1 class="mb-4">Responsive table with only Bootstrap</h1>
+
+      <!-- Example: table scrolls horizontally on small viewports -->
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Department</th>
+              <th>Location</th>
+              <th>Joined</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Maria</td>
+              <td>Gonzalez</td>
+              <td>maria.g@example.com</td>
+              <td>Manager</td>
+              <td>Sales</td>
+              <td>Yangon</td>
+              <td>2023-02-14</td>
+              <td>Top performer</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>John</td>
+              <td>Doe</td>
+              <td>john.d@example.com</td>
+              <td>Developer</td>
+              <td>Engineering</td>
+              <td>Mandalay</td>
+              <td>2021-07-30</td>
+              <td>Backend lead</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Lin</td>
+              <td>Aye</td>
+              <td>lin.aye@example.com</td>
+              <td>Designer</td>
+              <td>Product</td>
+              <td>Taunggyi</td>
+              <td>2024-01-08</td>
+              <td>Contractor</td>
+            </tr>
+            <!-- add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+      <h2 class="h5">Notes</h2>
+      <ul>
+        <li><strong>.table-responsive</strong> makes the table horizontally scroll when it overflows the container (Bootstrap only).</li>
+        <li>You can use breakpointed variants like <code>.table-responsive-sm</code>, <code>-md</code>, <code>-lg</code>, etc., to enable scrolling only below a specific breakpoint.</li>
+        <li>If you need vertical scrolling with a fixed height, wrap the table in a div with a fixed height and <code>overflow-auto</code>.</li>
+      </ul>
+
+    </div>
+
+    <!-- Bootstrap 5 JS + Popper (optional, not required for table) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

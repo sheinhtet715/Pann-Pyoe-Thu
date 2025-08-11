@@ -214,7 +214,7 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   
                  
 
-                  <strong>Logo :(stored)</strong>
+                  <strong>Logo:</strong>
 
                            <?php if ($j['imglogo_url']): ?>
                                     <img src="<?= '../../Job page images/' . htmlspecialchars($j['imglogo_url']) ?>" alt="Job Image" style="width: 80px; height: auto;">

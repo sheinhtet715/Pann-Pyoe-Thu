@@ -91,6 +91,8 @@ $stmt = $conn->prepare("
            degree,
            specialization,
            email,
+           phone,
+           experiences,
            image_url
       FROM Counsellor_tbl
      ORDER BY counsellor_id DESC
@@ -102,89 +104,193 @@ $list = $stmt->get_result();
 $stmt->close();
 ?>
 
-
-
 <?php
     ob_start();
     ?>
+      <style>
+      /* keep the two columns side-by-side always (no wrapping) and allow scrolling when needed */
+      .no-wrap-row { display: flex; flex-wrap: nowrap; gap: 1rem; }
 
+      /* left column (form) fixed/min width but allowed to shrink slightly */
+      .form-col { flex: 0 0 360px; max-width: 420px; min-width: 280px; }
+
+      /* right column grows and can scroll horizontally if table is wider */
+      .table-col { flex: 1 1 0; min-width: 0; }
+
+      /* make the table area scroll horizontally instead of wrapping under the form */
+      .table-col .table-responsive { overflow-x: auto; }
+
+      /* visual niceties */
+      .card.form-card { height: 100%; }
+      .table thead th { white-space: nowrap; }
+
+      /* tiny helper for chevron rotation when collapse is shown */
+      .rotate { transition: transform .2s ease-in-out; }
+      .rotate.open { transform: rotate(90deg); }
+    </style>
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                    <div class="container-fluid py-4">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Counsellor List</h1>
                     </div>
-
-                    <div class="">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card">
+ <div class="no-wrap-row">
+                      <div class="form-col">
+          <div class="card form-card shadow-sm">
+            <div class="card-body p-3">
                                     <div class="card-body shadow">
                                         <form action="" method="post" class="p-3 rounded" enctype="multipart/form-data">
+                                             <div class="mb-2">
                                             <input type="text" name="counsellor_name"   class="form-control mb-3" placeholder="Name..." required>
-                                            <input type="text" name="degree"             class="form-control mb-3" placeholder="Degree..." required>
-                                            <input type="text" name="specialization"     class="form-control mb-3" placeholder="Specialization..." required>
-                                            <input type="text" name="phone"              class="form-control mb-3" placeholder="Phone...">
-                                            <input type="email" name="email"             class="form-control mb-3" placeholder="Email...">
-                                            <textarea    name="experiences"  class="form-control mb-3" placeholder="Experiences (semi-colon separated)"></textarea>
-                                               <input type="file" name="image" id="" accept="image/*" class="form-control mt-1"onchange="loadFile(event)">
-                                            <button type="submit" name="create" class="btn btn-outline-primary mt-3">Create</button>
-                                        </form>
 
+                                            </div>
+                                              <div class="mb-2">
+                                            <input type="text" name="degree"             class="form-control mb-3" placeholder="Degree..." required>
+
+                                            </div>
+                                              <div class="mb-2">
+                                            <input type="text" name="specialization"     class="form-control mb-3" placeholder="Specialization..." required>
+
+                                            </div>
+                                              <div class="mb-2">
+                                            <input type="text" name="phone"              class="form-control mb-3" placeholder="Phone...">
+
+                                            </div>
+                                              <div class="mb-2">
+                                            <input type="email" name="email"             class="form-control mb-3" placeholder="Email...">
+
+                                            </div>
+                                              <div class="mb-2">
+                                            <textarea    name="experiences"  class="form-control mb-3" placeholder="Experiences (semi-colon separated)"></textarea>
+
+                                            </div>
+                                              <div class="mb-2">
+                                               <input type="file" name="image" id="" accept="image/*" class="form-control mt-1"onchange="loadFile(event)">
+
+                                            </div>
+                                             <div class="d-grid">
+                                            <button type="submit" name="create" class="btn btn-outline-primary">Create</button>
+                                            </div>
+                                        </form>
+</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col ">
-                                <table class="table table-hover shadow-sm ">
-                                    <thead class="bg-primary text-white">
-                                           <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Degree</th>
-                                            <th>Specialization</th>
-                                            <th>Email</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php while ($row = $list->fetch_assoc()): ?>
-                                        <tr>
-                                        <td><?= $row['counsellor_id'] ?></td>
-                                        <td><?= htmlspecialchars($row['counsellor_name']) ?></td>
-                                        <td><?= htmlspecialchars($row['degree']) ?></td>
-                                        <td><?= htmlspecialchars($row['specialization']) ?></td>
-                                        <td><?= htmlspecialchars($row['email']) ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $row['counsellor_id'] ?>"
-                                            class="btn btn-sm btn-outline-secondary">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                          <button type="button"
-                                                onclick="deleteCounsellor(<?= $row['counsellor_id'] ?>)"
-                                                class="btn btn-sm btn-outline-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                        </td>
-                                        </tr>
-                                    <?php endwhile; ?>
+                                   <!-- RIGHT: Table (flexible, will scroll horizontally if needed) -->
+        <div class="table-col">
+          <div class="card shadow-sm">
+            <div class="card-body p-0">
 
-                                    </tbody>
-                                </table>
-                            <nav>
-                                    <ul class="pagination justify-content-end">
-                                    <?php for ($p = 1; $p <= $totalPages; $p++): ?>
-                                        <li class="page-item <?= $p === $page ? 'active' : '' ?>">
-                                        <a class="page-link" href="?page=<?= $p ?>"><?= $p ?></a>
-                                        </li>
-                                    <?php endfor; ?>
-                                    </ul>
-                                </nav>
+              <!-- Make table horizontally scrollable inside this column -->
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="bg-primary text-white">
+            <tr>
+              <th style="width:40px"></th> <!-- chevron column -->
+              <th>ID</th>
+              <th>Name</th>
+              <th>Degree</th>
+              <th>Specialization</th>
+              <th>Email</th>
+              <th style="width:120px">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php while ($row = $list->fetch_assoc()): 
+              $id = (int)$row['counsellor_id'];
+            ?>
+              <tr class="main-row" data-id="<?= $id ?>">
+                <td class="toggle-cell text-center align-middle">
+                  <a class="text-decoration-none" data-bs-toggle="collapse" href="#detail-<?= $id ?>" role="button" aria-expanded="false" aria-controls="detail-<?= $id ?>">
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </td>
 
-                                </div>
-                            </div>
-                            </div>
+                <td class="align-middle"><?= $id ?></td>
+                <td class="align-middle"><?= htmlspecialchars($row['counsellor_name']) ?></td>
+                <td class="align-middle"><?= htmlspecialchars($row['degree']) ?></td>
+                <td class="align-middle"><?= htmlspecialchars($row['specialization']) ?></td>
+                <td class="align-middle"><?= htmlspecialchars($row['email']) ?></td>
+
+                <td class="align-middle">
+                  <a href="edit.php?id=<?= $id ?>" class="btn btn-sm btn-outline-secondary">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+
+                  <button type="button" onclick="deleteCounsellor(<?= $id ?>)" class="btn btn-sm btn-outline-danger">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- detail row (collapsed) -->
+              <tr class="detail-row">
+                <td colspan="7" class="p-0">
+                  <div class="collapse" id="detail-<?= $id ?>">
+                    <div class="p-3 bg-light border">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong>Phone</strong>
+                          <div class="mt-1"><?= htmlspecialchars($row['phone'] ?: '—') ?></div>
+                        </div>
+                        <div class="col-md-5">
+                          <strong>Experiences</strong>
+                          <ul class="mt-1">
+                            <?php
+                              $exps = array_filter(array_map('trim', explode(';', $row['experiences'] ?? '')));
+                              if (count($exps) === 0) {
+                                echo '<li class="text-muted">No experiences provided.</li>';
+                              } else {
+                                foreach ($exps as $e) {
+                                  echo '<li>' . htmlspecialchars($e) . '</li>';
+                                }
+                              }
+                            ?>
+                          </ul>
+                        </div>
+                        <div class="col-md-3 text-center">
+                          <strong>Image</strong>
+                          <div class="mt-2">
+                            <?php if (!empty($row['image_url'])): ?>
+                              <img src="<?= '../../Counsellor_page_images/' . htmlspecialchars($row['image_url']) ?>"
+                                   alt="Counsellor Image"
+                                   style="max-width:100%; height:120px; object-fit:cover; border-radius:6px;">
+                            <?php else: ?>
+                              <div class="text-muted">No image</div>
+                            <?php endif; ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+
+      <nav>
+        <ul class="pagination justify-content-end">
+          <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+            <li class="page-item <?= $p === $page ? 'active' : '' ?>">
+              <a class="page-link" href="?page=<?= $p ?>"><?= $p ?></a>
+            </li>
+          <?php endfor; ?>
+        </ul>
+      </nav>
+  </div>
+
+            </div> <!-- /.card-body -->
+          </div> <!-- /.card -->
+        </div> <!-- /.table-col -->
+
+      </div> <!-- /.no-wrap-row -->
+
+    </div> <!-- /.container-fluid -->
 
 <?php
     $content = ob_get_clean();
@@ -218,7 +324,27 @@ function deleteCounsellor(id) {
     }
   });
 }
-
+// Toggle chevron icon for each collapse target
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.collapse').forEach(c => {
+    c.addEventListener('show.bs.collapse', (ev) => {
+      const id = ev.target.id.replace('detail-','');
+      const toggle = document.querySelector(`.main-row[data-id="${id}"] .toggle-cell a i`);
+      if (toggle) {
+        toggle.classList.remove('fa-chevron-right');
+        toggle.classList.add('fa-chevron-down');
+      }
+    });
+    c.addEventListener('hide.bs.collapse', (ev) => {
+      const id = ev.target.id.replace('detail-','');
+      const toggle = document.querySelector(`.main-row[data-id="${id}"] .toggle-cell a i`);
+      if (toggle) {
+        toggle.classList.remove('fa-chevron-down');
+        toggle.classList.add('fa-chevron-right');
+      }
+    });
+  });
+});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
