@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($imglogo_input !== '') {
             $logoPathForDb = $imglogo_input;
         }
-
+          
         // insert (no posted_date)
         if (!$error) {
             $sql = "INSERT INTO job_tbl (org_name, job_title, job_type, location, description, requirement, job_attachment, imglogo_url)
@@ -89,26 +89,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+  // ── 3) Pagination setup (PDO-only) ──
+$limit = 5;
+$page  = max(1, (int) ($_GET['page'] ?? 1));
+$offset = ($page - 1) * $limit;
 
-// ---------- Fetch jobs for listing (no posted_date sort) ----------
-$stmt = $pdo->query("SELECT * FROM job_tbl ORDER BY job_id DESC");
+// total count via PDO
+$totalStmt = $pdo->query("SELECT COUNT(*) FROM job_tbl");
+$total = (int) $totalStmt->fetchColumn();
+$totalPages = (int) ceil($total / $limit);
+
+// fetch only current page with LIMIT/OFFSET (bind as integers)
+$stmt = $pdo->prepare("SELECT * FROM job_tbl ORDER BY job_id DESC LIMIT :limit OFFSET :offset");
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
 $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <?php ob_start(); ?>
+  <style>
+      /* Keep form and table side-by-side always. Table area will scroll horizontally when needed. */
+      .no-wrap-row { display:flex; flex-wrap:nowrap; gap:1rem; align-items:flex-start; }
+      .form-col { flex:0 0 360px; max-width:440px; min-width:260px; }
+      .table-col { flex:1 1 0; min-width:0; }
+      .table-col .table-responsive { overflow-x:auto; }
+      .card.form-card{height:100%;}
+      .table thead th { white-space:nowrap; }
+      .rotate { transition: transform .18s ease-in-out; }
+      .rotate.open { transform: rotate(90deg); }
+      .detail-inner { padding:1rem; }
+    </style>
  <!-- Begin Page Content -->
-                <div class="container-fluid">
+                   <div class="container-fluid py-4">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Counsellor List</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Jobs List</h1>
                     </div>
 
-                    <div class="">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card">
-                                    <div class="card-body shadow">
+                     <div class="no-wrap-row">
+
+        <!-- LEFT: form column -->
+        <div class="form-col">
+          <div class="card form-card shadow-sm">
+                             <div class="card-body p-3">
+                              <div class="card-body shadow">
            <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-2">
               <label class="form-label">Organization</label>
@@ -156,82 +183,101 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
-
-    <!-- List -->
-   <div class="col">
+              </div>
+        <!-- RIGHT: table column -->
+        <div class="table-col">
+          <div class="card shadow-sm">
+            <div class="card-body p-0">
   <div class="table-responsive">
-    <table class="table table-hover shadow-sm">
+
+    <table class="table table-hover mb-0 shadow-sm">
       <thead class="bg-primary text-white">
         <tr>
-          <th></th>              <!-- toggle column (chevron) -->
+           <th style="width:40px"></th>           <!-- toggle column (chevron) -->
           <th>Id</th>
           <th>Title</th>
           <th>description</th>
           <th>requirement</th>
           <th>location</th>
-
-          <th></th>              <!-- actions -->
+           <th style="width:120px">Actions</th>            <!-- actions -->
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($jobs as $j): ?>
-          <tr class="main-row" data-id="<?= (int)$j['job_id'] ?>">
-            <td class="toggle-cell" style="cursor:pointer; width:34px; text-align:center;">
-              <i class="fas fa-chevron-right"></i>
-            </td>
+      <?php foreach ($jobs as $j): ?>
+  <tr class="main-row" data-id="<?= (int)$j['job_id'] ?>">
+    <td class="toggle-cell" style="cursor:pointer; width:34px; text-align:center;">
+      <i class="fas fa-chevron-right rotate"></i>
+    </td>
 
-            <td><?= (int)$j['job_id'] ?></td>
-            <td><?= htmlspecialchars($j['job_title']) ?></td>
-            <td><?= nl2br(htmlspecialchars($j['description'] ?? '')) ?></td>
-            <td><?= nl2br(htmlspecialchars($j['requirement'] ?? '')) ?></td>
-            <td><?= htmlspecialchars($j['location']) ?></td>
+    <td><?= (int)$j['job_id'] ?></td>
+    <td><?= htmlspecialchars($j['job_title']) ?></td>
+    <td><?= nl2br(htmlspecialchars($j['description'] ?? '')) ?></td>
+    <td><?= nl2br(htmlspecialchars($j['requirement'] ?? '')) ?></td>
+    <td><?= htmlspecialchars($j['location']) ?></td>
 
+    <td>
+      <a href="edit.php?job_id=<?= $j['job_id'] ?>" class="btn btn-sm btn-secondary">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </a>
+      <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?= (int)$j['job_id'] ?>)">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </td>
+  </tr>
 
-            <td>
-             <a href="edit.php?job_id=<?= $j['job_id'] ?>" class="btn btn-sm btn-secondary">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </a>
-              <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?= (int)$j['job_id'] ?>)">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-          </tr>
+  <!-- detail row (hidden by default) -->
+  <tr id="detail-<?= (int)$j['job_id'] ?>" class="detail-row" style="display:none; background:#f8f9fa;">
+    <td colspan="7" class="bg-light">
+      <div class="detail-inner bg-light border-top">
+        <strong>Job Type:</strong> <?= htmlspecialchars($j['job_type'] ?? '') ?><br>
+        <strong>Organization:</strong> <?= htmlspecialchars($j['org_name'] ?? '') ?><br>
+        <strong>Attachment:</strong>
+        <?php if (!empty($j['job_attachment'])): ?>
+          <a href="<?= htmlspecialchars($j['job_attachment']) ?>" target="_blank" class="text-decoration-none">
+            <?= htmlspecialchars($j['job_attachment']) ?>
+          </a>
+        <?php else: ?>
+          <span class="text-muted">—</span>
+        <?php endif; ?>
+        <br>
+        <strong>Logo:</strong>
+        <?php if ($j['imglogo_url']): ?>
+          <img src="<?= '../../Job page images/' . htmlspecialchars($j['imglogo_url']) ?>"
+               alt="Job Image" style="width: 80px; height: auto;">
+        <?php else: ?>
+          -
+        <?php endif; ?>
+      </div>
+    </td>
+  </tr>
+<?php endforeach; ?>
 
-          <!-- detail row (hidden by default) -->
-          <tr id="detail-<?= (int)$j['job_id'] ?>" class="detail-row" style="display:none; background:#f8f9fa;">
-            <td colspan="8" class="bg-light">
-                  <strong>Job Type:</strong><?= htmlspecialchars($j['job_type'] ?? '') ?><br>
-                  <strong>Organization:</strong><?= htmlspecialchars($j['org_name'] ?? '') ?><br>
-                  <strong>Attachment:</strong>
-               
-                      <?php if (!empty($j['job_attachment'])): ?>
-                        <a href="<?= htmlspecialchars($j['job_attachment']) ?>" target="_blank" class="text-decoration-none">
-                          <?= htmlspecialchars($j['job_attachment']) ?>
-                        </a>
-                      <?php else: ?>
-                        <span class="text-muted">—</span>
-                      <?php endif; ?><br>
-                  
-                 
-
-                  <strong>Logo:</strong>
-
-                           <?php if ($j['imglogo_url']): ?>
-                                    <img src="<?= '../../Job page images/' . htmlspecialchars($j['imglogo_url']) ?>" alt="Job Image" style="width: 80px; height: auto;">
-                                <?php else: ?>
-                             -
-                                <?php endif; ?>
-              
-            </td>
-          </tr>
-
-        <?php endforeach; ?>
       </tbody>
         </table>
       </div>
-    </div>
-  </div>
+       
+          </div> <!-- /.card-body -->
+          
+          </div> <!-- /.card -->
+              <div class="p-3 border-top">
+                <!-- place pagination here if needed -->
+                        <nav>
+                                    <ul class="pagination justify-content-end">
+                                    <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+                                        <li class="page-item <?php echo $p === $page ? 'active' : ''?>">
+                                        <a class="page-link" href="?page=<?php echo $p?>"><?php echo $p?></a>
+                                        </li>
+                                    <?php endfor; ?>
+                                    </ul>
+                                </nav>
+                                    </div>
+        </div> <!-- /.table-col -->
+
+      </div> <!-- /.no-wrap-row -->
+
+    </div> <!-- /.container-fluid -->
 </div>
+
 
 <?php
     $content = ob_get_clean();
@@ -266,22 +312,46 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
-// after the table, add:
-document.querySelectorAll('.toggle-cell').forEach(cell => {
-  cell.addEventListener('click', () => {
-    const tr = cell.closest('tr.main-row');
-    const id = tr.dataset.id;
-    const detail = document.getElementById('detail-' + id);
-    const icon   = cell.querySelector('i');
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.toggle-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      const tr = cell.closest('tr.main-row');
+      if (!tr) return;
+      const id = tr.dataset.id;
+      const detail = document.getElementById('detail-' + id);
+      const icon   = cell.querySelector('i');
 
-    if (detail.style.display === 'none') {
-      detail.style.display = '';
-      icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
-    } else {
-      detail.style.display = 'none';
-      icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
-    }
+      if (!detail) return;
+
+      // check computed style (reliable)
+      const isHidden = window.getComputedStyle(detail).display === 'none';
+
+      if (isHidden) {
+        // OPTIONAL: close other open details (uncomment to enable)
+        // document.querySelectorAll('.detail-row').forEach(r => {
+        //   r.style.display = 'none';
+        //   const otherIcon = r.previousElementSibling?.querySelector('.toggle-cell i');
+        //   if (otherIcon) {
+        //     otherIcon.classList.remove('fa-chevron-down');
+        //     otherIcon.classList.add('fa-chevron-right');
+        //   }
+        // });
+
+        detail.style.display = ''; // show (browser will use table-row)
+        if (icon) {
+          icon.classList.remove('fa-chevron-right');
+          icon.classList.add('fa-chevron-down');
+          // icon.classList.add('open'); // if you want rotation CSS
+        }
+      } else {
+        detail.style.display = 'none'; // hide
+        if (icon) {
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-right');
+          icon.classList.remove('open');
+        }
+      }
+    });
   });
 });
 </script>
-    
