@@ -97,6 +97,7 @@ session_start();
       scholarship_id,
       title,
       description,
+      logo_url,
       country,
       intake_season,
       degree_level,
@@ -116,19 +117,33 @@ session_start();
 ?>
 
 <?php ob_start(); ?>
- <!-- Begin Page Content -->
-                <div class="container-fluid">
+<style>
+      /* keep the two columns side-by-side always */
+      .no-wrap-row { display: flex; flex-wrap: nowrap; gap: 1rem; align-items: flex-start; }
+      .form-col { flex: 0 0 360px; max-width: 440px; min-width: 260px; }
+      .table-col { flex: 1 1 0; min-width: 0; }
+      .table-col .table-responsive { overflow-x: auto; }
+      .card.form-card { height: 100%; }
+      .table thead th { white-space: nowrap; }
+      .rotate { transition: transform .18s ease-in-out; }
+      .rotate.open { transform: rotate(90deg); }
+      /* Make small tweak so collapse content inside td has some spacing */
+      .detail-inner { padding: 1rem; }
+    </style>
+    <!-- Begin Page Content -->
+    <div class="container-fluid py-4">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Counsellor List</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Scholarship List</h1>
                     </div>
 
-                    <div class="">
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="card">
-                                    <div class="card-body shadow">
+                  
+                        <div class="no-wrap-row">
+                                                  <!-- LEFT: Create form -->
+                          <div class="form-col">
+                            <div class="card form-card shadow-sm">
+                              <div class="card-body p-3">
                                       <form method="post" action="list.php" enctype="multipart/form-data">
                                         <div class="mb-2">
                                           <input type="text" name="title" class="form-control" placeholder="Title" required>
@@ -178,59 +193,79 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-         <div class="col ">
-           <div class="table-responsive">
-  <table class="table table-hover shadow-sm">
-    <thead class="bg-primary text-white">
-      <tr>
-        <th></th>               <!-- for the toggle button -->
-        <th>ID</th>
-        <th>Title</th>
-        <th>Country</th>
-        <th>Intake</th>
-        <th>Degree</th>
-        <th>Type</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-       <?php while ($r = $list->fetch_assoc()): ?>
-<tr class="main-row" data-id="<?= $r['scholarship_id'] ?>">
-      <td class="toggle-cell" style="cursor:pointer; width:34px; text-align:center;">
-              <i class="fas fa-chevron-right"></i>
-        </td>
-        <td><?= $r['scholarship_id'] ?></td>
-        <td><?= htmlspecialchars($r['title']) ?></td>
-        <td><?= htmlspecialchars($r['country']) ?></td>
-        <td><?= htmlspecialchars($r['intake_season']) ?></td>
-        <td><?= htmlspecialchars($r['degree_level']) ?></td>
-        <td><?= htmlspecialchars($r['type']) ?></td>
-        <td>
-          <a href="edit.php?id=<?= $r['scholarship_id'] ?>"
-             class="btn btn-sm btn-light"><i class="fa-solid fa-pen-to-square"></i></a>
-          <button class="btn btn-sm btn-danger"
-                  onclick="confirmDelete(<?= $r['scholarship_id'] ?>)">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-       <tr class="detail-row" id="detail-<?= $r['scholarship_id'] ?>" style="display:none; background:#f8f9fa;">
-          <td colspan="8" class="bg-light">
-             <strong>Description:</strong>
-          <?= isset($r['description']) ? nl2br(htmlspecialchars($r['description'])) : '' ?><br>
-            <strong>Deadline:</strong> <?= htmlspecialchars($r['deadline']) ?><br>
-            <strong>Coverage:</strong> <?= nl2br(htmlspecialchars($r['coverage'])) ?><br>
-            <strong>Apply Link:</strong>
-              <?php if ($r['apply_link']): ?>
-                <a href="<?= htmlspecialchars($r['apply_link']) ?>" target="_blank">Link</a>
-              <?php endif; ?><br>
-            <strong>Eligibility:</strong> <?= nl2br(htmlspecialchars($r['eligibility'])) ?>
+  <!-- RIGHT: Table -->
+        <div class="table-col">
+          <div class="card shadow-sm">
+            <div class="card-body p-0">
+
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="bg-primary text-white">
+                      <tr>
+                        <th style="width:40px"></th>               <!-- for the toggle button -->
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Country</th>
+                        <th>Intake</th>
+                        <th>Degree</th>
+                        <th>Type</th>
+                        <th style="width:120px">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php while ($r = $list->fetch_assoc()): ?>
+                <tr class="main-row" data-id="<?= $r['scholarship_id'] ?>">
+                      <td class="toggle-cell " style="cursor:pointer; width:34px; text-align:center;">
+                              <i class="fas fa-chevron-right"></i>
+                        </td>
+                        <td><?= $r['scholarship_id'] ?></td>
+                        <td><?= htmlspecialchars($r['title']) ?></td>
+                        <td><?= htmlspecialchars($r['country']) ?></td>
+                        <td><?= htmlspecialchars($r['intake_season']) ?></td>
+                        <td><?= htmlspecialchars($r['degree_level']) ?></td>
+                        <td><?= htmlspecialchars($r['type']) ?></td>
+                        <td>
+                          <a href="edit.php?id=<?= $r['scholarship_id'] ?>"
+                            class="btn btn-sm btn-light"><i class="fa-solid fa-pen-to-square"></i></a>
+                          <button class="btn btn-sm btn-danger"
+                                  onclick="confirmDelete(<?= $r['scholarship_id'] ?>)">
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr class="detail-row" id="detail-<?= $r['scholarship_id'] ?>" style="display:none; background:#f8f9fa;">
+                          <td colspan="8" class="bg-light">
+                              <div class="detail-inner bg-light border-top">
+                            <strong>Description:</strong>
+                          <?= isset($r['description']) ? nl2br(htmlspecialchars($r['description'])) : '' ?><br>
+                            <strong>Deadline:</strong> <?= htmlspecialchars($r['deadline']) ?><br>
+                            <strong>Coverage:</strong> <?= nl2br(htmlspecialchars($r['coverage'])) ?><br>
+                            <strong>Apply Link:</strong>
+                              <?php if ($r['apply_link']): ?>
+                                <a href="<?= htmlspecialchars($r['apply_link']) ?>" target="_blank">Link</a>
+                              <?php endif; ?><br>
+                            <strong>Eligibility:</strong> <?= nl2br(htmlspecialchars($r['eligibility'])) ?><br>
+                            <strong>Logo:</strong>
+
+                           <?php if ($r['logo_url']): ?>
+                                    <img src="<?= '../../Scholarships_page_images/' . htmlspecialchars($r['logo_url']) ?>" alt="Job Image" style="width: 80px; height: auto;">
+                                <?php else: ?>
+                             -
+                                <?php endif; ?>
+                                  </div>
           </td>
         </tr>
       <?php endwhile; ?>  
     </tbody>
   </table>
 </div>
+
+          </div> <!-- /.card -->
+        </div> <!-- /.table-col -->
+
+      </div> <!-- /.no-wrap-row -->
+
+    </div> <!-- /.container-fluid -->
 
     <!-- pagination -->
              <nav>
