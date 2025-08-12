@@ -472,7 +472,7 @@
             <p>© 2025 Pann Pyoe Thu. All rights reserved.</p>
         </div>
     </div>
-    <?php include '../Certificate/generate_certificate.php'; ?>
+    
     <script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
