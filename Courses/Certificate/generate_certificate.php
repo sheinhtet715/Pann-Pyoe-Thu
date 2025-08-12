@@ -46,7 +46,7 @@ imagettftext($image, 33, 0, 1550, 1000, $textColor, $fontPath, $date);
 // echo base64_encode($imageData);
 
 // === OUTPUT IMAGE === for self testing 
-header('Content-Type: image/jpeg');
+header('content-type: image/jpeg');
 // header('Content-Disposition: attachment; filename="certificate_test.jpg"');
 imagejpeg($image, null, 90);
 imagedestroy($image);
