@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-    <title>Psychological First Aid Course</title>
+    <title> Collaboration Course</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
      <link rel="stylesheet" href="../Courses_css/PFA.css">
@@ -35,9 +35,9 @@
     <div class="course-container">
         <!-- Course Header -->
         <div class="course-header">
-            <h1>Psychological First Aid (PFA)</h1>
+            <h1> Collaboration Course</h1>
             <div class="course-info">
-                <div>Type - Online Course</div>
+                <div>Type - Video Lecture</div>
                 <div>Language - English</div>
                 <div>Duration - 4 Modules</div>
             </div>
@@ -51,9 +51,9 @@
                 <li data-module="module2">Module 2</li>
                 <li data-module="module3">Module 3
                     <ul>
-                        <li>1. LOOK</li>
-                        <li>2. LISTEN</li>
-                        <li>3. LINK</li>
+                        <li>1.  Digital Tools for Collaboration</li>
+                        <li>2.  What is collaborative leadership?</li>
+                        <!-- <li>3. LINK</li> -->
                     </ul>
                 </li>
                 <li data-module="module4">Module 4</li>
@@ -66,116 +66,133 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
-                <h3>Psychological First Aid: What Is It?</h3>
+                <h3> What is collaboration?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
                 <img src="../Courses page Images/Psychological first aid.jpg" alt="Psychological First Aid Overview" class="module-image">
                 
-                <p>Psychological First Aid (PFA) is a data-driven method based on the concept of human resilience. PFA seeks to alleviate stress symptoms and promote a healthy recovery following a traumatic incident, natural disaster, public health emergency, or personal crisis.</p>
+                <p> The word collaboration is used in different ways making it necessary to check for common understanding. 
+                    Collaboration may be used as a synonym for “working together.” The term may indicate a process or it might refer to a highly integrated method of achieving a goal.</p>
                 
                 <div class="example">
-                    <h4>Key Insight:</h4>
-                    <p>Emotional suffering is not usually as evident as physical injury, yet it is equally terrible and debilitating.</p>
-                </div>
+                    <h4> Levels of Collaboration</h4>
+                    <p> Levels of Collaboration Since the word collaboration can be misunderstood, it is valuable to review some of the theory in this area. A commonly used 
+                        collaboration framework is Hogue’s3 Levels of Community Linkage Model. This model describes five levels of collaboration:</p>
+                        <ul>
+                            <li>(1) networking,</li>
+                            <li>(2) cooperation or alliance,</li>
+                            <li>(3) coordination or partnership,</li>
+                            <li>(4) coalition, and</li>
+                            <li>(5) collaboration.</li> 
+                        </ul>
+                       <a href="https://asphn.org/wp-content/uploads/2017/10/collaboration-primer.pdf" target="_blank">Read more about Hogue's Levels of Collaboration</a>
+                    </div>
             </section>
 
             <!-- Module 2 -->
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
-                <h3>Common Reactions to Traumatic Events</h3>
+                <h3>Collaborative learning</h3>
                 
-                <p>It is normal to feel upset after going through a life-changing incident. Every person who experiences a calamity is affected by it. Reactions vary depending on when they occur during and after the experience.</p>
+                <p> “Collaborative learning” is an umbrella term for a variety of educational approaches involving joint intellectual 
+                    effort by students, or students and teachers together. Usually, students are working in groups of two or more, 
+                    mutually searching for understanding, solutions, or meanings, or creating a product. Collaborative learning 
+                    activities vary widely, but most center on students’ exploration or application of the course material, not simply 
+                    the teacher’s presentation or explication of it.</p>
+                <a href="https://teach.ufl.edu/wp-content/uploads/2016/07/WhatisCollaborativeLearning.pdf" target="_blank">Read more about Collaborative Learning</a>
                 
-                <h3>Some frequent stress reactions are:</h3>
+                <h3>The benefits of collaborative learning include:</h3>
                 
                 <ul>
-                    <li>Confusion, fear, and feelings of helplessness</li>
-                    <li>Sleep troubles</li>
-                    <li>Physical pain and anxiety</li>
-                    <li>Feelings of anger, grief, and shock</li>
-                    <li>Aggressiveness</li>
-                    <li>Withdrawal & Guilt</li>
-                    <li>Shaken religious faith</li>
-                    <li>Loss of confidence in self or others</li>
+                    <li>Development of higher-level thinking, oral communication, self-management, and leadership skills.</li>
+                    <li>Promotion of student-faculty interaction.</li>
+                    <li>Increase in student retention, self-esteem, and responsibility.</li>
+                    <li>Exposure to and an increase in understanding of diverse perspectives.</li>
+                    <li>Preparation for real life social and employment situations.</li>
                 </ul>
-                
-                <div class="example">
-                    <h4>Important Note:</h4>
-                    <p>These reactions are normal responses to abnormal events. Recognizing them is the first step in providing appropriate support.</p>
-                </div>
-                
-                <p>Reference: <a href="https://www.health.state.mn.us/communities/ep/behavioral/pfa.html" target="_blank">Minnesota Department of Health - PFA</a></p>
+                <a href=" https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning" target="_blank">Read more about Benefits of Collaborative Learning</a>    
             </section>
 
             <!-- Module 3 -->
             <section id="module3" class="module">
                 <h2>MODULE 3</h2>
-                <h3>How to Proceed and What to Do?</h3>
+                <h3>Digital Tools for Collaboration</h3>
                 
-                <p>Comforting someone in distress and assisting them in feeling secure and at ease is the goal of PFA. In addition to helping people discover information, resources, and social support, it offers emotional support and assists in meeting urgent basic requirements.</p>
-                
+                <p> Google Workspace, Trello, Microsoft Teams
+                    These tools provide features such as instant messaging, video conferencing, file sharing, project management, and online whiteboards to help teams 
+                    collaborate more efficiently and effectively.</p>
                 <div class="think-outside-box">
-                    <h4>Action Principles</h4>
-                    <p>According to the three action principles of Look, Listen, and Link, PFA is a method of approaching someone who is in distress, determining what kind of assistance they require, and assisting them in getting that assistance.</p>
-                </div>
+                    <h4> What is collaborative leadership?</h4>
+                    <p> Collaborative leadership is a management strategy in which members of a leadership team collaborate across 
+                        sectors to make decisions that keep their organization prospering. This type of leadership has grown prevalent 
+                        among managers today, replacing the traditional top-down leadership strategy of the past, in which high-level 
+                        executives made decisions that were passed down to employees with little understanding of how or why such 
+                        decisions were made.
+                        
+                        Unlike the outdated top-down approach, the collaborative leadership style provides numerous benefits to 
+                        organizations. At the executive level, it develops a sense of unity among managers, helping them to quickly 
+                        make effective business decisions, establish and preserve the organization's core principles, and strategically 
+                        approach difficulties as a unified team. Embracing collaboration at this high level also shows employees that 
+                        they, too, should approach their work in a collaborative manner</p>
+                    </div>
                 
                 <!-- Image 2 in Module 3 -->
                 <img src="../Courses page Images/Psychological first aid.jpg" alt="LOOK Action Principle" class="module-image">
                 
-                <h3>1. LOOK (observe a circumstance)</h3>
-                <ul>
-                    <li>Analyze what has occurred or is occurring</li>
-                    <li>Pick who requires assistance</li>
-                    <li>Analyse the hazards to safety and security</li>
-                    <li>Evaluate any physical harm</li>
-                    <li>Consider your immediate practical and basic demands</li>
-                    <li>Monitor for emotional responses</li>
-                </ul>
-                
-                <h3>2. LISTEN (focus on the individual)</h3>
-                <ul>
-                    <li>Give a brief introduction</li>
-                    <li>Listen intently and actively</li>
-                    <li>Respect other people's emotions</li>
-                    <li>Calm the distressed individual</li>
-                    <li>Inquire about needs and worries</li>
-                    <li>Assist the person or people experiencing distress in resolving their issues and requirements</li>
-                </ul>
-                
                 <!-- Image 3 in Module 3 -->
                 <img src="../Courses page Images/Psychological first aid.jpg" alt="LISTEN Action Principle" class="module-image">
+                <a hre="https://graduate.northeastern.edu/knowledge-hub/collaborative-leadership/" target="_blank">Read more about Collaborative Leadership</a>
                 
-                <h3>3. LINK (act now to assist)</h3>
-                <ul>
-                    <li>Look for information</li>
-                    <li>Make contact with the person's family and friends</li>
-                    <li>Address real-world issues</li>
-                    <li>Get assistance and other services</li>
-                </ul>
             </section>
 
             <!-- Module 4 -->
             <section id="module4" class="module">
                 <h2>MODULE 4</h2>
-                <h3>Active Listening in PFA</h3>
+                <h3>Reasons for Collaboration</h3>
                 
                 <!-- Image 4 at start of Module 4 -->
                 <img src="../Courses page Images/Psychological first aid.jpg" alt="Active Listening in PFA" class="module-image">
                 
-                <p>A crucial element of PFA is active listening. This skill is fundamental to establishing trust and providing effective support.</p>
+                <p> There are numerous reasons why individuals or groups may decide to collaborate. Some common explanations are:</p>
                 
-                <h3>Active Listening Guidelines:</h3>
+                <!-- <h3>Active Listening Guidelines:</h3> -->
                 <ol>
-                    <li>Focus intently on what the person who is impacted has to say</li>
-                    <li>Don't try to reassure them that everything will be okay or interrupt them</li>
-                    <li>If appropriate for your culture, make frequent eye contact and make sure your body language conveys that you are paying attention</li>
-                    <li>If appropriate, gently touch the afflicted person's hand or shoulder</li>
-                    <li>Spend some time listening to others explain what transpired</li>
+                    <li>1. To reach a shared goal.
+                        Collaboration allows individuals or groups to 
+                        pool their resources and knowledge in order to 
+                        achieve a common objective.</li>
+                    <li>2. Improve communication.
+                        Collaboration can improve communication by 
+                        allowing for open conversation and the exchange 
+                        of ideas.</li>
+                    <li> 3. Improve problem-solving skills. 
+                        Collaboration can improve problem-solving 
+                        skills by allowing people to brainstorm and share 
+                        ideas with one another.</li>
+                    <li>4. To improve efficiency.
+                        Collaboration boosts efficiency by allowing 
+                        people to share resources, information, and 
+                        talents</li>
+                    <li>5. To develop relationships.
+                        Collaboration can assist to strengthen connections by 
+                        bringing individuals together and creating a sense of 
+                        community.</li>
+                    <li>6. To acquire new talents or expertise.
+                        Collaboration allows individuals to master new talents or 
+                        obtain knowledge from others.</li>
+                    <li>7. To boost inventiveness.
+                        Collaboration can boost creativity by creating an 
+                        environment for brainstorming and innovation.</li>
+                    <li>8. Create something fresh.
+                        Collaboration can be utilized to develop a new product, 
+                        service, or process</li>
                 </ol>
-                
+
                 <div class="example">
-                    <h4>Key Principle:</h4>
-                    <p>People will gradually comprehend and come to terms with the incident if they share their story.</p>
+                    <h4>Videos</h4>
+                    <p><a href= "https://www.marketing91.com/collaboration/"
+                        target="_blank">Collaboration allows individuals or groups to pool their resources and knowledge in order to achieve a common objective.</a></p>
+                    <a href="https://youtu.be/2DmFFS0dqQc?si=g5kPYir-LKEyvp6"> Collaborations</a>
                 </div>
                 
                 <!-- Two side-by-side images in Module 4 interaction part -->
@@ -184,51 +201,37 @@
                     <img src="../Courses page Images/Psychological first aid.jpg" alt="Supportive Communication">
                 </div>
                 
-                <div class="video-container">
-                    <h4>Supporting Specific Populations</h4>
-                    <p>Watch this video to learn about applying PFA principles with different groups:</p>
-                    <a href="https://youtu.be/AfdKqpGaa_k" target="_blank">
-                        <i class="fab fa-youtube"></i> Watch Video
-                    </a>
-                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/AfdKqpGaa_k?si=HFvFgW4MLmC76j8C" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                    </iframe> -->
                 </div>
-                
-                <p>Reference: <a href="https://epidemics.ifrc.org/volunteer/action/45-psychological-first-aid-pfa" target="_blank">IFRC - PFA Action Principles</a></p>
             </section>
 
             <!-- Quiz Section -->
             <section id="quiz" class="module">
                 <div class="quiz-section">
-                    <h2>Psychological First Aid (PFA) Quiz</h2>
+                    <h2>Collaboration Quiz</h2>
                     <p style="text-align: center; margin-bottom: 2rem;">Test your knowledge of Modules 1-4</p>
                     
                     <div class="quiz-question">
-                        <h3>1. What is the main goal of Psychological First Aid (PFA)?</h3>
+                        <h3>1.  What is the most basic level of collaboration according to Hogue’s Levels of Community Linkage Model?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q1a" name="question1">
-                                <label for="q1a">(A) To provide long-term therapy</label>
+                                <label for="q1a">(A)  Coordination</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1b" name="question1">
-                                <label for="q1b">(B) To promote resilience and healthy recovery after a crisis</label>
+                                <label for="q1b">(B)  Coalition</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1c" name="question1">
-                                <label for="q1c">(C) To administer medication</label>
+                                <label for="q1c">(C) Networking</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1d" name="question1">
-                                <label for="q1d">(D) To avoid discussing traumatic events</label>
+                                <label for="q1d">(D)  Collaboration</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
-                    </div>
-
+                    </div> 
                     <div class="quiz-question">
                         <h3>2. Which of the following is NOT a common reaction to a life-changing incident?</h3>
                         <div class="options">
