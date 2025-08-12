@@ -517,7 +517,7 @@ input, textarea {
 }
 .thank{
     width: 70%;
-    margin-left;
+    margin-left: 10px;
 }
 .payment-options {
     display: flex;
@@ -798,6 +798,8 @@ input, textarea {
     <div id="payment-popup" class="popup">
     <form method="POST" action="Payement Form.php">
       <input type="hidden" name="payment_name" id="payment-input" />
+      <input type="hidden" name="course_name" value="<?= htmlspecialchars($_SESSION['course_name'] ?? '') ?>">
+      <input type="hidden" name="course_id" value="<?= htmlspecialchars($course_id ?? '') ?>">
 
       <div class="card">
         <div class="left">
@@ -807,10 +809,10 @@ input, textarea {
           <img src="../Counsellor_page_images/Pink Tulip.png" class="flower-image" alt="logo">
           <div class="textbox">
             <label>Name</label>
-            <input type="text" name="user_name" placeholder="Your name" required />
+            <input type="text" name="user_name" value="<?= htmlspecialchars($user_name ?? '') ?>" placeholder="Your name" required />
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="your@email.com" required />
+            <input type="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="your@email.com" required />
             
             <label>Phone Number</label>
             <input type="phone" name="phone" placeholder="+95: 09..." required />
@@ -831,17 +833,17 @@ input, textarea {
             <div class="payment-options">
               <label class="payment-option">
                 <input type="radio" name="payment_method" value="Wave" hidden required>
-                <img src="../Courses page Images/Certificate.png" alt="Wave">
+                <img src="../Courses page Images/Certificate.png" alt="Wave" onclick="selectMethod('Wave')">
               </label>
 
               <label class="payment-option">
                 <input type="radio" name="payment_method" value="paypal" hidden>
-                <img src="../Courses page Images/Certificate.png" alt="PayPal">
+                <img src="../Courses page Images/Certificate.png" alt="PayPal" onclick="selectMethod('paypal')">
               </label>
 
               <label class="payment-option">
                 <input type="radio" name="payment_method" value="kbzpay" hidden>
-                <img src="../Courses page Images/Certificate.png" alt="KBZPay">
+                <img src="../Courses page Images/Certificate.png" alt="KBZPay" onclick="selectMethod('kbzpay')">
               </label>
             </div>
     
@@ -862,6 +864,13 @@ input, textarea {
   </div>
 </body>
 <script>
+
+  // Function to handle payment method selection
+  function selectMethod(method) {
+  document.querySelectorAll('input[name="payment_method"]').forEach(input => {
+    input.checked = (input.value === method);
+  });
+}
 
 function openPopup(paymentName, skipLoginCheck = false) {
   if (!skipLoginCheck && !window.isLoggedIn) {
