@@ -1,12 +1,56 @@
-// Profile‑menu toggle
-// function toggleProfileMenu() {
-//   const menu = document.getElementById("profile-menu");
-//   if (menu) menu.classList.toggle("show");
-// }
-// document.addEventListener('click', (e) => {
-//   const section = document.querySelector('.profile-section');
-//   const menu    = document.getElementById("profile-menu");
-//   if (section && menu && !section.contains(e.target)) {
-//     menu.classList.remove("show");
-//   }
-// });
+
+
+  
+
+function openPopup(courseName, fee, courseId) {
+    if (!window.isLoggedIn) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Please sign in',
+            text: 'You must be signed in to enroll in a course.'
+        }).then(() => {
+            openLogin();
+        });
+        return;
+    }
+    
+    // For paid courses
+    if (fee.toLowerCase() !== 'free') {
+        // Set course name in form
+        document.querySelector('#payment-popup input[name="course_name"]').value = courseName;
+        // Show payment popup
+        document.getElementById('payment-popup').style.display = 'flex';
+    } 
+    // For free courses - submit directly
+    else {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'Courses.php';
+        
+        const courseInput = document.createElement('input');
+        courseInput.type = 'hidden';
+        courseInput.name = 'course_name';
+        courseInput.value = courseName;
+        form.appendChild(courseInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+function closePopup() {
+    document.getElementById('payment-popup').style.display = 'none';
+}
+
+// Function to handle payment method selection
+  function selectMethod(method) {
+  document.querySelectorAll('input[name="payment_method"]').forEach(input => {
+    input.checked = (input.value === method);
+  });
+}
+
+function toggleMobileMenu() {
+    const nav = document.querySelector('.nav');
+    nav.classList.toggle('active');
+}
+
