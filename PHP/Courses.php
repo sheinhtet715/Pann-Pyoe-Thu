@@ -369,7 +369,7 @@ ob_start();
         </div>
         <div class="right">
           <p>Payment Method</p>
-          <img src="../HomePimg/tulips-removebg-preview.png" class="flower-image3" alt="logo">
+          <img src="../HomePimg/tulips-removebg-preview.png" class="flower-image2" alt="logo">
 
           <div class="payment-options">
             <label class="payment-option">
