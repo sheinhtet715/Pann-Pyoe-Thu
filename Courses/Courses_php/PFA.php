@@ -6,7 +6,7 @@
     <title>Psychological First Aid Course</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-     <link rel="stylesheet" href="../Courses/Courses_css/PFA.css">
+    <link rel="stylesheet" href="../Courses_css/PFA.css">
 </head>
 <body>
     <!-- Header -->
@@ -471,7 +471,7 @@
             <p>© 2025 Pann Pyoe Thu. All rights reserved.</p>
         </div>
     </div>
-
+    
     <script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -529,7 +529,7 @@
                 }
             });
         });
-
+            
         // Quiz submission function
         function submitQuiz() {
             const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
@@ -558,9 +558,17 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                    ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  window.location.href = '../Certificate/generate_certificate.php';
+              });
+            }
         }
 
         // Login modal functionality (placeholder)
