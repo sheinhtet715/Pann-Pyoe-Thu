@@ -66,12 +66,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    
+<style>
+    /* Background */
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Nunito', sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Input fields */
+    .form-control {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: #fff;
+    }
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Login button */
+    .btn-primary {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        border: none;
+        transition: all 0.3s ease-in-out;
+        font-weight: bold;
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 15px rgba(255, 126, 95, 0.8);
+        transform: translateY(-2px);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    /* Responsive logo + text */
+.logo-container img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+}
+.logo-container h2 {
+    font-weight: 700;
+    color: white;
+    font-size: 1.6rem;
+}
+
+/* Smaller screens */
+@media (max-width: 576px) {
+    .logo-container img {
+        width: 55px;
+        height: 55px;
+    }
+    .logo-container h2 {
+        font-size: 1.3rem;
+    }
+    .p-5 {
+        padding: 1.5rem !important;
+    }
+    .form-control {
+        font-size: 0.9rem;
+    }
+    .btn-primary {
+        font-size: 0.9rem;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+    .logo-container h2 {
+        font-size: 1.4rem;
+    }
+}
+
+</style>
 
 </head>
 
 <body id="page-top " >
-
     <div class="container">
     <?php if (!empty($error)): ?>
       <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -87,9 +174,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="row">
                             <div class="col-lg-8 offset-2">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    <div class="text-center mb-4 logo-container">
+                                        <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu Logo">
+                                        <h2 class="mt-2">Pann Pyoe Thu</h2>
                                     </div>
+
+
+                                    <div class="text-center">
+                                        <h1 class="h4 text-white-900 mb-4">Welcome Back!</h1>
+                                    </div>
+
                                    <form class="user" method="POST" action="index.php">
                                         <div class="form-group">
                                         <input type="email"
@@ -109,18 +203,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         Login
                                         </button>
                                     </form>
-                                        <!-- <a href="" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="" class="btn btn-facebook btn-user bg-dark btn-block">
-                                            <i class="fa-brands fa-github fa-fw"></i> Login with Github
-                                        </a> -->
+                                       
 
                                     <hr>
 
-                                    <!-- <div class="text-center">
-                                        <a class="small" href="">Create an Account!</a>
-                                    </div> -->
+                                  
                                 </div>
                             </div>
                         </div>
