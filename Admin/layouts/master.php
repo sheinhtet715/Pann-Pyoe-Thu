@@ -233,7 +233,7 @@ if ($user_id) {
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="../Counsellor/list.php"><i class="fa-solid fa-circle-plus"></i></i><span>Counsellors </span></a>
+                <a class="nav-link" href="../Counsellor/list.php"><i class="fa-solid fa-person"></i><span>Counsellors </span></a>
             </li>
 
             <li class="nav-item">
@@ -246,7 +246,7 @@ if ($user_id) {
 
 
             <li class="nav-item">
-                <a class="nav-link" href="../Courses/list.php"><i class="fa-solid fa-credit-card"></i></i><span>Courses </span></a>
+                <a class="nav-link" href="../Courses/list.php"><i class="fa-solid fa-book"></i><span>Courses </span></a>
             </li>
 
             <li class="nav-item">
@@ -254,14 +254,14 @@ if ($user_id) {
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="../Appointment_lists/appoinment.php"><i class="fa-solid fa-cart-shopping"></i><span>Appoinment Lists </span></a>
+                <a class="nav-link" href="../Appointment_lists/appoinment.php"><i class="fa-solid fa-calendar-check"></i><span>Appoinment Lists </span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="../changepassword/changepassword.php"><i class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../changepassword/profile.php"><i class="fa-solid fa-lock"></i></i></i><span>Profile </span></a>
+                <a class="nav-link" href="../changepassword/profile.php"><i class="fa-solid fa-user"></i><span>Profile </span></a>
             </li>
 
             <li class="nav-item">
