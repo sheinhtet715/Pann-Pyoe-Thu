@@ -32,12 +32,8 @@ ob_start();
 ?>
   
     <link rel="stylesheet" href="../CSS/Homepage.css">
-    <script src="../JavaScript/Homepage.js"></script>
-
-
-   <div class="homepage">
-        
-
+ 
+    <div class="homepage">
         <main class="main-content">
             <div class="quote-box">
                 <p>
@@ -94,100 +90,111 @@ ob_start();
         </section>
     </div>
 
+<!-- Counsellor Slide Start  -->
+            <style>
+            * {box-sizing: border-box;}
+            .mySlides {display: none;}
+            img {vertical-align: middle;}
 
+            /* Slideshow container */
+            .slideshow-container {
+            max-width: 1100px;
+            position: relative;
+            margin: auto;
+            }
 
-    <!-- Consulting Section -->
-    <!-- <div class="consult-slider">
-        <div class="consult-slider-track">
-            <div class="consult-slide">
-                <div class="profile-slide">
-                    <div class="consult">
-                        <div class="consult-photo2">
-                            <div class="background-box one"></div>
-                            <div class="background-box two"></div>
-                            <img src="../HomePimg/counsellor 1.png" alt="Cathy Doll">
-                        </div>
-                        <div class="consult-text">
-                            <div class="consult-name">Name-Cathy Doll</div>
-                            <h3>"Consult with us for your further academic studies"</h3>
-                            <p>"Guidance is not about giving answers—it's about helping students ask the right questions."</p>
-                            <p>Education counsellors walk beside students at crossroads—offering wisdom, support, and hope when decisions feel overwhelming and dreams feel distant.</p>
-                            <div class="see">
-                                <a href="#">See Profile...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="consult-slide">
-                <div class="profile-slide">
-                    <div class="consult">
-                        <div class="consult-photo1">
-                            <div class="background-box three"></div>
-                            <img src="../HomePimg/counsellor 2.png" alt="Mercy Donan">
-                        </div>
-                        <div class="consult-text">
-                            <div class="consult-name1">Name-Mercy Donan</div>
-                            <h3>"Consult with us for your further academic studies"</h3>
-                            <p>"To guide a student is to shape a future, one decision at a time."</p>
-                            <p>You don't need to have it all figured out. That's why I'm here—to help you discover your strengths, set your goals, and make confident decisions about your future..........</p>
-                            <div class="see">
-                                <a href="#">See Profile...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="consult-slide">
-                <div class="profile-slide">
-                    <div class="consult">
-                        <div class="consult-photo">
-                            <div class="background-box four"></div>
-                            <div class="background-box five"></div>
-                            <img src="../HomePimg/counsellor 3.png" alt="David Johnson">
-                        </div>
-                        <div class="consult-text">
-                            <div class="consult-name">Name-David Johnson</div>
-                            <h3>"Consult with us for your further academic studies"</h3>
-                            <p>"To guide a student is to shape a future, one decision at a time."</p>
-                            <p>You don't need to have it all figured out. That's why I'm here—to help you discover your strengths, set your goals, and make confident decisions about your future..........</p>
-                            <div class="see">
-                                <a href="#">See Profile...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-        <div class="slideshow-container">
+            /* Caption text */
+            .text .word {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 10px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            }
+
+            .active {
+            background-color: #717171;
+            }
+
+            /* Fading animation */
+            .fade {
+            animation-name: fade;
+            animation-duration: 2s;
+            }
+
+            @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+            .text {font-size: 11px}
+            }
+            </style>
+
+            <div class="slideshow-container">
 
             <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                   <img src="../HomePimg/C1.jpg" style="width:100%">
-                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            <img src="../HomePimg/C1.jpg" style="width:100%">
+            <div class="text"><a  class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
 
             <div class="mySlides fade">
-                <div class="numbertext">2 / 3</div>
-                   <img src="../HomePimg/C2.jpg" style="width:100%">  
-                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            <img src="../HomePimg/C2.jpg" style="width:100%">
+             <div class="text"><a class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
 
             <div class="mySlides fade">
-                <div class="numbertext">3 / 3</div>
-                  <img src="../HomePimg/C3.jpg" style="width:100%">
-                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            <img src="../HomePimg/C3.jpg" style="width:100%">
+             <div class="text"><a class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
-        </div> <br>
+            </div>
+            <br>
+
             <div style="text-align:center">
-                <span class="dot"></span> 
-                <span class="dot"></span> 
-                <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
             </div>
 
+            <script>
+            let slideIndex = 0;
+            showSlides();
 
+            function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+            </script>
 
+    <!-- Counsellor End  -->
 
     <!-- Popular Courses Section -->
     <div class="popular-course">
@@ -258,33 +265,19 @@ ob_start();
         <a class="about-us" href="#">Tap here to learn more About Us</a>
     </div>
 
+
+
     <!-- Footer -->
         <?php
         include_once "Footer.php"
         ?>
 
 
-<!-- Counsellor Slie  -->
-<script>
-let slideIndex = 0;
-showSlides();
 
-function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
-</script>
 
 <!-- 1) Load your libraries -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+   <script src="../JavaScript/Homepage.js"></script>
 
 <!-- 2) Fire the flash (only once!) and wire up open/close -->
 <script>
