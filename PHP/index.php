@@ -93,7 +93,7 @@ ob_start();
 <!-- Counsellor Slide Start  -->
             <style>
             * {box-sizing: border-box;}
-            .mySlides {display: none;}
+            .Counsellor {display: none;}
             img {vertical-align: middle;}
 
             /* Slideshow container */
@@ -149,17 +149,17 @@ ob_start();
 
             <div class="slideshow-container">
 
-            <div class="mySlides fade">
+            <div class="Counsellor fade">
             <img src="../HomePimg/C1.jpg" style="width:100%">
             <div class="text"><a  class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
 
-            <div class="mySlides fade">
+            <div class="Counsellor fade">
             <img src="../HomePimg/C2.jpg" style="width:100%">
              <div class="text"><a class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
 
-            <div class="mySlides fade">
+            <div class="Counsellor fade">
             <img src="../HomePimg/C3.jpg" style="width:100%">
              <div class="text"><a class="word" href= "../PHP/Counsellor.php">See details</a></div>
             </div>
@@ -178,7 +178,7 @@ ob_start();
 
             function showSlides() {
             let i;
-            let slides = document.getElementsByClassName("mySlides");
+            let slides = document.getElementsByClassName("Counsellor");
             let dots = document.getElementsByClassName("dot");
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";  
