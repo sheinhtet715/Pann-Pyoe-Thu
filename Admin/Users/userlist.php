@@ -71,47 +71,70 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 ?>
 
 <?php ob_start(); ?>
+    <style>
+       /* make controls responsive and the table horizontally scroll when needed */
+      .top-controls { display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+      .top-controls .left { flex: 0 0 auto; }
+      /* keep the search form fixed-width and pushed to the right */
+      .top-controls form { flex: 0 0 auto; }
+      .top-controls .input-group { width:100%; max-width:520px; }
+      .top-controls .left { flex: 0 0 auto; }
+      .top-controls .right { }
+      .top-controls .input-group { width:100%; max-width:520px; }
+
+      .table-responsive { overflow-x:auto; }
+      .table thead th { white-space: nowrap; }
+
+      /* responsive profile thumbnail */
+      .profile-thumb { width:100px; height:100px; object-fit:cover; border-radius:6px; }
+
+      /* smaller thumbs on narrow screens */
+      @media (max-width: 576px) {
+        .profile-thumb { width:72px; height:72px; }
+      }
+
+      /* ensure actions column doesn't force huge width */
+      .actions-col { white-space:nowrap; width:120px; }
+    </style>
 
 
-
-                <div class="container">
-                    <div class=" d-flex justify-content-between my-2">
-                        <div class="">
+              <div class="container py-4">  
+                    <div class="top-controls mb-3">
+                            <div class="left">
                           
-                            <button class="btn btn-secondary rounded shadow-sm">
-                                <i class="fa-solid fa-database"></i> User Count (<?= $totalUsers ?>)
-                            </button>
+                                <button class="btn btn-secondary rounded shadow-sm">
+                                    <i class="fa-solid fa-database"></i> User Count (<?= $totalUsers ?>)
+                                </button>
                                 
-                        </div>
-                        <div class="">
-                            <form action="" method="get">
+                            </div>
 
-                   
-                           
-                <div class="input-group">
-                    <input type="text" name="searchKey" value="<?= htmlspecialchars($searchKey) ?>" class="form-control" placeholder="Search by ID, name, email, phone...">
-                    <button type="submit" class="btn bg-dark text-white">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
-            </form>
+                        <div class="right ms-auto">
+                            <form action="" method="get">
+                                <div class="input-group">
+                                <input type="text" name="searchKey" value="<?= htmlspecialchars($searchKey) ?>" class="form-control" placeholder="Search by ID, name, email, phone...">
+                                <button type="submit" class="btn bg-dark text-white" aria-label="Search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                                </div>
+                            </form>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-hover shadow-sm">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th>Profile Image</th>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Course</th>
-                        <th>Job</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    </tr>
+     <div class="card shadow-sm">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0 align-middle">
+              <thead class="bg-primary text-white">
+                 <tr>
+                  <th>Profile</th>
+                  <th>User ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Course</th>
+                  <th>Job</th>
+                  <th>Role</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
                 </thead>
                 <tbody>
                     <?php if ($result->num_rows === 0): ?>
@@ -121,7 +144,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                     <?php else: ?>
                         <?php while ($user = $result->fetch_assoc()): ?>
                             <tr>
-                                <td>
+                                 <td style="width:120px;">
                                     <?php if ($user['profile_path']): ?>
                                         <img src="../../<?= htmlspecialchars($user['profile_path']) ?>" alt="Profile" class="img-thumbnail rounded shadow-sm" style="width:100px; height:100px; object-fit:cover;">
                                     <?php else: ?>
@@ -152,7 +175,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                     <?php endif; ?>
                 </tbody>
             </table>
-
+     </div> <!-- /.table-responsive -->
             <!-- Pagination -->
             <?php
             $totalPages = ceil($totalUsers / $limit);

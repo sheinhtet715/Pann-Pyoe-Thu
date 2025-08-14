@@ -254,3 +254,5 @@ $content = ob_get_clean();
 require './logo_container.php';
 ?>
 
+</body>
+</html>
