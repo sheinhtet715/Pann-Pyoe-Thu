@@ -1,24 +1,6 @@
 <?php
 // pick up any flash‐error or ‐success from login.php
 session_start();
-// 1) Check if logged-in user exists
-if (!empty($_SESSION['user_id'])) {
-    require_once "./db_connection.php";
-
-    $stmt = $conn->prepare("SELECT user_id FROM User_tbl WHERE user_id = ?");
-    $stmt->bind_param('i', $_SESSION['user_id']);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows === 0) {
-        // User no longer exists — clear session and redirect to login with message
-        session_unset();
-        session_destroy();
-        header('Location: login.php?msg=account_deleted');
-        exit;
-    }
-    $stmt->close();
-} 
 $error   = $_SESSION['login_error'] ?? '';
 $success = $_SESSION['login_success'] ?? '';
 unset($_SESSION['login_error'], $_SESSION['login_success']);
@@ -50,6 +32,7 @@ ob_start();
 ?>
   
     <link rel="stylesheet" href="../CSS/Homepage.css">
+    <script src="../JavaScript/Homepage.js"></script>
 
 
    <div class="homepage">
@@ -114,7 +97,7 @@ ob_start();
 
 
     <!-- Consulting Section -->
-    <div class="consult-slider">
+    <!-- <div class="consult-slider">
         <div class="consult-slider-track">
             <div class="consult-slide">
                 <div class="profile-slide">
@@ -169,14 +152,42 @@ ob_start();
                             <p>"To guide a student is to shape a future, one decision at a time."</p>
                             <p>You don't need to have it all figured out. That's why I'm here—to help you discover your strengths, set your goals, and make confident decisions about your future..........</p>
                             <div class="see">
-                                <a href="../PHP/Counsellor.php">See Profile...</a>
+                                <a href="#">See Profile...</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                   <img src="../HomePimg/C1.jpg" style="width:100%">
+                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                   <img src="../HomePimg/C2.jpg" style="width:100%">  
+                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                  <img src="../HomePimg/C3.jpg" style="width:100%">
+                <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
+            </div>
+        </div> <br>
+            <div style="text-align:center">
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+                <span class="dot"></span> 
+            </div>
+
+
+
 
     <!-- Popular Courses Section -->
     <div class="popular-course">
@@ -244,7 +255,7 @@ ob_start();
     </div>
 
     <div class="us-text">
-        <a class="about-us" href="../PHP/About Us.php">Tap here to learn more About Us</a>
+        <a class="about-us" href="#">Tap here to learn more About Us</a>
     </div>
 
     <!-- Footer -->
@@ -253,13 +264,85 @@ ob_start();
         ?>
 
 
+<!-- Counsellor Slie  -->
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
 
 <!-- 1) Load your libraries -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../JavaScript/Homepage.js"></script>
+
 
 <!-- 2) Fire the flash (only once!) and wire up open/close -->
 <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+    // Honor ?showLogin=1 in URL
+    (function(){
+      let auto = false;
+      const params = new URL(location).searchParams;
+      if (params.get('showLogin') === '1' && !auto) {
+        auto = true;
+        openLogin();
+        params.delete('showLogin');
+        history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+      }
+    })();
+  </script>
+
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  <?php if ($error): ?>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops…',
+      text: <?php echo json_encode($error)?>,
+      confirmButtonText: 'Try Again'
+    })
+    .then(() => {
+      openLogin();
+    });
+  <?php elseif ($success): ?>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: <?php echo json_encode($success)?>,
+      timer: 2000,
+      showConfirmButton: false
+    })
+
+  <?php endif; ?>
+});
 //Mobile menu toggle function
     function toggleMobileMenu() {
         const nav = document.getElementById('nav-menu');
