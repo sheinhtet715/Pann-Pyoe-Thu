@@ -164,19 +164,19 @@ ob_start();
 
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
-                   <img src="../HomePimg/C1.png" style="width:100%">
+                   <img src="../HomePimg/C1.jpg" style="width:100%">
                 <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                   <img src="../HomePimg/C2.png" style="width:100%">  
+                   <img src="../HomePimg/C2.jpg" style="width:100%">  
                 <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
-                  <img src="../HomePimg/C3.png" style="width:100%">
+                  <img src="../HomePimg/C3.jpg" style="width:100%">
                 <div class="text"><a href="../PHP/Counsellor.php">See Profile...</a></div>
             </div>
         </div> <br>
