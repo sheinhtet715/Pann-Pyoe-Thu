@@ -88,7 +88,7 @@ $discountCourses = $dcourses->getDiscountCourses();
 ob_start();
 ?>
    <link rel="stylesheet" href="../CSS/Courses.css">	
-   <link rel="stylesheet" href="../CSS/PaymentPopup.css">
+   <link rel="stylesheet" href="../CSS/Payment.css">
 
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
 
@@ -335,7 +335,6 @@ ob_start();
     
     <!-- Payment Popup -->
     <div id="payment-popup" class="popup">
-    <span class="close" onclick="closePopup()">&times;</span>
       <form method="POST" action="Payment Form.php" enctype="multipart/form-data">
         <input type="hidden" name="payment_name" id="payment-input" />
         <input type="hidden" name="course_name"  value="<?= htmlspecialchars($course_name ?? '') ?>">

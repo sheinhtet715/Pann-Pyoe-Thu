@@ -43,6 +43,12 @@ function closePopup() {
     document.getElementById('payment-popup').style.display = 'none';
 }
 
+// click-outside to close popup
+document.addEventListener('click', function(e) {
+const popup = document.getElementById('payment-popup');
+if (popup && e.target === popup) closePopup();
+});
+
 // Function to handle payment method selection
   function selectMethod(method) {
   document.querySelectorAll('input[name="payment_method"]').forEach(input => {

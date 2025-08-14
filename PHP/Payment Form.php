@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $allowed_ext = ['jpg', 'jpeg', 'png', 'pdf'];
 
                 // Extract file extension
-                $file_ext = strtolower(pathinfo($_FILES['file']['user_name'], PATHINFO_EXTENSION));
+                $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
 
                 // Check if file type is allowed
                 if (!in_array($file_ext, $allowed_ext)) {
