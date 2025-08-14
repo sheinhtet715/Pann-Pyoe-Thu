@@ -2,8 +2,8 @@
 session_start();
 
 // Example: pull from session if set, otherwise from POST
-$name   = $_SESSION['user_name'] ?? ($_POST['user_name'] ?? 'John Doe');
-$course = $_SESSION['course_name'] ?? ($_POST['course_name'] ?? 'Sample Course');
+$name   = $_GET['user_name'] ?? ($_SESSION['user_name'] ?? 'John Doe');
+$course = $_GET['course_name'] ?? ($_SESSION['course_name'] ?? 'Sample Course');
 $date  = date('F j, Y');
 
 // Paths
