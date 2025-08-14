@@ -79,7 +79,7 @@
             </li>
 
             <li class="nav-item">
-                <form action="" method="post">
+                <form action="../logout.php" method="post">
 
                     <span class="nav-link">
                         <button type="submit" class="btn bg-dark text-white"><i
@@ -141,8 +141,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <span class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                                    <form action="" method="post">
-
+                                          <form method="post" action="logout.php">
                                         <input type="submit" class="btn btn-dark text-white w-100" value="Logout">
                                     </form>
                                 </span>
