@@ -30,7 +30,19 @@ if (!empty($_FILES['profile_pic']['name']) && $_FILES['profile_pic']['error'] ==
 
     $origName = $_FILES['profile_pic']['name'];
     $ext = strtolower(pathinfo($origName, PATHINFO_EXTENSION));
-    $allowed = ['jpg','jpeg','png','gif'];
+    $allowed = [
+        // Raster formats
+        'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'tif', 'webp', 'heif', 'heic', 'avif',
+
+        // Camera RAW formats
+        'cr2', 'cr3', 'nef', 'arw', 'orf', 'rw2', 'dng',
+
+        // Vector formats
+        'svg', 'ai', 'eps', 'pdf',
+
+        // Special / less common
+        'ico', 'cur', 'xcf', 'psd', 'psb', 'hdr', 'exr', 'tga'
+    ];
     if (!in_array($ext, $allowed)) {
         die('File type not allowed. Use JPG/PNG/GIF.');
     }
