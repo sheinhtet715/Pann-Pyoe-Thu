@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include '../PHP/db_connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -567,8 +571,12 @@
                 </div>
             `;
             if (percentage >= 60) {
+                const courseName = "Pyschological First Aid"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
                document.getElementById('generateBtn').addEventListener('click', function() {
-                  window.location.href = '../Certificate/generate_certificate.php';
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
               });
             }
         }
