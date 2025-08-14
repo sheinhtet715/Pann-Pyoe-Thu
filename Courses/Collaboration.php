@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include '../PHP/db_connection.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -564,9 +568,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                    ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Collaboration"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)
