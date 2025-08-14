@@ -205,9 +205,11 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <tbody>
       <?php foreach ($jobs as $j): ?>
   <tr class="main-row" data-id="<?= (int)$j['job_id'] ?>">
-    <td class="toggle-cell" style="cursor:pointer; width:34px; text-align:center;">
-      <i class="fas fa-chevron-right rotate"></i>
-    </td>
+      <td class="text-center align-middle">
+                        <button type="button" class="btn btn-sm btn-outline-secondary toggle-btn" aria-expanded="false" title="Show details">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </td>
 
     <td><?= (int)$j['job_id'] ?></td>
     <td><?= htmlspecialchars($j['job_title']) ?></td>
@@ -303,55 +305,37 @@ function confirmDelete(id) {
 }
 
 // show success/error alerts on page load
-document.addEventListener('DOMContentLoaded', () => {
-  <?php if (!empty($success)): ?>
-    Swal.fire({ icon: 'success', title: 'Success', text: <?= json_encode($success) ?>, timer: 1800, showConfirmButton:false });
-  <?php elseif (!empty($error)): ?>
-    Swal.fire({ icon: 'error', title: 'Error', text: <?= json_encode($error) ?>, confirmButtonText: 'OK' });
-  <?php endif; ?>
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.toggle-cell').forEach(cell => {
-    cell.addEventListener('click', () => {
-      const tr = cell.closest('tr.main-row');
-      if (!tr) return;
-      const id = tr.dataset.id;
-      const detail = document.getElementById('detail-' + id);
-      const icon   = cell.querySelector('i');
 
-      if (!detail) return;
 
-      // check computed style (reliable)
-      const isHidden = window.getComputedStyle(detail).display === 'none';
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            // main row is the button's closest tr
+            const mainRow = btn.closest('tr');
+            // detail row is the next tr sibling
+            const detailRow = mainRow.nextElementSibling;
+            if (!detailRow || !detailRow.classList.contains('detail-row')) return;
 
-      if (isHidden) {
-        // OPTIONAL: close other open details (uncomment to enable)
-        // document.querySelectorAll('.detail-row').forEach(r => {
-        //   r.style.display = 'none';
-        //   const otherIcon = r.previousElementSibling?.querySelector('.toggle-cell i');
-        //   if (otherIcon) {
-        //     otherIcon.classList.remove('fa-chevron-down');
-        //     otherIcon.classList.add('fa-chevron-right');
-        //   }
-        // });
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
 
-        detail.style.display = ''; // show (browser will use table-row)
-        if (icon) {
-          icon.classList.remove('fa-chevron-right');
-          icon.classList.add('fa-chevron-down');
-          // icon.classList.add('open'); // if you want rotation CSS
-        }
-      } else {
-        detail.style.display = 'none'; // hide
-        if (icon) {
-          icon.classList.remove('fa-chevron-down');
-          icon.classList.add('fa-chevron-right');
-          icon.classList.remove('open');
-        }
-      }
+            if (expanded) {
+                // hide
+                detailRow.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+                // swap icon to right
+                btn.querySelector('i').classList.remove('fa-chevron-down');
+                btn.querySelector('i').classList.add('fa-chevron-right');
+                detailRow.setAttribute('aria-hidden', 'true');
+            } else {
+                // show
+                detailRow.style.display = 'table-row';
+                btn.setAttribute('aria-expanded', 'true');
+                // swap icon to down
+                btn.querySelector('i').classList.remove('fa-chevron-right');
+                btn.querySelector('i').classList.add('fa-chevron-down');
+                detailRow.setAttribute('aria-hidden', 'false');
+            }
+        });
     });
-  });
 });
 </script>
