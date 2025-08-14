@@ -298,7 +298,7 @@ if ($user_id) {
                             <p class="mt-2 mr-2">Guest</p>
                         <?php endif; ?>
                      <?php if ($user['profile_path']): ?>
-                        <img src="../<?php echo htmlspecialchars($user['profile_path']) ?>" alt="Profile"  style="width:40px; height:40px; object-fit:cover;" class="rounded-circle">
+                        <img src="../../<?php echo htmlspecialchars($user['profile_path']) ?>" alt="Profile"  style="width:40px; height:40px; object-fit:cover;" class="rounded-circle">
                         <?php else: ?>
                         <img src="../uploads/1000_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg" alt="Profile"  style="width:40px; height:40px; object-fit:cover;" class="rounded-circle">
                         <?php endif; ?>

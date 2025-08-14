@@ -19,9 +19,9 @@ if ($user_id <= 0 || $user_name === '' || $email === '') {
 }
 
 // File upload handling
-
+$profile_path= null;
 if (!empty($_FILES['profile_pic']['name']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
-    $upload_dir = __DIR__ . '/../uploads/'; // server filesystem path
+    $upload_dir = __DIR__ . '/../../User_profile_images/'; // server filesystem path
     if (!is_dir($upload_dir)) {
         if (!mkdir($upload_dir, 0755, true)) {
             die('Failed to create upload directory.');
@@ -44,7 +44,7 @@ if (!empty($_FILES['profile_pic']['name']) && $_FILES['profile_pic']['error'] ==
     }
 
     // Store relative web path (no ../) so the frontend can use <img src="uploads/filename">
-    $profile_path = 'uploads/' . $newFileName;
+    $profile_path = '/User_profile_images/' . $newFileName;
 }
 
 // Use prepared statements to avoid injection

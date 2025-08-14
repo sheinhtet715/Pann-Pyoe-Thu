@@ -30,7 +30,7 @@ ob_start();
                     <div class="col-md-4 text-center mb-3">
                          <div class="col-md-4 text-center mb-3">
                         <?php if ($user['profile_path']): ?>
-              <img src="../<?php echo htmlspecialchars($user['profile_path']) ?>" alt="Profile"  style="width:200px; height:200px; object-fit:cover;" class="rounded-circle">
+              <img src="../../<?php echo htmlspecialchars($user['profile_path']) ?>" alt="Profile"  style="width:200px; height:200px; object-fit:cover;" class="rounded-circle">
             <?php else: ?>
               <img src="../uploads/1000_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg" alt="Profile"  style="width:200px; height:200px; object-fit:cover;" class="rounded-circle">
             <?php endif; ?>
