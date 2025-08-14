@@ -335,14 +335,13 @@ ob_start();
     
     <!-- Payment Popup -->
     <div id="payment-popup" class="popup">
-    <div class="payment-container">
     <span class="close" onclick="closePopup()">&times;</span>
       <form method="POST" action="Payment Form.php" enctype="multipart/form-data">
         <input type="hidden" name="payment_name" id="payment-input" />
         <input type="hidden" name="course_name"  value="<?= htmlspecialchars($course_name ?? '') ?>">
       
 
-      <div class="card">
+      <div class="payment"> 
         <div class="left">
           <div class="Logo-title"><img src="../HomePimg/Logo.ico" class="logo-image" alt="logo">
             <h2>PAYMENT FORM</h2></div>

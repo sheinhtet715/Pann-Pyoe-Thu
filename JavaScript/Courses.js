@@ -2,7 +2,7 @@
 
   
 
-function openPopup(courseName, fee, courseId) {
+function openPopup(courseName, fee, paymentName) {
     if (!window.isLoggedIn) {
         Swal.fire({
             icon: 'warning',
@@ -19,6 +19,7 @@ function openPopup(courseName, fee, courseId) {
         // Set course name in form
         document.querySelector('#payment-popup input[name="course_name"]').value = courseName;
         // Show payment popup
+        document.getElementById('payment-input').value = paymentName;
         document.getElementById('payment-popup').style.display = 'flex';
     } 
     // For free courses - submit directly
