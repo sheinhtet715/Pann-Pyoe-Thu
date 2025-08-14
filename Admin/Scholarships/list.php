@@ -129,6 +129,10 @@ session_start();
       .rotate.open { transform: rotate(90deg); }
       /* Make small tweak so collapse content inside td has some spacing */
       .detail-inner { padding: 1rem; }
+      .detail-row { display: none; }
+.detail-row .detail-cell { padding: .75rem 1rem; background: #f8f9fa; }
+.toggle-btn { width: 34px; height: 34px; padding: 6px; }
+
     </style>
     <!-- Begin Page Content -->
     <div class="container-fluid py-4">
@@ -215,9 +219,11 @@ session_start();
                     <tbody>
                       <?php while ($r = $list->fetch_assoc()): ?>
                 <tr class="main-row" data-id="<?= $r['scholarship_id'] ?>">
-                      <td class="toggle-cell " style="cursor:pointer; width:34px; text-align:center;">
-                              <i class="fas fa-chevron-right"></i>
-                        </td>
+                       <td class="text-center align-middle">
+                        <button type="button" class="btn btn-sm btn-outline-secondary toggle-btn" aria-expanded="false" title="Show details">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </td>
                         <td><?= $r['scholarship_id'] ?></td>
                         <td><?= htmlspecialchars($r['title']) ?></td>
                         <td><?= htmlspecialchars($r['country']) ?></td>
@@ -327,20 +333,35 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <script>
 // after the table, add:
-document.querySelectorAll('.toggle-cell').forEach(cell => {
-  cell.addEventListener('click', () => {
-    const tr = cell.closest('tr.main-row');
-    const id = tr.dataset.id;
-    const detail = document.getElementById('detail-' + id);
-    const icon   = cell.querySelector('i');
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            // main row is the button's closest tr
+            const mainRow = btn.closest('tr');
+            // detail row is the next tr sibling
+            const detailRow = mainRow.nextElementSibling;
+            if (!detailRow || !detailRow.classList.contains('detail-row')) return;
 
-    if (detail.style.display === 'none') {
-      detail.style.display = '';
-      icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
-    } else {
-      detail.style.display = 'none';
-      icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
-    }
-  });
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (expanded) {
+                // hide
+                detailRow.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+                // swap icon to right
+                btn.querySelector('i').classList.remove('fa-chevron-down');
+                btn.querySelector('i').classList.add('fa-chevron-right');
+                detailRow.setAttribute('aria-hidden', 'true');
+            } else {
+                // show
+                detailRow.style.display = 'table-row';
+                btn.setAttribute('aria-expanded', 'true');
+                // swap icon to down
+                btn.querySelector('i').classList.remove('fa-chevron-right');
+                btn.querySelector('i').classList.add('fa-chevron-down');
+                detailRow.setAttribute('aria-hidden', 'false');
+            }
+        });
+    });
 });
 </script>
