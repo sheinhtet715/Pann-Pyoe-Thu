@@ -77,7 +77,7 @@
           </label> -->
           <a href="" id="change-photo-link">Change profile picture</a>
         </div>
- 
+    
         <div class="enrolled-courses">
           <span>Enrolled courses</span>
           <div class="courses-slider">
