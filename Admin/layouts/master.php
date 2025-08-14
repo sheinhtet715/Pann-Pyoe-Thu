@@ -34,7 +34,7 @@ if ($user_id) {
     <meta name="author" content="">
     
     <title>POS Admin Dashboard</title>
-
+    <link rel="icon" type="image/*" href="../../HomePimg/Logo.ico">
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
