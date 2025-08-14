@@ -75,7 +75,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
+                <a class="nav-link" href="../changepassword/changepassword.php"><i class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>
             </li>
 
             <li class="nav-item">
