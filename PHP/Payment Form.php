@@ -112,8 +112,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $conn->commit();
-        $_SESSION['login_success'] = "✅ Enrollment successful!";
-        header("Location: Courses.php");
+        $courseName = $course_name;
+        $redirectFile = $courseName.'.php';
+        echo "<script>
+               alert('✅ Enrollment successful!'');
+        $redirectFile = '';
+              window.location.href = '../Courses/$redirectFile';
+              </script>";
         exit;
     } catch (Exception $e) {
         $conn->rollback();

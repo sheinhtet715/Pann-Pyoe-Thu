@@ -63,7 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
             $ins->bind_param("iis", $user_id, $courseid, $date);
 
             if ($ins->execute()) {
-                $success = "✅ Enrollment booked successfully!";
+                $courseName = $course_name;
+                $redirectFile = $courseName.'.php';
+                echo " <script>              
+                  alert('✅ Enrollment booked successfully!');
+                  window.location.href = '../Courses/$redirectFile';
+                  </script>";
             } else {
                 $error = "❌ Error inserting Enrollment: " . $ins->error;
             }
