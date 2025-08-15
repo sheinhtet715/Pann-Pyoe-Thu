@@ -22,17 +22,23 @@
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
         <nav class="nav">
-            <a href="../HTML/Homepage.html">Home Page</a>
-            <a href="#">About us</a>
-            <a href="#" class="active">Courses</a>
-            <a href="../HTML/Counsellor Page.html">Education counselling</a>
-            <a href="#">Scholarships</a>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
+            <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
+            <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
+            <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
+            <a href="../PHP/Counsellor.php" class="<?= ($active==='counsellors')    ? 'active' : '' ?>">Educational Counsellors</a>
+            <a href="../PHP/Scholarship.php" class="<?= ($active==='scholarships')    ? 'active' : '' ?>">Scholarships</a>
+            <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
+            <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
         </nav>
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <!-- Main Content -->
