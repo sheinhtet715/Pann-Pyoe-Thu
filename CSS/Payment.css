@@ -427,8 +427,8 @@ input, textarea {
     border-radius: 30px;
     flex-direction: column;
     margin-top:0px;
-    margin-left: 20px;
-    width: 90%;
+    margin-left: 10px;
+    width: 70%;
     height: 100%;
     
   }
@@ -472,18 +472,18 @@ input, textarea {
     margin-top: 10px;
   }
   .left label {
-    margin: 5px;
+    margin: -5px;
   color: #f1efef;
   
 }
 .right label {
-    margin: 1px;
+    margin: -5px;
   color: #f1efef;
   margin-top: 1px;
   
 }
 .left input {
-  margin:10px 0;
+  margin:5px 0;
   width:70%;
   height:20px;
 }
@@ -494,7 +494,7 @@ input, textarea {
  
 }
 .thank{
-    width: 70%;
+    width: 100%;
     /* margin-left:; */
 }
 .payment-options {
@@ -650,10 +650,10 @@ input, textarea {
   }
 }
 @media (max-width: 320px) {
-    .popup, .card {
+    .popup .payment {
     border-radius: 30px;
     flex-direction: column;
-    margin-top:0px;
+    margin-top:100px;
     width: 100%;
     height: 100%;
     
@@ -662,8 +662,8 @@ input, textarea {
     flex-direction: column;
   }
   .logo-image {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   opacity: 0.9;
   margin-top: 0px;
   
@@ -704,7 +704,7 @@ input, textarea {
     margin-left: 80px;
   }
   .left label {
-    margin: 5px;
+    margin: -5px;
   color: #f1efef;
   
 }
@@ -721,7 +721,7 @@ input, textarea {
  
 }
 .thank{
-    width: 65%;
+    width: 100%;
   
 }
 
@@ -741,7 +741,7 @@ input, textarea {
   }
 
   .payment-option img {
-    width: 70px;
+    width: 50px;
     border: 3px solid transparent;
     border-radius: 10px;
     cursor: pointer;
