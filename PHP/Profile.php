@@ -33,6 +33,17 @@
     $success = $_SESSION['profile_success'] ?? '';
     $error   = $_SESSION['profile_error'] ?? '';
     unset($_SESSION['profile_success'], $_SESSION['profile_error']);
+
+    // Enrolled courses of user
+    $imgFolder = "../Courses page Images/";
+    $sql = "SELECT c.course_id, c.course_name, c.icon_url
+            FROM  enrollment_tbl e
+            INNER JOIN course_tbl c ON e.course_id = c.course_id
+            WHERE e.user_id = ?";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt ->execute([$_SESSION['user_id']]);
+    $courses = $stmt-> fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +95,16 @@
             <button class="slider-arrow left-arrow" id="left-arrow" aria-label="Previous courses">&#60;</button>
             <ul class="courses-list" id="enrolled-courses-list">
               <!-- course items here -->
+               <?php foreach($courses as $course): ?>
+                <?php $redirectFile = $course['course_name'];?>
+                <li class="course-circle" data-cousrse-id="<?=$course['course_id']?>">
+                  <a href="../Courses/<?= $redirectFile?>.php"<?= urldecode($course['course_id'])?>>
+                  
+                    <img src="<?= htmlspecialchars($imgFolder.($course['icon_url']))?>" alt="<?=htmlspecialchars($course['course_name'])?>" class="course-img">
+                    <span class="course-name"><?= htmlspecialchars($course['course_name']) ?></span>
+                  </a>
+                </li>
+               <?php endforeach; ?> 
             </ul>
             <button class="slider-arrow right-arrow" id="right-arrow" aria-label="Next courses">&#62;</button>
           </div>

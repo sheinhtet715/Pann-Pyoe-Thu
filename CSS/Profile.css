@@ -178,23 +178,43 @@ main {
 .courses-list::-webkit-scrollbar {
   display: none;
 }
+
 .course-circle {
   width: 64px;
   height: 64px;
   background: #1D2733;
   border-radius: 50%;
   margin-right: 22px;
-  display: inline-block;
+  /* display: inline-block; */
   box-shadow: 0 1px 4px #529AA622;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   border: 4px solid #6db6c2;
   flex-shrink: 0;
+  overflow: hidden;
 }
+/* new added  */
+.course-circle img{
+  width: 100%;;
+  height: 100%;
+  object-fit: cover;
+}
+
 .course-circle:hover {
   background: #6db6c2;
   box-shadow: 0 0 0 4px #1D2733;
   transform: scale(1.08);
 }
+
+.course-name {
+    display: block;
+    font-size: 0.75rem;
+    color: #fff;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .slider-arrow {
   background: #1D2733;
   color: #fff;
