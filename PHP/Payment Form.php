@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $course_id = $course['course_id'];
         $course_fee = strtolower(trim($course['fee']));
 
+        
         $conn->begin_transaction();
 
         // Update phone if provided
@@ -60,6 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             $stmt->close();
         }
+
+        // ✅ Check if already enrolled
+        $check = $conn->prepare("SELECT enrollment_id FROM enrollment_tbl WHERE user_id = ? AND course_id = ?");
+        $check->bind_param("ii", $user_id, $course_id);
+        $check->execute();
+        $result = $check->get_result();
+        if ($result->num_rows > 0) {
+            // Roll back transaction if already enrolled
+            $conn->rollback();
+            echo "<script>
+                alert('⚠️ You are already enrolled in this course.');
+                window.history.back();
+            </script>";
+            exit;
+        }
+        $check->close();
 
         // Insert into Enrollment
         $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date, payment_status) VALUES (?, ?, ?, 0)");

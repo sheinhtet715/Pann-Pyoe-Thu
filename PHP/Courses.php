@@ -53,7 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
             $courseid = $cres->fetch_assoc()['course_id'];
             $cs->close();
 
-            // b) insert into enrollment table
+            // b) check if already enrolled
+             $check = $conn->prepare("
+                 SELECT enrollment_id
+                 FROM Enrollment_tbl
+                 WHERE user_id = ? AND course_id = ?
+             ");
+             $check->bind_param("ii", $user_id, $courseid);
+             $check->execute();
+             $checkResult = $check->get_result();
+
+             if ($checkResult->num_rows > 0) {
+                 // User already enrolled → show alert, no insert
+                 echo "<script>
+                     alert('⚠️ You are already enrolled in this course.');
+                     window.history.back(); // go back to previous page
+                 </script>";
+                 exit;
+                 
+             }
+             $check->close();
+
+            // c) insert into enrollment table
             $date = date('Y-m-d');
             $ins = $conn->prepare("
                 INSERT INTO Enrollment_tbl
