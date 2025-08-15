@@ -173,8 +173,29 @@
       <?php endif; ?>
     });
   </script>
+  <script>
+        const courseList = document.getElementById('enrolled-courses-list');
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
 
+    // Scroll distance per click (adjust if needed)
+    const scrollAmount = 100;
 
+    leftArrow.addEventListener('click', () => {
+        courseList.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    rightArrow.addEventListener('click', () => {
+        courseList.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+  </script>
 
 </body>
 <style>
