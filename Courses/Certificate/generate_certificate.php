@@ -36,18 +36,10 @@ centerText($image, $name,   $fontPath, 1200, 700, 60, 30, $textColor);
 imagettftext($image, 40, 0, 850, 870, $textColor, $fontPath, $course);
 imagettftext($image, 33, 0, 1550, 1000, $textColor, $fontPath, $date);
 
-// this is for using with quiz results javascript 
-// Output as Base64 for AJAX
-// ob_start();
-// imagejpeg($image, null, 90); // 90% quality
-// imagedestroy($image);
-// $imageData = ob_get_clean();
 
-// echo base64_encode($imageData);
-
-// === OUTPUT IMAGE === for self testing 
+// === OUTPUT IMAGE ===
 header('content-type: image/jpeg');
-// header('Content-Disposition: attachment; filename="certificate_test.jpg"');
+// header('Content-Disposition: attachment; filename="certificate_{$name}.jpg"');
 imagejpeg($image, null, 90);
 imagedestroy($image);
 
