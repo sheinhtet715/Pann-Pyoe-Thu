@@ -5,7 +5,23 @@ include '../database/db_connection.php';
 
 ob_start();
 ?>
+<style>
 
+.swal2-image {
+    width: auto;
+    height: auto;
+    max-width: 120vw;
+    max-height: 120vh;
+    border-radius: 10px;
+    object-fit: contain;
+    transition: transform 0.2s ease; /* smooth zooming */
+}
+.swal2-no-padding {
+    padding: 0 !important;
+}
+
+
+</style>
 <div class="container">
     <div class=" d-flex justify-content-between my-2">
         <div class=""></div>
@@ -58,9 +74,12 @@ ob_start();
                             <tr>
                                 <td>
                                     <?php if ($row['payment_receipt']): ?>
-                                        <img src="../../PHP/<?= htmlspecialchars($row['payment_receipt']) ?>" 
-                                             class="img-thumbnail rounded shadow-sm" 
-                                             style="width:auto; height:100px" alt="receipt">
+                                       <img src="../../PHP/<?= htmlspecialchars($row['payment_receipt']) ?>" 
+                                            class="img-thumbnail rounded shadow-sm receipt-img" 
+                                            style="width:auto; height:100px; cursor:pointer;" 
+                                            alt="receipt"
+                                            data-src="../../PHP/<?= htmlspecialchars($row['payment_receipt']) ?>">
+
                                     <?php else: ?>
                                         <span class="text-muted">No Image</span>
                                     <?php endif; ?>
@@ -165,6 +184,58 @@ document.querySelectorAll('.delete-btn').forEach(btn => {
     });
 });
 </script>
+<script>
+document.querySelectorAll('.receipt-img').forEach(img => {
+    img.addEventListener('click', function() {
+        let src = this.dataset.src;
+        Swal.fire({
+            imageUrl: src,
+            imageAlt: 'Receipt',
+            showConfirmButton: false,
+            showCloseButton: true,
+            background: '#b3acac',
+            customClass: {
+                popup: 'swal2-no-padding'
+            }
+        });
+    });
+});
+// JS: Open SweetAlert2 image with zoom
+document.querySelectorAll('.img-thumbnail').forEach(img => {
+    img.addEventListener('click', () => {
+        Swal.fire({
+            imageUrl: img.src,
+            imageAlt: 'Receipt',
+            showCloseButton: true,
+            showConfirmButton: false,
+            background: '#b3acac',
+            customClass: {
+                image: 'swal2-image',
+                popup: 'swal2-no-padding'
+            },
+            didOpen: () => {
+                const swalImage = Swal.getImage();
+                let scale = 1;
+
+                // Zoom with mouse wheel
+                swalImage.addEventListener('wheel', e => {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        scale += 0.1; // zoom in
+                    } else {
+                        scale -= 0.1; // zoom out
+                        if (scale < 0.1) scale = 0.1; // minimum scale
+                    }
+                    swalImage.style.transform = `scale(${scale})`;
+                });
+            }
+        });
+    });
+});
+
+</script>
+
+
 
 <?php
 $content = ob_get_clean();
