@@ -1,43 +1,35 @@
 <?php
 // ===== login.php =====
+// Handles sign-in and sign-up, records session_id in Login_tbl for session management.
 
-// Start fresh session again after destroying
 session_start();
+require_once "./db_connection.php"; // make sure this provides $conn (mysqli)
 
-require_once "./db_connection.php";
+// Helper: sanitize incoming string inputs
+function sv($v) {
+    return trim($v ?? '');
+}
 
-
-$username = trim($_POST['user_name'] ?? '');
-$email    = trim($_POST['email'] ?? '');
+$username = sv($_POST['user_name'] ?? '');
+$email    = sv($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 $error    = '';
 $success  = '';
 
-// 1) All three fields are required:
 if (isset($_POST['signin'])) {
+    // Basic validation
     if ($username === '' || $email === '' || $password === '') {
         $error = 'Please enter your username, email, and password.';
-    }
-    // 2) Simple email format check
-    elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Please enter a valid email address.';
-    }
-    // 3) (Optional) enforce your username rules
-    elseif (! preg_match('/^[A-Za-z0-9_ ]{3,30}$/', $username)) {
+    } elseif (!preg_match('/^[A-Za-z0-9_ ]{3,30}$/', $username)) {
         $error = 'Usernames must be 3–30 chars and only letters, numbers, underscores, and spaces.';
-    }
-    // 4) Password cannot contain spaces
-    elseif (preg_match('/\s/', $password)) {
+    } elseif (preg_match('/\s/', $password)) {
         $error = 'Password cannot contain spaces.';
-    }
-    // 5) If phone is present, validate phone (optional for sign in)
-    elseif (isset($_POST['phone']) && $_POST['phone'] !== '' && !preg_match('/^\+?\d{7,15}$/', $_POST['phone'])) {
-        $error = 'Please enter a valid phone number (7-15 digits, optional +).';
-    }
-    // 6) Now do the lookup using AND
-    else {
+    } else {
+        // Look up user by email + username
         $sql = "
-          SELECT user_id, user_name, email, password_hash, profile_path
+          SELECT user_id, user_name, email, password_hash, role, profile_path
             FROM user_tbl
            WHERE email = ?
              AND user_name = ?
@@ -50,25 +42,38 @@ if (isset($_POST['signin'])) {
         if ($result && $result->num_rows === 1) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['password_hash'])) {
-                // success
+                // Success: regenerate session id, set session vars, and record session in Login_tbl
+                session_regenerate_id(true);
+                $sid = session_id();
+
                 $_SESSION['user_id']   = $user['user_id'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['email']     = $user['email'];
-                // ➊ record login in Login_tbl
-                $insertLogin = $conn->prepare("
-              INSERT INTO Login_tbl (
-                user_id, user_name, email, password_hash, role, last_login
-              ) VALUES (?, ?, ?, ?, ?, NOW())
-            ");
-                // if you have roles in User_tbl, you may need to fetch it first
+                if (!empty($user['profile_path'])) {
+                    $_SESSION['profile_path'] = $user['profile_path'];
+                }
+
+                // client metadata
+                $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+                $ua = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250);
                 $role = $user['role'] ?? 'user';
+
+                // Insert login/session row into Login_tbl
+                $insertLogin = $conn->prepare("
+                  INSERT INTO Login_tbl (
+                    user_id, session_id, user_name, email, password_hash, role, ip_address, user_agent, last_active
+                  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                ");
                 $insertLogin->bind_param(
-                    "issss",
+                    "isssssss",
                     $user['user_id'],
+                    $sid,
                     $user['user_name'],
                     $user['email'],
                     $user['password_hash'],
-                    $role
+                    $role,
+                    $ip,
+                    $ua
                 );
                 $insertLogin->execute();
                 $insertLogin->close();
@@ -86,7 +91,7 @@ if (isset($_POST['signin'])) {
 
 // -------- SIGN UP --------
 if (isset($_POST['signup'])) {
-    // 1) check for valid input
+    // Validation
     if ($username === '' || $email === '' || $password === '') {
         $error = 'Please enter your username, email, and password.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -98,7 +103,7 @@ if (isset($_POST['signup'])) {
     } elseif (isset($_POST['phone']) && $_POST['phone'] !== '' && !preg_match('/^\+?\d{7,15}$/', $_POST['phone'])) {
         $error = 'Please enter a valid phone number (7-15 digits, optional +).';
     } else {
-        // 2) check for existing account
+        // Check for existing account
         $sql = "SELECT 1 FROM user_tbl WHERE user_name = ? OR email = ? LIMIT 1";
         $chk = $conn->prepare($sql);
         $chk->bind_param("ss", $username, $email);
@@ -107,10 +112,10 @@ if (isset($_POST['signup'])) {
         if ($res->num_rows > 0) {
             $error = "That username or email is already taken.";
         } else {
-            // 3) hash password and insert into User_tbl
+            // Insert user
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $ins  = $conn->prepare("
-              INSERT INTO User_tbl
+              INSERT INTO user_tbl
                 (user_name, email, password_hash)
               VALUES (?, ?, ?)
             ");
@@ -118,33 +123,44 @@ if (isset($_POST['signup'])) {
 
             if ($ins->execute()) {
                 $newUserId = $ins->insert_id;
+                $ins->close();
 
-                // 4) also record initial login in Login_tbl
+                // Auto-login after signup: regenerate id, set session vars and record in Login_tbl
+                session_regenerate_id(true);
+                $sid = session_id();
+                $_SESSION['user_id']   = $newUserId;
+                $_SESSION['user_name'] = $username;
+                $_SESSION['email']     = $email;
+
+                $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+                $ua = substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250);
+                $defaultRole = 'user';
+
                 $insLog = $conn->prepare("
                   INSERT INTO Login_tbl
-                    (user_id, user_name, email, password_hash, role, last_login)
-                  VALUES (?, ?, ?, ?, ?, NOW())
+                    (user_id, session_id, user_name, email, password_hash, role, ip_address, user_agent, last_active)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
                 ");
-                $defaultRole = 'user';
                 $insLog->bind_param(
-                    "issss",
+                    "isssssss",
                     $newUserId,
+                    $sid,
                     $username,
                     $email,
                     $hash,
-                    $defaultRole
+                    $defaultRole,
+                    $ip,
+                    $ua
                 );
                 $insLog->execute();
                 $insLog->close();
 
-                $success = "Account created! You can now sign in.";
+                $success = "Account created! You are now signed in.";
             } else {
                 $error = "Signup failed: " . $ins->error;
+                $ins->close();
             }
-
-            $ins->close();
         }
-
         $chk->close();
     }
 }
@@ -152,7 +168,7 @@ if (isset($_POST['signup'])) {
 $conn->close();
 
 // ─── FLASH IT ──────────────────────────────────────────────────────
-// whichever happened, store it in session so the caller page can pick it up:
+// store messages in session so the caller page can display them
 if ($error) {
     $_SESSION['login_error'] = $error;
 }
@@ -161,8 +177,10 @@ if ($success) {
     $_SESSION['login_success'] = $success;
 }
 
+// Destination after login/signup
 $return = $_POST['return'] ?? $_GET['return'] ?? 'index.php';
 
+// Redirect back
 header("Location: " . $return);
 exit;
 ?>
