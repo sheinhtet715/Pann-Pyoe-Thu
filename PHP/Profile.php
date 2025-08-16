@@ -39,7 +39,8 @@
     $sql = "SELECT c.course_id, c.course_name, c.icon_url
             FROM  enrollment_tbl e
             INNER JOIN course_tbl c ON e.course_id = c.course_id
-            WHERE e.user_id = ?";
+            WHERE e.user_id = ?
+              AND e.payment_status ='confirm'";
     
     $stmt = $pdo->prepare($sql);
     $stmt ->execute([$_SESSION['user_id']]);

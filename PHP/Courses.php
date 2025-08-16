@@ -89,17 +89,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
 
         // c) insert into enrollment table
         $date = date('Y-m-d');
+        $status = 'confirm';
         $ins = $conn->prepare("
             INSERT INTO Enrollment_tbl
             (user_id, course_id, enrollment_date, payment_status)
-            VALUES (?, ?, ?, 1)
+            VALUES (?, ?, ?, ?)
         ");
 
         if (!$ins) {
             die("Prepare failed: " . $conn->error);
         }
 
-        $ins->bind_param("iis", $user_id, $courseid, $date);
+        $ins->bind_param("iiss", $user_id, $courseid, $date, $status);
         if ($ins->execute()) {
             $redirectFile =  $course_name.'.php';
             echo "<script>

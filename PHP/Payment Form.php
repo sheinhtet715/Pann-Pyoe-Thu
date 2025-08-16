@@ -1,13 +1,4 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['payment_method'])) {
-    $method = $_POST['payment_method'];
-    echo "<h2>You selected: $method</h2>";
-  } else {
-    echo "<p>No payment method selected.</p>";
-  }
-}
-?>
+
 <?php
 session_start();
 include "./db_connection.php";
@@ -38,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $payment_method = $_POST['payment_method'] ?? '';
         $enrollment_date = date('Y-m-d');
         $payment_date    = date('Y-m-d');
-        $payment_status = $_POST['payment_status'];
+        
 
         // Get course
         $stmt = $conn->prepare("SELECT course_id, fee FROM course_tbl WHERE course_name = ?");
@@ -80,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $check->close();
 
         // Insert into Enrollment
-        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date, payment_status) VALUES (?, ?, ?, 'pending')");
-        $stmt->bind_param("iiss", $user_id, $course_id, $enrollment_date, $payment_status);
+        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date) VALUES (?, ?, ?)");
+        $stmt->bind_param("iis", $user_id, $course_id, $enrollment_date);
         $stmt->execute();
         $enrollment_id = $stmt->insert_id;
         $stmt->close();
@@ -130,12 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $conn->commit();
-        $courseName = $course_name;
-        $redirectFile = $courseName.'.php';
         echo "<script>
-               alert('✅ Enrollment successful!'');
-        $redirectFile = '';
-              window.location.href = '../Courses/$redirectFile';
+               alert('✅ Enrollment successful, wait till admin approved!');
+              window.history.back();
               </script>";
         exit;
     } catch (Exception $e) {
