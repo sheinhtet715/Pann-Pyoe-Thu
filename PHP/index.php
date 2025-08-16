@@ -262,7 +262,7 @@ ob_start();
     </div>
 
     <div class="us-text">
-        <a class="about-us" href="#">Tap here to learn more About Us</a>
+        <a class="about-us" href="../PHP/About Us.php">Tap here to learn more About Us</a>
     </div>
 
 
