@@ -164,7 +164,13 @@ ob_start();
       // Initial load
       filterJobs();
 
+      function toggleMobileMenu() {
+        const nav = document.querySelector('.nav');
+        nav.classList.toggle('active');
+}
+
     </script>
+
 
 
 

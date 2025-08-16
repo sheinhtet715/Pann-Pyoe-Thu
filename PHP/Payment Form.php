@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $payment_method = $_POST['payment_method'] ?? '';
         $enrollment_date = date('Y-m-d');
         $payment_date    = date('Y-m-d');
+        $payment_status = $_POST['payment_status'];
 
         // Get course
         $stmt = $conn->prepare("SELECT course_id, fee FROM course_tbl WHERE course_name = ?");
@@ -79,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $check->close();
 
         // Insert into Enrollment
-        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date, payment_status) VALUES (?, ?, ?, 0)");
-        $stmt->bind_param("iis", $user_id, $course_id, $enrollment_date);
+        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date, payment_status) VALUES (?, ?, ?, 'pending')");
+        $stmt->bind_param("iiss", $user_id, $course_id, $enrollment_date, $payment_status);
         $stmt->execute();
         $enrollment_id = $stmt->insert_id;
         $stmt->close();

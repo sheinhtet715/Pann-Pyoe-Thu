@@ -6,6 +6,7 @@ require_once "./Controller/CoursesController.php";
 
 
 
+
 $imgFolder = '../Courses page Images/'; 
 $error   = $_SESSION['login_error']   ?? '';
 $success = $_SESSION['login_success'] ?? '';
@@ -32,72 +33,93 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
     } elseif (isset($_POST['email']) && $_POST['email'] !== ($_SESSION['email'] ?? '')) {
         $error = "❌ That email doesn’t match your logged‑in account.";
     } else {
-        $user_id      = $_SESSION['user_id'];
-        $course_name  = trim($_POST['course_name'] ?? '');
-       
+        // Get and sanitize inputs
+    $user_id = $_SESSION['user_id'];
+        $course_name = trim($_POST['course_name'] ?? '');
 
-        
         // a) find course_id
-        $cs = $conn->prepare("
-            SELECT course_id
-              FROM Course_tbl
-             WHERE course_name = ?
-        ");
-        $cs->bind_param("s", $course_name);
-        $cs->execute();
-        $cres = $cs->get_result();
-
-        if (!$cres->num_rows) {
-            $error = "⚠️ Course “{$course_name}” not found.";
-        } else {
-            $courseid = $cres->fetch_assoc()['course_id'];
-            $cs->close();
-
-            // b) check if already enrolled
-             $check = $conn->prepare("
-                 SELECT enrollment_id
-                 FROM Enrollment_tbl
-                 WHERE user_id = ? AND course_id = ?
-             ");
-             $check->bind_param("ii", $user_id, $courseid);
-             $check->execute();
-             $checkResult = $check->get_result();
-
-             if ($checkResult->num_rows > 0) {
-                 // User already enrolled → show alert, no insert
-                 echo "<script>
-                        alert('⚠️ You are already enrolled in this course.');
-                        window.history.back();
-                                
-                      </script>";
-                 exit;
-                 
-             }
-             $check->close();
-
-            // c) insert into enrollment table
-            $date = date('Y-m-d');
-            $ins = $conn->prepare("
-                INSERT INTO Enrollment_tbl
-                  (user_id,course_id,enrollment_date,payment_status)
-                VALUES (?, ?, ?, 1)
-            ");
-            $ins->bind_param("iis", $user_id, $courseid, $date);
-
-            if ($ins->execute()) {
-                $courseName = $course_name;
-                $redirectFile = $courseName.'.php';
-                echo " <script>              
-                  alert('✅ Enrollment booked successfully!');
-                  window.location.href = '../Courses/$redirectFile';
-                  </script>";
-            } else {
-                $error = "❌ Error inserting Enrollment: " . $ins->error;
-            }
-            $ins->close();
+        $cs = $conn->prepare("SELECT course_id FROM Course_tbl WHERE LOWER(TRIM(course_name)) = LOWER(?)");
+        if (!$cs) {
+            die("Prepare failed: " . $conn->error);
         }
-    }
-}
+
+        $clean_course_name = trim($course_name);
+        $cs->bind_param("s", $clean_course_name);
+        if (!$cs->execute()) {
+            die("Execute failed: " . $cs->error);
+        }
+
+        $cres = $cs->get_result();
+        //Handle course not found
+        if ($cres->num_rows === 0) {
+            $cs->close();
+            die ( "<script>
+                    alert('⚠️ Course \"".htmlspecialchars($course_name)."\" not found.');
+                    window.history.back();
+                  </script>");
+        }
+
+        // Get single course ID
+        $course_data = $cres->fetch_assoc();
+        $courseid = $course_data['course_id'];
+        $cs->close();
+
+        // b) check if already enrolled
+        $check = $conn->prepare("SELECT enrollment_id FROM Enrollment_tbl WHERE user_id = ? AND course_id = ?");
+        if ($check === false) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        $check->bind_param("ii", $user_id, $courseid);
+        if (!$check->execute()) {
+            die("Execute failed: " . $check->error);
+        }
+
+        $is_enrolled = $check->get_result()->num_rows >0;
+        $check->close();
+
+        if ($is_enrolled) {
+            $redirectFile = $course_name.'.php';
+            die ( "<script>
+                    alert('⚠️ You are already enrolled in this course.');
+                    window.location.href = '../Courses/{$redirectFile}';
+                  </script>");
+        }
+
+
+        // c) insert into enrollment table
+        $date = date('Y-m-d');
+        $ins = $conn->prepare("
+            INSERT INTO Enrollment_tbl
+            (user_id, course_id, enrollment_date, payment_status)
+            VALUES (?, ?, ?, 1)
+        ");
+
+        if (!$ins) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        $ins->bind_param("iis", $user_id, $courseid, $date);
+        if ($ins->execute()) {
+            $redirectFile =  $course_name.'.php';
+            echo "<script>
+                    alert('✅ Enrollment booked successfully!');
+                    window.location.href = '../Courses/{$redirectFile};
+                  </script>";
+        } else {
+            echo "<script>
+                    alert('❌ Error: ".addslashes($ins->error)."');
+                    window.history.back();
+                  </script>";
+        }
+
+
+            $ins->close();
+
+      }
+}    
+            
+
 
 // 2) Fetch dynamic list of courses from DB
 $controller = new CoursesController($conn);

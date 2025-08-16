@@ -47,7 +47,7 @@ async function openPopup(courseName, fee, paymentName) {
             Swal.fire({ icon: 'error', title: 'Error', text: data.message || 'Unexpected response.' });
             return;
         }
-
+    
 
     
     // For paid courses
@@ -58,7 +58,8 @@ async function openPopup(courseName, fee, paymentName) {
         document.getElementById('payment-input').value = paymentName;
         document.getElementById('payment-popup').style.display = 'flex';
     } 
-    // For free courses - submit directly
+   
+     // For free courses - submit directly
     else {
         const form = document.createElement('form');
         form.method = 'POST';
@@ -83,7 +84,6 @@ async function openPopup(courseName, fee, paymentName) {
         });
     }
 }
-
 
 function closePopup() {
     document.getElementById('payment-popup').style.display = 'none';
