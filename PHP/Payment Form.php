@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $check->close();
 
         // Insert into Enrollment
-        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date, payment_status) VALUES (?, ?, ?, 0)");
+        $stmt = $conn->prepare("INSERT INTO enrollment_tbl (user_id, course_id, enrollment_date) VALUES (?, ?, ?)");
         $stmt->bind_param("iis", $user_id, $course_id, $enrollment_date);
         $stmt->execute();
         $enrollment_id = $stmt->insert_id;
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Insert payment record
                 $amount = (float) filter_var($course_fee, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-                $stmt = $conn->prepare("INSERT INTO payment_tbl (enrollment_id, amount, payment_date, payment_method, payment_status, payment_receipt) VALUES (?, ?, ?, ?, 0, ?)");
+                $stmt = $conn->prepare("INSERT INTO payment_tbl (enrollment_id, amount, payment_date, payment_method, payment_receipt) VALUES (?, ?, ?, ?, ?)");
                 $stmt->bind_param("idsss", $enrollment_id, $amount, $payment_date, $payment_method, $relative_path);
                 $stmt->execute();
                 $stmt->close();
