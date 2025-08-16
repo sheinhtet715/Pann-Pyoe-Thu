@@ -66,9 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
              if ($checkResult->num_rows > 0) {
                  // User already enrolled → show alert, no insert
                  echo "<script>
-                     alert('⚠️ You are already enrolled in this course.');
-                     window.history.back(); // go back to previous page
-                 </script>";
+                        alert('⚠️ You are already enrolled in this course.');
+                        window.history.back();
+                                
+                      </script>";
                  exit;
                  
              }

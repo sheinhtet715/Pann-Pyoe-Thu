@@ -2,7 +2,7 @@
 
   
 
-function openPopup(courseName, fee, paymentName) {
+async function openPopup(courseName, fee, paymentName) {
     if (!window.isLoggedIn) {
         Swal.fire({
             icon: 'warning',
@@ -13,6 +13,42 @@ function openPopup(courseName, fee, paymentName) {
         });
         return;
     }
+     // 🔍 Check enrollment before continuing
+     try {
+        // Adjust the path as needed relative to the current page:
+        const resp = await fetch('check_enrollment.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ course_name: courseName })
+        });
+
+        // Read text first to debug if JSON parse fails
+        const raw = await resp.text();
+        let data;
+        try { data = JSON.parse(raw); }
+        catch (e) {
+            console.error('Non-JSON response:', raw);
+            throw e;
+        }
+
+        if (data.status === 'unauthenticated') {
+            Swal.fire({ icon: 'warning', title: 'Please sign in' }).then(() => openLogin());
+            return;
+        }
+        if (data.status === 'exists') {
+            Swal.fire({
+                icon: 'info',
+                title: 'Already Enrolled',
+                text: 'You are already enrolled in this course.'
+            });
+            return; // stop here
+        }
+        if (data.status !== 'not_enrolled') {
+            Swal.fire({ icon: 'error', title: 'Error', text: data.message || 'Unexpected response.' });
+            return;
+        }
+
+
     
     // For paid courses
     if (fee.toLowerCase() !== 'free') {
@@ -38,6 +74,16 @@ function openPopup(courseName, fee, paymentName) {
         form.submit();
     }
 }
+    catch(err) {
+        console.error(err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Something went wrong. Please try again later.'
+        });
+    }
+}
+
 
 function closePopup() {
     document.getElementById('payment-popup').style.display = 'none';
