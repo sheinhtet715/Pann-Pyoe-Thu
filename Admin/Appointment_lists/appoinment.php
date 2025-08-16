@@ -158,7 +158,7 @@ $res = $stmt->get_result();
   <?php while ($row = $res->fetch_assoc()):
         $id = (int)$row['appointment_id'];
         // create a short single-line preview (safe and trimmed)
-        $preview = htmlspecialchars(mb_strimwidth(trim((string)($row['description'] ?? '')), 0, 90, '...'));
+        $preview = htmlspecialchars(mb_strimwidth(trim((string)($row['description'] ?? '')), 0, 20, '...'));
   ?>
     <!-- MAIN ROW: compact table view -->
     <tr class="main-row">
@@ -178,7 +178,7 @@ $res = $stmt->get_result();
        <td style="vertical-align: middle;">
   <?php
     $fullDesc = trim((string)($row['description'] ?? ''));
-    $threshold = 90; // same as preview length
+    $threshold = 20; // same as preview length
     $needsToggle = mb_strwidth($fullDesc) > $threshold;
     $previewText = htmlspecialchars(mb_strimwidth($fullDesc, 0, $threshold, '...'));
   ?>
