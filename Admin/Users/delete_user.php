@@ -1,68 +1,117 @@
 <?php
 // delete_user.php
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
 session_name('ADMINSESSID');
 session_start();
-require '../database/db_connection.php'; // make sure this defines $conn (mysqli)
+require '../database/db_connection.php'; // $conn (mysqli)
 
-// 1) Validate incoming id
+// Validate id
 if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
     $_SESSION['flash_error'] = 'Invalid user id.';
     header('Location: userlist.php');
     exit;
 }
+$id = (int)$_GET['id'];
 
-$id = (int) $_GET['id'];
+try {
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $inTransaction = false;
 
-// (Optional) check permissions - ensure only admins can delete
-// if (empty($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-//     $_SESSION['flash_error'] = 'Permission denied.';
-//     header('Location: userlist.php');
-//     exit;
-// }
-
-// 2) Get the profile_path (so we can remove the file)
-$profilePath = null;
-$stmt = $conn->prepare("SELECT profile_path FROM User_tbl WHERE user_id = ?");
-$stmt->bind_param('i', $id);
-$stmt->execute();
-$res = $stmt->get_result();
-if ($row = $res->fetch_assoc()) {
-    $profilePath = $row['profile_path'];
-} else {
-    // user not found
-    $_SESSION['flash_error'] = 'User not found.';
+    // 1) Get profile_path
+    $profilePath = null;
+    $stmt = $conn->prepare("SELECT profile_path FROM User_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    if ($row = $res->fetch_assoc()) {
+        $profilePath = $row['profile_path'];
+    } else {
+        $stmt->close();
+        $_SESSION['flash_error'] = 'User not found.';
+        header('Location: userlist.php');
+        exit;
+    }
     $stmt->close();
+
+    // 2) Start transaction
+    $conn->begin_transaction();
+    $inTransaction = true;
+
+    // 3) Delete payments that reference the user's enrollments
+    //    Use a JOIN so it deletes only payments tied to this user's enrollments.
+    $stmt = $conn->prepare("
+        DELETE p
+        FROM payment_tbl p
+        INNER JOIN enrollment_tbl e ON p.enrollment_id = e.enrollment_id
+        WHERE e.user_id = ?
+    ");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $deletedPayments = $stmt->affected_rows;
+    $stmt->close();
+
+    // 4) Delete other tables that reference user_tbl directly
+    //    (appointment_tbl, favouritescholarship_tbl, login_tbl, user_course_tbl)
+    $tables = ['appointment_tbl', 'favouritescholarship_tbl', 'login_tbl', 'user_course_tbl'];
+    foreach ($tables as $t) {
+        $q = "DELETE FROM {$t} WHERE user_id = ?";
+        $stmt = $conn->prepare($q);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // 5) Delete enrollments for the user
+    $stmt = $conn->prepare("DELETE FROM enrollment_tbl WHERE user_id = ?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $deletedEnrollments = $stmt->affected_rows;
+    $stmt->close();
+
+    // 6) Delete the user
+    $stmt = $conn->prepare("DELETE FROM User_tbl WHERE user_id = ? LIMIT 1");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $deletedUsers = $stmt->affected_rows;
+    $stmt->close();
+
+    if ($deletedUsers !== 1) {
+        // Something unexpected: rollback and abort
+        $conn->rollback();
+        $inTransaction = false;
+        $_SESSION['flash_error'] = 'User could not be deleted (no rows affected).';
+        header('Location: userlist.php');
+        exit;
+    }
+
+    // 7) Commit
+    $conn->commit();
+    $inTransaction = false;
+
+    // 8) Remove profile image after successful commit
+    if (!empty($profilePath)) {
+        $uploadDir = realpath(__DIR__ . '/../User_profile_images');
+        $filePath = realpath(__DIR__ . '/../' . $profilePath);
+        if ($uploadDir && $filePath && strpos($filePath, $uploadDir) === 0) {
+            if (file_exists($filePath) && is_file($filePath)) {
+                @unlink($filePath);
+            }
+        }
+    }
+
+    $_SESSION['flash_success'] = 'User deleted successfully. Payments deleted: ' . $deletedPayments . '; Enrollments deleted: ' . $deletedEnrollments;
+    header('Location: userlist.php');
+    exit;
+
+} catch (Exception $e) {
+    if (isset($inTransaction) && $inTransaction) {
+        $conn->rollback();
+    }
+    error_log('delete_user error: ' . $e->getMessage());
+    // In production, avoid echoing raw DB error to users. For debugging you can show it.
+    $_SESSION['flash_error'] = 'Failed to delete user: ' . htmlspecialchars($e->getMessage());
     header('Location: userlist.php');
     exit;
 }
-$stmt->close();
-
-// 3) Delete the user
-$stmt = $conn->prepare("DELETE FROM User_tbl WHERE user_id = ? LIMIT 1");
-$stmt->bind_param('i', $id);
-$ok = $stmt->execute();
-if (! $ok) {
-    $_SESSION['flash_error'] = 'Failed to delete user: ' . $stmt->error;
-    $stmt->close();
-    header('Location: useruserlist.php');
-    exit;
-}
-$stmt->close();
-
-// 4) Remove profile image file (if any) — be careful with paths
-if (!empty($profilePath)) {
-    // profilePath in your app appears to be stored like "User_profile_images/filename.jpg"
-    // build an absolute path and delete only if inside expected folder
-    $file = __DIR__ . '/../' . $profilePath; // adjust if your stored path differs
-    // basic safety: ensure path contains the expected folder name
-    if (strpos($file, realpath(__DIR__ . '/../User_profile_images')) === 0) {
-        if (file_exists($file) && is_file($file)) {
-            @unlink($file);
-        }
-    }
-}
-
-// 5) Done
-$_SESSION['flash_success'] = 'User deleted successfully.';
-header('Location: userlist.php');
-exit;
