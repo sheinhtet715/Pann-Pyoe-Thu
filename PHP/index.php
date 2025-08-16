@@ -91,61 +91,6 @@ ob_start();
     </div>
 
 <!-- Counsellor Slide Start  -->
-            <style>
-            * {box-sizing: border-box;}
-            .Counsellor {display: none;}
-            img {vertical-align: middle;}
-
-            /* Slideshow container */
-            .slideshow-container {
-            max-width: 1100px;
-            position: relative;
-            margin: auto;
-            }
-
-            /* Caption text */
-            .text .word {
-            color: #f2f2f2;
-            font-size: 15px;
-            padding: 8px 10px;
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            }
-
-            /* The dots/bullets/indicators */
-            .dot {
-            height: 10px;
-            width: 10px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-            }
-
-            .dotactive {
-            background-color: #717171;
-            }
-
-            /* Fading animation */
-            .fade {
-            animation-name: fade;
-            animation-duration: 2s;
-            }
-
-            @keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
-            }
-
-            /* On smaller screens, decrease text size */
-            @media only screen and (max-width: 300px) {
-            .text {font-size: 11px}
-            }
-            </style>
 
             <div class="slideshow-container">
 
@@ -246,6 +191,8 @@ ob_start();
         <p>"Education becomes more meaningful when guided by the right counselling, helping students choose the right course university and career."</p>
     </div>
 
+
+    <!-- About Us  -->
     <div class="slider-wrapper">
         <div class="slider">
             <div class="slides">
@@ -259,12 +206,39 @@ ob_start();
                 </div>
             </div>
         </div>
+        <button class="nav-btn prev">&lt;</button>
+        <button class="nav-btn next">&gt;</button>
     </div>
 
     <div class="us-text">
         <a class="about-us" href="../PHP/About Us.php">Tap here to learn more About Us</a>
     </div>
 
+    <script>
+        const slidesContainer = document.querySelector('.slides');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        });
+
+        setInterval(() => {
+            nextBtn.click();
+        }, 3000);
+    </script>
 
 
     <!-- Footer -->
