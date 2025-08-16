@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $payment_method = $_POST['payment_method'] ?? '';
         $enrollment_date = date('Y-m-d');
         $payment_date    = date('Y-m-d');
+        $payment_status = $_POST['payment_status'];
 
         // Get course
         $stmt = $conn->prepare("SELECT course_id, fee FROM course_tbl WHERE course_name = ?");
