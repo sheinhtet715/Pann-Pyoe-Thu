@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['signin']) && !isset(
             $ins = $conn->prepare("
                 INSERT INTO Enrollment_tbl
                   (user_id,course_id,enrollment_date,payment_status)
-                VALUES (?, ?, ?, 'YES')
+                VALUES (?, ?, ?, '')
             ");
             $ins->bind_param("iis", $user_id, $courseid, $date);
 

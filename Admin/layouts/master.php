@@ -256,6 +256,9 @@ if ($user_id) {
             <li class="nav-item">
                 <a class="nav-link" href="../Appointment_lists/appoinment.php"><i class="fa-solid fa-calendar-check"></i><span>Appoinment Lists </span></a>
             </li>
+                      <li class="nav-item">
+                <a class="nav-link" href="../Payment/list.php"><i class="fa-solid fa-credit-card"></i><span>Payment Lists </span></a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="../changepassword/changepassword.php"><i class="fa-solid fa-lock"></i></i></i><span>Change Password </span></a>

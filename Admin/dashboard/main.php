@@ -39,6 +39,13 @@ if (tableExists($conn, 'Appointment_tbl')) {
     $pendingAppointments = (int) fetchScalar($conn, "SELECT COUNT(*) FROM Appointment_tbl WHERE appointment_status IN ('Pending','pending')", 0);
 }
 
+// Pending course payment requests
+$pendingPayments = 0;
+if (tableExists($conn, 'Payment_tbl')) {
+    $pendingPayments = (int) fetchScalar($conn, "SELECT COUNT(*) FROM Payment_tbl WHERE payment_status = 'pending'", 0);
+}
+
+
 ?>
 
    <div class="container-fluid">
@@ -161,7 +168,7 @@ if (tableExists($conn, 'Appointment_tbl')) {
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending Requests</div>
+                                 Counsellor Appointment Pending Requests</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= (int)$pendingAppointments ?></div>
                         </div>
                         <div class="col-auto">
@@ -171,7 +178,27 @@ if (tableExists($conn, 'Appointment_tbl')) {
                 </div>
             </div>
         </div>
+                     <!-- Pending Course Payments -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Course Pending Payment Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= (int)$pendingPayments ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+                <!-- Pending Requests Card Example -->
+            
                     <!-- Content Row -->
 <?php
 $content = ob_get_clean(); 
