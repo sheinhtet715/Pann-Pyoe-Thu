@@ -823,6 +823,7 @@ body {
         width: 100%;
         max-width: 500px;
         min-height: 280px;
+        align-content: center;
     }
 
     .intro-right {
@@ -833,20 +834,20 @@ body {
     .black-rectangle {
         width: 120px;
         height: 240px;
-        left: 20px;
+        left: 80px;
         top: -20px;
     }
 
     .brown-rectangle {
         width: 120px;
         height: 240px;
-        left: 180px;
+        left: 200px;
         top: 20px;
     }
 
     .intro-text {
         top: 60px;
-        left: 40px;
+        left: 100px;
     }
 
     .subtext {
