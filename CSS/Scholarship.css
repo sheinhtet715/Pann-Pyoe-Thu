@@ -7,19 +7,6 @@ html, body {
     background: #529AA6;
 }
 
-/* Header */
-/* .header {
-    background: #529AA6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-} */
-
-
 .logo {
     display: flex;
     align-items: center;
@@ -46,44 +33,6 @@ html, body {
     background: #fff;
     border-radius: 2px;
 }
-/* .logo-img {
-    width: 50px;
-    height: 50px; 
-    margin-right: 10px;
-} */
-
-/* .logo-text {
-    margin-top: 5px;
-    font-family: 'Great Vibes', cursive;
-    font-size: 24px;
-    color: black;
-    text-shadow:
-      -1px -1px 0 white,
-        1px -1px 0 white,
-      -1px  1px 0 white,
-        1px  1px 0 white;
-} */
-/* 
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-}
-
-.nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-} */
 
 /* Navigation and footer link hover effect */
 /* .nav a, */
@@ -117,25 +66,11 @@ html, body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* .profile-img {
-    width: 36px; 
-    height: 36px;
-    border-radius: 50%; 
-    object-fit: cover; 
-} */
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* .header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 20px;
-    } */
-
-    /* .nav {
-        justify-content: center;
-    } */
-
+   
     .search-bar {
         justify-content: center;
         padding: 20px;
@@ -146,26 +81,6 @@ html, body {
     }
 }
 
-@media (max-width: 480px) {
-     /* .header {
-        padding: 4px 1px;
-    } */
-
-    /* .logo-text {
-        font-size: 16px;
-    } */
-/* 
-    .nav a {
-        font-size: 14px;
-        padding: 3px 5px;
-    } */
-}
-/* .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    flex-shrink: 0;
-} */
 
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -230,11 +145,6 @@ html, body {
 .login-left h1 {
     font-size: 28px;
 }
-
-/* .flower-img {
-    width: 200px;
-    margin-top: 10px;
-} */
 
 .login-right {
     width: 100%;
@@ -657,23 +567,26 @@ footer p, footer a {
     border-radius: 6px;
 }
 @media (max-width: 1100px) {
-    /* header {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px 10px;
-    } */
-    /* .logo-container {
-        margin-bottom: 10px;
-    } */
     nav {
         flex-wrap: wrap;
         gap: 10px;
     }
 }
 @media (max-width: 900px) {
+    .filter-btn{
+        font-size: 8px;
+    }
+    .filter-select{
+        font-size: 5px;
+    }
     .scholarship-card {
         flex-direction: column;
         padding: 0;
+    }
+    .btn{
+        font-size: 8px;
+        margin-top: -15px;
+        margin-left: 1px;
     }
     .scholarship-card .right {
         position: static;
@@ -684,12 +597,25 @@ footer p, footer a {
     .scholarship-card .center {
         padding: 18px;
     }
+    
     .scholarship-card .left {
         border-radius: 14px 14px 0 0;
         width: 100%;
         flex-direction: row;
         justify-content: space-between;
         padding: 10px 18px;
+    }
+    .scholarship-card .left .country{
+        font-size: 8px;
+        padding: 7px 1px;
+    }
+      .scholarship-card .left .info{
+        font-size: 8px;
+        
+    }
+     .scholarship-card .left .date{
+        font-size: 8px;
+        
     }
     footer {
         flex-direction: column;
