@@ -310,7 +310,6 @@
             <ul class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="profileDropdownBtn">
                 <li><a class="dropdown-item" href="Profile.php">My Profile</a></li>
-                <li><a class="dropdown-item" href="settings.php">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             </ul>
