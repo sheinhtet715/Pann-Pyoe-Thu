@@ -1,6 +1,14 @@
 <?php
-    session_start();
+  if (session_status() === PHP_SESSION_NONE) session_start();
     include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +20,8 @@
      <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../Courses/PFA.css">
 </head>
 <body>
@@ -21,7 +31,7 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-        <nav class="nav">
+        <nav class="nav"  id="nav-menu">
             <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
             <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
             <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
@@ -30,15 +40,51 @@
             <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
             <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
         </nav>
-        <div class="profile-icon" onclick="openLogin()">
-            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
-        </div>
-
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+   <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
+
+
+          <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <?php if (! empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
+               <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+                <li><a class="dropdown-item" href="../PHP/Profile.php">My Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../PHP/logout.php">Logout</a></li>
+            </ul>
+        </div>
+        <?php else: ?>
+        <div class="profile-icon" onclick="openLogin()">
+            <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
+        </div>
+        <?php endif; ?>
+             
     </header>
 
     <!-- Main Content -->
@@ -593,5 +639,8 @@
             console.log('Login modal opened');
         }
     </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="…"
+        crossorigin="anonymous"></script>
 </body>
 </html>

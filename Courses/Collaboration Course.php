@@ -1,6 +1,14 @@
 <?php
-    session_start();
+  if (session_status() === PHP_SESSION_NONE) session_start();
     include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +20,8 @@
      <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
      <link rel="stylesheet" href="../Courses/PFA.css">
      
 </head>
@@ -22,7 +32,7 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-        <nav class="nav">
+        <nav class="nav" id="nav-menu">
                <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
         <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
         <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
@@ -31,9 +41,49 @@
         <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
         <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
         </nav>
+         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+           <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <?php if (! empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+                <li><a class="dropdown-item" href="../PHP/Profile.php">My Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../PHP/logout.php">Logout</a></li>
+            </ul>
+        </div>
+        <?php else: ?>
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
+        <?php endif; ?>
+             
     </header>
 
     <!-- Main Content -->
@@ -55,9 +105,9 @@
                 <li class="active" data-module="module1">Module 1</li>
                 <li data-module="module2">Module 2</li>
                 <li data-module="module3">Module 3
-                    <ul>
-                        <li>1.  Digital Tools for Collaboration</li>
-                        <li>2.  What is collaborative leadership?</li>
+                    <ul class="list-unstyled">
+                        <li class="text-wrap">1. Digital Tools for Collaboration</li>
+                        <li class="text-wrap">2. What is collaborative leadership?</li>
                         <!-- <li>3. LINK</li> -->
                     </ul>
                 </li>
@@ -482,6 +532,18 @@
         </div>
     </div>
 
+<?php include '../PHP/login_modal.php'; ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="…"
+        crossorigin="anonymous"></script>
+        <script>
+//Mobile menu toggle function
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+      </script>
+
     <script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -591,5 +653,67 @@
             console.log('Login modal opened');
         }
     </script>
+      <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+  </script>
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  <?php if ($error): ?>
+      // 1) Login error – show SweetAlert, then open modal on “Try Again”
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?php echo json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      })
+      .then(() => openLogin());
+
+    <?php elseif ($success): ?>
+      // 2) Success – quick toast only
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: <?php echo json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+    <?php else: ?>
+      // 3) No error/success – honor ?showLogin=1 here
+      (function(){
+        const params = new URL(location).searchParams;
+        if (params.get('showLogin') === '1') {
+          openLogin();
+          params.delete('showLogin');
+          history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+        }
+      })();
+
+    <?php endif; ?>
+
+  });
+
+</script>
+
+
 </body>
 </html>

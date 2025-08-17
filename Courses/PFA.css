@@ -71,7 +71,23 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    
+}
+.mobile-menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+}
 /* Profile Icon */
 .profile-icon {
     background-color: #f0e8d9;
@@ -213,7 +229,7 @@ body {
 
 .module ul {
     margin: 1rem 0;
-    padding-left: 2rem;
+    padding-left: 0rem;
 }
 
 .module li {
@@ -430,7 +446,7 @@ button:hover, .appointment-btn:hover, .confirm-btn:hover, .signin:hover, .signup
         position: static;
         order: -1;
     }
-    
+      
     .module-nav ul {
         display: flex;
         flex-wrap: wrap;
@@ -480,7 +496,11 @@ button:hover, .appointment-btn:hover, .confirm-btn:hover, .signin:hover, .signup
         gap: 1rem;
     }
 }
-
+@media (max-width: 900px) {
+  .mobile-menu-toggle {
+        display: flex;
+    }
+}
 @media (max-width: 480px) {
     .header {
         padding: 1rem;
