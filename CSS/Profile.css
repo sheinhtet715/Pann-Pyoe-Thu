@@ -242,12 +242,7 @@ main {
   gap: 22px;
   margin-top: 36px;
 }
-/* .flower-img {
-  width: 90px;
-  height: 90px;
-  filter: drop-shadow(0 2px 6px #529AA655);
-  border-radius: 10px;
-} */
+
 
 .edit-profile-section {
   background: linear-gradient(120deg, rgba(82,154,166,0.85) 80%, rgba(109,182,194,0.85) 100%);

@@ -332,6 +332,9 @@ html, body {
     gap: 10px;
     box-sizing: border-box;
 }
+.btn{
+    margin-top: -15px;
+}
 .scholarship-card .left .country,
 .scholarship-card .left .info,
 .scholarship-card .left .date {
