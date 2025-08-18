@@ -130,8 +130,6 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
-                  <th>Course</th>
-                  <th>Job</th>
                   <th>Role</th>
                   <th class="actions-col">Actions</th>
                 </tr>
@@ -155,8 +153,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                                 <td><?= htmlspecialchars($user['user_name']) ?></td>
                                 <td><?= htmlspecialchars($user['email']) ?></td>
                                 <td><?= htmlspecialchars($user['phone'] ?? '-') ?></td>
-                                <td><?= htmlspecialchars($user['course_name'] ?? '-') ?></td>
-                                <td><?= htmlspecialchars($user['job_name'] ?? '-') ?></td>
+                   
                                 <td><?= htmlspecialchars($user['role'] ?? '-') ?></td>
                                 <td>
                            <?php if (!($user['role'] === 'admin')): ?>
@@ -224,3 +221,4 @@ function deleteUser(id) {
     });
 }
 </script>
+
