@@ -831,6 +831,115 @@ nav a {
   flex-direction: column;
 }
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+nav a {
+  font-size: 14px;
+}
+
+.vision-container {
+  flex-direction: column;
+}
+
+.vision-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vision-line {
+  transform: rotate(90deg);
+  top: 270px;
+  left: 335px;
+  height: 700px;
+}
+
+ .vision-line::before,
+ .vision-line::after {
+  width: 150px;
+  height: 6px;
+}
+
+.vision-right {
+  position: absolute;
+  left: 22%;
+  top: 95%;
+}
+
+.mission-container{
+  margin-top: 600px;
+  max-width: 740px;
+}
+
+.mission-image {
+  width: 740px;
+}
+
+.mission-text {
+  width: 480px;
+}
+
+.mission-text h1 {
+  font-size: 24px;
+}
+
+.mission-text ul {
+  font-size: 16px;
+}
+
+.core-row {
+  flex-direction: column;
+}
+
+.team-section {
+  gap: 80px;
+  flex-direction: column;
+}
+.member-header{
+  position: absolute;
+  top: 0px;
+  background-color: #2C4854;
+  color: white;
+  border-radius: 15px;
+  font-weight: bold;
+  width: 320px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  padding: 9px;
+}
+.member-container {
+  gap: 70px;
+  margin-top: 200px;
+}
+.member-info {
+  width: 320px;
+  height: 450px;
+}
+.member-role {
+  width: 370px;
+}
+
+.tree-container{
+  flex-direction: column;
+}
+
+.bottom a {
+    font-size: 14px;
+}
+
+.bottom p {
+    font-size: 14px;
+}
+
+.fab {
+    font-size: 24px;
+}
+/* for debugging
+* {
+  border: 1px solid red;
+}*/
+
+}
 /*__________End Responsive__________*/
 
 @media screen and (min-width: 600px) and (max-width: 768px) {
@@ -943,6 +1052,120 @@ nav a {
 
 }
 
+@media screen and (min-width: 426px) and (max-width: 600px) {
+
+.the-start {
+  width: 300px;
+  height: 300px;
+}
+
+.the-start img {
+  width: 300px;
+  height: 300px;
+}
+
+.start-text {
+  top: 52%;
+  left: 50%;
+  font-size: 20px;
+}
+
+.vision-container {
+  flex-direction: column;
+}
+
+.image-container img {
+  margin-left: 15px;
+  width: 200px;
+  height: 150px;
+}
+
+.vision-right {
+  margin-top: 50px;
+}
+
+.vision-right p {
+  width: 250px;
+  font-size: small;
+  padding: 0px;
+}
+
+.vision-item {
+  display: flex;
+  flex-direction: column;
+  margin-left: 125px;
+}
+
+.vision-text {
+  margin-right: 40px;
+}
+
+.photo-text {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.mission-container {
+  margin-top: 600px;
+  max-width: 320px;
+}
+
+.mission-text {
+  margin-top: -15px;
+  width: 150px;
+}
+
+.mission-text h1 {
+  font-size: 10px;
+}
+
+.mission-text ul {
+  font-size: 6px;
+}
+
+.core-row {
+  flex-direction: column;
+}
+
+.team-section {
+  flex-direction: column;
+}
+
+.member-container {
+  margin-top: 200px;
+}
+
+.member-header {
+  width: 300px;
+  height: 50px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.member-info {
+  width: 300px;
+  height: 390px;
+}
+
+.member-role {
+  width: 300px;
+  margin-left: -20px;
+}
+
+.profile-image {
+  width: 125px;
+  height: 125px;
+}
+
+.tree-container {
+  flex-direction: column;
+}
+
+.tree-container img {
+  width: 300px;
+  height: 350px;
+}
+}
 /*__________End__________*/
 
 @media screen and (min-width: 320px) and (max-width: 426px) {
@@ -1262,7 +1485,7 @@ nav a {
 /*__________End Responsive__________*/
 /*__________Responsive for screen from 1024px to 1440px__________*/
 
-@media screen and (max-width: 1440px) and (min-width: 1024px) {
+@media screen and (max-width: 1930px) and (min-width: 1024px) {
 
 nav {
   gap: 15px;
