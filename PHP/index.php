@@ -294,11 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
       icon: 'error',
       title: 'Oops…',
       text: <?php echo json_encode($error)?>,
+        timer: 1500,
       confirmButtonText: 'Try Again'
     })
-    .then(() => {
-      openLogin();
-    });
+    ;
   <?php elseif ($success): ?>
     Swal.fire({
       icon: 'success',

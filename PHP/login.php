@@ -211,18 +211,25 @@ $conn->close();
 
 // ─── FLASH IT ──────────────────────────────────────────────────────
 // store messages in session so the caller page can display them
+$from = $_POST['from'] ?? $_GET['from'] ?? '';
+
+// save flash messages
 if ($error) {
     $_SESSION['login_error'] = $error;
+    if ($from) {
+        $_SESSION['login_from'] = $from; // e.g., "appointment"
+    }
 }
 
 if ($success) {
     $_SESSION['login_success'] = $success;
+    if ($from) {
+        $_SESSION['login_from'] = $from;
+    }
 }
 
-// Destination after login/signup
 $return = $_POST['return'] ?? $_GET['return'] ?? 'index.php';
-
-// Redirect back
 header("Location: " . $return);
 exit;
+
 ?>
