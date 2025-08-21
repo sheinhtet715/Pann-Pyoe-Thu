@@ -53,6 +53,7 @@
   <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
   <title>Profile Page</title>
   <link rel="stylesheet" href="../CSS/Profile.css">
+  
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -87,114 +88,35 @@
             <input type="file" id="profile-upload" name="profile_image" accept="image/*" style="display:none;">
             Upload your profile
           </label> -->
-          <a href="" id="change-photo-link">Change profile picture</a>
+          
         </div>
     
-        <div class="enrolled-courses">
-          <span>Enrolled courses</span>
-          <div class="courses-slider">
-            <button class="slider-arrow left-arrow" id="left-arrow" aria-label="Previous courses">&#60;</button>
-            <ul class="courses-list" id="enrolled-courses-list">
-              <!-- course items here -->
-               <?php foreach($courses as $course): ?>
-                <?php $redirectFile = $course['course_name'];?>
-                <li class="course-circle" data-cousrse-id="<?=$course['course_id']?>">
-                  <a href="../Courses/<?= $redirectFile?>.php"<?= urldecode($course['course_id'])?>>
-                  
-                    <img src="<?= htmlspecialchars($imgFolder.($course['icon_url']))?>" alt="<?=htmlspecialchars($course['course_name'])?>" class="course-img">
-                    <span class="course-name"><?= htmlspecialchars($course['course_name']) ?></span>
-                  </a>
-                </li>
-               <?php endforeach; ?> 
-            </ul>
-            <button class="slider-arrow right-arrow" id="right-arrow" aria-label="Next courses">&#62;</button>
-          </div>
-        </div>
+        
       </section>
       <section class="edit-profile-section">
+        <button type="button" class="btn btn-secondary" onclick="history.back();">Back</button>
         <h2>Edit Your Profile</h2>
-        <form method="post" action="update_profile.php"  id="profile-form" enctype="multipart/form-data">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="user_name" placeholder="Your name" value="<?php echo htmlspecialchars($user['user_name']) ?>" required>
+        <form method="post" action="updatepassword.php"  id="profile-form" enctype="multipart/form-data">
+          <label for="oldPassword">Old Password</label>
+           <input type="password" name="oldPassword" class="form-control"
+           placeholder="Enter Old Password..." required>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your email" value="<?php echo htmlspecialchars($user['email']) ?>" required>
-          <a href="./changepassword.php" class="changepwd">Change Password</a>
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="Your phone number" value="<?php echo htmlspecialchars($user['phone']) ?>">
-           <label class="upload-label" for="profile-upload-form" style="display:none">
+          <label for="password">New Password</label>
+        <input type="password" name="newPassword" class="form-control"
+               placeholder="Enter New Password..." required>
+            <small style="color: muted;">At least 8 characters recommended.</small>         
+          <label for="confirmPassword">Confirm Password</label>
+         <input type="password" name="confirmPassword" class="form-control"
+           placeholder="Enter Confirm Password..." required>
+         
           
-           <input
-            type="file"
-            id="profile-upload-form"
-            name="profile_image"
-            accept="image/*"
-            style="display:none"
-          >
-          Upload your profile picture
-        </label>
           <input type="submit" value="Save" class="btn btn-success">
         </form>
       </section>
     </main>
   </div>
   <script src="../JavaScript/Profile.js"></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      const link = document.getElementById('change-photo-link');
-      const fileInput = document.getElementById('profile-upload-form');
-      const form = document.getElementById('profile-form');
 
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        fileInput.click();
-      });
-
-      fileInput.addEventListener('change', function() {
-        if (fileInput.files.length) {
-          form.submit();
-        }
-      });
-
-      // SweetAlert feedback
-      <?php if ($success): ?>
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: '<?= htmlspecialchars($success) ?>'
-        });
-      <?php endif; ?>
-
-      <?php if ($error): ?>
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: '<?= htmlspecialchars($error) ?>'
-        });
-      <?php endif; ?>
-    });
-  </script>
-  <script>
-        const courseList = document.getElementById('enrolled-courses-list');
-    const leftArrow = document.getElementById('left-arrow');
-    const rightArrow = document.getElementById('right-arrow');
-
-    // Scroll distance per click (adjust if needed)
-    const scrollAmount = 100;
-
-    leftArrow.addEventListener('click', () => {
-        courseList.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-
-    rightArrow.addEventListener('click', () => {
-        courseList.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
 
   </script>
 
