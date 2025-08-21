@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaboration Course</title>
+    <title>Gender Studies</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Course.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -33,7 +33,7 @@
     <div class="course-container">
         <!-- Course Header -->
         <div class="course-header">
-            <h1>Collaboration</h1>
+            <h1>Gender Studies</h1>
             <div class="course-info">
                 <div>Type - Online Course</div>
                 <div>Language - English</div>
@@ -58,362 +58,349 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
-                <h3>Collaboration: What is collaboration?</h3>
+                <h3>Gender attitudinal changes are highly complex, fluid and multi-dimensional.</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
                 <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
+
+                <p>Describe our culture, what is lgbtgia+, and why does it discriminate against them?</p>
+
+                <br>
+
+                <p>Heteronormativity, sexual orientation , and regard as not normal.</p>
                 
-                <p>The word collaboration is used in different ways making it necessary to check for common understanding. Collaboration may be used as a synonym for "working together". The term may indicate a process or it might refer to a highly integrated method of achieving a goal.</p>
-                
-               <h3>Level of Collaboration</h3>
+                <br>
 
-               <p>Levels of Collaboration: Since the word collaboration can be misunderstood, it is valuable to review some of the theory in this area. A commonly used collaboration framework is Houge"s 3 Levels of Community Linkage Model.</p>
+                <p>#Traditional beliefs around male power ( patriarchy - male dominance) decision making #Gender stereotype (hair, makeup and nail are considered to be feminie in society and male to be masculine and don't show emotion) and gender norms in which men are judged by their talent but women by virtues, the limitations of structural and cultural perspectives.  
+                </p>
 
-               <h3>This model describes five levels of collaboration:</h3>
+                <br>
 
-               <ol>
-                   <li>Networking</li>
-                   <li>Cooperation or Alliance</li>
-                   <li>Coordination or Partnership</li>
-                   <li>Coalition and</li>
-                   <li>Collaboration</li>
-               </ol>
+                <p>Gender attitudinal changes are highly complex, fluid and multi-dimensional (Knight and Brinton, 2017; Scarborough et al., 2019)</p>
 
-               <a href="https://asphn.org/wp-content/uploads/2017/10/collaboration-primer.pdf">Click Here</a>
+                <br>
 
+                <p>Prior research on adolescents identifies the important role of parents’ gender attitudes and gendered behavior in the formation of children’s gender role attitudes (Cano and Hofmeister, 2022; Kim and Fong, 2014). Thus, questions remain about parents’ influence in adulthood.</p>
+
+                <p>Both structural and cultural perspectives help to uncover the opportunities and the constraints women face in patriarchal structures in different contexts, which affect gender role attitudes.</p>
+
+                <p>To further convert Haslanger’s philosophical terms to sociological language, I shall use Swidler’s (1986) distinction between ‘settled and unsettled times’. In settled patriarchy, at least in theory, gender roles assign men to dominant social roles and women to subordinate roles in both public and private spheres across economic, social, political, religious and family and kinship domains.</p>
             </section>
 
             <!-- Module 2 -->
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
-                <h3>Collaborative Learning</h3>
-                
-                <p>"Collaborative Learning" is an umbrella term for a variety of educational approaches involving joint intellectual efforts by students, or students and teachers together. Usually, students are working in groups of two or more, mutually searching for understanding, solutions, or meanings, or creating a product. Collaborative learning activities vary widely, but most center on students' exploration or application of the course material, not simply the teacher's presentation or explication of it.</p>
+                <h3>Heteronormativity</h3>
 
-                <a href="https://teach.ufl.edu/wp-content/uploads/2016/07/WhatisCollaborativeLearning.pdf">Click Here</a>
                 <br>
-                <h3>The benefits of collaborative learning include:</h3>
-                
-                <ul>
-                    <li>Development of higher-level thinking, oral communication, self-management, and leadership skills.</li>
-                    <li>Promotion of student-faculty interaction.</li>
-                    <li>Increase in student retention, self-esteem, and responsibility.</li>
-                    <li>Exposure to and an increase in understanding of diverse perspectives.</li>
-                    <li>Preparation for real life social and employment situations.</li>
-                </ul>
 
-                <a href="https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning">Learn More</a>
+                <p>Most feminists saw that oppression of women came from the underlying bias of a patriarchal society.</p>
+
+                <p>Gerda Lerner's 1986 history classic, The Creation of Patriarchy, traces the development of the patriarchy to the second millennium B.C.E. in the middle east, putting gender relations at the center of the story of civilization's history. She argues that before this development, male dominance was not a feature of human society in general. Women were key to the maintenance of human society and community, but with a few exceptions, social and legal power was wielded by men. If patriarchy was created by culture, it can be overturned by a new culture. </p>
+
+                <p>Heteronormativity is the concept that heterosexuality is the preferred or normal sexual orientation. It assumes the gender binary (i.e., that there are only two distinct, opposite genders) and that sexual and marital relations are most fitting between people of opposite sex.</p>
+
+                <br>
+
+                <p>Heteronormativity creates and upholds a social hierarchy based on sexual orientation with the practice and belief that heterosexuality is deemed as the societal norm. A heteronormative view, therefore, involves alignment of biological sex, sexuality, gender identity and gender roles. Heteronormativity has been linked to heterosexism and homophobia, and the effects of societal heteronormativity on lesbian, gay and bisexual individuals have been described as heterosexual or "straight" privilege.</p>
+
+                <p>In Patriarchy, gender roles and stereotypes may be different in each social class, age, and culture but through the mechanisms, structures, and institutions, it makes these roles and stereotypes seem natural and universal. In any given Patriarchy, not all men will enjoy the same privileges or have the same power. </p>
+
+
+                <a href="https://en.wikipedia.org/wiki/Same-sex_marriage_in_the_United_Kingdom">Learn More</a>
             </section>
 
             <!-- Module 3 -->
             <section id="module3" class="module">
                 <h2>MODULE 3</h2>
-                <h3>Digital Tools for Collaboration</h3>
-                
-                <ul>
-                    <li>Google Workspace, Trello, Microsoft Teams</li>
-                </ul>
-                
-                <p>These tools provide features such as instant messaging, video conferencing, file sharing, project management, and online whiteboards to help teams collaborate more efficiently and effectively.</p>
-                
-                <h2>What is a collaborative leadership?</h2>
+                <h3>The Criminalization of Same-Sex Behaviors:</h3>
 
-                <p>Collaborative leadership is a management strategy in which members of a leadership team collaborate across sectors to make decisions that keep their organization prospering. This type of leadership has grown prevalent among managers today, replacing the traditional top-down leadership strategy of the past, in which high-level executives made decisions that were passed down to employees with little understanding of how or why such decisions were made.</p>
-
-                <p>Unlike the outdated top-down approach, the collaborative leadership style provides numerous benefits to organizations. At the executive level, it develops a sense of unity among managers, helping them to quickly make effective business decisions, establish and preserve the organization's core principles, and strategically approach difficulties as a unified team. Embracing collaboration at this high level also shows employees that they, too, should approach their work in a collaborative manner.</p>
+                <br>
                 
-                <a href="https://graduate.northeastern.edu/knowledge-hub/collaborative-leadership/">Learn More</a>
+                <p>   The criminalization of same-sex behaviors has a long and dark history, particularly in Europe where sodomy laws influenced by religious beliefs were prevalent. These laws often prescribed severe punishments, including death, for individuals engaged in same-sex relationships. For example, in England, the Buggery Act of 1533 criminalized anal intercourse, punishable by death. Similarly, in the United States, sodomy laws were widespread, with many states criminalizing consensual same-sex sexual activity until as recently as the 2000s.</p>
+
+                <br>
+
+                <p>   One notable case study is that of Alan Turing, a pioneering mathematician and cryptanalyst who played a crucial role in breaking the German Enigma code during World War II. Despite his contributions to the war effort, Turing was prosecuted for homosexual acts in 1952 under the UK's gross indecency laws. He was subjected to chemical castration as an alternative to imprisonment and tragically died by suicide in 1954. Turing's persecution highlights the devastating impact of anti-LGBTQIA+ laws and the stigma surrounding same-sex behaviors.</p>
+
+                <br>
+
+                <p>   Despite the abolition of many sodomy laws in the latter half of the 20th century, same-sex relationships are still punishable by imprisonment or death in some countries today. For example, in several countries in Africa and the Middle East, homosexuality is criminalized, leading to a culture of fear and secrecy within LGBTQIA+ communities. The existence of such laws perpetuates stigma, discrimination, and violence against LGBTQIA+ individuals, impeding progress towards equality and human rights.</p>
+
+                <br>
+
+                <h3>Framing LGBTQIA+ Identities as Disorders:</h3>
+
+                <br>
+
+                <p>   The medicalization of gender diversity has historically pathologized non-binary and transgender identities, framing them as disorders to be treated rather than valid expressions of human diversity. This medicalization has had devastating consequences for LGBTQIA+ individuals, leading to harmful practices such as conversion therapy, which seeks to change an individual's sexual orientation or gender identity against their will.</p>
+
+                <br>
+
+                <p>   One prominent case study is that of Alan Turing, whose homosexuality was deemed a "disorder" by medical professionals of his time. Turing was subjected to chemical castration as a form of "treatment," which had severe psychological consequences and ultimately led to his death. His case underscores the harm inflicted by medicalization and conversion therapy on LGBTQIA+ individuals, highlighting the urgent need for ethical and affirming approaches to healthcare.</p>
+
+                <br>
+
+                <p>   Despite advancements in understanding gender diversity and the DE pathologization of transgender identities in many parts of the world, conversion therapy and other harmful practices continue to be employed in some regions. Efforts to combat medicalization and promote affirmative care for LGBTQIA+ individuals are ongoing, with advocacy organizations and medical professionals calling for bans on conversion therapy and improved access to gender-affirming healthcare.</p>
+
             </section>
 
             <!-- Module 4 -->
             <section id="module4" class="module">
                 <h2>MODULE 4</h2>
-                <h3>Reasons for Collaboration.</h3>
+                <h3> Providing Support Networks and Resources to LGBTQIA+ Communities:</h3>
                 
                 <!-- Image 4 at start of Module 4 -->
                 <img src="path/to/module4-image.jpg" alt="Active Listening in PFA" class="module-image">
                 
-                <p>There are numerous reasons why individuals or groups may decide to collaborate. Some common explanations are:</p>
+                <p>   Cultural activism has played a crucial role in challenging stereotypes and promoting LGBTQIA+ visibility and representation. Artists, activists, and community organizations have used art, media, and cultural events to foster greater acceptance and understanding of LGBTQIA+ identities.</p>
                 
-                <h3>1. To Reach a Shared goal.</h3>
-                
-                <p>Collaboration allows individuals or groups to pool their resources and knowledge in order to achieve a common objective.</p>
+                <br>
 
-                <h3>2. Improve Communication</h3>
-                
-                <p>Collaboration can improve communication by allowing for open conversation and the exchange of ideas.</p>
+                <p>   One notable example is the impact of LGBTQIA+ musicians and performers such as Freddie Mercury and David Bowie on mainstream culture. Through their music and public personas, Mercury and Bowie challenged gender norms and stereotypes, opening up conversations about sexuality and identity in mainstream media. Their visibility and success helped to humanize LGBTQIA+ experiences and pave the way for greater acceptance and representation in popular culture.</p>
 
-                <h3>3. Improve Problem-Solving Skills</h3>
-                
-                <p>Collaboration can improve problem-solving skills by allowing people to brainstorm and share ideas with one another.</p>
+                <br>
 
-                <h3>4. To Improve Efficiency</h3>
-                
-                <p>Collaboration boosts efficiency by allowing people to share resources, information, and talents.</p>
+                <p>   In addition to cultural activism, support networks and resources play a crucial role in providing community and assistance to LGBTQIA+ individuals. Organizations such as The Trevor Project, GLAAD, and local LGBTQIA+ community centers offer a range of services, including counseling, support groups, and educational resources. These resources provide vital support to LGBTQIA+ individuals facing discrimination, stigma, and other challenges, helping to build resilience and foster a sense of belonging within the community.</p>
 
-                <h3>5. To Develop Relationships</h3>
-                
-                <p>Collaboration can assist to strengthen connections by bringing individuals together and creating a sense of community.</p>
-
-                <h3>6. To Acquire New Talents or Expertise</h3>
-                
-                <p>Collaboration allows individuals to master new talents or obtain knowledge from others.</p>
-
-                <h3>7. To Boost Inventiveness</h3>
-                
-                <p>Collaboration can boost creativity by creating an environment for brainstorming and innovation.</p>
-
-                <h3>8. Create Something Fresh</h3>
-                
-                <p>Collaboration can be utilized to develop a new product, service, or process.</p>
-
-
-                <div class="example">
-                    <h4>Key Principle:</h4>
-                    <p>People will gradually comprehend and come to terms with the incident if they share their story.</p>
-                </div>
-                
-                <a href="https://www.marketing91.com/collaboration/">Learn More</a>
-                
-                <div class="video-container">
-                    <a href="https://youtu.be/AfdKqpGaa_k" target="_blank">
+                <a href="https://youtu.be/UD9IOllUR4k?si=vsbqDqNNiNIgyj7S" target="_blank">
                         <i class="fab fa-youtube"></i> Video
-                    </a>
-                </div>
+                </a>
 
+                <p>Excellent — I’ll create a 10-item multiple choice quiz based on these Gender Studies modules with an answer key as well:</p>
             </section>
 
             <!-- Quiz Section -->
             <section id="quiz" class="module">
                 <div class="quiz-section">
-                    <h2>Collaboration Quiz</h2>
+                    <h2>Gender Studies Quiz</h2>
                     <p style="text-align: center; margin-bottom: 2rem;">Test your knowledge of Modules 1-4</p>
                     
                     <div class="quiz-question">
-                        <h3>1. What is the most basic level of collaboration according to Hogue’s Levels of Community Linkage Model?</h3>
+                        <h3>1. What is heteronormativity?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q1a" name="question1">
-                                <label for="q1a">(A) Coorddination</label>
+                                <label for="q1a">(A) A belief that all gender identities are equally valid</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1b" name="question1">
-                                <label for="q1b">(B) Coalition</label>
+                                <label for="q1b">(B) The concept that heterosexuality is the preferred or normal sexual orientation</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1c" name="question1">
-                                <label for="q1c">(C) Networking</label>
+                                <label for="q1c">(C) A medical condition related to gender identity</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1d" name="question1">
-                                <label for="q1d">(D) Collaboration</label>
+                                <label for="q1d">(D) A social movement promoting equality</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>2. Which of the following is NOT a benefit of collaborative learning?</h3>
+                        <h3>2. According to patriarchal norms, how are men and women typically judged in society?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q2a" name="question2">
-                                <label for="q2a">(A) Improved oral communication skills</label>
+                                <label for="q2a">(A) Men by appearance, women by achievements</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2b" name="question2">
-                                <label for="q2b">(B) Reduced student retention</label>
+                                <label for="q2b">(B) Both equally by their emotional expression</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2c" name="question2">
-                                <label for="q2c">(C) Development of higher-level thinking</label>
+                                <label for="q2c">(C) Men by their talents, women by their virtues</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2d" name="question2">
-                                <label for="q2d">(D) Exposure to diverse perspectives</label>
+                                <label for="q2d">(D) Men by their relationships, women by their wealth</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>3. What is one main difference between traditional top-down leadership and collaborative leadership?</h3>
+                        <h3>3. What does Gerda Lerner’s work The Creation of Patriarchy argue about patriarchy’s origins?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q3a" name="question3">
-                                <label for="q3a">(A) Top-down leadership is slower in decision-making.</label>
+                                <label for="q3a">(A) It was always a natural part of human society</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3b" name="question3">
-                                <label for="q3b">(B) Collaborative leadership promotes unity and shared decision-making.</label>
+                                <label for="q3b">(B) It emerged in the second millennium B.C.E. in the Middle East and can be overturned by culture</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3c" name="question3">
-                                <label for="q3c">(C) Top-down leadership encourages employee participation.</label>
+                                <label for="q3c">(C) It was created by women</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3d" name="question3">
-                                <label for="q3d">(D) Collaborative leadership excludes employees from decision-making</label>
+                                <label for="q3d">(D) It originated with modern capitalism</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>4. Which digital tool is primarily used for project management and task tracking in collaborative settings?</h3>
+                        <h3>4. What effect has heteronormativity had on LGBTQIA+ individuals?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q4a" name="question4">
-                                <label for="q4a">(A) Trello</label>
+                                <label for="q4a">(A) It promoted equality and acceptance</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4b" name="question4">
-                                <label for="q4b">(B) Google Docs</label>
+                                <label for="q4b">(B) It created a hierarchy favoring heterosexuality, leading to privilege, heterosexism, and homophobia</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4c" name="question4">
-                                <label for="q4c">(C) Microsoft Word</label>
+                                <label for="q4c">(C) It had no impact on their social experience</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4d" name="question4">
-                                <label for="q4d">(D) Gmail</label>
+                                <label for="q4d">(D) It ended discrimination</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>5. Which of the following is a reason why groups might collaborate?</h3>
+                        <h3>5. Which historical figure’s life illustrates the harm of criminalizing same-sex behavior in the UK?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q5a" name="question5">
-                                <label for="q5a">(A) To reduce workload exclusively</label>
+                                <label for="q5a">(A) David Bowie</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5b" name="question5">
-                                <label for="q5b">(B) To improve problem-solving skills</label>
+                                <label for="q5b">(B) Alan Turing</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5c" name="question5">
-                                <label for="q5c">(C) To avoid open communication</label>
+                                <label for="q5c">(C) Freddie Mercury</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5d" name="question5">
-                                <label for="q5d">(D) To decrease efficiency</label>
+                                <label for="q5d">(D) Gerda Lerner</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>6. . In collaborative learning, students typically engage in:</h3>
+                        <h3>6. What harmful practice has historically been used to try to "treat" LGBTQIA+ individuals?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q6a" name="question6">
-                                <label for="q6a">(A) Solo work with teacher lectures</label>
+                                <label for="q6a">(A) Gender-affirming care</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6b" name="question6">
-                                <label for="q6b">(B) Joint intellectual effort to explore and apply course material</label>
+                                <label for="q6b">(B) Conversion therapy</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6c" name="question6">
-                                <label for="q6c">(C) Memorization of lecture notes</label>
+                                <label for="q6c">(C) Affirmative counseling</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6d" name="question6">
-                                <label for="q6d">(D) Competing against one another</label>
+                                <label for="q6d">(D) Social activism</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>7. Which collaborative tool offers video conferencing, instant messaging, and file sharing all in one platform?</h3>
+                        <h3>7. According to Module 1, gender attitudes are shaped by which of the following factors during adolescence?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q7a" name="question7">
-                                <label for="q7a">(A) Trello</label>
+                                <label for="q7a">(A) The weather</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7b" name="question7">
-                                <label for="q7b">(B) Microsoft Teams</label>
+                                <label for="q7b">(B) The media alone</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7c" name="question7">
-                                <label for="q7c">(C) Notepad</label>
+                                <label for="q7c">(C) Parents' gender attitudes and behaviors</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7d" name="question7">
-                                <label for="q7d">(D) Excel</label>
+                                <label for="q7d">(D) Social media influencers</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>8. One benefit of collaborative leadership is:</h3>
+                        <h3>8. In a patriarchal system, what makes gender stereotypes seem natural and universal?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q8a" name="question8">
-                                <label for="q8a">(A) It slows down decision-making processes.</label>
+                                <label for="q8a">(A) Different beliefs in each social class</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8b" name="question8">
-                                <label for="q8b">(B) It isolates decision-making among top executives.</label>
+                                <label for="q8b">(B) Structures and institutions reinforcing them</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8c" name="question8">
-                                <label for="q8c">(C) It helps managers approach difficulties as a unified team.</label>
+                                <label for="q8c">(C) The absence of media representation</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8d" name="question8">
-                                <label for="q8d">(D) It discourages employee engagement.</label>
+                                <label for="q8d">(D) Equality laws</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>9. Which of the following is a reason for collaboration related to innovation?</h3>
+                        <h3>9. Which of the following is an example of cultural activism promoting LGBTQIA+ visibility?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q9a" name="question9">
-                                <label for="q9a">(A) To reduce talent diversity</label>
+                                <label for="q9a">(A) Legal restrictions on same-sex marriage</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9b" name="question9">
-                                <label for="q9b">(B) To boost inventiveness through brainstorming and idea sharing</label>
+                                <label for="q9b">(B) Music and performances by artists like Freddie Mercury and David Bowie</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9c" name="question9">
-                                <label for="q9c">(C) To enforce rigid workflows</label>
+                                <label for="q9c">(C) Gender-based legal discrimination</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9d" name="question9">
-                                <label for="q9d">(D) To eliminate group discussions</label>
+                                <label for="q9d">(D) Banning LGBTQIA+ literature</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>10. What is collaborative learning mainly centered on?</h3>
+                        <h3>10. What kind of services do support organizations like The Trevor Project and GLAAD provide?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q10a" name="question10">
-                                <label for="q10a">(A) Student competition</label>
+                                <label for="q10a">(A) Investment advice</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10b" name="question10">
-                                <label for="q10b">(B) Teacher lectures and exams</label>
+                                <label for="q10b">(B) Counseling, support groups, and educational resources for LGBTQIA+ individuals</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10c" name="question10">
-                                <label for="q10c">(C) Student exploration and mutual problem-solving</label>
+                                <label for="q10c">(C) Tax filing services</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10d" name="question10">
-                                <label for="q10d">(D) Independent reading assignments</label>
+                                <label for="q10d">(D) Employment in government positions</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
@@ -426,7 +413,7 @@
                 
                 <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
-                    <p>1️⃣ C | 2️⃣ B | 3️⃣ B | 4️⃣ A | 5️⃣ B | 6️⃣ B | 7️⃣ B | 8️⃣ C | 9️⃣ B | 🔟 C</p>
+                    <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ B | 9️⃣ B | 🔟 B</p>
                 </div>
             </section>
         </div>
