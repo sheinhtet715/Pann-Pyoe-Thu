@@ -1,9 +1,33 @@
 <?php
     // Counsellor.php
     session_start();
-    $error   = $_SESSION['login_error'] ?? '';
-    $success = $_SESSION['login_success'] ?? '';
-    unset($_SESSION['login_error'], $_SESSION['login_success']);
+
+    // capture raw flash values then clear them
+    $raw_login_error   = $_SESSION['login_error'] ?? '';
+    $raw_login_success = $_SESSION['login_success'] ?? '';
+    $raw_login_from    = $_SESSION['login_from'] ?? '';
+    unset($_SESSION['login_error'], $_SESSION['login_success'], $_SESSION['login_from']);
+
+    // default appointment error/success (these may be set by appointment POST handler later)
+    $error   = '';
+    $success = '';
+
+    // If user is NOT logged in, decide what to show based on where the login came from
+    if (empty($_SESSION['user_id'])) {
+        if ($raw_login_from === 'appointment') {
+            // login was attempted while booking an appointment — surface the error as appointment error
+            $error = $raw_login_error;
+        } else {
+            // login was attempted from normal login flow — surface as login modal error instead
+            // pass this to JS so the login modal shows the message (we'll set JS var `loginModalError`)
+            $loginModalError = $raw_login_error;
+        }
+    } else {
+        // logged-in user — ignore prior login errors
+        $error = ''; 
+        $loginModalError = '';
+    }
+
     include "./db_connection.php";
     $active = 'counsellors';
     $user = null;
@@ -130,37 +154,96 @@ ob_start();
         <div class = "block" style="background-color:#1D2733; padding:35px;"></div>
 
 
-  <!-- your scripts for openPopup/closePopup, etc. -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! empty($error)): ?>
-    // Always show the appointment popup on booking error
-    openPopup(<?php echo json_encode($advisor_name ?? ($_POST['advisor_name'] ?? ''))?>, true);
-    const form = document.querySelector('#appointment-popup form');
-    if (form) {
-      form.elements['user_name'].value         = <?php echo json_encode($_POST['user_name'] ?? '')?>;
-      form.elements['description'].value       = <?php echo json_encode($_POST['description'] ?? '')?>;
-      form.elements['email'].value             = <?php echo json_encode($_POST['email'] ?? '')?>;
-      form.elements['appointment_date'].value  = <?php echo json_encode($_POST['appointment_date'] ?? '')?>;
-      form.elements['appointment_time'].value  = <?php echo json_encode($_POST['appointment_time'] ?? '')?>;
-    }
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops…',
-      text: <?php echo json_encode($error)?>,
-      confirmButtonText: 'Try Again'
-    });
-  <?php elseif (! empty($success)): ?>
-    Swal.fire({
-      icon: 'success',
-      title: 'Success!',
-      text: <?php echo json_encode(trim($success))?>,
-      timer: 2000,
-      showConfirmButton: false
-    });
-  <?php endif; ?>
-});
-</script>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const isLoggedIn = <?php echo json_encode(! empty($_SESSION['user_id'])); ?>;
+        const errorMsg   = <?php echo json_encode($error ?? ''); ?>;
+        const successMsg = <?php echo json_encode($success ?? ''); ?>;
+        const advisorVal = <?php echo json_encode($advisor_name ?? ($_POST['advisor_name'] ?? '')); ?>;
+        const loginModalError = <?php echo json_encode($loginModalError ?? ''); ?>;
+
+        // If login modal error exists and user not logged in, open login modal (not appointment popup)
+        if (!isLoggedIn && loginModalError) {
+          if (typeof openLogin === 'function') {
+            // openLogin(); // open the login modal
+          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Login failed',
+            text: loginModalError,
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+
+        // Appointment-specific behaviour (unchanged)
+        if (errorMsg) {
+          if (typeof openPopup === 'function') {
+            openPopup(advisorVal, true);
+          }
+          // populate form fields...
+          const form = document.querySelector('#appointment-popup form');
+          if (form) {
+            try {
+              form.elements['user_name'].value         = <?php echo json_encode($_POST['user_name'] ?? '')?>;
+              form.elements['description'].value      = <?php echo json_encode($_POST['description'] ?? '')?>;
+              form.elements['email'].value            = <?php echo json_encode($_POST['email'] ?? '')?>;
+              form.elements['appointment_date'].value = <?php echo json_encode($_POST['appointment_date'] ?? '')?>;
+              form.elements['appointment_time'].value = <?php echo json_encode($_POST['appointment_time'] ?? '')?>;
+              const advInput = document.getElementById('advisor-input');
+              if (advInput) advInput.value = <?php echo json_encode($_POST['advisor_name'] ?? ''); ?>;
+            } catch (e) {
+              console.error('Failed to populate appointment form values', e);
+            }
+          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops…',
+            text: errorMsg,
+            confirmButtonText: 'Try Again'
+          });
+          return;
+        }
+
+        if (successMsg) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: successMsg.trim(),
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+
+        // Defensive guard: if some code tries to open login modal when user is logged in,
+        // ensure appointment popup opens instead. This attaches safe behavior to appointment buttons.
+        document.querySelectorAll('.appointment-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            // If the button was meant to open login (not the case for logged-in view),
+            // prevent that and open popup when user is already logged in.
+            if (isLoggedIn) {
+              // try to read counsellor name from onclick string or data attribute
+              let advisorName = '';
+              if (btn.dataset && btn.dataset.advisorName) {
+                advisorName = btn.dataset.advisorName;
+              } else {
+                // fallback: parse name from inline onclick (if you have onclick="openPopup('Name')")
+                const onclick = btn.getAttribute('onclick') || '';
+                const m = onclick.match(/openPopup\(['"](.+?)['"]/);
+                if (m) advisorName = m[1];
+              }
+
+              // ensure popup opens for logged-in users
+              if (typeof openPopup === 'function') {
+                e.preventDefault();
+                openPopup(advisorName);
+              }
+            }
+          });
+        });
+      });
+      </script>
+
 
       <div class="title">“Consult with us for your further academic studies”</div>
     <div class="divider"></div>
@@ -269,7 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <textarea name="description" placeholder="Your response…" required></textarea>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="your@email.com" required />
+            <input type="email" name="email" value="<?php echo htmlspecialchars($_SESSION['email'] ?? ''); ?>" readonly />
+
 
             <p class="disclaimer">
               We'll reach out to you via email once the appointment date and time have been arranged.
