@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-    <title>Critical Thinking Course</title>
+    <title>Gender Studies</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../Courses/Critical Thinking.css">
+    <link rel="stylesheet" href="../Courses/Gender.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -34,7 +34,7 @@
     <div class="course-container">
         <!-- Course Header -->
         <div class="course-header">
-            <h1>Critical Thinking</h1>
+            <h1>Gender Studies</h1>
             <div class="course-info">
                 <div>Type - Online Course</div>
                 <div>Language - English</div>
@@ -59,393 +59,349 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
-                <h3>Why is critical thinking important?</h3>
+                <h3>Gender attitudinal changes are highly complex, fluid and multi-dimensional.</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
                 <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
-                
-                <p>Critical thinkers don't simply accept what they're told; they question why. They delve deeper, question assumptions, and refuse to be satisfied with simple solutions. If something doesn't add up, they don't dismiss it. They investigate. This does not imply that you are intentionally tough or contrarian. It indicates that you care about the truth. You want to know how things actually function, not simply how they are portrayed. Others may accept faulty beliefs simply because they are the norm, but you can't help but question them. What about the power to question everything? That is what sets you apart.</p>
-                
-               <h3>You seek proof, not merely speculations.</h3>
 
-               <p>Most people trust information based on how convincingly it is delivered or how many people believe it. But confidence does not imply truth, and popularity does not ensure correctness. In fact, research have shown that people are more likely to believe misinformation if it has been repeated many times.</p>
+                <p>Describe our culture, what is lgbtgia+, and why does it discriminate against them?</p>
 
+                <br>
+
+                <p>Heteronormativity, sexual orientation , and regard as not normal.</p>
+                
+                <br>
+
+                <p>#Traditional beliefs around male power ( patriarchy - male dominance) decision making #Gender stereotype (hair, makeup and nail are considered to be feminie in society and male to be masculine and don't show emotion) and gender norms in which men are judged by their talent but women by virtues, the limitations of structural and cultural perspectives.  
+                </p>
+
+                <br>
+
+                <p>Gender attitudinal changes are highly complex, fluid and multi-dimensional (Knight and Brinton, 2017; Scarborough et al., 2019)</p>
+
+                <br>
+
+                <p>Prior research on adolescents identifies the important role of parents’ gender attitudes and gendered behavior in the formation of children’s gender role attitudes (Cano and Hofmeister, 2022; Kim and Fong, 2014). Thus, questions remain about parents’ influence in adulthood.</p>
+
+                <p>Both structural and cultural perspectives help to uncover the opportunities and the constraints women face in patriarchal structures in different contexts, which affect gender role attitudes.</p>
+
+                <p>To further convert Haslanger’s philosophical terms to sociological language, I shall use Swidler’s (1986) distinction between ‘settled and unsettled times’. In settled patriarchy, at least in theory, gender roles assign men to dominant social roles and women to subordinate roles in both public and private spheres across economic, social, political, religious and family and kinship domains.</p>
             </section>
 
             <!-- Module 2 -->
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
-                <h3>Aspects of thinking critically</h3>
-                <p>You probably think for yourself and don't take anything at face value if you've read this far.</p>
-                <br>
-                <p>And that is a rare but necessary ability. It is more crucial than ever to be able to question, evaluate, and seek the truth in a world full of false information, prejudice, and superficial thinking. According to the philosopher Bertrand Russell, "the whole problem with the world is that wiser people are so full of doubts, and fools and fanatics are always so certain of themselves." This is understood by true critical thinkers, who recognize that truth, not certainty, is the aim. Ultimately, critical thinking isn't about being skeptical for the purpose of being skeptical. It all comes down to never accepting simple solutions when a more thorough understanding is achievable.</p>
+                <h3>Heteronormativity</h3>
 
-                <a href="https://geediting.com/dan-signs-youre-a-critical-thinker-who-sees-the-flaws-in-things-others-blindly-accept/">Learn More</a>
+                <br>
+
+                <p>Most feminists saw that oppression of women came from the underlying bias of a patriarchal society.</p>
+
+                <p>Gerda Lerner's 1986 history classic, The Creation of Patriarchy, traces the development of the patriarchy to the second millennium B.C.E. in the middle east, putting gender relations at the center of the story of civilization's history. She argues that before this development, male dominance was not a feature of human society in general. Women were key to the maintenance of human society and community, but with a few exceptions, social and legal power was wielded by men. If patriarchy was created by culture, it can be overturned by a new culture. </p>
+
+                <p>Heteronormativity is the concept that heterosexuality is the preferred or normal sexual orientation. It assumes the gender binary (i.e., that there are only two distinct, opposite genders) and that sexual and marital relations are most fitting between people of opposite sex.</p>
+
+                <br>
+
+                <p>Heteronormativity creates and upholds a social hierarchy based on sexual orientation with the practice and belief that heterosexuality is deemed as the societal norm. A heteronormative view, therefore, involves alignment of biological sex, sexuality, gender identity and gender roles. Heteronormativity has been linked to heterosexism and homophobia, and the effects of societal heteronormativity on lesbian, gay and bisexual individuals have been described as heterosexual or "straight" privilege.</p>
+
+                <p>In Patriarchy, gender roles and stereotypes may be different in each social class, age, and culture but through the mechanisms, structures, and institutions, it makes these roles and stereotypes seem natural and universal. In any given Patriarchy, not all men will enjoy the same privileges or have the same power. </p>
+
+
+                <a href="https://en.wikipedia.org/wiki/Same-sex_marriage_in_the_United_Kingdom">Learn More</a>
             </section>
+
             <!-- Module 3 -->
             <section id="module3" class="module">
                 <h2>MODULE 3</h2>
-                <h3>8 critical thinking abilities that are vital to cultivate</h3>
+                <h3>The Criminalization of Same-Sex Behaviors:</h3>
+
+                <br>
                 
-                <h3>1. Thinking Analytically</h3>
-                
-                <p>To arrive at the best conclusions, analytical thinking entails analyzing evidence from various sources. Rejecting cognitive biases and attempting to collect and evaluate complex information while resolving challenging issues are made possible by analytical thinking. Critical thinkers with analytical skills are able to:</p>
+                <p>   The criminalization of same-sex behaviors has a long and dark history, particularly in Europe where sodomy laws influenced by religious beliefs were prevalent. These laws often prescribed severe punishments, including death, for individuals engaged in same-sex relationships. For example, in England, the Buggery Act of 1533 criminalized anal intercourse, punishable by death. Similarly, in the United States, sodomy laws were widespread, with many states criminalizing consensual same-sex sexual activity until as recently as the 2000s.</p>
 
-                <ol>
-                    <li>Determine the data's trends and patterns.</li>
-                    <li>Divide difficult problems into smaller, more manageable parts.</li>
-                    <li>Understand the links between causes and effects</li>
-                    <li>Assess the quality of the arguments and supporting data.</li>
-                </ol>
+                <br>
 
-                <p>For instance, a data analyst deconstructs intricate sales data to find patterns and trends that guide the business's marketing approach.</p>                
-                
-                <h3>2. Having an Open Mind</h3>
+                <p>   One notable case study is that of Alan Turing, a pioneering mathematician and cryptanalyst who played a crucial role in breaking the German Enigma code during World War II. Despite his contributions to the war effort, Turing was prosecuted for homosexual acts in 1952 under the UK's gross indecency laws. He was subjected to chemical castration as an alternative to imprisonment and tragically died by suicide in 1954. Turing's persecution highlights the devastating impact of anti-LGBTQIA+ laws and the stigma surrounding same-sex behaviors.</p>
 
-                <p>The ability to examine new concepts, viewpoints, and data objectively is known as open-mindedness. This ability to think critically enables you to evaluate and digest data in order to reach an objective conclusion. Letting rid of personal prejudices, accepting facts at face value, and drawing conclusions from a variety of viewpoints are all components of critical thinking.
-                Critical thinkers with an open mind exhibit:</p>
+                <br>
 
-                <ol>
-                    <li>Willingness to take into account different perspectives</li>
-                    <li>The capacity to hold off on making a decision until enough information has been obtained</li>
-                    <li>Being open to helpful critiques and comments</li>
-                    <li>Adaptability in revising opinions in light of fresh data</li>
-                </ol>
+                <p>   Despite the abolition of many sodomy laws in the latter half of the 20th century, same-sex relationships are still punishable by imprisonment or death in some countries today. For example, in several countries in Africa and the Middle East, homosexuality is criminalized, leading to a culture of fear and secrecy within LGBTQIA+ communities. The existence of such laws perpetuates stigma, discrimination, and violence against LGBTQIA+ individuals, impeding progress towards equality and human rights.</p>
 
-                <p>Example: A team leader actively examines unconventional suggestions from junior members at a product development meeting, which results in an inventive solution.</p>
+                <br>
 
-                <h3>3. Solving Problems</h3>
+                <h3>Framing LGBTQIA+ Identities as Disorders:</h3>
 
-                <p>A key component of critical thinking is the ability to solve problems effectively. It calls for the capacity to see problems, come up with potential fixes, weigh options, and carry out the best plan of action. Particularly useful in domains like project management and entrepreneurship is this critical thinking ability.Important components of problem-solving consist of:</p>
+                <br>
 
-                <ol>
-                    <li>Clearly stating the issue</li>
-                    <li>Compiling pertinent data</li>
-                    <li>Generating ideas for possible fixes</li>
-                    <li>Weighing the benefits and drawbacks of each choice</li>
-                    <li>Applying and keeping an eye on the selected solution</li>
-                    <li>Considering the result and making any required adjustments</li>
-                </ol>
-                
-                <p>As an illustration, a high school principal employs problem-solving techniques to address dwindling student involvement through student surveys, expert consultations in higher education, and the introduction of a new curriculum that strikes a balance between academic difficulty and useful, real-world applications.</p>
+                <p>   The medicalization of gender diversity has historically pathologized non-binary and transgender identities, framing them as disorders to be treated rather than valid expressions of human diversity. This medicalization has had devastating consequences for LGBTQIA+ individuals, leading to harmful practices such as conversion therapy, which seeks to change an individual's sexual orientation or gender identity against their will.</p>
 
-                <h3>4. Resonal Assement</h3>
+                <br>
 
-                <p>A crucial element of higher order thinking is reasoned judgment, which is making deliberate decisions after carefully weighing the pros and cons of various options and logically analyzing the available data. This ability to think critically is crucial in both professional and academic contexts. Important components of reasoned judgment consist of:</p>
+                <p>   One prominent case study is that of Alan Turing, whose homosexuality was deemed a "disorder" by medical professionals of his time. Turing was subjected to chemical castration as a form of "treatment," which had severe psychological consequences and ultimately led to his death. His case underscores the harm inflicted by medicalization and conversion therapy on LGBTQIA+ individuals, highlighting the urgent need for ethical and affirming approaches to healthcare.</p>
 
-                <ol>
-                    <li>Collecting and evaluating data objectively</li>
-                    <li>Assessing the reliability and applicability of the evidence</li>
-                    <li>Taking into account various viewpoints before making judgments</li>
-                    <li>Using sound reasoning and logical inference to make decisions</li>
-                </ol>
+                <br>
 
-                <p>As an illustration, a high school science instructor designs an experiment using reasoned judgment, closely monitoring and evaluating the findings before formulating conclusions regarding the hypothesis.</p>
+                <p>   Despite advancements in understanding gender diversity and the DE pathologization of transgender identities in many parts of the world, conversion therapy and other harmful practices continue to be employed in some regions. Efforts to combat medicalization and promote affirmative care for LGBTQIA+ individuals are ongoing, with advocacy organizations and medical professionals calling for bans on conversion therapy and improved access to gender-affirming healthcare.</p>
 
             </section>
 
             <!-- Module 4 -->
             <section id="module4" class="module">
                 <h2>MODULE 4</h2>
-                <h3>5. Introspective Thought</h3>
+                <h3> Providing Support Networks and Resources to LGBTQIA+ Communities:</h3>
                 
-                <p>Analyzing one's own ideas, deeds, and results in order to better comprehend them and perform better in the future is known as reflective thinking. In order to develop a cohesive understanding of an issue, good critical thinking necessitates the analysis and synthesis of information. It is a crucial critical thinking ability for lifelong learning and development.</p>
+                <!-- Image 4 at start of Module 4 -->
+                <img src="path/to/module4-image.jpg" alt="Active Listening in PFA" class="module-image">
+                
+                <p>   Cultural activism has played a crucial role in challenging stereotypes and promoting LGBTQIA+ visibility and representation. Artists, activists, and community organizations have used art, media, and cultural events to foster greater acceptance and understanding of LGBTQIA+ identities.</p>
+                
+                <br>
+
+                <p>   One notable example is the impact of LGBTQIA+ musicians and performers such as Freddie Mercury and David Bowie on mainstream culture. Through their music and public personas, Mercury and Bowie challenged gender norms and stereotypes, opening up conversations about sexuality and identity in mainstream media. Their visibility and success helped to humanize LGBTQIA+ experiences and pave the way for greater acceptance and representation in popular culture.</p>
 
                 <br>
 
-                <p>Among the essential components of reflective thinking are:</p>
+                <p>   In addition to cultural activism, support networks and resources play a crucial role in providing community and assistance to LGBTQIA+ individuals. Organizations such as The Trevor Project, GLAAD, and local LGBTQIA+ community centers offer a range of services, including counseling, support groups, and educational resources. These resources provide vital support to LGBTQIA+ individuals facing discrimination, stigma, and other challenges, helping to build resilience and foster a sense of belonging within the community.</p>
 
-                <ol>
-                    <li>Analyzing one's own presumptions and cognitive biases critically</li>
-                    <li>Taking into account a range of opinions and perspectives</li>
-                    <li>Combining data from multiple sources and experiences</li>
-                    <li>Using insights to enhance choices and actions in the future</li>
-                    <li>Constantly assessing and modifying one's thought processes</li>
-                </ol>
-
-                <p>As an illustration, a community organizer evaluates the results of a recent public gathering, taking into account what went well and what could be enhanced for similar events in the future.</p>
-
-                <h3>6. Interaction</h3>
-
-                <p>Critical thinkers who possess strong communication skills are better able to express their thoughts in a clear and convincing manner. efficient teamwork, leadership, and information sharing in the workplace all depend on efficient communication. Important facets of critical thinking communication include:</p>
-
-                <ol>
-                    <li>Clearly communicating difficult concepts</li>
-                    <li>Active hearing and understanding</li>
-                    <li>Modifying communication methods for various audiences</li>
-                    <li>Developing and presenting strong arguments</li>
-                </ol>
-
-                <p>Example: A manager skillfully addresses her team's concerns and makes sure everyone is aware of the ramifications of a new corporate policy.</p>
-
-                <h3>7. Investigation</h3>
-
-                <p>Strong research abilities enable critical thinkers to collect, assess, and integrate data from a variety of sources. This is especially crucial in professional and academic contexts where lifelong learning is necessary. To conduct research effectively, one must:</p>
-
-                <ol>
-                    <li>Finding trustworthy and pertinent information sources</li>
-                    <li>Assessing the reliability and partiality of sources</li>
-                    <li>Integrating data from several sources</li>
-                    <li>Identifying knowledge gaps in the field</li>
-                </ol>
-
-                <p>Example: Before writing a piece on a contentious subject, a journalist confirms facts from several reliable sources.</p>
-
-                <h3>8. Making Choices</h3>
-
-                <p>The ability to make logical inferences and generalizations through a variety of critical thinking abilities culminates in effective decision making. It entails assessing possibilities, thinking through the repercussions, and selecting the best course of action. Crucial elements of decision-making consist of:</p>
-
-                <ol>
-                    <li>Establishing precise grading criteria</li>
-                    <li>Collecting and evaluating pertinent data</li>
-                    <li>Taking into account both immediate and long-term effects</li>
-                    <li>Controlling risk and uncertainty</li>
-                    <li>Keeping intuition and reasoning in check</li>
-                </ol>
-
-                <p>Example: Before choosing to install solar panels on their property, a homeowner considers the costs, advantages, and long-term effects.</p>
-                
-                <a href="https://asana.com/resources/critical-thinking-skills">Learn More</a>
-                
-                <div class="video-container">
-                    <a href="https://youtu.be/vNDYUlxNIAA?si=o7OAyiNTDJzTQ-AP" target="_blank">
+                <a href="https://youtu.be/UD9IOllUR4k?si=vsbqDqNNiNIgyj7S" target="_blank">
                         <i class="fab fa-youtube"></i> Video
-                    </a>
-                </div>
+                </a>
 
+                <p>Excellent — I’ll create a 10-item multiple choice quiz based on these Gender Studies modules with an answer key as well:</p>
             </section>
 
             <!-- Quiz Section -->
             <section id="quiz" class="module">
                 <div class="quiz-section">
-                    <h2>Critical Thinking Quiz</h2>
+                    <h2>Gender Studies Quiz</h2>
                     <p style="text-align: center; margin-bottom: 2rem;">Test your knowledge of Modules 1-4</p>
                     
                     <div class="quiz-question">
-                        <h3>1. Why is critical thinking important according to the text?</h3>
+                        <h3>1. What is heteronormativity?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q1a" name="question1">
-                                <label for="q1a">(A) It helps people agree with the majority.</label>
+                                <label for="q1a">(A) A belief that all gender identities are equally valid</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1b" name="question1">
-                                <label for="q1b">(B) ) It encourages people to question assumptions and seek truth.</label>
+                                <label for="q1b">(B) The concept that heterosexuality is the preferred or normal sexual orientation</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1c" name="question1">
-                                <label for="q1c">(C) It makes people intentionally difficult.</label>
+                                <label for="q1c">(C) A medical condition related to gender identity</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1d" name="question1">
-                                <label for="q1d">(D) It avoids investigating conflicting information.</label>
+                                <label for="q1d">(D) A social movement promoting equality</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>2. What is a sign of a critical thinker based on Module 1?</h3>
+                        <h3>2. According to patriarchal norms, how are men and women typically judged in society?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q2a" name="question2">
-                                <label for="q2a">(A) Accepting information if it's popular</label>
+                                <label for="q2a">(A) Men by appearance, women by achievements</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2b" name="question2">
-                                <label for="q2b">(B) Trusting confidently delivered claims without proof</label>
+                                <label for="q2b">(B) Both equally by their emotional expression</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2c" name="question2">
-                                <label for="q2c">(C) Investigating when something doesn’t add up</label>
+                                <label for="q2c">(C) Men by their talents, women by their virtues</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2d" name="question2">
-                                <label for="q2d">(D) Avoiding conflict to maintain peace</label>
+                                <label for="q2d">(D) Men by their relationships, women by their wealth</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>3. According to Bertrand Russell, what problem does the world face?</h3>
+                        <h3>3. What does Gerda Lerner’s work The Creation of Patriarchy argue about patriarchy’s origins?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q3a" name="question3">
-                                <label for="q3a">(A) Critical thinkers being too skeptical</label>
+                                <label for="q3a">(A) It was always a natural part of human society</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3b" name="question3">
-                                <label for="q3b">(B) Wise people doubting themselves while fools are overly certain</label>
+                                <label for="q3b">(B) It emerged in the second millennium B.C.E. in the Middle East and can be overturned by culture</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3c" name="question3">
-                                <label for="q3c">(C) Too many people seeking evidence</label>
+                                <label for="q3c">(C) It was created by women</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3d" name="question3">
-                                <label for="q3d">(D) Everyone believing the same thing</label>
+                                <label for="q3d">(D) It originated with modern capitalism</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>4. Which of the following best describes analytical thinking?</h3>
+                        <h3>4. What effect has heteronormativity had on LGBTQIA+ individuals?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q4a" name="question4">
-                                <label for="q4a">(A) Accepting personal biases as facts</label>
+                                <label for="q4a">(A) It promoted equality and acceptance</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4b" name="question4">
-                                <label for="q4b">(B) Making quick decisions without evidence</label>
+                                <label for="q4b">(B) It created a hierarchy favoring heterosexuality, leading to privilege, heterosexism, and homophobia</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4c" name="question4">
-                                <label for="q4c">(C) Breaking down complex information to find patterns and relationships</label>
+                                <label for="q4c">(C) It had no impact on their social experience</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4d" name="question4">
-                                <label for="q4d">(D) Refusing to consider multiple sources of evidence</label>
+                                <label for="q4d">(D) It ended discrimination</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>5. What does it mean to have an open mind as a critical thinker?</h3>
+                        <h3>5. Which historical figure’s life illustrates the harm of criminalizing same-sex behavior in the UK?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q5a" name="question5">
-                                <label for="q5a">(A) Ignoring different perspectives</label>
+                                <label for="q5a">(A) David Bowie</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5b" name="question5">
-                                <label for="q5b">(B) Relying solely on personal opinions</label>
+                                <label for="q5b">(B) Alan Turing</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5c" name="question5">
-                                <label for="q5c">(C) Objectively considering new ideas and facts before deciding</label>
+                                <label for="q5c">(C) Freddie Mercury</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5d" name="question5">
-                                <label for="q5d">(D) Quickly making conclusions without enough information</label>
+                                <label for="q5d">(D) Gerda Lerner</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>6. Which is the correct order of steps in problem-solving?</h3>
+                        <h3>6. What harmful practice has historically been used to try to "treat" LGBTQIA+ individuals?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q6a" name="question6">
-                                <label for="q6a">(A) Make a decision → Apply it → Identify the issue</label>
+                                <label for="q6a">(A) Gender-affirming care</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6b" name="question6">
-                                <label for="q6b">(B) Identify the issue → Gather information → Generate solutions → Evaluate options → Implement and monitor</label>
+                                <label for="q6b">(B) Conversion therapy</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6c" name="question6">
-                                <label for="q6c">(C) Skip to the solution → Gather information → Evaluate results</label>
+                                <label for="q6c">(C) Affirmative counseling</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6d" name="question6">
-                                <label for="q6d">(D) Ignore the issue → Wait for it to resolve itself</label>
+                                <label for="q6d">(D) Social activism</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>7. Reasoned judgment involves:</h3>
+                        <h3>7. According to Module 1, gender attitudes are shaped by which of the following factors during adolescence?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q7a" name="question7">
-                                <label for="q7a">(A) Guessing based on instinct</label>
+                                <label for="q7a">(A) The weather</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7b" name="question7">
-                                <label for="q7b">(B) Making decisions after logically analyzing data and viewpoints</label>
+                                <label for="q7b">(B) The media alone</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7c" name="question7">
-                                <label for="q7c">(C) Trusting popular opinions</label>
+                                <label for="q7c">(C) Parents' gender attitudes and behaviors</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7d" name="question7">
-                                <label for="q7d">(D) Ignoring conflicting information</label>
+                                <label for="q7d">(D) Social media influencers</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>8. What is reflective thinking?</h3>
+                        <h3>8. In a patriarchal system, what makes gender stereotypes seem natural and universal?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q8a" name="question8">
-                                <label for="q8a">(A) Quickly reacting without analyzing outcomes</label>
+                                <label for="q8a">(A) Different beliefs in each social class</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8b" name="question8">
-                                <label for="q8b">(B) Analyzing one's own thoughts and actions to improve future decisions</label>
+                                <label for="q8b">(B) Structures and institutions reinforcing them</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8c" name="question8">
-                                <label for="q8c">(C) Ignoring personal assumptions</label>
+                                <label for="q8c">(C) The absence of media representation</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8d" name="question8">
-                                <label for="q8d">(D) Avoiding feedback and critique</label>
+                                <label for="q8d">(D) Equality laws</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>9. Why are strong communication skills important for critical thinkers?</h3>
+                        <h3>9. Which of the following is an example of cultural activism promoting LGBTQIA+ visibility?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q9a" name="question9">
-                                <label for="q9a">(A) So they can aggressively defend their opinions</label>
+                                <label for="q9a">(A) Legal restrictions on same-sex marriage</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9b" name="question9">
-                                <label for="q9b">(B) To clearly express ideas, listen actively, and adjust their message for different audiences</label>
+                                <label for="q9b">(B) Music and performances by artists like Freddie Mercury and David Bowie</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9c" name="question9">
-                                <label for="q9c">(C) To impress others with complex words</label>
+                                <label for="q9c">(C) Gender-based legal discrimination</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9d" name="question9">
-                                <label for="q9d">(D) To avoid disagreements in conversations</label>
+                                <label for="q9d">(D) Banning LGBTQIA+ literature</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>10. What is the purpose of strong research skills in critical thinking?</h3>
+                        <h3>10. What kind of services do support organizations like The Trevor Project and GLAAD provide?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q10a" name="question10">
-                                <label for="q10a">(A) Trusting the first source you find</label>
+                                <label for="q10a">(A) Investment advice</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10b" name="question10">
-                                <label for="q10b">(B) Only reading from social media</label>
+                                <label for="q10b">(B) Counseling, support groups, and educational resources for LGBTQIA+ individuals</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10c" name="question10">
-                                <label for="q10c">(C) Gathering, evaluating, and integrating reliable information from multiple sources</label>
+                                <label for="q10c">(C) Tax filing services</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10d" name="question10">
-                                <label for="q10d">(D) Avoiding knowledge gaps in every subject</label>
+                                <label for="q10d">(D) Employment in government positions</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
@@ -458,7 +414,7 @@
                 
                 <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
-                    <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ C | 5️⃣ C | 6️⃣ B | 7️⃣ B | 8️⃣ B | 9️⃣ B | 🔟 C</p>
+                    <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ B | 9️⃣ B | 🔟 B</p>
                 </div>
             </section>
         </div>

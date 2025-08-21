@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
-     <link rel="stylesheet" href="../Courses/PFA.css">
+     <link rel="stylesheet" href="../Courses/Collaboration.css">
      
 </head>
 <body>
@@ -259,22 +259,22 @@
                 </div>
             </section>
 
-            <!-- Quiz Section -->
+             <!-- Quiz Section -->
             <section id="quiz" class="module">
                 <div class="quiz-section">
                     <h2>Collaboration Quiz</h2>
                     <p style="text-align: center; margin-bottom: 2rem;">Test your knowledge of Modules 1-4</p>
                     
                     <div class="quiz-question">
-                        <h3>1.  What is the most basic level of collaboration according to Hogue’s Levels of Community Linkage Model?</h3>
+                        <h3>1. What is the most basic level of collaboration according to Hogue’s Levels of Community Linkage Model?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q1a" name="question1">
-                                <label for="q1a">(A)  Coordination</label>
+                                <label for="q1a">(A) Coorddination</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1b" name="question1">
-                                <label for="q1b">(B)  Coalition</label>
+                                <label for="q1b">(B) Coalition</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1c" name="question1">
@@ -282,213 +282,214 @@
                             </div>
                             <div class="option">
                                 <input type="radio" id="q1d" name="question1">
-                                <label for="q1d">(D)  Collaboration</label>
+                                <label for="q1d">(D) Collaboration</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
-                    </div> 
+                    </div>
+
                     <div class="quiz-question">
-                        <h3>2. Which of the following is NOT a common reaction to a life-changing incident?</h3>
+                        <h3>2. Which of the following is NOT a benefit of collaborative learning?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q2a" name="question2">
-                                <label for="q2a">(A) Sleep problems</label>
+                                <label for="q2a">(A) Improved oral communication skills</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2b" name="question2">
-                                <label for="q2b">(B) Feelings of anger and grief</label>
+                                <label for="q2b">(B) Reduced student retention</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2c" name="question2">
-                                <label for="q2c">(C) Immediate recovery within minutes</label>
+                                <label for="q2c">(C) Development of higher-level thinking</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q2d" name="question2">
-                                <label for="q2d">(D) Loss of confidence in self or others</label>
+                                <label for="q2d">(D) Exposure to diverse perspectives</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>3. What does the 'LOOK' action principle of PFA involve?</h3>
+                        <h3>3. What is one main difference between traditional top-down leadership and collaborative leadership?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q3a" name="question3">
-                                <label for="q3a">(A) Ignoring the environment</label>
+                                <label for="q3a">(A) Top-down leadership is slower in decision-making.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3b" name="question3">
-                                <label for="q3b">(B) Judging people's feelings</label>
+                                <label for="q3b">(B) Collaborative leadership promotes unity and shared decision-making.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3c" name="question3">
-                                <label for="q3c">(C) Observing the situation and identifying who needs help</label>
+                                <label for="q3c">(C) Top-down leadership encourages employee participation.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q3d" name="question3">
-                                <label for="q3d">(D) Sharing personal experiences</label>
+                                <label for="q3d">(D) Collaborative leadership excludes employees from decision-making</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>4. What is the key objective of the 'LISTEN' step in PFA?</h3>
+                        <h3>4. Which digital tool is primarily used for project management and task tracking in collaborative settings?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q4a" name="question4">
-                                <label for="q4a">(A) To immediately offer advice</label>
+                                <label for="q4a">(A) Trello</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4b" name="question4">
-                                <label for="q4b">(B) To actively listen and calm the person in distress</label>
+                                <label for="q4b">(B) Google Docs</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4c" name="question4">
-                                <label for="q4c">(C) To list possible reasons for the incident</label>
+                                <label for="q4c">(C) Microsoft Word</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q4d" name="question4">
-                                <label for="q4d">(D) To avoid the person until they recover</label>
+                                <label for="q4d">(D) Gmail</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>5. What does the 'LINK' step focus on?</h3>
+                        <h3>5. Which of the following is a reason why groups might collaborate?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q5a" name="question5">
-                                <label for="q5a">(A) Ignoring practical problems</label>
+                                <label for="q5a">(A) To reduce workload exclusively</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5b" name="question5">
-                                <label for="q5b">(B) Connecting the person to resources, support, and information</label>
+                                <label for="q5b">(B) To improve problem-solving skills</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5c" name="question5">
-                                <label for="q5c">(C) Encouraging isolation</label>
+                                <label for="q5c">(C) To avoid open communication</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q5d" name="question5">
-                                <label for="q5d">(D) Dismissing their concerns</label>
+                                <label for="q5d">(D) To decrease efficiency</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>6. Which of the following best describes active listening in PFA?</h3>
+                        <h3>6. . In collaborative learning, students typically engage in:</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q6a" name="question6">
-                                <label for="q6a">(A) Interrupting to share your own story</label>
+                                <label for="q6a">(A) Solo work with teacher lectures</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6b" name="question6">
-                                <label for="q6b">(B) Listening attentively without judging or rushing to reassure</label>
+                                <label for="q6b">(B) Joint intellectual effort to explore and apply course material</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6c" name="question6">
-                                <label for="q6c">(C) Advising people to quickly move on</label>
+                                <label for="q6c">(C) Memorization of lecture notes</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q6d" name="question6">
-                                <label for="q6d">(D) Focusing on distractions</label>
+                                <label for="q6d">(D) Competing against one another</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>7. According to PFA guidelines, what physical gestures may help show you're listening if culturally appropriate?</h3>
+                        <h3>7. Which collaborative tool offers video conferencing, instant messaging, and file sharing all in one platform?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q7a" name="question7">
-                                <label for="q7a">(A) Crossing your arms</label>
+                                <label for="q7a">(A) Trello</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7b" name="question7">
-                                <label for="q7b">(B) Turning away from the person</label>
+                                <label for="q7b">(B) Microsoft Teams</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7c" name="question7">
-                                <label for="q7c">(C) Gentle touch on the hand or shoulder</label>
+                                <label for="q7c">(C) Notepad</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q7d" name="question7">
-                                <label for="q7d">(D) Constantly checking your phone</label>
+                                <label for="q7d">(D) Excel</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>8. Which of the following is a common emotional reaction after a disaster?</h3>
+                        <h3>8. One benefit of collaborative leadership is:</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q8a" name="question8">
-                                <label for="q8a">(A) Confusion and fear</label>
+                                <label for="q8a">(A) It slows down decision-making processes.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8b" name="question8">
-                                <label for="q8b">(B) Feeling nothing at all in every case</label>
+                                <label for="q8b">(B) It isolates decision-making among top executives.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8c" name="question8">
-                                <label for="q8c">(C) Immediate happiness</label>
+                                <label for="q8c">(C) It helps managers approach difficulties as a unified team.</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q8d" name="question8">
-                                <label for="q8d">(D) Total memory loss</label>
+                                <label for="q8d">(D) It discourages employee engagement.</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>9. What should a person practicing PFA avoid saying to someone in distress?</h3>
+                        <h3>9. Which of the following is a reason for collaboration related to innovation?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q9a" name="question9">
-                                <label for="q9a">(A) "Everything will be fine soon."</label>
+                                <label for="q9a">(A) To reduce talent diversity</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9b" name="question9">
-                                <label for="q9b">(B) "I am here to listen if you'd like to talk."</label>
+                                <label for="q9b">(B) To boost inventiveness through brainstorming and idea sharing</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9c" name="question9">
-                                <label for="q9c">(C) "Can you tell me how you're feeling right now?"</label>
+                                <label for="q9c">(C) To enforce rigid workflows</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q9d" name="question9">
-                                <label for="q9d">(D) "Would you like me to help contact your family or friends?"</label>
+                                <label for="q9d">(D) To eliminate group discussions</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
                     </div>
 
                     <div class="quiz-question">
-                        <h3>10. Why is it important for people to share their experiences after a traumatic event?</h3>
+                        <h3>10. What is collaborative learning mainly centered on?</h3>
                         <div class="options">
                             <div class="option">
                                 <input type="radio" id="q10a" name="question10">
-                                <label for="q10a">(A) It helps them gradually comprehend and come to terms with the event</label>
+                                <label for="q10a">(A) Student competition</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10b" name="question10">
-                                <label for="q10b">(B) It delays their recovery</label>
+                                <label for="q10b">(B) Teacher lectures and exams</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10c" name="question10">
-                                <label for="q10c">(C) It encourages them to forget the event</label>
+                                <label for="q10c">(C) Student exploration and mutual problem-solving</label>
                             </div>
                             <div class="option">
                                 <input type="radio" id="q10d" name="question10">
-                                <label for="q10d">(D) It makes them dependent on others</label>
+                                <label for="q10d">(D) Independent reading assignments</label>
                             </div>
                         </div>
                         <p style="margin-top: 1rem; color: #BF9E8D;">Choose a correct one.</p>
@@ -499,14 +500,13 @@
                     </div>
                 </div>
                 
-                <!-- <div class="highlight" style="margin-top: 2rem;">
+                <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
-                    <p>1️⃣ B | 2️⃣ C | 3️⃣ C | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ A | 9️⃣ A | 🔟 A</p>
-                </div> -->
+                    <p>1️⃣ C | 2️⃣ B | 3️⃣ B | 4️⃣ A | 5️⃣ B | 6️⃣ B | 7️⃣ B | 8️⃣ C | 9️⃣ B | 🔟 C</p>
+                </div>
             </section>
         </div>
     </div>
-
     <!-- Footer -->
     <div class="bottom">
         <div class="bottom-left">
