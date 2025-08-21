@@ -17,14 +17,16 @@
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
         <nav class="nav">
-            <a href="../HTML/Homepage.html">Home Page</a>
-            <a href="#">About us</a>
-            <a href="#" class="active">Courses</a>
-            <a href="../HTML/Counsellor Page.html">Education counselling</a>
-            <a href="#">Scholarships</a>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-        </nav>
+            <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
+        <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
+        <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
+        <a href="../PHP/Counsellor.php" class="<?= ($active==='counsellors')    ? 'active' : '' ?>">Educational Counsellors</a>
+        <a href="../PHP/Scholarship.php" class="<?= ($active==='scholarships')    ? 'active' : '' ?>">Scholarships</a>
+        <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
+        <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
+      </nav>
+   
+       
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
@@ -412,10 +414,10 @@
                     </div>
                 </div>
                 
-                <div class="highlight" style="margin-top: 2rem;">
+                <!-- <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ B | 9️⃣ B | 🔟 B</p>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>

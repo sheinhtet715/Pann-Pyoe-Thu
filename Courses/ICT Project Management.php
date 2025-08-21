@@ -425,10 +425,10 @@
                     </div>
                 </div>
                 
-                <div class="highlight" style="margin-top: 2rem;">
+                <!-- <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ C | 2️⃣ B | 3️⃣ B | 4️⃣ A | 5️⃣ B | 6️⃣ B | 7️⃣ B | 8️⃣ C | 9️⃣ B | 🔟 C</p>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>
