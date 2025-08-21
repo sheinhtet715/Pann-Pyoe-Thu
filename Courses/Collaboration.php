@@ -1,13 +1,30 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) session_start();
+    include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
-    <title>ICT Project Management</title>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../Courses/ICT.css">
+     <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
+    <title> Collaboration Course - PPT</title>
+     <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+     <link rel="stylesheet" href="../Courses/Collaboration.css">
+     
 </head>
 <body>
     <!-- Header -->
@@ -16,27 +33,67 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-        <nav class="nav">
-            <a href="../HTML/Homepage.html">Home Page</a>
-            <a href="#">About us</a>
-            <a href="#" class="active">Courses</a>
-            <a href="../HTML/Counsellor Page.html">Education counselling</a>
-            <a href="#">Scholarships</a>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
+        <nav class="nav" id="nav-menu">
+               <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
+        <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
+        <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
+        <a href="../PHP/Counsellor.php" class="<?= ($active==='counsellors')    ? 'active' : '' ?>">Educational Counsellors</a>
+        <a href="../PHP/Scholarship.php" class="<?= ($active==='scholarships')    ? 'active' : '' ?>">Scholarships</a>
+        <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
+        <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
         </nav>
+         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+           <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <?php if (! empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+                <li><a class="dropdown-item" href="../PHP/Profile.php">My Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../PHP/logout.php">Logout</a></li>
+            </ul>
+        </div>
+        <?php else: ?>
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
+        <?php endif; ?>
+             
     </header>
 
     <!-- Main Content -->
     <div class="course-container">
         <!-- Course Header -->
         <div class="course-header">
-            <h1>Collaboration</h1>
+            <h1> Collaboration Course</h1>
             <div class="course-info">
-                <div>Type - Online Course</div>
+                <div>Type - Video Lecture</div>
                 <div>Language - English</div>
                 <div>Duration - 4 Modules</div>
             </div>
@@ -48,7 +105,13 @@
             <ul>
                 <li class="active" data-module="module1">Module 1</li>
                 <li data-module="module2">Module 2</li>
-                <li data-module="module3">Module 3</li>
+                <li data-module="module3">Module 3
+                    <ul class="list-unstyled">
+                        <li class="text-wrap">1. Digital Tools for Collaboration</li>
+                        <li class="text-wrap">2. What is collaborative leadership?</li>
+                        <!-- <li>3. LINK</li> -->
+                    </ul>
+                </li>
                 <li data-module="module4">Module 4</li>
                 <li data-module="quiz" class="quiz-nav" style="display: none;">Quiz</li>
             </ul>
@@ -59,40 +122,41 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
-                <h3>Collaboration: What is collaboration?</h3>
+                <h3> What is collaboration?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
-                <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
+                <img src="../Courses page Images/Psychological first aid.jpg" alt="Psychological First Aid Overview" class="module-image">
                 
-                <p>The word collaboration is used in different ways making it necessary to check for common understanding. Collaboration may be used as a synonym for "working together". The term may indicate a process or it might refer to a highly integrated method of achieving a goal.</p>
+                <p> The word collaboration is used in different ways making it necessary to check for common understanding. 
+                    Collaboration may be used as a synonym for “working together.” The term may indicate a process or it might refer to a highly integrated method of achieving a goal.</p>
                 
-               <h3>Level of Collaboration</h3>
-
-               <p>Levels of Collaboration: Since the word collaboration can be misunderstood, it is valuable to review some of the theory in this area. A commonly used collaboration framework is Houge"s 3 Levels of Community Linkage Model.</p>
-
-               <h3>This model describes five levels of collaboration:</h3>
-
-               <ol>
-                   <li>Networking</li>
-                   <li>Cooperation or Alliance</li>
-                   <li>Coordination or Partnership</li>
-                   <li>Coalition and</li>
-                   <li>Collaboration</li>
-               </ol>
-
-               <a href="https://asphn.org/wp-content/uploads/2017/10/collaboration-primer.pdf">Click Here</a>
-
+                <div class="example">
+                    <h4> Levels of Collaboration</h4>
+                    <p> Levels of Collaboration Since the word collaboration can be misunderstood, it is valuable to review some of the theory in this area. A commonly used 
+                        collaboration framework is Hogue’s3 Levels of Community Linkage Model. This model describes five levels of collaboration:</p>
+                        <ul>
+                            <li>(1) networking,</li>
+                            <li>(2) cooperation or alliance,</li>
+                            <li>(3) coordination or partnership,</li>
+                            <li>(4) coalition, and</li>
+                            <li>(5) collaboration.</li> 
+                        </ul>
+                       <a href="https://asphn.org/wp-content/uploads/2017/10/collaboration-primer.pdf" target="_blank">Read more about Hogue's Levels of Collaboration</a>
+                    </div>
             </section>
 
             <!-- Module 2 -->
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
-                <h3>Collaborative Learning</h3>
+                <h3>Collaborative learning</h3>
                 
-                <p>"Collaborative Learning" is an umbrella term for a variety of educational approaches involving joint intellectual efforts by students, or students and teachers together. Usually, students are working in groups of two or more, mutually searching for understanding, solutions, or meanings, or creating a product. Collaborative learning activities vary widely, but most center on students' exploration or application of the course material, not simply the teacher's presentation or explication of it.</p>
-
-                <a href="https://teach.ufl.edu/wp-content/uploads/2016/07/WhatisCollaborativeLearning.pdf">Click Here</a>
-                <br>
+                <p> “Collaborative learning” is an umbrella term for a variety of educational approaches involving joint intellectual 
+                    effort by students, or students and teachers together. Usually, students are working in groups of two or more, 
+                    mutually searching for understanding, solutions, or meanings, or creating a product. Collaborative learning 
+                    activities vary widely, but most center on students’ exploration or application of the course material, not simply 
+                    the teacher’s presentation or explication of it.</p>
+                <a href="https://teach.ufl.edu/wp-content/uploads/2016/07/WhatisCollaborativeLearning.pdf" target="_blank">Read more about Collaborative Learning</a>
+                
                 <h3>The benefits of collaborative learning include:</h3>
                 
                 <ul>
@@ -102,8 +166,7 @@
                     <li>Exposure to and an increase in understanding of diverse perspectives.</li>
                     <li>Preparation for real life social and employment situations.</li>
                 </ul>
-
-                <a href="https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning">Learn More</a>
+                <a href=" https://teaching.cornell.edu/teaching-resources/active-collaborative-learning/collaborative-learning" target="_blank">Read more about Benefits of Collaborative Learning</a>    
             </section>
 
             <!-- Module 3 -->
@@ -111,80 +174,93 @@
                 <h2>MODULE 3</h2>
                 <h3>Digital Tools for Collaboration</h3>
                 
-                <ul>
-                    <li>Google Workspace, Trello, Microsoft Teams</li>
-                </ul>
+                <p> Google Workspace, Trello, Microsoft Teams
+                    These tools provide features such as instant messaging, video conferencing, file sharing, project management, and online whiteboards to help teams 
+                    collaborate more efficiently and effectively.</p>
+                <div class="think-outside-box">
+                    <h4> What is collaborative leadership?</h4>
+                    <p> Collaborative leadership is a management strategy in which members of a leadership team collaborate across 
+                        sectors to make decisions that keep their organization prospering. This type of leadership has grown prevalent 
+                        among managers today, replacing the traditional top-down leadership strategy of the past, in which high-level 
+                        executives made decisions that were passed down to employees with little understanding of how or why such 
+                        decisions were made.
+                        
+                        Unlike the outdated top-down approach, the collaborative leadership style provides numerous benefits to 
+                        organizations. At the executive level, it develops a sense of unity among managers, helping them to quickly 
+                        make effective business decisions, establish and preserve the organization's core principles, and strategically 
+                        approach difficulties as a unified team. Embracing collaboration at this high level also shows employees that 
+                        they, too, should approach their work in a collaborative manner</p>
+                    </div>
                 
-                <p>These tools provide features such as instant messaging, video conferencing, file sharing, project management, and online whiteboards to help teams collaborate more efficiently and effectively.</p>
+                <!-- Image 2 in Module 3 -->
+                <img src="../Courses page Images/Psychological first aid.jpg" alt="LOOK Action Principle" class="module-image">
                 
-                <h2>What is a collaborative leadership?</h2>
-
-                <p>Collaborative leadership is a management strategy in which members of a leadership team collaborate across sectors to make decisions that keep their organization prospering. This type of leadership has grown prevalent among managers today, replacing the traditional top-down leadership strategy of the past, in which high-level executives made decisions that were passed down to employees with little understanding of how or why such decisions were made.</p>
-
-                <p>Unlike the outdated top-down approach, the collaborative leadership style provides numerous benefits to organizations. At the executive level, it develops a sense of unity among managers, helping them to quickly make effective business decisions, establish and preserve the organization's core principles, and strategically approach difficulties as a unified team. Embracing collaboration at this high level also shows employees that they, too, should approach their work in a collaborative manner.</p>
+                <!-- Image 3 in Module 3 -->
+                <img src="../Courses page Images/Psychological first aid.jpg" alt="LISTEN Action Principle" class="module-image">
+                <a hre="https://graduate.northeastern.edu/knowledge-hub/collaborative-leadership/" target="_blank">Read more about Collaborative Leadership</a>
                 
-                <a href="https://graduate.northeastern.edu/knowledge-hub/collaborative-leadership/">Learn More</a>
             </section>
 
             <!-- Module 4 -->
             <section id="module4" class="module">
                 <h2>MODULE 4</h2>
-                <h3>Reasons for Collaboration.</h3>
+                <h3>Reasons for Collaboration</h3>
                 
                 <!-- Image 4 at start of Module 4 -->
-                <img src="path/to/module4-image.jpg" alt="Active Listening in PFA" class="module-image">
+                <img src="../Courses page Images/Psychological first aid.jpg" alt="Active Listening in PFA" class="module-image">
                 
-                <p>There are numerous reasons why individuals or groups may decide to collaborate. Some common explanations are:</p>
+                <p> There are numerous reasons why individuals or groups may decide to collaborate. Some common explanations are:</p>
                 
-                <h3>1. To Reach a Shared goal.</h3>
-                
-                <p>Collaboration allows individuals or groups to pool their resources and knowledge in order to achieve a common objective.</p>
-
-                <h3>2. Improve Communication</h3>
-                
-                <p>Collaboration can improve communication by allowing for open conversation and the exchange of ideas.</p>
-
-                <h3>3. Improve Problem-Solving Skills</h3>
-                
-                <p>Collaboration can improve problem-solving skills by allowing people to brainstorm and share ideas with one another.</p>
-
-                <h3>4. To Improve Efficiency</h3>
-                
-                <p>Collaboration boosts efficiency by allowing people to share resources, information, and talents.</p>
-
-                <h3>5. To Develop Relationships</h3>
-                
-                <p>Collaboration can assist to strengthen connections by bringing individuals together and creating a sense of community.</p>
-
-                <h3>6. To Acquire New Talents or Expertise</h3>
-                
-                <p>Collaboration allows individuals to master new talents or obtain knowledge from others.</p>
-
-                <h3>7. To Boost Inventiveness</h3>
-                
-                <p>Collaboration can boost creativity by creating an environment for brainstorming and innovation.</p>
-
-                <h3>8. Create Something Fresh</h3>
-                
-                <p>Collaboration can be utilized to develop a new product, service, or process.</p>
-
+                <!-- <h3>Active Listening Guidelines:</h3> -->
+                <ol>
+                    <li>1. To reach a shared goal.
+                        Collaboration allows individuals or groups to 
+                        pool their resources and knowledge in order to 
+                        achieve a common objective.</li>
+                    <li>2. Improve communication.
+                        Collaboration can improve communication by 
+                        allowing for open conversation and the exchange 
+                        of ideas.</li>
+                    <li> 3. Improve problem-solving skills. 
+                        Collaboration can improve problem-solving 
+                        skills by allowing people to brainstorm and share 
+                        ideas with one another.</li>
+                    <li>4. To improve efficiency.
+                        Collaboration boosts efficiency by allowing 
+                        people to share resources, information, and 
+                        talents</li>
+                    <li>5. To develop relationships.
+                        Collaboration can assist to strengthen connections by 
+                        bringing individuals together and creating a sense of 
+                        community.</li>
+                    <li>6. To acquire new talents or expertise.
+                        Collaboration allows individuals to master new talents or 
+                        obtain knowledge from others.</li>
+                    <li>7. To boost inventiveness.
+                        Collaboration can boost creativity by creating an 
+                        environment for brainstorming and innovation.</li>
+                    <li>8. Create something fresh.
+                        Collaboration can be utilized to develop a new product, 
+                        service, or process</li>
+                </ol>
 
                 <div class="example">
-                    <h4>Key Principle:</h4>
-                    <p>People will gradually comprehend and come to terms with the incident if they share their story.</p>
+                    <h4>Videos</h4>
+                    <p><a href= "https://www.marketing91.com/collaboration/"
+                        target="_blank">Collaboration allows individuals or groups to pool their resources and knowledge in order to achieve a common objective.</a></p>
+                    <a href="https://youtu.be/2DmFFS0dqQc?si=g5kPYir-LKEyvp6"> Collaborations</a>
                 </div>
                 
-                <a href="https://www.marketing91.com/collaboration/">Learn More</a>
-                
-                <div class="video-container">
-                    <a href="https://youtu.be/AfdKqpGaa_k" target="_blank">
-                        <i class="fab fa-youtube"></i> Video
-                    </a>
+                <!-- Two side-by-side images in Module 4 interaction part -->
+                <div class="image-container">
+                    <img src="../Courses page Images/Psychological first aid.jpg" alt="Active Listening Techniques">
+                    <img src="../Courses page Images/Psychological first aid.jpg" alt="Supportive Communication">
                 </div>
-
+                
+                </div>
             </section>
 
-            <!-- Quiz Section -->
+             <!-- Quiz Section -->
             <section id="quiz" class="module">
                 <div class="quiz-section">
                     <h2>Collaboration Quiz</h2>
@@ -432,7 +508,6 @@
             </section>
         </div>
     </div>
-
     <!-- Footer -->
     <div class="bottom">
         <div class="bottom-left">
@@ -457,6 +532,18 @@
             <p>© 2025 Pann Pyoe Thu. All rights reserved.</p>
         </div>
     </div>
+
+<?php include '../PHP/login_modal.php'; ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="…"
+        crossorigin="anonymous"></script>
+        <script>
+//Mobile menu toggle function
+    function toggleMobileMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+      }
+      </script>
 
     <script>
         // Module navigation functionality
@@ -536,7 +623,7 @@
             quizSection.innerHTML = `
                 <h2>Quiz Results</h2>
                 <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: #BF9E8D; font-size: 2rem; margin-bottom: 20px;">
+                    <h3 style="color: #2e5356; font-size: 2rem; margin-bottom: 20px;">
                         You got ${score} out of ${totalQuestions} correct! (${percentage}%)
                     </h3>
                     <p style="font-size: 1.2rem; margin-bottom: 20px;">
@@ -544,9 +631,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                    ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Collaboration"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)
@@ -555,5 +654,67 @@
             console.log('Login modal opened');
         }
     </script>
+      <script>
+    function openLogin() {
+      const m = document.getElementById('loginModal');
+      if (m && m.style.display !== 'block') m.style.display = 'block';
+    }
+    function closeLogin() {
+      const m = document.getElementById('loginModal');
+      if (m) m.style.display = 'none';
+    }
+
+    // Clicking the ✕ or outside the modal closes it
+    document.addEventListener('click', e => {
+      const m = document.getElementById('loginModal');
+      if (!m) return;
+      if (e.target.classList.contains('close') || e.target === m) {
+        closeLogin();
+      }
+    });
+
+  </script>
+  <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  <?php if ($error): ?>
+      // 1) Login error – show SweetAlert, then open modal on “Try Again”
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: <?php echo json_encode($error) ?>,
+        confirmButtonText: 'Try Again'
+      })
+      .then(() => openLogin());
+
+    <?php elseif ($success): ?>
+      // 2) Success – quick toast only
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: <?php echo json_encode($success) ?>,
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+    <?php else: ?>
+      // 3) No error/success – honor ?showLogin=1 here
+      (function(){
+        const params = new URL(location).searchParams;
+        if (params.get('showLogin') === '1') {
+          openLogin();
+          params.delete('showLogin');
+          history.replaceState({}, '', location.pathname + (params.toString() ? `?${params}` : ''));
+        }
+      })();
+
+    <?php endif; ?>
+
+  });
+
+</script>
+
+
 </body>
 </html>
