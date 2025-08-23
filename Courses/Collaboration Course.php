@@ -76,7 +76,8 @@
                 <h3>Collaboration: What is collaboration?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
-                <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
+                <img src="Courses_images/Collaboration Images/Collaboration 0.png" alt="Collaboration 0" class="module-image">
+
                 
                 <p>The word collaboration is used in different ways making it necessary to check for common understanding. Collaboration may be used as a synonym for "working together". The term may indicate a process or it might refer to a highly integrated method of achieving a goal.</p>
                 
@@ -102,6 +103,8 @@
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
                 <h3>Collaborative Learning</h3>
+
+                <img src="Courses_images/Collaboration Images/Collaboration 1.jpg" alt="Collaboration 1" class="module-image">
                 
                 <p>"Collaborative Learning" is an umbrella term for a variety of educational approaches involving joint intellectual efforts by students, or students and teachers together. Usually, students are working in groups of two or more, mutually searching for understanding, solutions, or meanings, or creating a product. Collaborative learning activities vary widely, but most center on students' exploration or application of the course material, not simply the teacher's presentation or explication of it.</p>
 
@@ -131,7 +134,9 @@
                 
                 <p>These tools provide features such as instant messaging, video conferencing, file sharing, project management, and online whiteboards to help teams collaborate more efficiently and effectively.</p>
                 
-                <h2>What is a collaborative leadership?</h2>
+                <img src="Courses_images/Collaboration Images/Collaboration 2.jpg" alt="Collaboration 2" class="module-image">
+
+                <h3>What is a collaborative leadership?</h3>
 
                 <p>Collaborative leadership is a management strategy in which members of a leadership team collaborate across sectors to make decisions that keep their organization prospering. This type of leadership has grown prevalent among managers today, replacing the traditional top-down leadership strategy of the past, in which high-level executives made decisions that were passed down to employees with little understanding of how or why such decisions were made.</p>
 
@@ -165,6 +170,8 @@
                 <h3>4. To Improve Efficiency</h3>
                 
                 <p>Collaboration boosts efficiency by allowing people to share resources, information, and talents.</p>
+
+                <img src="Courses_images/Collaboration Images/Collaboration 3.jpg" alt="Collaboration 3">
 
                 <h3>5. To Develop Relationships</h3>
                 
@@ -472,7 +479,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
             const moduleNavItems = document.querySelectorAll('.module-nav li');
@@ -532,7 +539,7 @@
 
         // Quiz submission function
         function submitQuiz() {
-            const correctAnswers = ['q1c', 'q2b', 'q3b', 'q4a', 'q5b', 'q6b', 'q7b', 'q8c', 'q9b', 'q10c'];
+            const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
             let score = 0;
             let totalQuestions = correctAnswers.length;
             
@@ -550,7 +557,7 @@
             quizSection.innerHTML = `
                 <h2>Quiz Results</h2>
                 <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: #2e5356; font-size: 2rem; margin-bottom: 20px;">
+                    <h3 style="color: #BF9E8D; font-size: 2rem; margin-bottom: 20px;">
                         You got ${score} out of ${totalQuestions} correct! (${percentage}%)
                     </h3>
                     <p style="font-size: 1.2rem; margin-bottom: 20px;">
@@ -558,21 +565,9 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                     ${percentage >= 60 
-                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
-                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
-                    }
+                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
                 </div>
             `;
-            if (percentage >= 60) {
-                const courseName = "Collaboration Course"; 
-                const userName = "<?= $_SESSION['user_name']?>";
-
-               document.getElementById('generateBtn').addEventListener('click', function() {
-                  
-                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
-              });
-            }
         }
 
         // Login modal functionality (placeholder)

@@ -59,6 +59,7 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
+                
                 <h3>Why is critical thinking important?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->

@@ -125,7 +125,7 @@
                 <h3>Psychological First Aid: What Is It?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
-                <img src="../Courses page Images/Psychological first aid.jpg" alt="Psychological First Aid Overview" class="module-image">
+                <img src="Courses_images/Psychology First Aid Images/Psychology 0.png" alt="Psychology 0" class="module-image">
                 
                 <p>Psychological First Aid (PFA) is a data-driven method based on the concept of human resilience. PFA seeks to alleviate stress symptoms and promote a healthy recovery following a traumatic incident, natural disaster, public health emergency, or personal crisis.</p>
                 
@@ -137,10 +137,17 @@
 
             <!-- Module 2 -->
             <section id="module2" class="module">
+
+                <img src="Courses_images/Psychology First Aid Images/Psychology 1.jpg" alt="Psychology 1" class="module-image">
+
                 <h2>MODULE 2</h2>
+
+
                 <h3>Common Reactions to Traumatic Events</h3>
+
                 
                 <p>It is normal to feel upset after going through a life-changing incident. Every person who experiences a calamity is affected by it. Reactions vary depending on when they occur during and after the experience.</p>
+                <img src="Courses_images/Psychology First Aid Images/Psychology 2.jpg" alt="Psychology 2" class="module-image">
                 
                 <h3>Some frequent stress reactions are:</h3>
                 
@@ -176,7 +183,7 @@
                 </div>
                 
                 <!-- Image 2 in Module 3 -->
-                <img src="../Courses page Images/Psychological first aid.jpg" alt="LOOK Action Principle" class="module-image">
+                <img src="Courses_images/Psychology First Aid Images/Psychology 3.jpg" alt="Psychology 3" class="module-image">
                 
                 <h3>1. LOOK (observe a circumstance)</h3>
                 <ul>
@@ -199,7 +206,7 @@
                 </ul>
                 
                 <!-- Image 3 in Module 3 -->
-                <img src="../Courses page Images/Psychological first aid.jpg" alt="LISTEN Action Principle" class="module-image">
+                <img src="Courses_images/Psychology First Aid Images/Psychology 4.jpg" alt="Psychology 4" class="module-image">
                 
                 <h3>3. LINK (act now to assist)</h3>
                 <ul>
@@ -216,7 +223,7 @@
                 <h3>Active Listening in PFA</h3>
                 
                 <!-- Image 4 at start of Module 4 -->
-                <img src="../Courses page Images/Psychological first aid.jpg" alt="Active Listening in PFA" class="module-image">
+                <img src="Courses_images/Psychology First Aid Images/Psychology 5.jpg" alt="Psychology 5" class="module-image">
                 
                 <p>A crucial element of PFA is active listening. This skill is fundamental to establishing trust and providing effective support.</p>
                 
@@ -236,8 +243,8 @@
                 
                 <!-- Two side-by-side images in Module 4 interaction part -->
                 <div class="image-container">
-                    <img src="../Courses page Images/Psychological first aid.jpg" alt="Active Listening Techniques">
-                    <img src="../Courses page Images/Psychological first aid.jpg" alt="Supportive Communication">
+                    <img src="path/to/module4-interaction1.jpg" alt="Active Listening Techniques">
+                    <img src="path/to/module4-interaction2.jpg" alt="Supportive Communication">
                 </div>
                 
                 <div class="video-container">
@@ -246,11 +253,6 @@
                     <a href="https://youtu.be/AfdKqpGaa_k" target="_blank">
                         <i class="fab fa-youtube"></i> Watch Video
                     </a>
-                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/AfdKqpGaa_k?si=HFvFgW4MLmC76j8C" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                    </iframe> -->
                 </div>
                 
                 <p>Reference: <a href="https://epidemics.ifrc.org/volunteer/action/45-psychological-first-aid-pfa" target="_blank">IFRC - PFA Action Principles</a></p>
@@ -497,10 +499,10 @@
                     </div>
                 </div>
                 
-                <!-- <div class="highlight" style="margin-top: 2rem;">
+                <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ B | 2️⃣ C | 3️⃣ C | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ A | 9️⃣ A | 🔟 A</p>
-                </div> -->
+                </div>
             </section>
         </div>
     </div>
@@ -529,7 +531,7 @@
             <p>© 2025 Pann Pyoe Thu. All rights reserved.</p>
         </div>
     </div>
-    
+
     <script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -587,7 +589,7 @@
                 }
             });
         });
-            
+
         // Quiz submission function
         function submitQuiz() {
             const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
@@ -608,7 +610,7 @@
             quizSection.innerHTML = `
                 <h2>Quiz Results</h2>
                 <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: #2e5356; font-size: 2rem; margin-bottom: 20px;">
+                    <h3 style="color: #BF9E8D; font-size: 2rem; margin-bottom: 20px;">
                         You got ${score} out of ${totalQuestions} correct! (${percentage}%)
                     </h3>
                     <p style="font-size: 1.2rem; margin-bottom: 20px;">
@@ -616,21 +618,9 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    ${percentage >= 60 
-                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
-                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
-                    }
+                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
                 </div>
             `;
-            if (percentage >= 60) {
-                const courseName = "Pyschological First Aid"; 
-                const userName = "<?= $_SESSION['user_name']?>";
-
-               document.getElementById('generateBtn').addEventListener('click', function() {
-                  
-                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
-              });
-            }
         }
 
         // Login modal functionality (placeholder)
@@ -639,8 +629,5 @@
             console.log('Login modal opened');
         }
     </script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="…"
-        crossorigin="anonymous"></script>
 </body>
 </html>

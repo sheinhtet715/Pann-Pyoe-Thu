@@ -264,6 +264,17 @@ body {
     font-size: 0.9rem;
 }
 
+.gender-last {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.gender-last img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
 /* Quiz Section */
 .quiz-section {
     background: #2e5356;
