@@ -19,6 +19,8 @@
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <title>ICT Project Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../Courses/ICT.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -38,9 +40,50 @@
             <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
             <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
         </nav>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+          <?php if (! empty($_SESSION['user_id'])): ?>
+        <div class="dropdown">
+            <button
+                class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
+                type="button"
+                id="profileDropdownBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <?php if (! empty($user['profile_path'])): ?>
+                    <img
+                        src="../<?php echo htmlspecialchars($user['profile_path']); ?>"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:50px; height:50px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img
+                        src="../HomePimg/Profile.png"
+                        alt="Profile"
+                        class="profile-img"
+                        style="width:28px; height:28px; object-fit:cover;"
+                    >
+                <?php endif; ?>
+            </button>
+               <ul class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdownBtn">
+                <li><a class="dropdown-item" href="../PHP/Profile.php">My Profile</a></li>
+                <li><a class="dropdown-item" href="../PHP/logout.php">Logout</a></li>
+            </ul>
+        </div>
+        <?php else: ?>
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
+        <?php endif; ?>
+             
     </header>
 
     <div class="course-container">
@@ -478,6 +521,7 @@
             <p>© 2025 Pann Pyoe Thu. All rights reserved.</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 
     <script>
         // Module navigation functionality
