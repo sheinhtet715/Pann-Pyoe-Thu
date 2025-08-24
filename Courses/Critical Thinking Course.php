@@ -1,8 +1,21 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) session_start();
+    include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <title>Critical Thinking Course</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,15 +29,15 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-        <nav class="nav">
-            <a href="../HTML/Homepage.html">Home Page</a>
-            <a href="#">About us</a>
-            <a href="#" class="active">Courses</a>
-            <a href="../HTML/Counsellor Page.html">Education counselling</a>
-            <a href="#">Scholarships</a>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-        </nav>
+         <nav class="nav">
+            <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
+        <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
+        <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
+        <a href="../PHP/Counsellor.php" class="<?= ($active==='counsellors')    ? 'active' : '' ?>">Educational Counsellors</a>
+        <a href="../PHP/Scholarship.php" class="<?= ($active==='scholarships')    ? 'active' : '' ?>">Scholarships</a>
+        <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
+        <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
+      </nav>
         <div class="profile-icon" onclick="openLogin()">
             <img src="../HomePimg/Profile.png" alt="Profile" class="profile-img" />
         </div>
@@ -59,14 +72,15 @@
             <!-- Module 1 -->
             <section id="module1" class="module active">
                 <h2>MODULE 1</h2>
+                
                 <h3>Why is critical thinking important?</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
-                <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
+                <img src="Courses_images/Critcal Thinking Images/Thinking 0.png" alt="Psychological First Aid Overview" class="module-image">
                 
                 <p>Critical thinkers don't simply accept what they're told; they question why. They delve deeper, question assumptions, and refuse to be satisfied with simple solutions. If something doesn't add up, they don't dismiss it. They investigate. This does not imply that you are intentionally tough or contrarian. It indicates that you care about the truth. You want to know how things actually function, not simply how they are portrayed. Others may accept faulty beliefs simply because they are the norm, but you can't help but question them. What about the power to question everything? That is what sets you apart.</p>
                 
-               <h3>You seek proof, not merely speculations.</h3>
+               <h3>You seek proof, not merely speculations. This is test</h3>
 
                <p>Most people trust information based on how convincingly it is delivered or how many people believe it. But confidence does not imply truth, and popularity does not ensure correctness. In fact, research have shown that people are more likely to believe misinformation if it has been repeated many times.</p>
 
@@ -75,7 +89,11 @@
             <!-- Module 2 -->
             <section id="module2" class="module">
                 <h2>MODULE 2</h2>
+
                 <h3>Aspects of thinking critically</h3>
+
+                <img src="Courses_images/Critcal Thinking Images/Thinking 1.jpg" alt="Thinking 01" class="module-image">
+
                 <p>You probably think for yourself and don't take anything at face value if you've read this far.</p>
                 <br>
                 <p>And that is a rare but necessary ability. It is more crucial than ever to be able to question, evaluate, and seek the truth in a world full of false information, prejudice, and superficial thinking. According to the philosopher Bertrand Russell, "the whole problem with the world is that wiser people are so full of doubts, and fools and fanatics are always so certain of themselves." This is understood by true critical thinkers, who recognize that truth, not certainty, is the aim. Ultimately, critical thinking isn't about being skeptical for the purpose of being skeptical. It all comes down to never accepting simple solutions when a more thorough understanding is achievable.</p>
@@ -100,6 +118,8 @@
 
                 <p>For instance, a data analyst deconstructs intricate sales data to find patterns and trends that guide the business's marketing approach.</p>                
                 
+                <img src="Courses_images/Critcal Thinking Images/Thinking 2.jpg" alt="Thinking 02" class="module-image">
+
                 <h3>2. Having an Open Mind</h3>
 
                 <p>The ability to examine new concepts, viewpoints, and data objectively is known as open-mindedness. This ability to think critically enables you to evaluate and digest data in order to reach an objective conclusion. Letting rid of personal prejudices, accepting facts at face value, and drawing conclusions from a variety of viewpoints are all components of critical thinking.
@@ -117,6 +137,8 @@
                 <h3>3. Solving Problems</h3>
 
                 <p>A key component of critical thinking is the ability to solve problems effectively. It calls for the capacity to see problems, come up with potential fixes, weigh options, and carry out the best plan of action. Particularly useful in domains like project management and entrepreneurship is this critical thinking ability.Important components of problem-solving consist of:</p>
+
+                <img src="Courses_images/Critcal Thinking Images/Thinking 3.jpg" alt="Thinking 02" class="module-image">
 
                 <ol>
                     <li>Clearly stating the issue</li>
@@ -147,6 +169,9 @@
             <!-- Module 4 -->
             <section id="module4" class="module">
                 <h2>MODULE 4</h2>
+
+                <img src="Courses_images/Critcal Thinking Images/Thinking 4.jpg" alt="Thinking 04" class="module-image">
+
                 <h3>5. Introspective Thought</h3>
                 
                 <p>Analyzing one's own ideas, deeds, and results in order to better comprehend them and perform better in the future is known as reflective thinking. In order to develop a cohesive understanding of an issue, good critical thinking necessitates the analysis and synthesis of information. It is a crucial critical thinking ability for lifelong learning and development.</p>
@@ -175,9 +200,11 @@
                     <li>Modifying communication methods for various audiences</li>
                     <li>Developing and presenting strong arguments</li>
                 </ol>
-
+                
                 <p>Example: A manager skillfully addresses her team's concerns and makes sure everyone is aware of the ramifications of a new corporate policy.</p>
 
+                <img src="Courses_images/Critcal Thinking Images/Thinking 5.jpg" alt="Thinking 05">
+                
                 <h3>7. Investigation</h3>
 
                 <p>Strong research abilities enable critical thinkers to collect, assess, and integrate data from a variety of sources. This is especially crucial in professional and academic contexts where lifelong learning is necessary. To conduct research effectively, one must:</p>
@@ -456,29 +483,29 @@
                     </div>
                 </div>
                 
-                <div class="highlight" style="margin-top: 2rem;">
+                <!-- <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ C | 5️⃣ C | 6️⃣ B | 7️⃣ B | 8️⃣ B | 9️⃣ B | 🔟 C</p>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>
 
     <!-- Footer -->
-    <div class="bottom">
+   <div class="bottom">
         <div class="bottom-left">
             <h4>Quick Links</h4>
-            <a href="#">About Us</a>
-            <a href="#">Courses</a>
-            <a href="#">Education Counselling</a>
-            <a href="#">Scholarships</a>
+            <a href="../PHP/About Us.php">About Us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-middle">
             <h4>Services</h4>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-            <a href="#">Career Guidance</a>
-            <a href="#">Student Support</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Jobs</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-right">
             <h4>Connect With Us</h4>
@@ -549,7 +576,7 @@
 
         // Quiz submission function
         function submitQuiz() {
-            const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
+            const correctAnswers = ['q1b', 'q2c', 'q3b', 'q4c', 'q5c', 'q6b', 'q7b', 'q8b', 'q9b', 'q10c'];
             let score = 0;
             let totalQuestions = correctAnswers.length;
             
@@ -575,9 +602,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                    ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Critical Thinking Course"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)

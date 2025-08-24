@@ -1,3 +1,15 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) session_start();
+    include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +77,8 @@
                 <h3>Gender attitudinal changes are highly complex, fluid and multi-dimensional.</h3>
                 
                 <!-- Image 1 at start of Module 1 -->
-                <img src="path/to/module1-image.jpg" alt="Psychological First Aid Overview" class="module-image">
+                <img src="Courses_images/Gender Studies Images/Gender 0.png" alt="Gender 0" class="module-image">
+
 
                 <p>Describe our culture, what is lgbtgia+, and why does it discriminate against them?</p>
 
@@ -100,6 +113,8 @@
 
                 <p>Most feminists saw that oppression of women came from the underlying bias of a patriarchal society.</p>
 
+                <img src="Courses_images/Gender Studies Images/Gender 1.jpg" alt="Gender 1" class="module-image">
+
                 <p>Gerda Lerner's 1986 history classic, The Creation of Patriarchy, traces the development of the patriarchy to the second millennium B.C.E. in the middle east, putting gender relations at the center of the story of civilization's history. She argues that before this development, male dominance was not a feature of human society in general. Women were key to the maintenance of human society and community, but with a few exceptions, social and legal power was wielded by men. If patriarchy was created by culture, it can be overturned by a new culture. </p>
 
                 <p>Heteronormativity is the concept that heterosexuality is the preferred or normal sexual orientation. It assumes the gender binary (i.e., that there are only two distinct, opposite genders) and that sexual and marital relations are most fitting between people of opposite sex.</p>
@@ -125,6 +140,8 @@
 
                 <br>
 
+                <img src="Courses_images/Gender Studies Images/Gender 2.jpg" alt="Gender 2" class="module-image">
+
                 <p>   One notable case study is that of Alan Turing, a pioneering mathematician and cryptanalyst who played a crucial role in breaking the German Enigma code during World War II. Despite his contributions to the war effort, Turing was prosecuted for homosexual acts in 1952 under the UK's gross indecency laws. He was subjected to chemical castration as an alternative to imprisonment and tragically died by suicide in 1954. Turing's persecution highlights the devastating impact of anti-LGBTQIA+ laws and the stigma surrounding same-sex behaviors.</p>
 
                 <br>
@@ -140,6 +157,8 @@
                 <p>   The medicalization of gender diversity has historically pathologized non-binary and transgender identities, framing them as disorders to be treated rather than valid expressions of human diversity. This medicalization has had devastating consequences for LGBTQIA+ individuals, leading to harmful practices such as conversion therapy, which seeks to change an individual's sexual orientation or gender identity against their will.</p>
 
                 <br>
+
+                <img src="Courses_images/Gender Studies Images/Gender 3.jpg" alt="Gender 3" class="module-image">
 
                 <p>   One prominent case study is that of Alan Turing, whose homosexuality was deemed a "disorder" by medical professionals of his time. Turing was subjected to chemical castration as a form of "treatment," which had severe psychological consequences and ultimately led to his death. His case underscores the harm inflicted by medicalization and conversion therapy on LGBTQIA+ individuals, highlighting the urgent need for ethical and affirming approaches to healthcare.</p>
 
@@ -172,6 +191,15 @@
                 </a>
 
                 <p>Excellent — I’ll create a 10-item multiple choice quiz based on these Gender Studies modules with an answer key as well:</p>
+                
+            <div class="gender-last">
+
+                <img src="Courses_images/Gender Studies Images/Gender 4.jpg" alt="Gender 4">              
+            
+                <img src="Courses_images/Gender Studies Images/Gender 5.jpg" alt="Gender 5">
+
+            </div>
+
             </section>
 
             <!-- Quiz Section -->
@@ -424,20 +452,20 @@
     </div>
 
     <!-- Footer -->
-    <div class="bottom">
+   <div class="bottom">
         <div class="bottom-left">
             <h4>Quick Links</h4>
-            <a href="#">About Us</a>
-            <a href="#">Courses</a>
-            <a href="#">Education Counselling</a>
-            <a href="#">Scholarships</a>
+            <a href="../PHP/About Us.php">About Us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-middle">
             <h4>Services</h4>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-            <a href="#">Career Guidance</a>
-            <a href="#">Student Support</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Jobs</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-right">
             <h4>Connect With Us</h4>
@@ -448,7 +476,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
             const moduleNavItems = document.querySelectorAll('.module-nav li');
@@ -508,7 +536,7 @@
 
         // Quiz submission function
         function submitQuiz() {
-            const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
+            const correctAnswers = ['q1b', 'q2c', 'q3b', 'q4b', 'q5b', 'q6b', 'q7c', 'q8bS', 'q9b', 'q10b'];
             let score = 0;
             let totalQuestions = correctAnswers.length;
             
@@ -526,7 +554,7 @@
             quizSection.innerHTML = `
                 <h2>Quiz Results</h2>
                 <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: #2e5356; font-size: 2rem; margin-bottom: 20px;">
+                    <h3 style="color: #BF9E8D; font-size: 2rem; margin-bottom: 20px;">
                         You got ${score} out of ${totalQuestions} correct! (${percentage}%)
                     </h3>
                     <p style="font-size: 1.2rem; margin-bottom: 20px;">
@@ -534,9 +562,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                      ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Gender Studies Course"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)
