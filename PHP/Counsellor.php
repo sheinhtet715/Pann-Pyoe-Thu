@@ -39,6 +39,7 @@
         $user   = $result->fetch_assoc();
         $stmt->close();
     }
+    // print_r($user);
     require_once "./Controller/CounsellorController.php";
 
     $imgFolder = '../Counsellor_page_images/';
@@ -235,7 +236,7 @@ ob_start();
 
               // ensure popup opens for logged-in users
               if (typeof openPopup === 'function') {
-                e.preventDefault();
+                e.preventDefault();  //stops the browser’s default action
                 openPopup(advisorName);
               }
             }
