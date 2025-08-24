@@ -1,8 +1,21 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) session_start();
+    include '../PHP/db_connection.php';
+      $user = null;
+  if (! empty($_SESSION['user_id'])) {
+      $stmt = $conn->prepare("SELECT user_name, profile_path FROM User_tbl WHERE user_id = ?");
+      $stmt->bind_param('i', $_SESSION['user_id']);
+      $stmt->execute();
+      $user = $stmt->get_result()->fetch_assoc();
+      $stmt->close();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400,700&display=swap" rel="stylesheet">
     <link rel="icon" href="../HomePimg/Logo.ico" type="image/x-icon">
     <title>Critical Thinking Course</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
@@ -470,29 +483,29 @@
                     </div>
                 </div>
                 
-                <div class="highlight" style="margin-top: 2rem;">
+                <!-- <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ B | 2️⃣ C | 3️⃣ B | 4️⃣ C | 5️⃣ C | 6️⃣ B | 7️⃣ B | 8️⃣ B | 9️⃣ B | 🔟 C</p>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>
 
     <!-- Footer -->
-    <div class="bottom">
+   <div class="bottom">
         <div class="bottom-left">
             <h4>Quick Links</h4>
-            <a href="#">About Us</a>
-            <a href="#">Courses</a>
-            <a href="#">Education Counselling</a>
-            <a href="#">Scholarships</a>
+            <a href="../PHP/About Us.php">About Us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-middle">
             <h4>Services</h4>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-            <a href="#">Career Guidance</a>
-            <a href="#">Student Support</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Jobs</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-right">
             <h4>Connect With Us</h4>
@@ -563,7 +576,7 @@
 
         // Quiz submission function
         function submitQuiz() {
-            const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
+            const correctAnswers = ['q1b', 'q2c', 'q3b', 'q4c', 'q5c', 'q6b', 'q7b', 'q8b', 'q9b', 'q10c'];
             let score = 0;
             let totalQuestions = correctAnswers.length;
             
@@ -589,9 +602,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                    ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Critical Thinking Course"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)

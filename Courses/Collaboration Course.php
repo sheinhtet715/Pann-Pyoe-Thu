@@ -458,17 +458,17 @@
     <div class="bottom">
         <div class="bottom-left">
             <h4>Quick Links</h4>
-            <a href="#">About Us</a>
-            <a href="#">Courses</a>
-            <a href="#">Education Counselling</a>
-            <a href="#">Scholarships</a>
+            <a href="../PHP/About Us.php">About Us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-middle">
             <h4>Services</h4>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-            <a href="#">Career Guidance</a>
-            <a href="#">Student Support</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Jobs</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-right">
             <h4>Connect With Us</h4>
@@ -539,7 +539,7 @@
 
         // Quiz submission function
         function submitQuiz() {
-            const correctAnswers = ['q1b', 'q2c', 'q3c', 'q4b', 'q5b', 'q6b', 'q7c', 'q8a', 'q9a', 'q10a'];
+            const correctAnswers = ['q1c', 'q2b', 'q3b', 'q4a', 'q5b', 'q6b', 'q7b', 'q8c', 'q9b', 'q10c'];
             let score = 0;
             let totalQuestions = correctAnswers.length;
             
@@ -565,9 +565,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                      ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Collaboration Course"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)

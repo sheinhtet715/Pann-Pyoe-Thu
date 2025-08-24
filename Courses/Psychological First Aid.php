@@ -499,10 +499,10 @@
                     </div>
                 </div>
                 
-                <div class="highlight" style="margin-top: 2rem;">
+                <!-- <div class="highlight" style="margin-top: 2rem;">
                     <h3>Answer Key:</h3>
                     <p>1️⃣ B | 2️⃣ C | 3️⃣ C | 4️⃣ B | 5️⃣ B | 6️⃣ B | 7️⃣ C | 8️⃣ A | 9️⃣ A | 🔟 A</p>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>
@@ -511,17 +511,17 @@
     <div class="bottom">
         <div class="bottom-left">
             <h4>Quick Links</h4>
-            <a href="#">About Us</a>
-            <a href="#">Courses</a>
-            <a href="#">Education Counselling</a>
-            <a href="#">Scholarships</a>
+            <a href="../PHP/About Us.php">About Us</a>
+            <a href="../PHP/Courses.php">Courses</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-middle">
             <h4>Services</h4>
-            <a href="#">Local Universities</a>
-            <a href="#">Job Applications</a>
-            <a href="#">Career Guidance</a>
-            <a href="#">Student Support</a>
+            <a href="../PHP/Local Uni.php">Local Universities</a>
+            <a href="../PHP/Jobs.php">Jobs</a>
+            <a href="../PHP/Counsellor.php">Counsellors</a>
+            <a href="../PHP/Scholarship.php">Scholarships</a>
         </div>
         <div class="bottom-right">
             <h4>Connect With Us</h4>
@@ -618,9 +618,21 @@
                           percentage >= 60 ? '👍 Good job! You have a solid grasp of PFA concepts.' : 
                           '📚 Keep studying! Review the modules and try again.'}
                     </p>
-                    <button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>
+                ${percentage >= 60 
+                      ? `<button class="quiz-btn" id="generateBtn">Generate Certificate</button>`
+                     : '<button class="quiz-btn" onclick="location.reload()">Take Quiz Again</button>'
+                    }
                 </div>
             `;
+            if (percentage >= 60) {
+                const courseName = "Psycological First Aid Course"; 
+                const userName = "<?= $_SESSION['user_name']?>";
+
+               document.getElementById('generateBtn').addEventListener('click', function() {
+                  
+                  window.location.href = `../Courses/Certificate/generate_certificate.php?course_name=${encodeURIComponent(courseName)}&user_name=${encodeURIComponent(userName)}`;
+              });
+            }
         }
 
         // Login modal functionality (placeholder)
