@@ -624,19 +624,21 @@ body {
 }
 
 @media screen and (max-width: 1440px) and (min-width: 1024px) {
+    
+    .card .university{
+        padding: 1px;
+        margin: 1px;
+        width: 700px;
+        height: 250px;
+        flex-direction: row;
+    
+    }
 
 .university img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     padding: 45px;
-}
-
-.university {
-    display: flex;
-    flex-direction: row;
-    width: 600px;
-    height: 250px;
 }
 
 .uni-text {
@@ -731,7 +733,7 @@ body {
     .university img{
         padding: 10px;
         width: 50%;
-        height: 50%;
+        /* height: 50%; */
         align-items: center;
         margin-left: 70px;
     }
