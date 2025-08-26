@@ -634,11 +634,21 @@
             }
         }
 
-        // Login modal functionality (placeholder)
-        function openLogin() {
-            // Add login modal functionality here
-            console.log('Login modal opened');
-        }
+     
     </script>
+
+
+
+
+      <!-- 4) Flash‐and‐SweetAlert2 trigger on login/signup errors or success -->
+      <script>
+   
+    //Mobile menu toggle function
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+          }
+    </script>
+
 </body>
 </html>
