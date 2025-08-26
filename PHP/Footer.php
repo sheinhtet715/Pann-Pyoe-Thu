@@ -122,13 +122,6 @@
         margin: 20px auto;
     }
 
-    .login-container {
-        flex-direction: column;
-    }
-
-    .login-left {
-        border-radius: 25px 25px 0 0;
-    }
 }
 
 </style>
