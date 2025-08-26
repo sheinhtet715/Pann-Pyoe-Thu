@@ -122,6 +122,9 @@ $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
       .detail-inner { padding:1rem; }
     </style>
  <!-- Begin Page Content -->
+  <?php
+  //  var_dump($jobs) 
+  ?>
                    <div class="container-fluid py-4">
 
                     <!-- Page Heading -->
