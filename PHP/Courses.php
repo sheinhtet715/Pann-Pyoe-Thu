@@ -139,6 +139,7 @@ ob_start();
 ?>
    <link rel="stylesheet" href="../CSS/Courses.css">	
    <link rel="stylesheet" href="../CSS/Payment.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <h1>Explore our wide range of courses designed to meet your goals.</h1>
 
