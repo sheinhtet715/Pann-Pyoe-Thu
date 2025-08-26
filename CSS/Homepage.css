@@ -828,9 +828,11 @@ body {
         .slide img {
             flex: 1;
             width: 50%;
-            height: 50%;
+            height: auto; 
             object-fit: cover;
             border-radius: 4px;
+            flex: 1;
+        
         }
 
         .prev {
@@ -847,8 +849,13 @@ body {
             margin-top: -200px;
             
         }
+        .slide img {
+            flex: 1;
+            height: auto; /* Adjusts based on container */
+        }
         .slider-wrapper {
             margin-bottom: -20px;
+            /* height: 40%; */
         }
         .slider {
             margin-bottom: -20px;
