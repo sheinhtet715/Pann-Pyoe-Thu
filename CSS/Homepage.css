@@ -840,7 +840,14 @@ body {
         .next {
             right: 10px;
         }
-         @media (min-width: 768px) {
+
+        @media (max-width: 1024px) {
+            .us-text {
+            text-align: center;
+            margin-top: -50px;
+        }
+        }
+         @media (max-width: 768px) {
             .slider-wrapper {
                 max-width: 1200px; 
             }
@@ -849,6 +856,10 @@ body {
                 flex: 1;
                 height: auto; /* Adjusts based on container */
             }
+            .us-text {
+            text-align: center;
+            margin-top: -50px;
+        }
         }
 
         @media (max-width: 600px) {
@@ -863,14 +874,14 @@ body {
             }
 
             .slide img {
-                width: 100%;
+                width: 50%;
                 height: 100%;
             }
         }
 
         .us-text {
             text-align: center;
-            margin-top: 10px;
+            margin-top: -50px;
         }
 
         .about-us {
