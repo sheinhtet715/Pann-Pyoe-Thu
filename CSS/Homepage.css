@@ -844,21 +844,31 @@ body {
         @media (max-width: 1024px) {
             .us-text {
             text-align: center;
-            margin-top: -50px;
+            margin-top: -200px;
+            
+        }
+        .slider-wrapper {
+            margin-bottom: -20px;
+        }
+        .slider {
+            margin-bottom: -20px;
         }
         }
          @media (max-width: 768px) {
             .slider-wrapper {
                 max-width: 1200px; 
+                 margin-bottom: -20px;
             }
-
+            .slider {
+                margin-bottom: -20px;
+            }
             .slide img {
                 flex: 1;
                 height: auto; /* Adjusts based on container */
             }
             .us-text {
             text-align: center;
-            margin-top: -50px;
+            margin-top: -200px;
         }
         }
 

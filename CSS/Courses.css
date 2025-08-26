@@ -631,6 +631,25 @@ button:hover, .signin:hover, .signup:hover {
         margin-bottom: 18px;
     }
 }
+
+@media (max-width: 768px){
+
+  .box-two {
+
+    height: 180px;
+    width: 200px;
+    margin-top: 50px;
+    margin-right: 25px;
+
+  }
+
+  .box-two p {
+
+    font-size: 16px;
+
+  }
+}
+
 @media (max-width: 600px) {
     .modal-content.login-container {
         width: 100vw;
@@ -705,7 +724,7 @@ button:hover, .signin:hover, .signup:hover {
     z-index: -1;
    }
 }
-@media (max-width: 370px) {
+@media (max-width: 375px) {
   .course  {
 
     width: 290px;
@@ -715,4 +734,21 @@ button:hover, .signin:hover, .signup:hover {
   h1 {
     font-size: 16px;
   }
+}
+@media (max-width: 320px) {
+  /* .course  {
+
+    width: 220px;
+
+  }
+
+  
+
+  h1 {
+    font-size: 14px;
+  } */
+   .course-text {
+     width: 200px;
+   }
+   
 }
