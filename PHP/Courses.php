@@ -326,7 +326,7 @@ ob_start();
     <div class="box-one"></div>
     <div class="box-two">
       <?php if (!empty($discountCourses)): ?>
-        <h2>Discount Courses</h2>
+        <!-- <h2>Discount Courses</h2> -->
         <?php foreach ($discountCourses as $percent): ?>
           <p>Get <span class="red"><?= (int)$percent ?>%</span> discount for the very first enrolled course.</p>
           <br>

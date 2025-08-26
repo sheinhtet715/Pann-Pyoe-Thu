@@ -227,7 +227,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  gap: 50px;
+  gap: 30px;
   margin-top: 30px;
 }
 
@@ -255,7 +255,10 @@ h1 {
   transform: rotate(-30deg);
   z-index: -1;
 }
-
+.box-two h2 {
+  font-size: 16px;
+  z-index: 10;
+}
 .box-two p {
   margin: 0 0 0px;
   font-size: 20px;
@@ -471,7 +474,12 @@ button:hover, .signin:hover, .signup:hover {
 
   }
 
-  .box-two p {
+  .box-two p  {
+
+    font-size: 14px;
+
+  }
+  .box-two .red {
 
     font-size: 16px;
 
@@ -551,6 +559,16 @@ button:hover, .signin:hover, .signup:hover {
     transform: rotate(-30deg);
     z-index: -1;
    }
+  .box-two p  {
+
+    font-size: 12px;
+
+  }
+  .box-two .red {
+
+    font-size: 14px;
+
+  }
 }
 @media (max-width: 375px) {
   .course  {
