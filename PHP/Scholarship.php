@@ -149,7 +149,7 @@ ob_start();
       <button
         type="button"
         id="show-fav"
-        class="btn btn-secondary btn-sm <?= $showFav ? 'active' : '' ?>"
+        class="btn btn-secondary btn-sm mt-1 <?= $showFav ? 'active' : '' ?>"
         onclick="toggleFavorites()"
         title="<?= $showFav ? 'Show all scholarships' : 'Show only my favorites' ?>"
       >
