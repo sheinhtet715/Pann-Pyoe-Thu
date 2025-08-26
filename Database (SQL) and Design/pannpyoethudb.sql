@@ -39,10 +39,6 @@ CREATE TABLE `appointment_tbl` (
 --
 -- Dumping data for table `appointment_tbl`
 --
-
-INSERT INTO `appointment_tbl` (`appointment_id`, `user_id`, `counsellor_id`, `appointment_date`, `appointment_time`, `description`, `appointment_status`) VALUES
-(6, 2, 1, '2025-08-17', '01:00:00', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'Pending');
-
 -- --------------------------------------------------------
 
 --
