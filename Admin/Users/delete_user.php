@@ -88,10 +88,7 @@ try {
     $conn->commit();
     $inTransaction = false;
 
-    // 8) Immediately remove session files for that user (force logout)
-    //    We already deleted login_tbl rows above; but to be safe, find any session ids that were stored earlier.
-    //    If you want to find them prior to deleting login_tbl, you can query BEFORE step 4.
-    // (We attempt to remove session files named sess_<session_id> in session_save_path)
+
     $savePath = session_save_path();
     if (empty($savePath)) $savePath = sys_get_temp_dir();
     // If session files are stored inside a subdir, ensure you have correct path.
@@ -104,8 +101,7 @@ try {
         while (($file = readdir($dh)) !== false) {
             if (strpos($file, 'sess_') === 0) {
                 $full = $savePath . DIRECTORY_SEPARATOR . $file;
-                // Best-effort: if file contains the user id inside (some apps write user id in session data)
-                // read small portion to avoid heavy IO
+          
                 $contents = @file_get_contents($full, false, null, 0, 4096);
                 if ($contents !== false && strpos($contents, (string)$id) !== false) {
                     @unlink($full);
@@ -115,9 +111,6 @@ try {
         closedir($dh);
     }
 
-    // NOTE: If you stored session_id values in Login_tbl before deleting them (preferred),
-    // you can remove those specific files. Example (if you captured session ids earlier):
-    // foreach ($sids as $sid) { @unlink(rtrim($savePath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'sess_' . $sid); }
 
     // 9) Remove profile image file after commit
     if (!empty($profilePath)) {

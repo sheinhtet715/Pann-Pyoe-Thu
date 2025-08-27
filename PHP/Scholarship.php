@@ -304,7 +304,7 @@ ob_start();
     });
   </script>
 
-  <!-- 4) Your Scholarship.js (only once) -->
+
   <script src="../JavaScript/Scholarship.js"></script>
   <!-- 3) Flash & SweetAlert2: error → then openLogin; success → alert only -->
   
