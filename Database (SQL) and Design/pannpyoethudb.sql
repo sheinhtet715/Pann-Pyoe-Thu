@@ -363,7 +363,7 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
-(1, NULL, NULL, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
+(1, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
 
 
 --
