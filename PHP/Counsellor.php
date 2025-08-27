@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ! isset($_POST['signin']) && ! isse
                         $cid = (int) $cres->fetch_assoc()['counsellor_id'];
                         $cs->close();
 
-                        // OPTIONAL: prevent double booking for same counsellor/date/time (excluding Cancelled if you want)
+                    
                         $chk = $conn->prepare("
                             SELECT COUNT(*) AS cnt
                               FROM Appointment_tbl
