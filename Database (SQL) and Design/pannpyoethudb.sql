@@ -475,9 +475,7 @@ ALTER TABLE `user_course_tbl`
 --
 -- Indexes for table `user_tbl`
 --
-ALTER TABLE `user_tbl`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`);
+
 
 
 --
