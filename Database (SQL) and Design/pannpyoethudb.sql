@@ -97,7 +97,7 @@ CREATE TABLE `course_discounts` (
 --
 
 INSERT INTO `course_discounts` (`discount_id`, `discount_percent`, `start_date`, `end_date`) VALUES
-(1, 25, '2025-08-01', '2025-08-02');
+(1, 25, '2025-08-01', '2025-09-30');
 
 -- --------------------------------------------------------
 
@@ -151,16 +151,6 @@ CREATE TABLE `enrollment_tbl` (
   `payment_status` enum('pending','confirm','reject') NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `enrollment_tbl`
---
-
-INSERT INTO `enrollment_tbl` (`enrollment_id`, `user_id`, `course_id`, `enrollment_date`, `payment_status`) VALUES
-(6, 2, 4, '2025-08-16', 'confirm'),
-(7, 2, 2, '2025-08-16', 'confirm'),
-(8, 2, 7, '2025-08-16', 'confirm'),
-(10, 2, 8, '2025-08-23', 'confirm'),
-(11, 2, 5, '2025-08-23', 'confirm');
 
 -- --------------------------------------------------------
 
@@ -239,15 +229,6 @@ CREATE TABLE `login_tbl` (
   `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `login_tbl`
---
-
-INSERT INTO `login_tbl` (`login_id`, `user_id`, `session_id`, `ip_address`, `user_agent`, `last_active`, `user_name`, `password_hash`, `email`, `role`, `last_login`) VALUES
-(1, 2, '376m30ac2rjeu31ltfqj4bf57s', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2025-08-17 20:21:33', 'Marina', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'marina@gmail.com', 'user', NULL),
-(2, 2, 'tairkudo1fh7navehqjdda40hd', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2025-08-21 14:58:20', 'Marina', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'marina@gmail.com', 'user', NULL),
-(3, 2, 'uemt2as4h99lou1vm1jvh7kr4a', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2025-08-23 21:14:10', 'Marina', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'marina@gmail.com', 'user', NULL),
-(4, 2, 'ot5ltj7kq30lh5k64jh4fbccn4', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2025-08-24 22:24:47', 'Marina', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'marina@gmail.com', 'user', NULL);
 
 -- --------------------------------------------------------
 
@@ -264,11 +245,6 @@ CREATE TABLE `payment_tbl` (
   `payment_status` enum('pending','confirm','reject') NOT NULL DEFAULT 'pending',
   `payment_receipt` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `payment_tbl`
---
-
 
 
 -- --------------------------------------------------------
@@ -350,6 +326,8 @@ CREATE TABLE `user_course_tbl` (
 
 CREATE TABLE `user_tbl` (
   `user_id` int(11) NOT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `job_id` int(11) DEFAULT NULL,
   `user_name` varchar(50) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password_hash` varchar(100) NOT NULL,
@@ -362,9 +340,9 @@ CREATE TABLE `user_tbl` (
 -- Dumping data for table `user_tbl`
 --
 
-INSERT INTO `user_tbl` (`user_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
-(1, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
-
+INSERT INTO `user_tbl` (`user_id`, `course_id`, `job_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
+(1, NULL, NULL, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico'),
+(2, NULL, NULL, 'Marina', 'marina@gmail.com', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'user', '0956834535', 'User_profile_images/prof_68a6d8bcad2d64.97176035.jpg');
 
 --
 -- Indexes for dumped tables
@@ -475,8 +453,11 @@ ALTER TABLE `user_course_tbl`
 --
 -- Indexes for table `user_tbl`
 --
-
-
+ALTER TABLE `user_tbl`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `course_id` (`course_id`),
+  ADD KEY `job_id` (`job_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -554,7 +535,13 @@ ALTER TABLE `scholarship_tbl`
 ALTER TABLE `university_tbl`
   MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT for table `user_tbl`
+--
+ALTER TABLE `user_tbl`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+--
 -- Constraints for dumped tables
 --
 
@@ -614,7 +601,10 @@ ALTER TABLE `user_course_tbl`
 --
 -- Constraints for table `user_tbl`
 --
-
+ALTER TABLE `user_tbl`
+  ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_tbl` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job_tbl` (`job_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
