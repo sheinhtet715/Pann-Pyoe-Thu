@@ -477,9 +477,8 @@ ALTER TABLE `user_course_tbl`
 --
 ALTER TABLE `user_tbl`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `course_id` (`course_id`),
-  ADD KEY `job_id` (`job_id`);
+  ADD UNIQUE KEY `email` (`email`);
+
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -623,10 +622,7 @@ ALTER TABLE `user_course_tbl`
 --
 -- Constraints for table `user_tbl`
 --
-ALTER TABLE `user_tbl`
-  ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_tbl` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job_tbl` (`job_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
