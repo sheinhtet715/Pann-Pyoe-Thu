@@ -1,0 +1,38 @@
+The SQL file has been uploaded to the folder named "Database (SQL) and Design."
+
+Importing a Database (.sql) using XAMPP and phpMyAdmin
+
+1. Start MySQL: 
+   - Open the XAMPP Control Panel.
+   - Click "Start" for both Apache and MySQL.
+(or)
+Run as administrator
+2.  Open phpMyAdmin:
+   - In your browser, navigate to [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+
+3. Import the pannpyoethudb.sql File
+Navigate to the Import tab.  
+Click on "Choose File" and select your pannpyoethudb.sql file.  
+Ensure the format is set to SQL, then click "Go."
+
+For this project, the SQL file is ready; no need to create a database, and you can import the file directly. 
+Therefore, the remaining steps are not necessary.
+
+If the above instruction does not work, try the following methods, ranging from 1 to 5.
+3. Create the Database:
+   - Click on "Databases."
+   - Enter a name for your database (e.g., `pannpyoethudb`).
+   - Click "Create" to finalise the database creation.
+
+
+4. Select the Database:  
+Click on the new database name in the left sidebar.
+
+5. Import the pannpyoethudb.sql File
+Navigate to the Import tab.  
+Click on "Choose File" and select your pannpyoethudb.sql file.  
+Ensure the format is set to SQL, then click "Go."
+
+6. Completion 
+A message will appear indicating that the import has been completed. 
+The tables will now be visible in the left sidebar.
