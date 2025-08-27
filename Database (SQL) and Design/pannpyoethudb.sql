@@ -554,13 +554,7 @@ ALTER TABLE `scholarship_tbl`
 ALTER TABLE `university_tbl`
   MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `user_tbl`
---
-ALTER TABLE `user_tbl`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
---
 -- Constraints for dumped tables
 --
 
