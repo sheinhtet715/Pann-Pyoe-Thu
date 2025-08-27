@@ -341,8 +341,8 @@ CREATE TABLE `user_tbl` (
 --
 
 INSERT INTO `user_tbl` (`user_id`, `course_id`, `job_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
-(1, NULL, NULL, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico'),
-(2, NULL, NULL, 'Marina', 'marina@gmail.com', '$2y$10$jrp1LpuQenQb2n9LIFIfEuAbxT5pqwVc3.2K8cLCvPsPM6XKs5kfe', 'user', '0956834535', 'User_profile_images/prof_68a6d8bcad2d64.97176035.jpg');
+(1, NULL, NULL, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
+
 
 --
 -- Indexes for dumped tables
