@@ -234,7 +234,7 @@ $res = $stmt->get_result();
     </tr>
 
     <!-- DETAIL ROW: hidden, shows when the collapse is opened -->
-    <!-- DETAIL ROW: hidden, shows when the collapse is opened -->
+
 <tr class="detail-row">
   <td colspan="8" class="p-0">
     <div class="collapse" id="desc-<?= $id ?>">
