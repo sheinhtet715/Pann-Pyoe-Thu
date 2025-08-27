@@ -351,8 +351,6 @@ CREATE TABLE `user_course_tbl` (
 
 CREATE TABLE `user_tbl` (
   `user_id` int(11) NOT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  `job_id` int(11) DEFAULT NULL,
   `user_name` varchar(50) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password_hash` varchar(100) NOT NULL,
