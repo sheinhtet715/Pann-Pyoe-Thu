@@ -283,6 +283,7 @@
         <span></span>
       </button>
        <?php if (! empty($_SESSION['user_id'])): ?>
+        
         <div class="dropdown">
             <button
                 class="btn btn-secondary dropdown-toggle p-0 border-0 bg-transparent"
