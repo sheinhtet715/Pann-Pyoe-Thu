@@ -191,7 +191,7 @@ ob_start();
         <p>"Education becomes more meaningful when guided by the right counselling, helping students choose the right course university and career."</p>
     </div>
 
-
+<div class="">
     <!-- About Us  -->
     <div class="slider-wrapper">
         <div class="slider">
@@ -211,9 +211,9 @@ ob_start();
     </div>
 
     <div class="us-text">
-        <a class="about-us" href="../PHP/About Us.php">Tap here to learn more About Us</a>
+        <a class="about-us" href="./About Us.php">Tap here to learn more About Us</a>
     </div>
-
+    </div>
     <script>
         const slidesContainer = document.querySelector('.slides');
         const slides = document.querySelectorAll('.slide');
