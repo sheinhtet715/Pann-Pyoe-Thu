@@ -479,6 +479,27 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+
+.us-text {
+    text-align: center;
+       margin-top: -50px;
+       z-index: 10;
+    position: relative;
+}
+
+.about-us {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+    z-index: 10;
+        
+}
+
+.about-us:hover {
+    text-decoration: none;
+    color: #b59583;
+}
 /* Counsellor Slide  */
 * {box-sizing: border-box;}
             .Counsellor {display: none;}
@@ -540,12 +561,11 @@ body {
             width: 100%;
             height: 90%;
             max-width: 900px;
-             margin: 0 auto;
-            margin: 10px auto; /* Reduced vertical margin */
-            margin: 0 auto;
+            margin: 10px auto 20px; /* Reduced vertical margin */
             overflow: hidden;
             aspect-ratio: 16 / 9;
             border-radius: 8px;
+            z-index: 0;
         }
 
         .slides {
@@ -648,21 +668,7 @@ body {
             }
         }
 
-        .us-text {
-            text-align: center;
-            margin-top: -50px;
-        }
 
-        .about-us {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .about-us:hover {
-            text-decoration: none;
-            color: #b59583;
-        }
 
 
 /* Responsive Design */
