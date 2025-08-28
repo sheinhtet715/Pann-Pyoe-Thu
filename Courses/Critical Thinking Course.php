@@ -638,7 +638,7 @@
             quizSection.innerHTML = `
                 <h2>Quiz Results</h2>
                 <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: #BF9E8D; font-size: 2rem; margin-bottom: 20px;">
+                    <h3 style="color: #2e5356; font-size: 2rem; margin-bottom: 20px;">
                         You got ${score} out of ${totalQuestions} correct! (${percentage}%)
                     </h3>
                     <p style="font-size: 1.2rem; margin-bottom: 20px;">
