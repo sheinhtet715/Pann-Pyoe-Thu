@@ -630,6 +630,10 @@
             // Add login modal functionality here
             console.log('Login modal opened');
         }
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+          }
     </script>
 </body>
 </html>

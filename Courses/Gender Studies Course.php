@@ -31,7 +31,7 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-        <nav class="nav">
+        <nav class="nav" id="nav-menu">
             <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
         <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
         <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
@@ -628,6 +628,10 @@
             // Add login modal functionality here
             console.log('Login modal opened');
         }
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+          }
     </script>
 </body>
 </html>

@@ -664,7 +664,8 @@ body {
 
             .slide img {
                 width: 50%;
-                height: 100%;
+                flex: 1;
+                height: auto;
             }
         }
 
@@ -801,5 +802,9 @@ body {
 
     .speech {
         font-size: 20px;
+    }
+     .slide img {
+        flex: 1;
+        height: auto; /* Adjusts based on container */
     }
 } 

@@ -31,7 +31,7 @@
             <img src="../HomePimg/Logo.ico" alt="Pann Pyoe Thu logo" class="logo-img" />
             <span class="logo-text">Pann Pyoe Thu</span>
         </div>
-         <nav class="nav">
+         <nav class="nav"  id="nav-menu">
             <a href="../PHP/index.php" class="<?= ($active==='home')    ? 'active' : '' ?>">Home</a>
         <a href="../PHP/About Us.php" class="<?= ($active==='about')    ? 'active' : '' ?>">About us</a>
         <a href="../PHP/Courses.php" class="<?= ($active==='courses')    ? 'active' : '' ?>">Courses</a>
@@ -40,11 +40,11 @@
         <a href="../PHP/Local Uni.php" class="<?= ($active==='localuni')    ? 'active' : '' ?>">Local Universities</a>
         <a href="../PHP/Jobs.php" class="<?= ($active==='jobs')    ? 'active' : '' ?>">Job Opportunities</a>
       </nav>
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+           <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
 
           <?php if (! empty($_SESSION['user_id'])): ?>
@@ -559,7 +559,12 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-
+            <script>
+                function toggleMobileMenu() {
+                    const nav = document.getElementById('nav-menu');
+                    nav.classList.toggle('active');
+                  }
+            </script>
     <script>
         // Module navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -668,6 +673,7 @@
             // Add login modal functionality here
             console.log('Login modal opened');
         }
+
     </script>
 </body>
 </html>
