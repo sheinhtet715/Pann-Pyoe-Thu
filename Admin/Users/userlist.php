@@ -12,11 +12,10 @@ $searchKey = $_GET['searchKey'] ?? '';
 
 // Prepare base SQL with JOINs for course and job names
 $sql = "
-    SELECT u.*, c.course_name, j.job_title
+    SELECT u.*
     FROM User_tbl u
-    LEFT JOIN course_tbl c ON u.course_id = c.course_id
-    LEFT JOIN job_tbl j ON u.job_id = j.job_id
 ";
+
 
 // Parameters for query
 $params = [];
