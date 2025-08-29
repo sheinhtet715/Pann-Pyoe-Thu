@@ -326,8 +326,6 @@ CREATE TABLE `user_course_tbl` (
 
 CREATE TABLE `user_tbl` (
   `user_id` int(11) NOT NULL,
-  `course_id` int(11) DEFAULT NULL,
-  `job_id` int(11) DEFAULT NULL,
   `user_name` varchar(50) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password_hash` varchar(100) NOT NULL,
@@ -340,9 +338,8 @@ CREATE TABLE `user_tbl` (
 -- Dumping data for table `user_tbl`
 --
 
-INSERT INTO `user_tbl` (`user_id`, `course_id`, `job_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
-(1, NULL, NULL, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
-
+INSERT INTO `user_tbl` (`user_id`, `user_name`, `email`, `password_hash`, `role`, `phone`, `profile_path`) VALUES
+(1, 'Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin', '', '/User_profile_images/1_1755197154_c2d0c894.ico');
 
 --
 -- Indexes for dumped tables
@@ -455,9 +452,7 @@ ALTER TABLE `user_course_tbl`
 --
 ALTER TABLE `user_tbl`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `course_id` (`course_id`),
-  ADD KEY `job_id` (`job_id`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -591,20 +586,12 @@ ALTER TABLE `scholarshipfield_tbl`
 ALTER TABLE `university_tbl`
   ADD CONSTRAINT `university_tbl_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country_tbl` (`country_id`);
 
---
--- Constraints for table `user_course_tbl`
---
-ALTER TABLE `user_course_tbl`
-  ADD CONSTRAINT `user_course_tbl_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_tbl` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_course_tbl_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course_tbl` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 
 --
 -- Constraints for table `user_tbl`
 --
-ALTER TABLE `user_tbl`
-  ADD CONSTRAINT `user_tbl_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_tbl` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_tbl_ibfk_2` FOREIGN KEY (`job_id`) REFERENCES `job_tbl` (`job_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
